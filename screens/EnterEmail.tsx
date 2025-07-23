@@ -101,7 +101,7 @@ export default EnterEmail;
 
 const styles = StyleSheet.create({
   oAuthButtonsContainer: {
-    marginTop: 100,
+    marginTop: 75,
   },
   outerContainer: {
     // borderWidth: 5,
