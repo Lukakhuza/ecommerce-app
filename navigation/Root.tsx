@@ -1,6 +1,9 @@
 import { SafeAreaView } from "react-native";
 import AuthStack from "./AuthStack";
+import AuthenticatedStack from "./AuthenticatedStack";
+import { AuthContext } from "../store/auth-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { useContext } from "react";
 
 const Theme = {
   ...DefaultTheme,
@@ -10,7 +13,8 @@ const Theme = {
   },
 };
 
-const MainNavigation = () => {
+const Root = () => {
+  const authCtx: any = useContext(AuthContext);
   return (
     <NavigationContainer theme={Theme}>
       <SafeAreaView
@@ -21,10 +25,10 @@ const MainNavigation = () => {
           paddingHorizontal: 30,
         }}
       >
-        <AuthStack />
+        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
       </SafeAreaView>
     </NavigationContainer>
   );
 };
 
-export default MainNavigation;
+export default Root;

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import MainNavigation from "./navigation/MainNavigation";
+import Root from "./navigation/Root";
 import AuthContextProvider from "./store/auth-context";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <AuthContextProvider>
-        <MainNavigation />
+        <Root />
       </AuthContextProvider>
     </View>
   );
