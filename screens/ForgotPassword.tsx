@@ -22,29 +22,18 @@ type Props = {
   navigation?: any;
 };
 
-const CreateAccount = ({ navigation }: Props) => {
+const ForgotPassword = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <ScrollView>
         <View>
-          <PageHeader>Create Account</PageHeader>
-          <DataInput placeholder="First Name" />
-          <DataInput placeholder="Last Name" />
-          <DataInput placeholder="Email Address" />
-          <DataInput placeholder="Password" style={styles.endOfInputs} />
+          <PageHeader>Forgot Password?</PageHeader>
+          <DataInput placeholder="Enter Email Address" />
           <ContinueButton
-            style={styles.endOfContinueButton}
             onPress={() => {
-              navigation.replace("ForgotPassword");
+              // For testing only
+              navigation.replace("PasswordReset");
             }}
-          />
-          <SmallText
-            primaryText="Forgot Password?"
-            secondaryText="Reset"
-            onPress={() => {
-              navigation.navigate("ForgotPassword");
-            }}
-            style={{}}
           />
         </View>
       </ScrollView>
@@ -52,16 +41,10 @@ const CreateAccount = ({ navigation }: Props) => {
   );
 };
 
-export default CreateAccount;
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   oAuthButtonsContainer: {
     marginTop: 100,
-  },
-  endOfInputs: {
-    marginBottom: 20,
-  },
-  endOfContinueButton: {
-    marginBottom: 25,
   },
 });

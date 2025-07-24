@@ -29,12 +29,17 @@ const EnterPassword = ({ navigation }: Props) => {
         <View>
           <PageHeader>Sign In</PageHeader>
           <DataInput placeholder="Password" />
-          <ContinueButton />
+          <ContinueButton
+            onPress={() => {
+              // For testing only
+              navigation.navigate("CreateAccount");
+            }}
+          />
           <SmallText
             primaryText="Forgot Password?"
             secondaryText="Reset"
             onPress={() => {
-              console.log("Reset Password");
+              navigation.navigate("ForgotPassword");
             }}
             style={{}}
           />

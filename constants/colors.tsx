@@ -1,4 +1,4 @@
-export const Colors: object = {
+export const Colors: any = {
   primary100: "#8E6CEF",
   white100: "#FFFFFF",
   black100: "#272727",

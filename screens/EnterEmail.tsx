@@ -18,6 +18,7 @@ import ContinueButton from "../components/atoms/ContinueButton";
 import { Colors } from "../constants/colors";
 import SmallText from "../components/atoms/SmallText";
 // import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import EnterPassword from "./EnterPassword";
@@ -26,7 +27,8 @@ type Props = {
   navigation?: any;
 };
 
-const EnterEmail = ({ navigation }: Props) => {
+const EnterEmail = () => {
+  const navigation: any = useNavigation();
   //   const userInputCtx: any = useContext(UserInputContext);
   //   const userData = {
   //     email: userInputCtx.email,
@@ -54,14 +56,14 @@ const EnterEmail = ({ navigation }: Props) => {
           <DataInput placeholder="Email Address" />
           <ContinueButton
             onPress={() => {
-              console.log("Navigate to Enter Password Page");
+              navigation.navigate("EnterPassword");
             }}
           />
           <SmallText
             primaryText="Don't have an account?"
             secondaryText="Create One"
             onPress={() => {
-              console.log("Create Account");
+              navigation.navigate("CreateAccount");
             }}
             style={{}}
           />
