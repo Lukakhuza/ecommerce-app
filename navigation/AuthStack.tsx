@@ -5,12 +5,18 @@ import IconButton from "../components/atoms/IconButton";
 import CreateAccount from "../screens/CreateAccount";
 import ForgotPassword from "../screens/ForgotPassword";
 import PasswordReset from "../screens/PasswordReset";
+import TestScreen from "../screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
     <Stack.Navigator initialRouteName="EnterEmail">
+      {/* <Stack.Screen
+        name="TestScreen"
+        component={TestScreen}
+        options={{ headerShown: false }}
+      /> */}
       <Stack.Screen
         name="EnterEmail"
         component={EnterEmail}

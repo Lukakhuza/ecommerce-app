@@ -3,7 +3,8 @@ import AuthStack from "./AuthStack";
 import AuthenticatedStack from "./AuthenticatedStack";
 import { AuthContext } from "../store/auth-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Theme = {
   ...DefaultTheme,
@@ -15,6 +16,8 @@ const Theme = {
 
 const Root = () => {
   const authCtx: any = useContext(AuthContext);
+  // Check if the user is already logged in on the device (if token and auth email are in async storage).
+
   return (
     <NavigationContainer theme={Theme}>
       <SafeAreaView
@@ -25,7 +28,8 @@ const Root = () => {
           paddingHorizontal: 30,
         }}
       >
-        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+        {/* {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />} */}
+        <AuthStack />
       </SafeAreaView>
     </NavigationContainer>
   );

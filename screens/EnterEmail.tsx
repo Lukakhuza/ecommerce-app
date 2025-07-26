@@ -22,12 +22,14 @@ import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import EnterPassword from "./EnterPassword";
+import { AuthContext } from "../store/auth-context";
 
 type Props = {
   navigation?: any;
 };
 
 const EnterEmail = () => {
+  const authCtx: any = useContext(AuthContext);
   const navigation: any = useNavigation();
   //   const userInputCtx: any = useContext(UserInputContext);
   //   const userData = {
@@ -53,9 +55,15 @@ const EnterEmail = () => {
       >
         <View style={styles.outerContainer}>
           <PageHeader>Sign In</PageHeader>
-          <DataInput placeholder="Email Address" />
+          <DataInput
+            placeholder="Email Address"
+            onChangeText={(enteredText: string) => {
+              authCtx.updateEnteredUserInfo("email", enteredText);
+            }}
+          />
           <ContinueButton
             onPress={() => {
+              console.log();
               navigation.navigate("EnterPassword");
             }}
           />
