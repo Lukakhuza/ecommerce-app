@@ -63,7 +63,6 @@ const EnterEmail = () => {
           />
           <ContinueButton
             onPress={() => {
-              console.log();
               navigation.navigate("EnterPassword");
             }}
           />

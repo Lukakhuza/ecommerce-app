@@ -14,6 +14,7 @@ import DataInput from "../components/atoms/DataInput";
 import ContinueButton from "../components/atoms/ContinueButton";
 import { Colors } from "../constants/colors";
 import SmallText from "../components/atoms/SmallText";
+import { AuthContext } from "../store/auth-context";
 // import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
@@ -23,12 +24,18 @@ type Props = {
 };
 
 const EnterPassword = ({ navigation }: Props) => {
+  const authCtx: any = useContext(AuthContext);
   return (
     <SafeAreaView>
       <ScrollView>
         <View>
           <PageHeader>Sign In</PageHeader>
-          <DataInput placeholder="Password" />
+          <DataInput
+            placeholder="Password"
+            onChangeText={(enteredText: string) => {
+              authCtx.updateEnteredUserInfo("password", enteredText);
+            }}
+          />
           <ContinueButton
             onPress={() => {
               // For testing only

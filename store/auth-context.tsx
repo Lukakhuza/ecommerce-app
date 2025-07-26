@@ -36,6 +36,7 @@ const AuthContextProvider = ({ children }: Props) => {
   }, []);
 
   const updateEnteredUserInfo = (inputIdentifier: any, enteredText: string) => {
+    console.log(enteredUserInfo);
     setEnteredUserInfo((currInputValues) => {
       return {
         ...currInputValues,
