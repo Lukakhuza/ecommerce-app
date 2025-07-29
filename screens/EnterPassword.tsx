@@ -35,11 +35,17 @@ const EnterPassword = ({ navigation }: Props) => {
             onChangeText={(enteredText: string) => {
               authCtx.updateEnteredUserInfo("password", enteredText);
             }}
+            value={authCtx.enteredPassword}
+            secureTextEntry={true}
           />
           <ContinueButton
             onPress={() => {
               // For testing only
-              navigation.navigate("CreateAccount");
+              // navigation.navigate("CreateAccount");
+              authCtx.loginHandler(
+                authCtx.enteredEmail,
+                authCtx.enteredPassword
+              );
             }}
           />
           <SmallText
@@ -48,7 +54,6 @@ const EnterPassword = ({ navigation }: Props) => {
             onPress={() => {
               navigation.navigate("ForgotPassword");
             }}
-            style={{}}
           />
         </View>
       </ScrollView>

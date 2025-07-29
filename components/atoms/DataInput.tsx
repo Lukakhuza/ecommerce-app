@@ -3,21 +3,19 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 type Props = {
   placeholder: string;
   style?: any;
+  secureTextEntry?: boolean;
   onChangeText?: any;
+  value?: any;
 };
 
-const DataInput = ({ placeholder, style, onChangeText }: Props) => {
+const DataInput = ({ style, secureTextEntry = false, ...props }: Props) => {
   return (
     <View>
       <TextInput
         autoCorrect={false}
-        placeholder={placeholder}
         style={[styles.text, style]}
-        onChangeText={
-          // handleInputUpdate.bind("email")
-          onChangeText
-        }
-        // value="Hello1"
+        secureTextEntry={secureTextEntry}
+        {...props}
       ></TextInput>
     </View>
   );

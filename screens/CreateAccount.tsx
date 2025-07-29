@@ -44,7 +44,6 @@ const CreateAccount = ({ navigation }: Props) => {
             onPress={() => {
               navigation.navigate("ForgotPassword");
             }}
-            style={{}}
           />
         </View>
       </ScrollView>

@@ -36,7 +36,6 @@ const AuthStack = () => {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
-              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -53,7 +52,6 @@ const AuthStack = () => {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
-              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}

@@ -4,7 +4,7 @@ type Props = {
   primaryText: string;
   secondaryText: string;
   onPress: any;
-  style: any;
+  style?: any;
 };
 
 const SmallText = ({ primaryText, secondaryText, onPress, style }: Props) => {

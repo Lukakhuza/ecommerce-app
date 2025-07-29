@@ -16,7 +16,7 @@ const Theme = {
 
 const Root = () => {
   const authCtx: any = useContext(AuthContext);
-  // Check if the user is already logged in on the device (if token and auth email are in async storage).
+  // Check if the user is already logged in on the device (if there is a token in device's secure store).
 
   return (
     <NavigationContainer theme={Theme}>

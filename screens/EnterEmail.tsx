@@ -60,6 +60,7 @@ const EnterEmail = () => {
             onChangeText={(enteredText: string) => {
               authCtx.updateEnteredUserInfo("email", enteredText);
             }}
+            value={authCtx.enteredEmail}
           />
           <ContinueButton
             onPress={() => {
@@ -72,7 +73,6 @@ const EnterEmail = () => {
             onPress={() => {
               navigation.navigate("CreateAccount");
             }}
-            style={{}}
           />
           <View style={styles.oAuthButtonsContainer}>
             <ButtonOAuth
