@@ -28,8 +28,7 @@ const Root = () => {
           paddingHorizontal: 30,
         }}
       >
-        {/* {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />} */}
-        <AuthStack />
+        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
       </SafeAreaView>
     </NavigationContainer>
   );

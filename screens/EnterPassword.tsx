@@ -15,6 +15,8 @@ import ContinueButton from "../components/atoms/ContinueButton";
 import { Colors } from "../constants/colors";
 import SmallText from "../components/atoms/SmallText";
 import { AuthContext } from "../store/auth-context";
+import LoadingOverlay from "../components/atoms/LoadingOverlay";
+import ErrorOverlay from "../components/atoms/ErrorOverlay";
 // import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
@@ -24,7 +26,31 @@ type Props = {
 };
 
 const EnterPassword = ({ navigation }: Props) => {
-  const authCtx: any = useContext(AuthContext);
+  const {
+    loginHandler,
+    updateEnteredUserInfo,
+    enteredEmail,
+    enteredPassword,
+    hasError,
+    isLoading,
+    clearEnteredUserInfo,
+  }: any = useContext(AuthContext);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
+
+  // if (hasError && !isLoading) {
+  //   return (
+  //     <ErrorOverlay
+  //       message="There is an error"
+  //       onConfirm={() => {
+  //         console.log("Error button");
+  //       }}
+  //     />
+  //   );
+  // }
+  if (isLoading) {
+    return <LoadingOverlay message="Signing In" />;
+  }
   return (
     <SafeAreaView>
       <ScrollView>
@@ -33,19 +59,16 @@ const EnterPassword = ({ navigation }: Props) => {
           <DataInput
             placeholder="Password"
             onChangeText={(enteredText: string) => {
-              authCtx.updateEnteredUserInfo("password", enteredText);
+              updateEnteredUserInfo("password", enteredText);
             }}
-            value={authCtx.enteredPassword}
+            value={enteredPassword}
             secureTextEntry={true}
           />
           <ContinueButton
             onPress={() => {
               // For testing only
               // navigation.navigate("CreateAccount");
-              authCtx.loginHandler(
-                authCtx.enteredEmail,
-                authCtx.enteredPassword
-              );
+              loginHandler(enteredEmail, enteredPassword);
             }}
           />
           <SmallText
