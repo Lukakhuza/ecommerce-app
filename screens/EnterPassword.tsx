@@ -38,17 +38,33 @@ const EnterPassword = ({ navigation }: Props) => {
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState(null);
 
-  // if (hasError && !isLoading) {
-  //   return (
-  //     <ErrorOverlay
-  //       message="There is an error"
-  //       onConfirm={() => {
-  //         console.log("Error button");
-  //       }}
-  //     />
-  //   );
-  // }
+  const proceedHandler = () => {
+    // For testing only
+    // navigation.navigate("CreateAccount");
+
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    const passwordIsValid = regex.test(enteredPassword.value);
+
+    if (!passwordIsValid) {
+      updateEnteredUserInfo("password", enteredPassword.value, false);
+      return;
+    }
+    loginHandler(enteredEmail.value, enteredPassword.value);
+  };
+
   if (isLoading) {
+    // if (hasError && !isLoading) {
+    //   return (
+    //     <ErrorOverlay
+    //       message="There is an error"
+    //       onConfirm={() => {
+    //         console.log("Error button");
+    //       }}
+    //     />
+    //   );
+    // }
     return <LoadingOverlay message="Signing In" />;
   }
   return (
@@ -59,18 +75,13 @@ const EnterPassword = ({ navigation }: Props) => {
           <DataInput
             placeholder="Password"
             onChangeText={(enteredText: string) => {
-              updateEnteredUserInfo("password", enteredText);
+              updateEnteredUserInfo("password", enteredText, true);
             }}
             value={enteredPassword}
+            isValid={enteredPassword.isValid}
             secureTextEntry={true}
           />
-          <ContinueButton
-            onPress={() => {
-              // For testing only
-              // navigation.navigate("CreateAccount");
-              loginHandler(enteredEmail, enteredPassword);
-            }}
-          />
+          <ContinueButton onPress={proceedHandler} />
           <SmallText
             primaryText="Forgot Password?"
             secondaryText="Reset"

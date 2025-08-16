@@ -4,16 +4,22 @@ type Props = {
   placeholder: string;
   style?: any;
   secureTextEntry?: boolean;
+  isValid?: boolean;
   onChangeText?: any;
   value?: any;
 };
 
-const DataInput = ({ style, secureTextEntry = false, ...props }: Props) => {
+const DataInput = ({
+  style,
+  secureTextEntry = false,
+  isValid = true,
+  ...props
+}: Props) => {
   return (
     <View>
       <TextInput
         autoCorrect={false}
-        style={[styles.text, style]}
+        style={[styles.text, !isValid && styles.textInvalid, style]}
         secureTextEntry={secureTextEntry}
         {...props}
       ></TextInput>
@@ -32,5 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F4F4",
     // backgroundColor: "orange",
     paddingLeft: 10,
+  },
+  textInvalid: {
+    backgroundColor: "#cf5b6c",
   },
 });

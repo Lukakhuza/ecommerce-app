@@ -9,6 +9,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useState, useContext } from "react";
+import validator from "validator";
+// import validator from "validator";
 // import PurpleButton from "../../components/ui/PurpleButton";
 import PageHeader from "../components/atoms/PageHeader";
 import ButtonOAuth from "../components/atoms/ButtonOAuth";
@@ -31,6 +33,16 @@ type Props = {
 const EnterEmail = () => {
   const authCtx: any = useContext(AuthContext);
   const navigation: any = useNavigation();
+
+  const proceedHandler = () => {
+    const emailIsValid = validator.isEmail(authCtx.enteredEmail.value);
+    if (!emailIsValid) {
+      authCtx.updateEnteredUserInfo("email", authCtx.enteredEmail.value, false);
+      return;
+    }
+    navigation.navigate("EnterPassword");
+  };
+
   //   const userInputCtx: any = useContext(UserInputContext);
   //   const userData = {
   //     email: userInputCtx.email,
@@ -58,15 +70,12 @@ const EnterEmail = () => {
           <DataInput
             placeholder="Email Address"
             onChangeText={(enteredText: string) => {
-              authCtx.updateEnteredUserInfo("email", enteredText);
+              authCtx.updateEnteredUserInfo("email", enteredText, true);
             }}
-            value={authCtx.enteredEmail}
+            value={authCtx.enteredEmail.value}
+            isValid={authCtx.enteredEmail.isValid}
           />
-          <ContinueButton
-            onPress={() => {
-              navigation.navigate("EnterPassword");
-            }}
-          />
+          <ContinueButton onPress={proceedHandler} />
           <SmallText
             primaryText="Don't have an account?"
             secondaryText="Create One"
