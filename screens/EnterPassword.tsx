@@ -79,6 +79,7 @@ const EnterPassword = ({ navigation }: Props) => {
             }}
             value={enteredPassword}
             isValid={enteredPassword.isValid}
+            invalidInputMessage="Make sure the password is at least 8 characters long, is alphanumeric and contains special character(s)."
             secureTextEntry={true}
           />
           <ContinueButton onPress={proceedHandler} />

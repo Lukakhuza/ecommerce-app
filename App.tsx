@@ -2,13 +2,16 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Root from "./navigation/Root";
 import AuthContextProvider from "./store/auth-context";
+import UserInputContextProvider from "./store/user-input";
 
 const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <AuthContextProvider>
-        <Root />
+        <UserInputContextProvider>
+          <Root />
+        </UserInputContextProvider>
       </AuthContextProvider>
     </View>
   );

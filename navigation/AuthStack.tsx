@@ -6,6 +6,7 @@ import CreateAccount from "../screens/CreateAccount";
 import ForgotPassword from "../screens/ForgotPassword";
 import PasswordReset from "../screens/PasswordReset";
 import TestScreen from "../screens/TestScreen";
+import TellUsAboutYourself from "../screens/TellUsAboutYourself";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,14 +66,14 @@ const AuthStack = () => {
         component={PasswordReset}
         options={{ headerShown: false }}
       />
-      {/*
+
       <Stack.Screen
         name="TellUsAboutYourself"
         component={TellUsAboutYourself}
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };

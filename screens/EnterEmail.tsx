@@ -74,6 +74,7 @@ const EnterEmail = () => {
             }}
             value={authCtx.enteredEmail.value}
             isValid={authCtx.enteredEmail.isValid}
+            invalidInputMessage="Please enter a valid email"
           />
           <ContinueButton onPress={proceedHandler} />
           <SmallText

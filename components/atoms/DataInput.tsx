@@ -6,6 +6,7 @@ type Props = {
   secureTextEntry?: boolean;
   isValid?: boolean;
   onChangeText?: any;
+  invalidInputMessage?: string;
   value?: any;
 };
 
@@ -13,10 +14,14 @@ const DataInput = ({
   style,
   secureTextEntry = false,
   isValid = true,
+  invalidInputMessage = "Invalid Input",
   ...props
 }: Props) => {
   return (
     <View>
+      {!isValid && (
+        <Text style={styles.invalidInputMessage}>{invalidInputMessage}</Text>
+      )}
       <TextInput
         autoCorrect={false}
         style={[styles.text, !isValid && styles.textInvalid, style]}
@@ -41,5 +46,8 @@ const styles = StyleSheet.create({
   },
   textInvalid: {
     backgroundColor: "#cf5b6c",
+  },
+  invalidInputMessage: {
+    color: "red",
   },
 });
