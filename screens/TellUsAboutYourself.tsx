@@ -37,8 +37,32 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
 
   const createAccountHandler = async () => {
     const user = {
-      email: userInputCtx.userInput.emailAddress,
+      email: userInputCtx.userInput.emailAddress.value,
+      password: userInputCtx.userInput.password.value,
+      firstName: userInputCtx.userInput.firstName.value,
+      lastName: userInputCtx.userInput.lastName.value,
+      phoneNumber: "123-456-7890",
+      address: {
+        addressLine1: "500 Main St.",
+        city: "Washington",
+        state: "NJ",
+        zipcode: "01234",
+      },
+      shopFor: userInputCtx.userInput.shopFor.value,
+      ageRange: userInputCtx.userInput.ageRange.value,
+      cart: { items: [] },
     };
+    const result = await fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/user/create-user/",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    );
+    console.log(result);
   };
 
   //   const createAccountHandler = async () => {
