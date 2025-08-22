@@ -84,7 +84,7 @@ const CreateAccount = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View>
+        <View style={styles.outerContainer}>
           <PageHeader>Create Account</PageHeader>
           <DataInput
             placeholder="First Name"
@@ -144,6 +144,9 @@ const CreateAccount = ({ navigation }: Props) => {
 export default CreateAccount;
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    paddingHorizontal: 30,
+  },
   oAuthButtonsContainer: {
     marginTop: 100,
   },

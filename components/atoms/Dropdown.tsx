@@ -41,12 +41,10 @@ const DropdownComponent = ({ value, onChange, style }: any) => {
 export default DropdownComponent;
 
 const styles: any = StyleSheet.create({
-  //   dropdown: {
-  //     margin: 16,
-  //     height: 50,
-  //     borderBottomColor: "gray",
-  //     borderBottomWidth: 0.5,
-  //   },
+  dropdown: {
+    margin: 16,
+    height: 50,
+  },
   icon: {
     marginRight: 5,
   },

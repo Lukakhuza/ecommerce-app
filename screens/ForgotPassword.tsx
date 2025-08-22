@@ -26,7 +26,7 @@ const ForgotPassword = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View>
+        <View style={styles.outerContainer}>
           <PageHeader>Forgot Password?</PageHeader>
           <DataInput placeholder="Enter Email Address" />
           <ContinueButton
@@ -44,6 +44,9 @@ const ForgotPassword = ({ navigation }: Props) => {
 export default ForgotPassword;
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    paddingHorizontal: 30,
+  },
   oAuthButtonsContainer: {
     marginTop: 100,
   },

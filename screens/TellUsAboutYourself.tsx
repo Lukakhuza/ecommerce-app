@@ -15,6 +15,7 @@ import ContinueButton from "../components/atoms/ContinueButton";
 import { AuthContext } from "../store/auth-context";
 // import { addData, createUser } from "../../util/auth";
 // import LoadingOverlay from "../../components/ui/LoadingOverlay";
+import SmallPurpleButton from "../components/atoms/SmallPurpleButton";
 import DropdownComponent from "../components/atoms/Dropdown";
 // import { formToJSON } from "axios";
 
@@ -33,8 +34,11 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [selection, setSelection] = useState("");
   const [ageRange, setAgeRange] = useState("");
-  const handleInputUpdate = (inputIdentifier: any, enteredText: string) => {
-    userInputCtx.updateInputs(inputIdentifier, enteredText);
+
+  const createAccountHandler = async () => {
+    const user = {
+      email: userInputCtx.userInput.emailAddress,
+    };
   };
 
   //   const createAccountHandler = async () => {
@@ -113,7 +117,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
   //   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView style={styles.innerContainer}>
         <View>
           <Text style={styles.text1}>Tell us about yourself</Text>
@@ -121,36 +125,41 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
         <View>
           <Text style={styles.text2}>Who do you shop for?</Text>
           <View style={styles.genders}>
-            {/* <PurpleButton
-              style={styles.male}
+            {/* <View
+              style={{
+                width: 1,
+                height: "100%",
+                backgroundColor: "black", // Black color
+              }}
+            /> */}
+            <SmallPurpleButton
+              style={{ width: "48%" }}
+              text="Men"
               mode={selection === "men" ? "selected" : ""}
               onPress={() => {
                 if (selection === "men") {
                   setSelection("");
-                  userInputCtx.updateInputs("shopFor", "");
+                  userInputCtx.updateUserInput("shopFor", "", true);
                 } else {
                   setSelection("men");
-                  userInputCtx.updateInputs("shopFor", "men");
+                  userInputCtx.updateUserInput("shopFor", "men", true);
                 }
               }}
-            >
-              Men
-            </PurpleButton> */}
-            {/* <PurpleButton
-              style={styles.female}
+            />
+            <SmallPurpleButton
+              style={{ width: "48%" }}
               mode={selection === "women" ? "selected" : ""}
+              text="Women"
               onPress={() => {
                 if (selection === "women") {
                   setSelection("");
-                  userInputCtx.updateInputs("shopFor", "");
+                  userInputCtx.updateUserInput("shopFor", "", true);
                 } else {
                   setSelection("women");
-                  userInputCtx.updateInputs("shopFor", "women");
+                  userInputCtx.updateUserInput("shopFor", "women", true);
                 }
               }}
-            >
-              Women
-            </PurpleButton> */}
+            />
           </View>
         </View>
         <View>
@@ -162,15 +171,19 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
             value={ageRange}
             onChange={(item: any) => {
               setAgeRange(item.value);
-              userInputCtx.updateInputs("ageRange", item.value);
+              userInputCtx.updateUserInput("ageRange", item.value, true);
             }}
           />
         </View>
       </ScrollView>
       <View style={styles.footer}>
-        <ContinueButton text="Finish" style={styles.button} />
+        <ContinueButton
+          text="Finish"
+          style={styles.button}
+          onPress={createAccountHandler}
+        />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -181,6 +194,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "white",
+    borderColor: "blue",
+    borderWidth: 3,
   },
   innerContainer: {
     // top: 3,
@@ -190,6 +205,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     // flexDirection: "column",
     // justifyContent: "center",
+    paddingHorizontal: 15,
   },
   selected: {
     backgroundColor: "yellow",
@@ -202,7 +218,7 @@ const styles = StyleSheet.create({
     fontFamily: "Circular-Std",
     fontWeight: 700,
     marginBottom: 50,
-    marginLeft: 20,
+    marginLeft: 0,
     marginTop: 100,
     textAlign: "left",
     fontSize: 28,
@@ -211,7 +227,7 @@ const styles = StyleSheet.create({
     fontFamily: "Circular-Std",
     fontWeight: 400,
     fontSize: 17,
-    marginLeft: 30,
+    marginLeft: 10,
     marginVertical: 10,
   },
   //   text3: {
@@ -224,20 +240,22 @@ const styles = StyleSheet.create({
   genders: {
     // flex: 1,
     // marginHorizontal: 20,
+    // height: 30,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    paddingHorizontal: 5,
     // margin: 10,
     // borderColor: "black",
     // borderWidth: 3,
     marginBottom: 30,
   },
   male: {
-    width: "40%",
+    width: 40,
     // marginRight: 10,
     marginLeft: 15,
   },
   female: {
-    width: "40%",
+    width: 40,
     // marginLeft: 10,
     marginRight: 15,
   },
@@ -265,8 +283,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "flex-start",
     alignItems: "center",
+    paddingHorizontal: 20,
   },
   button: {
-    width: "70%",
+    width: "100%",
   },
 });

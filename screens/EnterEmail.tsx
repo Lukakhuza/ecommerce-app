@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   outerContainer: {
     // borderWidth: 5,
     // borderColor: "brown",
+    paddingHorizontal: 30,
   },
   // safeAreaView: {
   //   backgroundColor: "white",

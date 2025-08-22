@@ -70,7 +70,7 @@ const EnterPassword = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View>
+        <View style={styles.outerContainer}>
           <PageHeader>Sign In</PageHeader>
           <DataInput
             placeholder="Password"
@@ -99,6 +99,9 @@ const EnterPassword = ({ navigation }: Props) => {
 export default EnterPassword;
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    paddingHorizontal: 30,
+  },
   oAuthButtonsContainer: {
     marginTop: 100,
   },

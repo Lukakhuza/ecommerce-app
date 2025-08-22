@@ -33,8 +33,6 @@ const AuthContextProvider = ({ children }: Props) => {
 
   const url = "https://backend-ecommerce-mobile-app.onrender.com";
 
-  console.log(enteredUserInfo);
-
   const updateEnteredUserInfo = (
     inputIdentifier: any,
     enteredText: string,

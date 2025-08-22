@@ -5,6 +5,16 @@ const emptyUserInput = {
   lastName: { value: "", isValid: true },
   emailAddress: { value: "", isValid: true },
   password: { value: "", isValid: true },
+  phoneNumber: { value: "", isValid: true },
+  shopFor: { value: "", isValid: true },
+  ageRange: { value: "", isValid: true },
+  address: {
+    addressLine1: { value: "", isValid: true },
+    city: { value: "", isValid: true },
+    state: { value: "", isValid: true },
+    zipcode: { value: "", isValid: true },
+  },
+  cart: { items: [] },
 };
 
 export const UserInputContext: any = createContext(emptyUserInput);

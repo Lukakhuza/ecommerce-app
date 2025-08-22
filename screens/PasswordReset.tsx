@@ -8,7 +8,7 @@ type Props = {
 
 const PasswordReset = ({ navigation }: Props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.outerContainer}>
       <View>
         <Image
           style={styles.image}
@@ -29,18 +29,19 @@ const PasswordReset = ({ navigation }: Props) => {
           Return to Login
         </PurpleButtonSmall>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default PasswordReset;
 
 const styles = StyleSheet.create({
-  container: {
+  outerContainer: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 30,
   },
   image: {
     width: 150,
