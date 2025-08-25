@@ -8,15 +8,17 @@ import {
 } from "react-native";
 import { useState, useContext } from "react";
 // import PurpleButton from "../../components/ui/PurpleButton";
-import { UserInputContext } from "../store/user-input";
-import { Colors } from "../constants/colors";
-import ContinueButton from "../components/atoms/ContinueButton";
+import { UserInputContext } from "../../store/user-input";
+import { Colors } from "../../constants/colors";
+import ContinueButton from "../../components/atoms/ContinueButton";
 // import { Dropdown } from "react-native-element-dropdown";
-import { AuthContext } from "../store/auth-context";
+import { AuthContext } from "../../store/auth-context";
 // import { addData, createUser } from "../../util/auth";
 // import LoadingOverlay from "../../components/ui/LoadingOverlay";
-import SmallPurpleButton from "../components/atoms/SmallPurpleButton";
-import DropdownComponent from "../components/atoms/Dropdown";
+import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
+import DropdownComponent from "../../components/atoms/Dropdown";
+import { createUser } from "../../api/users.api";
+import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 // import { formToJSON } from "axios";
 
 const data = [
@@ -29,13 +31,14 @@ type Props = {
   navigation: any;
 };
 const TellUsAboutYourself = ({ navigation }: Props) => {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const authCtx = useContext(AuthContext);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const [selection, setSelection] = useState("");
   const [ageRange, setAgeRange] = useState("");
 
-  const createAccountHandler = async () => {
+  const createUserHandler = async () => {
+    setIsCreatingUser(true);
     const user = {
       email: userInputCtx.userInput.emailAddress.value,
       password: userInputCtx.userInput.password.value,
@@ -43,7 +46,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
       lastName: userInputCtx.userInput.lastName.value,
       phoneNumber: "123-456-7890",
       address: {
-        addressLine1: "500 Main St.",
+        addressLine1: "600 Main St.",
         city: "Washington",
         state: "NJ",
         zipcode: "01234",
@@ -52,93 +55,16 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
       ageRange: userInputCtx.userInput.ageRange.value,
       cart: { items: [] },
     };
-    const result = await fetch(
-      "https://backend-ecommerce-mobile-app.onrender.com/user/create-user/",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    );
-    console.log(result);
+
+    await createUser(user);
+    userInputCtx.clearUserInput();
+    navigation.replace("EnterEmail");
+    setIsCreatingUser(false);
   };
 
-  //   const createAccountHandler = async () => {
-  //     const user = {
-  //       email: userInputCtx.input.email,
-  //       password: userInputCtx.input.passwordPlaceholder,
-  //       firstName: userInputCtx.input.firstName,
-  //       lastName: userInputCtx.input.lastName,
-  //       phoneNumber: "123-456-7890",
-  //       address: {
-  //         addressLine1: "500 Main St.",
-  //         city: "Washington",
-  //         state: "NJ",
-  //         zipcode: "01234",
-  //       },
-  //       // uid: response.localId,
-  //       // idToken: response.idToken,
-  //       shopFor: userInputCtx.input.shopFor,
-  //       ageRange: userInputCtx.input.ageRange,
-  //       cart: { items: [] },
-  //     };
-
-  //     fetch(
-  //       "https://backend-ecommerce-mobile-app.onrender.com/user/create-user/",
-  //       {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(user),
-  //       }
-  //     )
-  //       .then((result) => {
-  //         console.log("Test 33", result);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //     // const response = await axios.get("https://localhost:3000/user/create-user");
-
-  //     //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY,
-  //     //   {
-  //     //     email: email,
-  //     //     password: password,
-  //     //     returnSecureToken: true,
-  //     //   }
-  //     // );
-  //     // const user = {
-  //     //   email: userInputCtx.input.email,
-  //     //   password: userInputCtx.input.passwordPlaceholder,
-  //     //   firstName: userInputCtx.input.firstName,
-  //     //   lastName: userInputCtx.input.lastName,
-  //     //   phoneNumber: "123-456-7890",
-  //     //   address: {
-  //     //     addressLine1: "100 Main St.",
-  //     //     city: "Washington",
-  //     //     state: "NJ",
-  //     //     zipcode: "01234",
-  //     //   },
-  //     //   // uid: response.localId,
-  //     //   // idToken: response.idToken,
-  //     //   shopFor: userInputCtx.input.shopFor,
-  //     //   ageRange: userInputCtx.input.ageRange,
-  //     // };
-  //     // setIsAuthenticating(true);
-  //     // const response = await createUser(email, password);
-  //     // addData(userData);
-  //     // authCtx.authenticate(userData.idToken);
-  //     // setIsAuthenticating(false);
-  //     userInputCtx.resetInputs();
-  //     navigation.navigate("EnterEmail");
-  //   };
-
-  //   if (isAuthenticating) {
-  //     return <LoadingOverlay message="Creating User..." />;
-  //   }
+  if (isCreatingUser) {
+    return <LoadingOverlay message="Creating User..." />;
+  }
 
   return (
     <View style={styles.container}>
@@ -204,7 +130,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
         <ContinueButton
           text="Finish"
           style={styles.button}
-          onPress={createAccountHandler}
+          onPress={createUserHandler}
         />
       </View>
     </View>

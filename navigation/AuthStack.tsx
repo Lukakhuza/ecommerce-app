@@ -1,23 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import EnterEmail from "../screens/EnterEmail";
-import EnterPassword from "../screens/EnterPassword";
+import EnterEmail from "../screens/LoginAndOnboarding/EnterEmail";
+import EnterPassword from "../screens/LoginAndOnboarding/EnterPassword";
 import IconButton from "../components/atoms/IconButton";
-import CreateAccount from "../screens/CreateAccount";
-import ForgotPassword from "../screens/ForgotPassword";
-import PasswordReset from "../screens/PasswordReset";
-import TestScreen from "../screens/TestScreen";
-import TellUsAboutYourself from "../screens/TellUsAboutYourself";
+import CreateAccount from "../screens/LoginAndOnboarding/CreateAccount";
+import ForgotPassword from "../screens/LoginAndOnboarding/ForgotPassword";
+import PasswordReset from "../screens/LoginAndOnboarding/PasswordReset";
+import TestScreen from "../screens/LoginAndOnboarding/TestScreen";
+import TellUsAboutYourself from "../screens/LoginAndOnboarding/TellUsAboutYourself";
 
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
     <Stack.Navigator initialRouteName="EnterEmail">
-      {/* <Stack.Screen
-        name="TestScreen"
-        component={TestScreen}
-        options={{ headerShown: false }}
-      /> */}
       <Stack.Screen
         name="EnterEmail"
         component={EnterEmail}

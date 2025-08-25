@@ -41,9 +41,14 @@ const UserInputContextProvider = ({ children }: Props) => {
     });
   };
 
+  const clearUserInput = () => {
+    setUserInput(emptyUserInput);
+  };
+
   const value = {
     userInput: userInput,
     updateUserInput: updateUserInput,
+    clearUserInput: clearUserInput,
   };
 
   return (

@@ -25,7 +25,8 @@ const Root = () => {
           flex: 1,
         }}
       >
-        {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+        {/* {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />} */}
+        {<AuthenticatedStack />}
       </SafeAreaView>
     </NavigationContainer>
   );

@@ -8,12 +8,12 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useState, useContext } from "react";
-import PageHeader from "../components/atoms/PageHeader";
-import ButtonOAuth from "../components/atoms/ButtonOAuth";
-import DataInput from "../components/atoms/DataInput";
-import ContinueButton from "../components/atoms/ContinueButton";
-import { Colors } from "../constants/colors";
-import SmallText from "../components/atoms/SmallText";
+import PageHeader from "../../components/atoms/PageHeader";
+import ButtonOAuth from "../../components/atoms/ButtonOAuth";
+import DataInput from "../../components/atoms/DataInput";
+import ContinueButton from "../../components/atoms/ContinueButton";
+import { Colors } from "../../constants/colors";
+import SmallText from "../../components/atoms/SmallText";
 // import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";

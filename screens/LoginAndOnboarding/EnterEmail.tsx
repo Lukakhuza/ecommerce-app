@@ -12,19 +12,19 @@ import { useState, useContext } from "react";
 import validator from "validator";
 // import validator from "validator";
 // import PurpleButton from "../../components/ui/PurpleButton";
-import PageHeader from "../components/atoms/PageHeader";
-import ButtonOAuth from "../components/atoms/ButtonOAuth";
-import DataInput from "../components/atoms/DataInput";
-import ContinueButton from "../components/atoms/ContinueButton";
+import PageHeader from "../../components/atoms/PageHeader";
+import ButtonOAuth from "../../components/atoms/ButtonOAuth";
+import DataInput from "../../components/atoms/DataInput";
+import ContinueButton from "../../components/atoms/ContinueButton";
 // import Button3 from "../../components/ui/Button3";
-import { Colors } from "../constants/colors";
-import SmallText from "../components/atoms/SmallText";
+import { Colors } from "../../constants/colors";
+import SmallText from "../../components/atoms/SmallText";
 // import { useNavigation } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import EnterPassword from "./EnterPassword";
-import { AuthContext } from "../store/auth-context";
+import { AuthContext } from "../../store/auth-context";
 
 type Props = {
   navigation?: any;
@@ -89,7 +89,7 @@ const EnterEmail = () => {
               onPress={() => {
                 console.log("Log in with your Apple account.");
               }}
-              imageSource={require("../assets/OAuth/apple-logo.png")}
+              imageSource={require("../../assets/OAuth/apple-logo.png")}
             >
               Continue with Apple
             </ButtonOAuth>
@@ -97,7 +97,7 @@ const EnterEmail = () => {
               onPress={() => {
                 console.log("Log in with your Google account.");
               }}
-              imageSource={require("../assets/OAuth/google-logo.png")}
+              imageSource={require("../../assets/OAuth/google-logo.png")}
             >
               Continue with Google
             </ButtonOAuth>
@@ -105,7 +105,7 @@ const EnterEmail = () => {
               onPress={() => {
                 console.log("Log in with your Facebook account.");
               }}
-              imageSource={require("../assets/OAuth/facebook-logo.png")}
+              imageSource={require("../../assets/OAuth/facebook-logo.png")}
             >
               Continue with Facebook
             </ButtonOAuth>

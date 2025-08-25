@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
-import PurpleButtonSmall from "../components/atoms/PurpleButtonSmall";
+import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
 // import PurpleButton from "../../components/ui/PurpleButton";
 
 type Props = {
@@ -12,7 +12,7 @@ const PasswordReset = ({ navigation }: Props) => {
       <View>
         <Image
           style={styles.image}
-          source={require("../assets/password-reset.png")}
+          source={require("../../assets/password-reset.png")}
         />
       </View>
       <View>
