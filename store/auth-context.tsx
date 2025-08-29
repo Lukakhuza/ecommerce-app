@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import * as SecureStore from "expo-secure-store";
+import * as SplashScreen from "expo-splash-screen";
 import { Alert } from "react-native";
+import { validateToken, fetchToken } from "../api/users.api";
+import { jwtDecode } from "jwt-decode";
 
 export const AuthContext: any = createContext({
   token: "",
-  // email: "",
   isAuthenticated: false,
   isLoading: false,
   hasError: false,
@@ -29,9 +31,41 @@ const AuthContextProvider = ({ children }: Props) => {
   const [authToken, setAuthToken] = useState(null);
   const [enteredUserInfo, setEnteredUserInfo] = useState(emptyEmailAndPassword);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [hasError, setHasError] = useState(null);
 
-  const url = "https://backend-ecommerce-mobile-app.onrender.com";
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
+  console.log("T2", authToken);
+
+  useEffect(() => {
+    // Check for token at app startup
+    const loadToken = async () => {
+      try {
+        const storedToken: any = await SecureStore.getItemAsync("token");
+        if (storedToken) {
+          setAuthToken(storedToken);
+        }
+      } catch (error) {
+        console.log("Error loading token", error);
+      } finally {
+        await wait(500);
+        SplashScreen.hideAsync();
+      }
+    };
+    loadToken();
+  }, []);
+
+  const getEmailFromToken = (token: string) => {
+    try {
+      const decoded: any = jwtDecode(token);
+      console.log(decoded);
+      return decoded.email;
+    } catch (error) {
+      return null;
+    }
+  };
 
   const updateEnteredUserInfo = (
     inputIdentifier: any,
@@ -49,27 +83,6 @@ const AuthContextProvider = ({ children }: Props) => {
     });
   };
 
-  // Fetch token from backend.
-  const fetchToken = async (userData: object) => {
-    try {
-      const response = await fetch(url + "/user/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-      const resData = await response.json();
-      if (!response.ok) {
-        throw new Error(resData.message);
-      }
-      const token = await resData.token;
-      return token;
-    } catch (error) {
-      Alert.alert("Authentication Failed - 2", "Error 2");
-    }
-  };
-
   const loginHandler = async (email: string, password: string) => {
     setIsLoading(true);
     clearEnteredUserInfo();
@@ -79,6 +92,7 @@ const AuthContextProvider = ({ children }: Props) => {
         throw new Error("Authentication Failed - 1");
       }
       authenticate(token);
+      SecureStore.setItemAsync("token", token);
     } catch (error) {
       console.log(error);
       Alert.alert(
@@ -94,12 +108,14 @@ const AuthContextProvider = ({ children }: Props) => {
   };
 
   const logout = () => {
+    // Clear authentication token state
     setAuthToken(null);
-    // SecureStore.deleteItemAsync("token");Se
-    // SecureStore.deleteItemAsync("authEmail");
+    // Remove the token from device secure store
+    SecureStore.deleteItemAsync("token");
   };
 
   const clearEnteredUserInfo = () => {
+    // Clear user input email and password
     setEnteredUserInfo(emptyEmailAndPassword);
   };
 
@@ -107,11 +123,12 @@ const AuthContextProvider = ({ children }: Props) => {
     token: authToken,
     isAuthenticated: !!authToken,
     isLoading: isLoading,
-    hasError: hasError,
+    // hasError: hasError,
     enteredEmail: enteredUserInfo.email,
     enteredPassword: enteredUserInfo.password,
     fetchToken: fetchToken,
     updateEnteredUserInfo: updateEnteredUserInfo,
+    getEmailFromToken: getEmailFromToken,
     loginHandler: loginHandler,
     authenticate: authenticate,
     logout: logout,
@@ -122,82 +139,3 @@ const AuthContextProvider = ({ children }: Props) => {
 };
 
 export default AuthContextProvider;
-
-// useEffect(() => {
-//   // Check if there is a saved token on the device. Fetch token from device's secure store.
-//   const fetchToken = async () => {
-//     setIsLoading(true);
-//     const storedToken: any = await SecureStore.getItemAsync("token");
-//     console.log("Test 10: stored token: ", storedToken);
-//     // Check if the token is valid.
-//     // If there is a valid token, update authToken with it:
-//     if (storedToken) {
-//       setAuthToken(storedToken);
-//     }
-//     setIsLoading(false);
-//   };
-//   fetchToken();
-// }, []);
-
-//
-
-// const validateToken = async (token: string) => {
-//   setIsLoading(true);
-//   const tokenData = {
-//     token: token,
-//   };
-//   const result = await fetch(url + "/user/authenticate/", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(tokenData),
-//   });
-//   const resData = await result.json();
-//   console.log("data 1", resData);
-//   console.log("Status 1: ", result.status);
-//   console.log("Status 2: ", resData.status);
-//   if (resData.decodedToken) {
-//     // save the token to SecureStore
-//     SecureStore.setItemAsync("token", resData.token);
-//     // update the state to authenticated.
-//     setAuthToken(resData.decodedToken);
-//     // extract user email and set it as authEmail in state.
-//   }
-
-//   setIsLoading(false);
-//   return resData;
-//   // SecureStore.setItemAsync("token", token);
-//   // setAuthToken(token);
-// };
-
-//
-
-// const createUserHandler = async (email: string, password: string) => {
-//   const userData = {
-//     email: enteredUserInfo.email,
-//     password: enteredUserInfo.password,
-//   };
-//   setIsLoading(true);
-//   fetchToken(userData);
-//   setIsLoading(false);
-// };
-
-//
-
-// console.log("Test 0", token);
-// If we were able to fetch the token, try to authenticate it:
-// let decodedTokenData;
-// if (token) {
-// If authentication function returned a response, save it in decodedTokenData variable.
-// decodedTokenData = await authenticate(token);
-// } else {
-// console.log("Authentication Failed here.");
-// }
-
-// if (decodedTokenData) {
-//   return decodedTokenData;
-// } else {
-//   console.log("Token failed to decode.");
-//   return null;
-// }

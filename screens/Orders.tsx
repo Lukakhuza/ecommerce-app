@@ -17,7 +17,7 @@ type Props = {
 const Orders = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Text style={styles.header}>Notifications</Text>
+      <Text style={styles.header}>Orders</Text>
       <ScrollView contentContainerStyle={styles.root}>
         <View style={styles.content}>
           <Image

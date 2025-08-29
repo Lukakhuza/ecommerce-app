@@ -1,16 +1,73 @@
+import { Alert } from "react-native";
+
+const url = "https://backend-ecommerce-mobile-app.onrender.com";
+
 export const createUser = async (user: any) => {
   console.log("Test 1");
-  const result = await fetch(
-    "https://backend-ecommerce-mobile-app.onrender.com/user/create-user/",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }
-  );
+  const result = await fetch(url + "/user/create-user/", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
   console.log("Test 5", result);
   // console.log("Hii");
   // return result;
+};
+
+export const validateToken = async (token: string) => {
+  const tokenData = {
+    token: token,
+  };
+  const result = await fetch(url + "/user/authenticate/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tokenData),
+  });
+  const resData = await result.json();
+  console.log("data 1", resData);
+  console.log("Status 1: ", result.status);
+  console.log("Status 2: ", resData.status);
+  // setIsLoading(false);
+  return resData;
+  // SecureStore.setItemAsync("token", token);
+  // setAuthToken(token);
+};
+
+export const fetchToken = async (userData: object) => {
+  try {
+    const response = await fetch(url + "/user/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    const resData = await response.json();
+    if (!response.ok) {
+      throw new Error(resData.message);
+    }
+    const token = await resData.token;
+    return token;
+  } catch (error) {
+    Alert.alert("Authentication Failed - 2", "Error 2");
+  }
+};
+
+export const getUserByEmail = async (email: string) => {
+  const userData = {
+    email: email,
+  };
+  const response = await fetch(url + "/user/get-user-by-email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  const resData = await response.json();
+  return resData;
 };
