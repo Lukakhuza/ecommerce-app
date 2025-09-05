@@ -1,9 +1,14 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../../components/atoms/Input";
 import Button from "../../components/atoms/Button";
 import { UserInputContext } from "../../store/user-input";
-import { AuthContext } from "../../store/auth-context";
+import {
+  isValidAddressLine1,
+  isValidCityName,
+  isValidUSState,
+  isValidUSZipCode,
+} from "../../util/validation";
 
 type Props = {
   route: any;
@@ -12,32 +17,33 @@ type Props = {
 
 const ManageUserAddress = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
-  const authCtx: any = useContext(AuthContext);
-  console.log("T20", userInputCtx.userInput.address);
-  useEffect(() => {
-    // userInputCtx.updateInputs("email", authCtx.authEmail);
-  }, []);
-  // const [inputValues, setInputValues] = useState({
-  //   addressLine1: userInputCtx.input
-  //     ? userInputCtx.input.address.addressLine1.toString()
-  //     : "",
-  //   city: userInputCtx.input ? userInputCtx.input.address.city.toString() : "",
-  //   state: userInputCtx.input
-  //     ? userInputCtx.input.address.state.toString()
-  //     : "",
-  //   zipcode: userInputCtx.input
-  //     ? userInputCtx.input.address.zipcode.toString()
-  //     : "",
-  // });
+  const [addressInputValues, setAddressInputValues] = useState({
+    addressLine1: {
+      value: userInputCtx.userInput.address.addressLine1.value,
+      isValid: true,
+    },
+    city: {
+      value: userInputCtx.userInput.address.city.value,
+      isValid: true,
+    },
+    state: {
+      value: userInputCtx.userInput.address.state.value,
+      isValid: true,
+    },
+    zipcode: {
+      value: userInputCtx.userInput.address.zipcode.value,
+      isValid: true,
+    },
+  });
 
-  // const handleTextChange = (inputIdentifier: any, enteredText: string) => {
-  //   setInputValues((currInputValues) => {
-  //     return {
-  //       ...currInputValues,
-  //       [inputIdentifier]: enteredText,
-  //     };
-  //   });
-  // };
+  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
+    setAddressInputValues((currAddress) => {
+      return {
+        ...currAddress,
+        [inputIdentifier]: { value: enteredText, isValid: true },
+      };
+    });
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -49,43 +55,75 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
     navigation.goBack();
   };
   const confirmHandler = () => {
-    // Update the values as they are displayed:
-    // userInputCtx.updateInputs("address", inputValues);
-    // Update the user input context with new address:
-    // userInputCtx.input.address = inputValues;
+    // Validate the address inputs
+    const addressLine1IsValid = isValidAddressLine1(
+      addressInputValues.addressLine1.value
+    );
+    const cityIsValid = isValidCityName(addressInputValues.city.value);
+    const stateIsValid = isValidUSState(addressInputValues.state.value);
+    const zipcodeIsValid = isValidUSZipCode(addressInputValues.zipcode.value);
 
-    // Save updated context to the database:
-    // const updateUserAddressHandler = async () => {
-    //   const user = {
-    //     email: userInputCtx.input.email,
-    //     password: userInputCtx.input.passwordPlaceholder,
-    //     firstName: userInputCtx.input.firstName,
-    //     lastName: userInputCtx.input.lastName,
-    //     phoneNumber: userInputCtx.input.phoneNumber,
-    //     address: userInputCtx.input.address,
-    //     shopFor: userInputCtx.input.shopFor,
-    //     ageRange: userInputCtx.input.ageRange,
-    //     cart: { items: [] },
-    //   };
+    console.log(
+      "TT11",
+      addressLine1IsValid,
+      cityIsValid,
+      stateIsValid,
+      zipcodeIsValid
+    );
+    if (
+      !addressLine1IsValid ||
+      !cityIsValid ||
+      !stateIsValid ||
+      !zipcodeIsValid
+    ) {
+      if (!addressLine1IsValid) {
+        setAddressInputValues((currAddressInputs) => {
+          return {
+            ...currAddressInputs,
+            firstName: {
+              value: addressInputValues.addressLine1.value,
+              isValid: false,
+            },
+          };
+        });
+      }
+      if (!cityIsValid) {
+        setAddressInputValues((currAddressInputs) => {
+          return {
+            ...currAddressInputs,
+            city: {
+              value: addressInputValues.city.value,
+              isValid: false,
+            },
+          };
+        });
+      }
+      if (!stateIsValid) {
+        setAddressInputValues((currAddressInputs) => {
+          return {
+            ...currAddressInputs,
+            state: {
+              value: addressInputValues.state.value,
+              isValid: false,
+            },
+          };
+        });
+      }
+      if (!zipcodeIsValid) {
+        setAddressInputValues((currAddressInputs) => {
+          return {
+            ...currAddressInputs,
+            zipcode: {
+              value: addressInputValues.zipcode.value,
+              isValid: false,
+            },
+          };
+        });
+        return;
+      }
+    }
 
-    //   fetch(
-    //     "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
-    //     {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(user),
-    //     }
-    //   )
-    //     .then((result) => {
-    //       console.log(result);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // };
-    // updateUserAddressHandler();
+    userInputCtx.updateAddress(addressInputValues);
     navigation.goBack();
   };
   return (
@@ -96,44 +134,59 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
           textInputConfig={{
             autoCapitalize: "sentences",
             autoCorrect: false,
-            // onChangeText: handleTextChange.bind("addressLine1"),
-            value: userInputCtx.userInput.address.addressLine1.value,
+            onChangeText: (enteredText: string) => {
+              handleTextChange("addressLine1", enteredText);
+            },
+            value: addressInputValues.addressLine1.value,
           }}
+          isValid={addressInputValues.addressLine1.isValid}
+          invalidInputMessage="Please enter a valid street name and number"
         />
-        {/*
         <Input
           label="City"
           textInputConfig={{
             autoCapitalize: "words",
             autoCorrect: false,
-            // onChangeText: handleTextChange.bind("city"),
-            // value: inputValues.city,
+            onChangeText: (enteredText: string) => {
+              handleTextChange("city", enteredText);
+            },
+            value: addressInputValues.city.value,
           }}
+          isValid={addressInputValues.city.isValid}
+          invalidInputMessage="Please enter a valid city name"
         />
         <Input
           label="State"
           textInputConfig={{
             autoCapitalize: "characters",
             autoCorrect: false,
-            maxLength: "2",
-            // onChangeText: handleTextChange.bind("state"),
-            // value: inputValues.state,
+            maxLength: 2,
+            onChangeText: (enteredText: string) => {
+              handleTextChange("state", enteredText);
+            },
+            value: addressInputValues.state.value,
           }}
+          isValid={addressInputValues.state.isValid}
+          invalidInputMessage="Please enter a valid state abbreviation"
         />
         <Input
           label="Zip Code"
           textInputConfig={{
             autoCapitalize: "sentences",
             keyboardType: "numeric",
-            maxLength: "5",
+            maxLength: 5,
             autoCorrect: false,
-            // onChangeText: handleTextChange.bind("zipcode"),
-            // value: inputValues.zipcode,
+            onChangeText: (enteredText: string) => {
+              handleTextChange("zipcode", enteredText);
+            },
+            value: addressInputValues.zipcode.value,
           }}
-        /> */}
+          isValid={addressInputValues.zipcode.isValid}
+          invalidInputMessage="Please enter a valid zipcode"
+        />
       </View>
       <View style={styles.buttons}>
-        <Button mode="flat" onPress={cancelHandler} style={styles.button}>
+        <Button mode="flat2" onPress={cancelHandler} style={styles.button}>
           Cancel
         </Button>
         <Button mode="" onPress={confirmHandler} style={styles.button}>
@@ -141,56 +194,6 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
         </Button>
       </View>
     </SafeAreaView>
-    //   <SafeAreaView style={styles.container}>
-    //       <View>
-    //         <Input
-    //           label="First Name"
-    //           textInputConfig={{
-    //             autoCapitalize: "sentences",
-    //             autoCorrect: false,
-    //             onChangeText: handleTextChange.bind(this, "firstName"),
-    //             value: inputValues.firstName,
-    //           }}
-    //         />
-    //         <Input
-    //           label="Last Name"
-    //           textInputConfig={{
-    //             autoCapitalize: "sentences",
-    //             autoCorrect: false,
-    //             onChangeText: handleTextChange.bind(this, "lastName"),
-    //             value: inputValues.lastName,
-    //           }}
-    //         />
-    //         <Input
-    //           label="Email Address"
-    //           textInputConfig={{
-    //             editable: false,
-    //             placeholder: "Email Address",
-    //             maxLength: 12,
-    //             value: inputValues.email,
-    //             style: { color: "black", fontSize: 17, backgroundColor: "none" },
-    //           }}
-    //         />
-    //         <Input
-    //           label="Phone Number"
-    //           textInputConfig={{
-    //             keyboardType: "numeric",
-    //             onChangeText: handleTextChange.bind(this, "phoneNumber"),
-    //             placeholder: "###-###-####",
-    //             maxLength: 12,
-    //             value: inputValues.phoneNumber,
-    //           }}
-    //         />
-    //       </View>
-    //       <View style={styles.buttons}>
-    //         <Button mode="flat" onPress={cancelHandler} style={styles.button}>
-    //           Cancel
-    //         </Button>
-    //         <Button onPress={confirmHandler} style={styles.button}>
-    //           Confirm
-    //         </Button>
-    //       </View>
-    //   </SafeAreaView>
   );
 };
 

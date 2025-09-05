@@ -13,6 +13,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
 import { UserInputContext } from "../../store/user-input";
+import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 // import { FavoritesContext } from "../../store/context/favoritesContext";
 
 type Props = {
@@ -20,9 +21,6 @@ type Props = {
 };
 
 const ProfileSettings = ({ navigation }: Props) => {
-  // const [dummyUserData, setDummyUserData] = useState({
-  //   users: [{ image: "" }],
-  // });
   const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const editPressHandler = (basicInfo: any) => {
@@ -30,6 +28,19 @@ const ProfileSettings = ({ navigation }: Props) => {
       {
         userData: basicInfo,
       };
+  };
+
+  const ProfilePicture = () => {
+    return (
+      <View>
+        <Image
+          source={{
+            uri: "https://drive.google.com/uc?export=view&id=1LBJjTPXlYb-g8vXO9nIIMr9mcqK5l0xa",
+          }}
+          style={{ width: 50, height: 50, borderRadius: 25 }}
+        />
+      </View>
+    );
   };
 
   const editUserAddress = () => {
@@ -45,22 +56,22 @@ const ProfileSettings = ({ navigation }: Props) => {
     getProfilePicture();
   }, []);
 
+  if (userInputCtx.isLoading) {
+    return <LoadingOverlay message="Updating..." />;
+  }
+
   return (
     <SafeAreaView>
       <View
-      //  style={styles.container}
+        style={{
+          flexDirection: "column",
+          justifyContent: "flex-start",
+        }}
       >
         <View style={styles.containerProfilePic}>
-          <View style={styles.imageContainerProfilePic}>
-            {/* {dummyUserData.users && (
-              <Image
-                source={{ uri: dummyUserData.users[8].image }}
-                style={styles.image}
-              />
-            )} */}
-          </View>
+          <ProfilePicture />
         </View>
-        <ScrollView style={styles.categoriesContainer}>
+        <ScrollView contentContainerStyle={styles.categoriesContainer}>
           <Pressable
             style={({ pressed }) => [
               styles.basicInfo,
@@ -91,11 +102,14 @@ const ProfileSettings = ({ navigation }: Props) => {
               <Text style={styles.label}>Address</Text>
             </View>
             <View></View>
-            <View style={{ maxWidth: 200 }}>
+            <View style={{ maxWidth: 180 }}>
               <Text style={{ color: "gray" }} numberOfLines={1}>
-                {userInputCtx.userInput.address.addressLine1.value}{" "}
-                {userInputCtx.userInput.address.city.value}{" "}
-                {userInputCtx.userInput.address.state.value}
+                {userInputCtx.userInput.address.addressLine1.value}
+                {", "}
+                {userInputCtx.userInput.address.city.value}
+                {", "}
+                {userInputCtx.userInput.address.state.value}{" "}
+                {userInputCtx.userInput.address.zipcode.value}
               </Text>
             </View>
             <View>
@@ -169,7 +183,7 @@ const ProfileSettings = ({ navigation }: Props) => {
           </Pressable>
         </ScrollView>
       </View>
-      <View></View>
+      {/* <View></View> */}
     </SafeAreaView>
   );
 };
@@ -216,14 +230,14 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     marginHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 20,
   },
   category: {
     marginVertical: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F4F4F4",
     height: 80,
     borderRadius: 20,
     paddingHorizontal: 10,
@@ -233,7 +247,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F4F4F4",
     height: 110,
     borderRadius: 20,
     paddingHorizontal: 10,

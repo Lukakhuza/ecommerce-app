@@ -3,7 +3,6 @@ import { Alert } from "react-native";
 const url = "https://backend-ecommerce-mobile-app.onrender.com";
 
 export const createUser = async (user: any) => {
-  console.log("Test 1");
   const result = await fetch(url + "/user/create-user/", {
     method: "PUT",
     headers: {
@@ -11,9 +10,6 @@ export const createUser = async (user: any) => {
     },
     body: JSON.stringify(user),
   });
-  console.log("Test 5", result);
-  // console.log("Hii");
-  // return result;
 };
 
 export const validateToken = async (token: string) => {
@@ -28,9 +24,6 @@ export const validateToken = async (token: string) => {
     body: JSON.stringify(tokenData),
   });
   const resData = await result.json();
-  console.log("data 1", resData);
-  console.log("Status 1: ", result.status);
-  console.log("Status 2: ", resData.status);
   // setIsLoading(false);
   return resData;
   // SecureStore.setItemAsync("token", token);
@@ -70,4 +63,38 @@ export const getUserByEmail = async (email: string) => {
   });
   const resData = await response.json();
   return resData;
+};
+
+export const saveUserDataToDatabase = async (userData: any) => {
+  try {
+    const userId = userData.id;
+    const result = await fetch(url + "/user/update-user/" + userId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    const resData = await result.json();
+    return resData;
+  } catch (error) {
+    Alert.alert("User could not be saved. Try again later.");
+  }
+};
+
+export const saveUserDataToContext = async (userData: any) => {
+  try {
+    const userId = userData.id;
+    const result = await fetch(url + "/user/update-user/" + userId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    const resData = await result.json();
+    return resData;
+  } catch (error) {
+    Alert.alert("User could not be saved. Try again later.");
+  }
 };

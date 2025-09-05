@@ -5,6 +5,11 @@ import Input from "../../components/atoms/Input";
 import Button from "../../components/atoms/Button";
 import { UserInputContext } from "../../store/user-input";
 import { AuthContext } from "../../store/auth-context";
+import {
+  isValidFirstName,
+  isValidLastName,
+  isValidPhoneNumber,
+} from "../../util/validation";
 
 type Props = {
   route: any;
@@ -13,36 +18,74 @@ type Props = {
 
 const ManageUserData = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
-  const [originalValues, setOriginalValues] = useState({
-    firstName: userInputCtx.userInput.firstName.value,
-    lastName: userInputCtx.userInput.lastName.value,
-    phoneNumber: userInputCtx.userInput.phoneNumber.value,
+  // console.log("Test 3", userInputCtx.userInput.firstName.isValid);
+  const [inputValues, setInputValues] = useState({
+    firstName: { value: userInputCtx.userInput.firstName.value, isValid: true },
+    lastName: { value: userInputCtx.userInput.lastName.value, isValid: true },
+    phoneNumber: {
+      value: userInputCtx.userInput.phoneNumber.value,
+      isValid: true,
+    },
   });
-  console.log(originalValues);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Edit Basic Info",
     });
   }, [navigation]);
 
-  const confirmHandler = () => {
-    setOriginalValues({
-      firstName: userInputCtx.userInput.firstName.value,
-      lastName: userInputCtx.userInput.lastName.value,
-      phoneNumber: userInputCtx.userInput.phoneNumber.value,
+  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
+    setInputValues((currInputs) => {
+      return {
+        ...currInputs,
+        [inputIdentifier]: { value: enteredText, isValid: true },
+      };
     });
+  };
+
+  const confirmHandler = () => {
+    // Check if the inputs are valid:
+    const firstNameIsValid = isValidFirstName(inputValues.firstName.value);
+    const lastNameIsValid = isValidLastName(inputValues.lastName.value);
+    const phoneNumberIsValid = isValidPhoneNumber(
+      inputValues.phoneNumber.value
+    );
+
+    if (!firstNameIsValid || !lastNameIsValid || !phoneNumberIsValid) {
+      if (!firstNameIsValid) {
+        // need to create a function that will call this: (same logic is being repeated)
+        setInputValues((currInputs) => {
+          return {
+            ...currInputs,
+            firstName: { value: inputValues.firstName, isValid: false },
+          };
+        });
+      }
+      if (!lastNameIsValid) {
+        // need to create a function that will call this: (same logic is being repeated)
+        setInputValues((currInputs) => {
+          return {
+            ...currInputs,
+            lastName: { value: inputValues.lastName, isValid: false },
+          };
+        });
+      }
+      if (!phoneNumberIsValid) {
+        // need to create a function that will call this: (same logic is being repeated)
+        setInputValues((currInputs) => {
+          return {
+            ...currInputs,
+            phoneNumber: { value: inputValues.phoneNumber, isValid: false },
+          };
+        });
+      }
+      return;
+    }
+
+    userInputCtx.updateUserInfo(inputValues);
     navigation.goBack();
   };
 
   const cancelHandler = () => {
-    // Change the values back to original values and close the modal.
-    userInputCtx.updateUserInput("firstName", originalValues.firstName, true);
-    userInputCtx.updateUserInput("lastName", originalValues.lastName, true);
-    userInputCtx.updateUserInput(
-      "phoneNumber",
-      originalValues.phoneNumber,
-      true
-    );
     navigation.goBack();
   };
 
@@ -55,10 +98,12 @@ const ManageUserData = ({ route, navigation }: Props) => {
             autoCapitalize: "sentences",
             autoCorrect: false,
             onChangeText: (enteredText: string) => {
-              userInputCtx.updateUserInput("firstName", enteredText, true);
+              handleTextChange("firstName", enteredText);
             },
-            value: userInputCtx.userInput.firstName.value,
+            value: inputValues.firstName.value,
           }}
+          isValid={inputValues.firstName.isValid}
+          invalidInputMessage="Please enter a valid first name"
         />
         <Input
           label="Last Name"
@@ -66,10 +111,12 @@ const ManageUserData = ({ route, navigation }: Props) => {
             autoCapitalize: "sentences",
             autoCorrect: false,
             onChangeText: (enteredText: string) => {
-              userInputCtx.updateUserInput("lastName", enteredText, true);
+              handleTextChange("lastName", enteredText);
             },
-            value: userInputCtx.userInput.lastName.value,
+            value: inputValues.lastName.value,
           }}
+          isValid={inputValues.lastName.isValid}
+          invalidInputMessage="Please enter a valid last name"
         />
         <Input
           label="Email Address"
@@ -85,13 +132,15 @@ const ManageUserData = ({ route, navigation }: Props) => {
           label="Phone Number"
           textInputConfig={{
             keyboardType: "numeric",
-            onChangeText: (enteredText: string) => {
-              userInputCtx.updateUserInput("phoneNumber", enteredText, true);
-            },
             placeholder: "###-###-####",
             maxLength: 12,
-            value: userInputCtx.userInput.phoneNumber.value,
+            onChangeText: (enteredText: string) => {
+              handleTextChange("phoneNumber", enteredText);
+            },
+            value: inputValues.phoneNumber.value,
           }}
+          isValid={inputValues.phoneNumber.isValid}
+          invalidInputMessage="Please enter a valid phone number"
         />
       </View>
       <View style={styles.buttons}>

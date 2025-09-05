@@ -3,6 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
 import { Alert } from "react-native";
 import { validateToken, fetchToken } from "../api/users.api";
+import { wait } from "../util/helpers";
 import { jwtDecode } from "jwt-decode";
 
 export const AuthContext: any = createContext({
@@ -34,11 +35,6 @@ const AuthContextProvider = ({ children }: Props) => {
   // const [loading, setLoading] = useState(true);
   // const [hasError, setHasError] = useState(null);
 
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
-  console.log("T2", authToken);
-
   useEffect(() => {
     // Check for token at app startup
     const loadToken = async () => {
@@ -60,7 +56,6 @@ const AuthContextProvider = ({ children }: Props) => {
   const getEmailFromToken = (token: string) => {
     try {
       const decoded: any = jwtDecode(token);
-      console.log(decoded);
       return decoded.email;
     } catch (error) {
       return null;

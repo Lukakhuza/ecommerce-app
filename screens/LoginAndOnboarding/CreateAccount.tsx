@@ -17,6 +17,12 @@ import ContinueButton from "../../components/atoms/ContinueButton";
 import { Colors } from "../../constants/colors";
 import SmallText from "../../components/atoms/SmallText";
 import { UserInputContext } from "../../store/user-input";
+import {
+  isValidFirstName,
+  isValidEmail,
+  isValidPassword,
+  isValidLastName,
+} from "../../util/validation";
 // import { useNavigation } from "@react-navigation/native";
 // import { addData, fetchProductsData } from "../../util/auth";
 // import { UserInputContext } from "../../store/context/userInputContext";
@@ -29,18 +35,21 @@ const CreateAccount = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   // const navigation = useNavigation();
   const proceedHandler = () => {
-    // Check if inputs are valid:
-    const regex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    const passwordIsValid = regex.test(userInputCtx.userInput.password.value);
-    const emailIsValid = validator.isEmail(
+    const emailIsValid = isValidEmail(
       userInputCtx.userInput.emailAddress.value
     );
-    const firstNameIsValid =
-      userInputCtx.userInput.firstName.value.trim().length > 0 ? true : false;
-    const lastNameIsValid =
-      userInputCtx.userInput.lastName.value.trim().length > 0 ? true : false;
+
+    const passwordIsValid = isValidPassword(
+      userInputCtx.userInput.password.value
+    );
+
+    const firstNameIsValid = isValidFirstName(
+      userInputCtx.userInput.firstName.value
+    );
+
+    const lastNameIsValid = isValidLastName(
+      userInputCtx.userInput.lastName.value
+    );
 
     if (
       !emailIsValid ||
