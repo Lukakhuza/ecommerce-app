@@ -6,6 +6,7 @@ import IconButton from "../components/atoms/IconButton";
 import CreateAccount from "../screens/LoginAndOnboarding/CreateAccount";
 import ForgotPassword from "../screens/LoginAndOnboarding/ForgotPassword";
 import PasswordReset from "../screens/LoginAndOnboarding/PasswordReset";
+import Categories from "../screens/Categories";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
 
@@ -36,6 +37,7 @@ import ManageUserAddress from "../screens/Settings/ManageUserAddress";
 // import Payment from "../screens/Settings/Payment";
 // import Favorites from "../screens/ProductPage/Favorites";
 import TabsOverview from "./BottomTabs";
+// import Categories from "../screens/Categories";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,23 @@ const AuthenticatedStack = () => {
         name="ManageUserAddress"
         component={ManageUserAddress}
         options={{ presentation: "modal" }}
+      />
+      <Stack.Screen
+        name="Categories"
+        component={Categories}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              style={{}}
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );

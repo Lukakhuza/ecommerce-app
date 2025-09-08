@@ -3,8 +3,10 @@ import { StyleSheet, View } from "react-native";
 import Root from "./navigation/Root";
 // import AuthContextProvider from "./store/auth-context";
 import AuthContextProvider from "./store/auth-context";
-import UserInputContextProvider from "./store/user-input";
+import UserInputContextProvider from "./store/user-input-context";
 import * as SplashScreen from "expo-splash-screen";
+import ProductsContextProvider from "./store/products-context";
+import FavoritesContextProvider from "./store/favorites-context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,7 +16,11 @@ const App = () => {
       <StatusBar style="auto" />
       <AuthContextProvider>
         <UserInputContextProvider>
-          <Root />
+          <ProductsContextProvider>
+            <FavoritesContextProvider>
+              <Root />
+            </FavoritesContextProvider>
+          </ProductsContextProvider>
         </UserInputContextProvider>
       </AuthContextProvider>
     </View>

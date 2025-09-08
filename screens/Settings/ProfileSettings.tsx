@@ -12,7 +12,7 @@ import {
 // import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
-import { UserInputContext } from "../../store/user-input";
+import { UserInputContext } from "../../store/user-input-context";
 import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 // import { FavoritesContext } from "../../store/context/favoritesContext";
 

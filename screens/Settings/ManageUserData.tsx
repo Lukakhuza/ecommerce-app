@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../../components/atoms/Input";
 // import IconButton from "../components/ui/IconButton";
 import Button from "../../components/atoms/Button";
-import { UserInputContext } from "../../store/user-input";
+import { UserInputContext } from "../../store/user-input-context";
 import { AuthContext } from "../../store/auth-context";
 import {
   isValidFirstName,
@@ -19,6 +19,7 @@ type Props = {
 const ManageUserData = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   // console.log("Test 3", userInputCtx.userInput.firstName.isValid);
+  const [phone, setPhone] = useState("");
   const [inputValues, setInputValues] = useState({
     firstName: { value: userInputCtx.userInput.firstName.value, isValid: true },
     lastName: { value: userInputCtx.userInput.lastName.value, isValid: true },
@@ -56,7 +57,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
         setInputValues((currInputs) => {
           return {
             ...currInputs,
-            firstName: { value: inputValues.firstName, isValid: false },
+            firstName: { value: inputValues.firstName.value, isValid: false },
           };
         });
       }
@@ -65,7 +66,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
         setInputValues((currInputs) => {
           return {
             ...currInputs,
-            lastName: { value: inputValues.lastName, isValid: false },
+            lastName: { value: inputValues.lastName.value, isValid: false },
           };
         });
       }
@@ -74,7 +75,10 @@ const ManageUserData = ({ route, navigation }: Props) => {
         setInputValues((currInputs) => {
           return {
             ...currInputs,
-            phoneNumber: { value: inputValues.phoneNumber, isValid: false },
+            phoneNumber: {
+              value: inputValues.phoneNumber.value,
+              isValid: false,
+            },
           };
         });
       }
@@ -131,9 +135,8 @@ const ManageUserData = ({ route, navigation }: Props) => {
         <Input
           label="Phone Number"
           textInputConfig={{
-            keyboardType: "numeric",
-            placeholder: "###-###-####",
-            maxLength: 12,
+            autoCapitalize: "sentences",
+            autoCorrect: false,
             onChangeText: (enteredText: string) => {
               handleTextChange("phoneNumber", enteredText);
             },

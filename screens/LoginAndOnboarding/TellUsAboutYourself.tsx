@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useState, useContext } from "react";
 // import PurpleButton from "../../components/ui/PurpleButton";
-import { UserInputContext } from "../../store/user-input";
+import { UserInputContext } from "../../store/user-input-context";
 import { Colors } from "../../constants/colors";
 import ContinueButton from "../../components/atoms/ContinueButton";
 // import { Dropdown } from "react-native-element-dropdown";

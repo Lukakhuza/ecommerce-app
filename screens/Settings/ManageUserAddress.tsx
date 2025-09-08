@@ -2,7 +2,7 @@ import { useContext, useLayoutEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../../components/atoms/Input";
 import Button from "../../components/atoms/Button";
-import { UserInputContext } from "../../store/user-input";
+import { UserInputContext } from "../../store/user-input-context";
 import {
   isValidAddressLine1,
   isValidCityName,
@@ -63,13 +63,6 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
     const stateIsValid = isValidUSState(addressInputValues.state.value);
     const zipcodeIsValid = isValidUSZipCode(addressInputValues.zipcode.value);
 
-    console.log(
-      "TT11",
-      addressLine1IsValid,
-      cityIsValid,
-      stateIsValid,
-      zipcodeIsValid
-    );
     if (
       !addressLine1IsValid ||
       !cityIsValid ||
@@ -80,7 +73,7 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
         setAddressInputValues((currAddressInputs) => {
           return {
             ...currAddressInputs,
-            firstName: {
+            addressLine1: {
               value: addressInputValues.addressLine1.value,
               isValid: false,
             },
@@ -119,8 +112,8 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
             },
           };
         });
-        return;
       }
+      return;
     }
 
     userInputCtx.updateAddress(addressInputValues);
