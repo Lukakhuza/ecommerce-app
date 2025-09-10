@@ -1,6 +1,5 @@
 import { Alert } from "react-native";
-
-const url = "https://backend-ecommerce-mobile-app.onrender.com";
+import { url } from "./client";
 
 export const createUser = async (user: any) => {
   const result = await fetch(url + "/user/create-user/", {

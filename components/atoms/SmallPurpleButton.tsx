@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgLight2,
   },
   selected: {
-    color: "black",
+    color: Colors.black,
   },
 });

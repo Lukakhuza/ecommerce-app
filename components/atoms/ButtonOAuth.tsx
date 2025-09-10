@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
   pressed: {
     // opacity: 0.5,
     backgroundColor: Colors.primary100,
-    color: "white",
+    color: Colors.white100,
   },
 });

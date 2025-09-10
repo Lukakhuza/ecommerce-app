@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   children: any;
@@ -42,28 +43,28 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 4,
     padding: 8,
-    backgroundColor: "darkblue",
+    backgroundColor: Colors.darkblue,
   },
   flat: {
-    backgroundColor: "transparent",
+    backgroundColor: Colors.transparent,
   },
   flat2: {
-    backgroundColor: "white",
+    backgroundColor: Colors.white100,
   },
   buttonText: {
-    color: "white",
+    color: Colors.white100,
     textAlign: "center",
   },
   flatText: {
-    color: "lightpurple",
+    color: Colors.lightpurple,
   },
   flat2Text: {
-    color: "darkblue",
+    color: Colors.darkblue,
     fontWeight: 500,
   },
   pressed: {
     opacity: 0.75,
-    backgroundColor: "white",
+    backgroundColor: Colors.white100,
     borderRadius: 4,
   },
 });

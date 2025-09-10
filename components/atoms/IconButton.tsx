@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet } from "react-native";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   icon: any;
@@ -28,11 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
-    // borderColor: "blue",
-    backgroundColor: "white",
+    backgroundColor: Colors.white100,
     width: 50,
     height: 50,
-    // borderWidth: 3,
   },
   pressed: {
     opacity: 0.5,

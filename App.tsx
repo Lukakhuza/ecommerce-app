@@ -7,6 +7,7 @@ import UserInputContextProvider from "./store/user-input-context";
 import * as SplashScreen from "expo-splash-screen";
 import ProductsContextProvider from "./store/products-context";
 import FavoritesContextProvider from "./store/favorites-context";
+import { Colors } from "./constants/colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,7 +33,7 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white100,
     // alignItems: "center",
     // justifyContent: "center",
   },

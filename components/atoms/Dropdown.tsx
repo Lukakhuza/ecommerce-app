@@ -31,9 +31,6 @@ const DropdownComponent = ({ value, onChange, style }: any) => {
       //   searchPlaceholder="Search..."
       value={value}
       onChange={onChange}
-      //   renderLeftIcon={() => (
-      //     <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-      //   )}
     />
   );
 };

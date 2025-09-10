@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   label: any;
@@ -40,21 +41,21 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    color: "purple",
+    color: Colors.purple100,
     marginBottom: 4,
   },
   input: {
-    backgroundColor: "lightblue",
-    color: "darkblue",
+    backgroundColor: Colors.lightblue,
+    color: Colors.darkblue,
     padding: 6,
     borderRadius: 6,
     fontSize: 18,
   },
   inputInvalid: {
-    backgroundColor: "#cf5b6c",
+    backgroundColor: Colors.pinkishRed,
   },
   invalidInputMessage: {
-    color: "red",
+    color: Colors.red100,
     marginLeft: 10,
   },
 });

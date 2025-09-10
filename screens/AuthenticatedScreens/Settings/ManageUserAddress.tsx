@@ -1,14 +1,15 @@
 import { useContext, useLayoutEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Input from "../../components/atoms/Input";
-import Button from "../../components/atoms/Button";
-import { UserInputContext } from "../../store/user-input-context";
+import Input from "../../../components/atoms/Input";
+import Button from "../../../components/atoms/Button";
+import { UserInputContext } from "../../../store/user-input-context";
 import {
   isValidAddressLine1,
   isValidCityName,
   isValidUSState,
   isValidUSZipCode,
-} from "../../util/validation";
+} from "../../../util/validation";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   route: any;
@@ -121,7 +122,7 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
   };
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.container}>
         <Input
           label="Address Line 1"
           textInputConfig={{
@@ -194,9 +195,7 @@ export default ManageUserAddress;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 24,
-    color: "purple",
+    marginTop: 30,
   },
   buttons: {
     flexDirection: "row",
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     paddingTop: 8,
     borderTopWidth: 2,
-    borderTopColor: "lightpurple",
+    borderTopColor: Colors.lightpurple,
     alignItems: "center",
   },
 });

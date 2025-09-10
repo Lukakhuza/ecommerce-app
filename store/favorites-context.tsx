@@ -13,6 +13,7 @@ type Props = {
 const FavoritesContextProvider = ({ children }: Props) => {
   const [favorites, setFavorites] = useState([{}]);
 
+  console.log(favorites);
   const addFavorite = (id: any) => {
     setFavorites((currentFavorites: any) => {
       return [...currentFavorites, id];

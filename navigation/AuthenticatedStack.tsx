@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Button, StyleSheet } from "react-native";
-import EnterEmail from "../screens/LoginAndOnboarding/EnterEmail";
-import EnterPassword from "../screens/LoginAndOnboarding/EnterPassword";
+import EnterEmail from "../screens/LoginAndOnboardingScreens/EnterEmail";
+import EnterPassword from "../screens/LoginAndOnboardingScreens/EnterPassword";
 import IconButton from "../components/atoms/IconButton";
-import CreateAccount from "../screens/LoginAndOnboarding/CreateAccount";
-import ForgotPassword from "../screens/LoginAndOnboarding/ForgotPassword";
-import PasswordReset from "../screens/LoginAndOnboarding/PasswordReset";
-import Categories from "../screens/Categories";
+import CreateAccount from "../screens/LoginAndOnboardingScreens/CreateAccount";
+import ForgotPassword from "../screens/LoginAndOnboardingScreens/ForgotPassword";
+import PasswordReset from "../screens/LoginAndOnboardingScreens/PasswordReset";
+import Categories from "../screens/AuthenticatedScreens/Categories";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
 
@@ -23,13 +23,13 @@ import { AuthContext } from "../store/auth-context";
 // import ProductDetails from "../screens/ProductPage/ProductDetails";
 // import IconButton from "../components/ui/IconButton";
 // import CategoriesSearchAndFilter from "../screens/SearchAndFilter/CategoriesSearchAndFilter";
-import Notifications from "../screens/Notifications";
+import Notifications from "../screens/AuthenticatedScreens/Notifications";
 // import Welcome from "../screens/Welcome/welcome";
 
-import Orders from "../screens/Orders";
-import ProfileSettings from "../screens/Settings/ProfileSettings";
-import ManageUserData from "../screens/Settings/ManageUserData";
-import ManageUserAddress from "../screens/Settings/ManageUserAddress";
+import Orders from "../screens/AuthenticatedScreens/Orders";
+import ProfileSettings from "../screens/AuthenticatedScreens/Settings/ProfileSettings";
+import ManageUserData from "../screens/AuthenticatedScreens/Settings/ManageUserData";
+import ManageUserAddress from "../screens/AuthenticatedScreens/Settings/ManageUserAddress";
 // import Cart from "../screens/CartAndCheckout/Cart";
 // import ManageUserAddress from "../screens/ManageUserAddress";
 // import ManageUserData from "../screens/ManageUserData";
@@ -48,33 +48,6 @@ const AuthenticatedStack = () => {
         name="TabsOverview"
         component={TabsOverview}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ManageUserData"
-        component={ManageUserData}
-        options={{ presentation: "modal" }}
-      />
-      <Stack.Screen
-        name="ManageUserAddress"
-        component={ManageUserAddress}
-        options={{ presentation: "modal" }}
-      />
-      <Stack.Screen
-        name="Categories"
-        component={Categories}
-        options={({ navigation }) => ({
-          title: "",
-          headerTransparent: true,
-          headerLeft: ({ tintColor }) => (
-            <IconButton
-              style={{}}
-              icon="chevron-back-circle-outline"
-              size={32}
-              color={tintColor}
-              onPress={() => navigation.goBack()}
-            />
-          ),
-        })}
       />
     </Stack.Navigator>
   );

@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   placeholder: string;
@@ -40,14 +41,14 @@ const styles = StyleSheet.create({
     marginVertical: 7,
     height: 56,
     borderRadius: 4,
-    backgroundColor: "#F4F4F4",
-    // backgroundColor: "orange",
+    backgroundColor: Colors.bgLight2,
+    // backgroundColor: Colors.orange100,
     paddingLeft: 10,
   },
   textInvalid: {
-    backgroundColor: "#cf5b6c",
+    backgroundColor: Colors.pinkishRed,
   },
   invalidInputMessage: {
-    color: "red",
+    color: Colors.red100,
   },
 });

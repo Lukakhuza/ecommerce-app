@@ -8,7 +8,8 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
-import { ProductsContext } from "../store/products-context";
+import { ProductsContext } from "../../store/products-context";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   navigation: any;
@@ -19,9 +20,7 @@ const Categories = ({ navigation }: Props) => {
 
   return (
     <SafeAreaView>
-      <View
-      //  style={styles.container}
-      >
+      <View style={styles.container}>
         <Text style={styles.title}>Shop by Categories</Text>
         <ScrollView style={styles.categoriesContainer}>
           <Pressable
@@ -121,12 +120,13 @@ const Categories = ({ navigation }: Props) => {
 export default Categories;
 
 const styles = StyleSheet.create({
+  container: {},
   categories: {
     height: 840,
   },
   title: {
-    marginLeft: 80,
-    marginTop: 20,
+    marginLeft: 30,
+    marginTop: 40,
     fontSize: 25,
     fontWeight: 500,
   },
@@ -138,14 +138,14 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     marginHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 10,
   },
   category: {
     marginVertical: 5,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    // backgroundColor: "white",
+    // backgroundColor: Colors.white100,
     height: 80,
     borderRadius: 20,
   },

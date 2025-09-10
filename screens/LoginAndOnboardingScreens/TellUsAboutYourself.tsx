@@ -79,7 +79,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
               style={{
                 width: 1,
                 height: "100%",
-                backgroundColor: "black", // Black color
+                backgroundColor: Colors.black, // Black color
               }}
             /> */}
             <SmallPurpleButton
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "white",
-    borderColor: "blue",
+    backgroundColor: Colors.white100,
+    borderColor: Colors.blue100,
     borderWidth: 3,
   },
   innerContainer: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   selected: {
-    backgroundColor: "yellow",
+    backgroundColor: Colors.yellow100,
   },
   //   subcontainer: {
   //     // marginBottom: 100,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 5,
     // margin: 10,
-    // borderColor: "black",
+    // borderColor: Colors.black,
     // borderWidth: 3,
     marginBottom: 30,
   },
@@ -211,13 +211,13 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     margin: 100,
-    // borderColor: "black",
+    // borderColor: Colors.black,
     borderWidth: 1,
     paddingHorizontal: 15,
     height: 60,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: Colors.bgLight2,
     borderRadius: 30,
-    // borderBottomColor: "gray",
+    // borderBottomColor: Colors.gray100,
     // borderBottomWidth: 0.5,
   },
   //   //   textContainer: {

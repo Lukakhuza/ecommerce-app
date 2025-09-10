@@ -1,15 +1,16 @@
 import { useContext, useLayoutEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Input from "../../components/atoms/Input";
+import Input from "../../../components/atoms/Input";
 // import IconButton from "../components/ui/IconButton";
-import Button from "../../components/atoms/Button";
-import { UserInputContext } from "../../store/user-input-context";
-import { AuthContext } from "../../store/auth-context";
+import Button from "../../../components/atoms/Button";
+import { UserInputContext } from "../../../store/user-input-context";
+import { AuthContext } from "../../../store/auth-context";
 import {
   isValidFirstName,
   isValidLastName,
   isValidPhoneNumber,
-} from "../../util/validation";
+} from "../../../util/validation";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   route: any;
@@ -129,7 +130,11 @@ const ManageUserData = ({ route, navigation }: Props) => {
             placeholder: "Email Address",
             // maxLength: 20,
             value: userInputCtx.userInput.emailAddress.value,
-            style: { color: "black", fontSize: 17, backgroundColor: "none" },
+            style: {
+              color: Colors.black,
+              fontSize: 17,
+              backgroundColor: "none",
+            },
           }}
         />
         <Input
@@ -154,7 +159,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
             minWidth: 120,
             marginHorizontal: 8,
             marginTop: 20,
-            borderColor: "blue",
+            borderColor: Colors.blue100,
           }}
         >
           Cancel
@@ -173,7 +178,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    color: "purple",
+    color: Colors.purple100,
   },
   buttons: {
     flexDirection: "row",
@@ -184,13 +189,13 @@ const styles = StyleSheet.create({
     minWidth: 120,
     marginHorizontal: 8,
     marginTop: 20,
-    borderColor: "blue",
+    borderColor: Colors.blue100,
   },
   deleteContainer: {
     marginTop: 16,
     paddingTop: 8,
     borderTopWidth: 2,
-    borderTopColor: "lightpurple",
+    borderTopColor: Colors.lightpurple,
     alignItems: "center",
   },
 });

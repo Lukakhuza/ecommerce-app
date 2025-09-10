@@ -1,4 +1,5 @@
 import { View, StyleSheet, Text, Button } from "react-native";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   message: string;
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
-    backgroundColor: "gray", // update the color here from global styles.
+    backgroundColor: Colors.gray100,
   },
   text: {
     textAlign: "center",

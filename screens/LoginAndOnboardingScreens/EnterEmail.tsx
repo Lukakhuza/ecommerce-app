@@ -123,18 +123,16 @@ const styles = StyleSheet.create({
     marginTop: 75,
   },
   outerContainer: {
-    // borderWidth: 5,
-    // borderColor: "brown",
     paddingHorizontal: 30,
   },
   // safeAreaView: {
-  //   backgroundColor: "white",
+  //   backgroundColor: Colors.white100,
   // },
   // container: {
   //   // flex: 1,
   //   height: "100%",
   //   flexDirection: "column",
-  //   backgroundColor: "white",
+  //   backgroundColor: Colors.white100,
   // },
   // inputsOuterContainer: {
   //   alignItems: "center",
@@ -163,7 +161,7 @@ const styles = StyleSheet.create({
   //   width: 360,
   //   height: 56,
   //   borderRadius: 4,
-  //   backgroundColor: "#F4F4F4",
+  //   backgroundColor: Colors.bgLight2,
   //   paddingLeft: 10,
   // },
   // redirectText: {
@@ -176,6 +174,6 @@ const styles = StyleSheet.create({
   //   width: "80%",
   // },
   // button1: {
-  //   // backgroundColor: "blue",
+  //   // backgroundColor: Colors.blue100,
   // },
 });

@@ -4,14 +4,14 @@ import AuthenticatedStack from "./AuthenticatedStack";
 import { AuthContext } from "../store/auth-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useContext, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingOverlay from "../components/atoms/LoadingOverlay";
+import { Colors } from "../constants/colors";
 
 const Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "transparent",
+    background: Colors.transparent,
   },
 };
 

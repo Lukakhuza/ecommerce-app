@@ -11,21 +11,22 @@ import {
 } from "react-native";
 import { useContext, useEffect, useState } from "react";
 // import { fetchProfilePicture } from "../../util/auth";
-import { ProductsContext } from "./../store/products-context";
-import CartButton from "../components/atoms/CartButton";
+import { ProductsContext } from "../../store/products-context";
+import CartButton from "../../components/atoms/CartButton";
 // import DropdownComponent from "../../components/ui/Dropdown";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import { Dropdown } from "react-native-element-dropdown";
 import { Ionicons } from "@expo/vector-icons";
-import FavoriteIcon from "./../components/atoms/FavoriteIcon";
+import FavoriteIcon from "../../components/atoms/FavoriteIcon";
 // import { FavoritesContext } from "../../store/context/favoritesContext";
-import { FavoritesContext } from "../store/favorites-context";
+import { FavoritesContext } from "../../store/favorites-context";
 // import SearchComponent from "../../components/ui/SearchComponent";
-import SearchComponent from "../components/atoms/SearchComponent";
-import { AuthContext } from "./../store/auth-context";
-import LoadingOverlay from "./../components/atoms/LoadingOverlay";
-import CategoryButton from "../components/atoms/CategoryButton";
-import { UserInputContext } from "../store/user-input-context";
+import SearchComponent from "../../components/atoms/SearchComponent";
+import { AuthContext } from "../../store/auth-context";
+import LoadingOverlay from "../../components/atoms/LoadingOverlay";
+import CategoryButton from "../../components/atoms/CategoryButton";
+import { UserInputContext } from "../../store/user-input-context";
+import { Colors } from "../../constants/colors";
 
 const data = [
   { label: "Men", value: "Men" },
@@ -63,7 +64,8 @@ const HomePage = ({ navigation }: Props) => {
         <Pressable
           style={styles.imageContainer}
           onPress={() => {
-            navigation.navigate("Profile");
+            console.log("Hello");
+            navigation.navigate("ProfileTab", { screen: "Profile" });
           }}
         >
           {/* {dummyUserData.users && ( */}
@@ -239,7 +241,7 @@ const HomePage = ({ navigation }: Props) => {
                           : "heart-outline"
                       }
                       size={30}
-                      color="black"
+                      color={Colors.black}
                       onPress={() => {
                         if (
                           !favoritesCtx.favorites.includes(itemData.item.id)
@@ -280,7 +282,7 @@ const HomePage = ({ navigation }: Props) => {
                 fontSize: 18,
                 fontWeight: 600,
                 marginLeft: 10,
-                color: "purple",
+                color: Colors.purple100,
               }}
             >
               New In
@@ -308,7 +310,7 @@ const HomePage = ({ navigation }: Props) => {
                           : "heart-outline"
                       }
                       size={30}
-                      color="black"
+                      color={Colors.black}
                       onPress={() => {
                         if (
                           !favoritesCtx.favorites.includes(itemData.item.id)
@@ -351,7 +353,7 @@ export default HomePage;
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    // backgroundColor: "orange",
+    // backgroundColor: Colors.orange100,
   },
   headerContainer: {
     // flex: 1,
@@ -360,35 +362,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderColor: "red",
+    // borderColor: Colors.red100,
     // borderWidth: 4,
     height: 100,
   },
 
   container: {
     // height: 800,
-    // backgroundColor: "yellow",
   },
   imageContainer: {
     height: 50,
     width: 50,
-    backgroundColor: "brown",
+    backgroundColor: Colors.brown100,
     borderRadius: 25,
   },
   imageContainer2: {
     height: 78,
     width: 78,
     padding: 2,
-    // borderColor: "orange",
+    // borderColor: Colors.orange100,
     // borderWidth: 3,
   },
   image: {
     flex: 1,
-    // borderColor: "black",
+    // borderColor: Colors.black,
     // borderWidth: 2,
     // padding: 8,
     // margin: 5,
-    // backgroundColor: "white",
+    // backgroundColor: Colors.white100,
     // height: 30,
     // width: 20,
     // height: 20,
@@ -425,12 +426,12 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     marginTop: 0,
-    // borderColor: "black",
+    // borderColor: Colors.black,
     borderWidth: 1,
     paddingHorizontal: 15,
     // margin: 16,
     height: 60,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: Colors.bgLight2,
     borderRadius: 30,
   },
   categories: {
@@ -440,15 +441,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 5,
     marginHorizontal: 30,
-    // borderColor: "brown",
-    // borderWidth: 5,
   },
   categoriesHeader: {
     // flex: 1,
     flexDirection: "row",
-    // borderColor: "blue",
     height: 40,
-    // borderWidth: 5,
     // paddingHorizontal: 10,
     // marginBottom: 10,
     justifyContent: "space-between",
@@ -457,18 +454,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
-    // borderColor: "green",
-    // borderWidth: 5,
   },
   categoryItem: {
     flex: 1,
     // marginHorizontal: 10,
     // height: 1,
-    // borderColor: "purple",
-    // borderWidth: 3,
     // height: 300,
     // width: 300,
-    // backgroundColor: "yellow",
   },
   topSelling: {
     flex: 5,
@@ -483,7 +475,7 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white100,
     height: "auto",
     width: 150,
     margin: 10,
@@ -502,6 +494,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   productStyle: {
-    // backgroundColor: "yellow",
+    // backgroundColor: Colors.yellow100,
   },
 });

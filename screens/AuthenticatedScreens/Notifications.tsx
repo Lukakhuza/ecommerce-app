@@ -8,7 +8,8 @@ import {
   View,
 } from "react-native";
 // import PurpleButton from "../../components/ui/PurpleButton";
-import SmallPurpleButton from "../components/atoms/SmallPurpleButton";
+import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   navigation: any;
@@ -20,7 +21,10 @@ const Notifications = ({ navigation }: Props) => {
       <Text style={styles.header}>Notifications</Text>
       <ScrollView contentContainerStyle={styles.root}>
         <View style={styles.content}>
-          <Image style={styles.image} source={require("../assets/bell.png")} />
+          <Image
+            style={styles.image}
+            source={require("../../assets/bell.png")}
+          />
           <View>
             <Text style={{ fontSize: 20, marginVertical: 10 }}>
               No Notifications yet
@@ -29,7 +33,7 @@ const Notifications = ({ navigation }: Props) => {
           <View>
             <SmallPurpleButton
               onPress={() => {
-                navigation.navigate("CategoriesList");
+                navigation.navigate("HomeTab", { screen: "Categories" });
               }}
               text="Explore Categories"
             />
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 200,
     height: 200,
-    borderColor: "yellow",
+    borderColor: Colors.yellow100,
     borderWidth: 4,
   },
   image: {

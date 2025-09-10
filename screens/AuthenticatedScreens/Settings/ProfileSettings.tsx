@@ -11,9 +11,10 @@ import {
 // import { fetchProfilePicture } from "../../util/auth";
 // import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
-import { AuthContext } from "../../store/auth-context";
-import { UserInputContext } from "../../store/user-input-context";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
+import { AuthContext } from "../../../store/auth-context";
+import { UserInputContext } from "../../../store/user-input-context";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import { Colors } from "../../../constants/colors";
 // import { FavoritesContext } from "../../store/context/favoritesContext";
 
 type Props = {
@@ -103,7 +104,7 @@ const ProfileSettings = ({ navigation }: Props) => {
             </View>
             <View></View>
             <View style={{ maxWidth: 180 }}>
-              <Text style={{ color: "gray" }} numberOfLines={1}>
+              <Text style={{ color: Colors.gray100 }} numberOfLines={1}>
                 {userInputCtx.userInput.address.addressLine1.value}
                 {", "}
                 {userInputCtx.userInput.address.city.value}
@@ -193,7 +194,7 @@ export default ProfileSettings;
 const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
-    // backgroundColor: "gray",
+    // backgroundColor: Colors.gray100,
   },
   containerProfilePic: {
     marginTop: 38,
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
   },
   label2: {
-    color: "gray",
+    color: Colors.gray100,
     fontSize: 17,
     marginLeft: 10,
     marginVertical: 4,
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    backgroundColor: Colors.bgLight2,
     height: 80,
     borderRadius: 20,
     paddingHorizontal: 10,
@@ -247,7 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    backgroundColor: Colors.bgLight2,
     height: 110,
     borderRadius: 20,
     paddingHorizontal: 10,
@@ -268,15 +269,15 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     marginHorizontal: 30,
-    backgroundColor: "brown",
+    backgroundColor: Colors.brown100,
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 3,
-    borderColor: "black",
+    borderColor: Colors.black,
   },
   signOut: {
-    color: "red",
+    color: Colors.red100,
     fontSize: 15,
   },
   signOutContainer: {

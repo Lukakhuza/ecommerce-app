@@ -1,5 +1,6 @@
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "../../constants/colors";
 
 type Props = { style?: any; onChangeText?: any; value?: any };
 
@@ -10,7 +11,7 @@ const SearchComponent = ({ style, onChangeText, value }: Props) => {
       <TextInput
         autoCorrect={false}
         placeholder="Search"
-        placeholderTextColor="gray"
+        placeholderTextColor={Colors.gray100}
         style={styles.searchBar}
         clearButtonMode="while-editing"
         onChangeText={onChangeText}
@@ -28,13 +29,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderColor: "red",
+    // borderColor: Colors.red100,
     // borderWidth: 4,
     // height: 40,
   },
   searchBar: {
-    backgroundColor: "white",
-    // borderColor: "black",
+    backgroundColor: Colors.white100,
+    // borderColor: Colors.black,
     flex: 1,
     height: 50,
     paddingLeft: 40,
@@ -45,7 +46,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 10,
     zIndex: 1,
-    // borderColor: "yellow",
-    // borderWidth: 3,
   },
 });
