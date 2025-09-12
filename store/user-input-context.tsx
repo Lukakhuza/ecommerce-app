@@ -24,6 +24,7 @@ const emptyUserInput = {
     state: { value: "", isValid: true },
     zipcode: { value: "", isValid: true },
   },
+  favorites: { items: [] },
   cart: { items: [] },
 };
 
@@ -46,7 +47,6 @@ const UserInputContextProvider = ({ children }: Props) => {
       const email = await getEmailFromToken(token);
       const userData = await getUserByEmail(email);
       setUserInput({
-        // working on this. need to fix the backend code to make sure the userData includes user id.
         id: { value: userData.user.id ? userData.user.id : "", isValid: true },
         firstName: {
           value: userData.user.firstName ? userData.user.firstName : "",
@@ -56,7 +56,10 @@ const UserInputContextProvider = ({ children }: Props) => {
           value: userData.user.lastName ? userData.user.lastName : "",
           isValid: true,
         },
-        emailAddress: { value: email ? email : "", isValid: true },
+        emailAddress: {
+          value: email ? email : "",
+          isValid: true,
+        },
         password: {
           value: userData.user.password ? userData.user.password : "",
           isValid: true,
@@ -65,35 +68,34 @@ const UserInputContextProvider = ({ children }: Props) => {
           value: userData.user.phoneNumber ? userData.user.phoneNumber : "",
           isValid: true,
         },
-        shopFor: { value: "", isValid: true },
-        ageRange: { value: "", isValid: true },
+        shopFor: {
+          value: userData.user.shopFor ? userData.user.shopFor : "",
+          isValid: true,
+        },
+        ageRange: {
+          value: userData.user.ageRange ? userData.user.ageRange : "",
+          isValid: true,
+        },
         address: {
           addressLine1: {
-            value: userData.user.address.addressLine1
-              ? userData.user.address.addressLine1
-              : "",
+            value: "100 Main St.",
             isValid: true,
           },
           city: {
-            value: userData.user.address.city ? userData.user.address.city : "",
+            value: "Washington",
             isValid: true,
           },
           state: {
-            value: userData.user.address.state
-              ? userData.user.address.state
-              : "",
+            value: "NJ",
             isValid: true,
           },
           zipcode: {
-            value: userData.user.address.zipcode
-              ? userData.user.address.zipcode
-              : "",
+            value: "08560",
             isValid: true,
           },
         },
-        cart: {
-          items: userData.user.cart.items ? userData.user.cart.items : [],
-        },
+        favorites: { items: [] },
+        cart: { items: [] },
       });
     };
     getUser();

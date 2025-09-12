@@ -1,4 +1,12 @@
-import { createContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  useContext,
+  type ReactNode,
+  useEffect,
+} from "react";
+import { UserInputContext } from "./user-input-context";
+import { saveFavoritesToDatabase } from "../api/users.api";
 
 export const FavoritesContext: any = createContext({
   favorites: [],
@@ -11,13 +19,22 @@ type Props = {
 };
 
 const FavoritesContextProvider = ({ children }: Props) => {
-  const [favorites, setFavorites] = useState([{}]);
+  const userInputCtx: any = useContext(UserInputContext);
+  const [favorites, setFavorites] = useState<Number[]>([]);
 
-  console.log(favorites);
+  useEffect(() => {
+    setFavorites(userInputCtx.userInput.favorites.items);
+  }, [userInputCtx.userInput.favorites.items]);
+
+  console.log("Test 40", favorites);
   const addFavorite = (id: any) => {
-    setFavorites((currentFavorites: any) => {
+    // Update context
+    setFavorites((currentFavorites) => {
       return [...currentFavorites, id];
     });
+
+    // Update databases
+    saveFavoritesToDatabase(userInputCtx.userInput.id.value, id);
   };
   const removeFavorite = (id: any) => {
     setFavorites((currentFavorites) => {

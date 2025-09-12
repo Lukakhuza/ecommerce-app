@@ -53,6 +53,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
       },
       shopFor: userInputCtx.userInput.shopFor.value,
       ageRange: userInputCtx.userInput.ageRange.value,
+      favorites: { items: [] },
       cart: { items: [] },
     };
 

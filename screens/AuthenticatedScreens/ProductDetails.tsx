@@ -46,7 +46,12 @@ const ProductDetails = ({ route, navigation }: Props) => {
       firstName: userInputCtx.userInput.firstName.value,
       lastName: userInputCtx.userInput.lastName.value,
       phoneNumber: userInputCtx.userInput.phoneNumber.value,
-      address: userInputCtx.userInput.address,
+      address: {
+        addressLine1: userInputCtx.userInput.address.addressLine1.value.value,
+        city: userInputCtx.userInput.address.city.value.value,
+        state: userInputCtx.userInput.address.state.value.value,
+        zipcode: userInputCtx.userInput.address.zipcode.value.value,
+      },
       shopFor: userInputCtx.userInput.shopFor.value,
       ageRange: userInputCtx.userInput.ageRange.value,
       cart: userInputCtx.userInput.cart.value,

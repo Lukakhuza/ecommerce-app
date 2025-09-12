@@ -20,14 +20,14 @@ type Props = {
 const CartContextProvider = ({ children }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [cartItems, setCartItems] = useState(
-    userInputCtx.input.cart.items ?? []
+    userInputCtx.userInput.cart.items ?? []
   );
 
   useEffect(() => {
-    if (userInputCtx.input.cart.items) {
-      setCartItems(userInputCtx.input.cart.items);
+    if (userInputCtx.userInput.cart.items) {
+      setCartItems(userInputCtx.userInput.cart.items);
     }
-  }, [userInputCtx.input.cart.items]);
+  }, [userInputCtx.userInput.cart.items]);
 
   const addItem = (item: any) => {
     setCartItems((currentCartItems: any) => {

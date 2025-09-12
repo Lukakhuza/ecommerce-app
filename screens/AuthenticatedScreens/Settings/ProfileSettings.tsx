@@ -105,12 +105,7 @@ const ProfileSettings = ({ navigation }: Props) => {
             <View></View>
             <View style={{ maxWidth: 180 }}>
               <Text style={{ color: Colors.gray100 }} numberOfLines={1}>
-                {userInputCtx.userInput.address.addressLine1.value}
-                {", "}
-                {userInputCtx.userInput.address.city.value}
-                {", "}
-                {userInputCtx.userInput.address.state.value}{" "}
-                {userInputCtx.userInput.address.zipcode.value}
+                {`${userInputCtx.userInput.address.addressLine1.value}, ${userInputCtx.userInput.address.city.value}, ${userInputCtx.userInput.address.state.value} ${userInputCtx.userInput.address.zipcode.value}`}
               </Text>
             </View>
             <View>
@@ -120,7 +115,7 @@ const ProfileSettings = ({ navigation }: Props) => {
           <Pressable
             onPress={() => {
               // productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Favorites");
+              navigation.navigate("HomeTab", { screen: "Favorites" });
             }}
             style={styles.category}
           >

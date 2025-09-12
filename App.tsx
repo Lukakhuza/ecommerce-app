@@ -8,6 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 import ProductsContextProvider from "./store/products-context";
 import FavoritesContextProvider from "./store/favorites-context";
 import { Colors } from "./constants/colors";
+import CartContextProvider from "./store/cart-context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,7 +20,9 @@ const App = () => {
         <UserInputContextProvider>
           <ProductsContextProvider>
             <FavoritesContextProvider>
-              <Root />
+              <CartContextProvider>
+                <Root />
+              </CartContextProvider>
             </FavoritesContextProvider>
           </ProductsContextProvider>
         </UserInputContextProvider>
