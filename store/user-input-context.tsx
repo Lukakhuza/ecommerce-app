@@ -94,7 +94,11 @@ const UserInputContextProvider = ({ children }: Props) => {
             isValid: true,
           },
         },
-        favorites: { items: [] },
+        favorites: {
+          items: userData.user.favorites.items
+            ? userData.user.favorites.items
+            : [],
+        },
         cart: { items: [] },
       });
     };

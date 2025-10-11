@@ -64,7 +64,6 @@ const HomePage = ({ navigation }: Props) => {
         <Pressable
           style={styles.imageContainer}
           onPress={() => {
-            console.log("Hello");
             navigation.navigate("ProfileTab", { screen: "Profile" });
           }}
         >

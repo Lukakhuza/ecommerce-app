@@ -51,7 +51,7 @@ const Favorites = ({ navigation }: Props) => {
     let favoriteProductIds = favoritesCtx.favorites;
 
     if (
-      // favoriteProductIds.includes(productData.id) ||
+      favoriteProductIds.includes(productData.id) ||
       productsCtx.selectedCategory === "All"
     ) {
       return true;

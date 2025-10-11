@@ -26,21 +26,32 @@ const FavoritesContextProvider = ({ children }: Props) => {
     setFavorites(userInputCtx.userInput.favorites.items);
   }, [userInputCtx.userInput.favorites.items]);
 
-  console.log("Test 40", favorites);
-  const addFavorite = (id: any) => {
+  const addFavorite = async (id: any) => {
     // Update context
     setFavorites((currentFavorites) => {
-      return [...currentFavorites, id];
-    });
+      const updatedFavorites = [...currentFavorites, id];
+      saveFavoritesToDatabase(
+        userInputCtx.userInput.id.value,
+        updatedFavorites
+      );
 
-    // Update databases
-    saveFavoritesToDatabase(userInputCtx.userInput.id.value, id);
+      return updatedFavorites;
+    });
   };
+
   const removeFavorite = (id: any) => {
+    console.log("Test 11:", id);
     setFavorites((currentFavorites) => {
-      return currentFavorites.filter((favoriteItem) => {
+      const updatedFavorites = currentFavorites.filter((favoriteItem) => {
         return favoriteItem !== id;
       });
+
+      saveFavoritesToDatabase(
+        userInputCtx.userInput.id.value,
+        updatedFavorites
+      );
+
+      return updatedFavorites;
     });
   };
 

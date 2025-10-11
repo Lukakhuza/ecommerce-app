@@ -100,21 +100,18 @@ export const saveUserDataToContext = async (userData: any) => {
 
 export const saveFavoritesToDatabase = async (
   userId: string,
-  productId: string
+  updatedFavorites: Number[]
 ) => {
   const data = {
     userId: userId,
-    productId: productId,
+    updatedFavorites: updatedFavorites,
   };
-  console.log("Data", data);
-  const result = await fetch(url + "/product/add-to-favorites/", {
+  const result = await fetch(url + "/product/save-updated-favorites/", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-  // console.log("Test 67", result);
   const resData = await result.json();
-  console.log("Test 68", resData);
 };

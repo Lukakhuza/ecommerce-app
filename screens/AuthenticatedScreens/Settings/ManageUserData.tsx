@@ -19,7 +19,6 @@ type Props = {
 
 const ManageUserData = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
-  // console.log("Test 3", userInputCtx.userInput.firstName.isValid);
   const [phone, setPhone] = useState("");
   const [inputValues, setInputValues] = useState({
     firstName: { value: userInputCtx.userInput.firstName.value, isValid: true },

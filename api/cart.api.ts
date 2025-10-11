@@ -9,5 +9,5 @@ export const addProductToCart = async (data: object) => {
     body: JSON.stringify(data),
   });
   const resData = await response.json();
-  console.log(resData);
+  console.log(resData.user.cart.items);
 };
