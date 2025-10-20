@@ -30,6 +30,12 @@ type Props = {
 
 const AuthContextProvider = ({ children }: Props) => {
   const [authToken, setAuthToken] = useState(null);
+  const [authData, setAuthData] = useState({
+    email: "",
+    userId: "",
+    exp: "",
+    iat: "",
+  });
   const [enteredUserInfo, setEnteredUserInfo] = useState(emptyEmailAndPassword);
   const [isLoading, setIsLoading] = useState(false);
   // const [loading, setLoading] = useState(true);
@@ -53,9 +59,23 @@ const AuthContextProvider = ({ children }: Props) => {
     loadToken();
   }, []);
 
+  // If there is an auth token, get auth data based on it:
+  useEffect(() => {
+    if (authToken) {
+      const decoded: any = jwtDecode(authToken);
+      setAuthData({
+        email: decoded.email,
+        userId: decoded.userId,
+        exp: decoded.exp,
+        iat: decoded.iat,
+      });
+    }
+  }, [authToken]);
+
   const getEmailFromToken = (token: string) => {
     try {
       const decoded: any = jwtDecode(token);
+      console.log(decoded);
       return decoded.email;
     } catch (error) {
       return null;
@@ -116,6 +136,7 @@ const AuthContextProvider = ({ children }: Props) => {
 
   const value = {
     token: authToken,
+    authData: authData,
     isAuthenticated: !!authToken,
     isLoading: isLoading,
     // hasError: hasError,

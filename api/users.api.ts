@@ -11,6 +11,19 @@ export const createUser = async (user: any) => {
   });
 };
 
+export const createCustomerInStripe = async (user: any) => {
+  const response = await fetch(url + "/user/create-customer-in-stripe/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  const resData = await response.json();
+  console.log("Test 456", resData);
+  return resData;
+};
+
 export const validateToken = async (token: string) => {
   const tokenData = {
     token: token,

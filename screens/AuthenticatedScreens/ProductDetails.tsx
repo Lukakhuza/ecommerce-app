@@ -13,7 +13,7 @@ import { AuthContext } from "../../store/auth-context";
 import { UserInputContext } from "../../store/user-input-context";
 import { useContext, useEffect, useState } from "react";
 import { fetchProductsData } from "../../api/products.api";
-import { addProductToCart } from "../../api/cart.api";
+import { CartContext } from "../../store/cart-context";
 import { Colors } from "../../constants/colors";
 import FavoriteIcon from "../../components/atoms/FavoriteIcon";
 import { Ionicons } from "@expo/vector-icons";
@@ -28,11 +28,12 @@ type Props = {
 const ProductDetails = ({ route, navigation }: Props) => {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
+  const cartCtx: any = useContext(CartContext);
   const authCtx = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
 
-  const addProductToCartHandler = () => {
+  const addProductToCartHandler = async () => {
     const productData = {
       id: route.params.product.id,
       title: route.params.product.title,
@@ -40,28 +41,12 @@ const ProductDetails = ({ route, navigation }: Props) => {
       quantity: quantity,
     };
 
-    const userData = {
-      email: userInputCtx.userInput.emailAddress.value,
-      password: userInputCtx.userInput.password.value,
-      firstName: userInputCtx.userInput.firstName.value,
-      lastName: userInputCtx.userInput.lastName.value,
-      phoneNumber: userInputCtx.userInput.phoneNumber.value,
-      address: {
-        addressLine1: userInputCtx.userInput.address.addressLine1.value.value,
-        city: userInputCtx.userInput.address.city.value.value,
-        state: userInputCtx.userInput.address.state.value.value,
-        zipcode: userInputCtx.userInput.address.zipcode.value.value,
-      },
-      shopFor: userInputCtx.userInput.shopFor.value,
-      ageRange: userInputCtx.userInput.ageRange.value,
-      cart: userInputCtx.userInput.cart.value,
-    };
+    const userId = userInputCtx.userInput.id.value;
     const data = {
       productData: productData,
-      userData: userData,
+      userId: userId,
     };
-
-    addProductToCart(data);
+    await cartCtx.addProductToCart(data);
   };
 
   // const testStripe = async () => {

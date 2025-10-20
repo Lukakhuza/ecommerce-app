@@ -26,6 +26,7 @@ const emptyUserInput = {
   },
   favorites: { items: [] },
   cart: { items: [] },
+  stripeCustomerId: "",
 };
 
 export const UserInputContext: any = createContext(emptyUserInput);
@@ -35,7 +36,7 @@ type Props = {
 };
 
 const UserInputContextProvider = ({ children }: Props) => {
-  const { token, getEmailFromToken }: any = useContext(AuthContext);
+  const { token, authData }: any = useContext(AuthContext);
   const [userInput, setUserInput] = useState(emptyUserInput);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +45,10 @@ const UserInputContextProvider = ({ children }: Props) => {
       if (!token) {
         return;
       }
-      const email = await getEmailFromToken(token);
+      if (!authData.email) {
+        return;
+      }
+      const email = authData.email;
       const userData = await getUserByEmail(email);
       setUserInput({
         id: { value: userData.user.id ? userData.user.id : "", isValid: true },
@@ -99,11 +103,16 @@ const UserInputContextProvider = ({ children }: Props) => {
             ? userData.user.favorites.items
             : [],
         },
-        cart: { items: [] },
+        cart: {
+          items: userData.user.cart.items ? userData.user.cart.items : [],
+        },
+        stripeCustomerId: userData.user.stripeCustomerId
+          ? userData.user.stripeCustomerId
+          : "",
       });
     };
     getUser();
-  }, [token]);
+  }, [token, authData.email]);
 
   const updateUserInput = (
     inputIdentifier: any,
@@ -140,6 +149,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       shopFor: userInput.shopFor.value,
       ageRange: userInput.ageRange.value,
       cart: { items: userInput.cart.items },
+      stripeCustomerId: userInput.stripeCustomerId,
     };
 
     // Save updated user data to database.
@@ -186,6 +196,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       shopFor: userInput.shopFor.value,
       ageRange: userInput.ageRange.value,
       cart: { items: userInput.cart.items },
+      stripeCustomerId: userInput.stripeCustomerId,
     };
 
     // Save updated user data to database.

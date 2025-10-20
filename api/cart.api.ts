@@ -1,6 +1,7 @@
 import { url } from "./client";
+import { debounce } from "lodash";
 
-export const addProductToCart = async (data: object) => {
+export const addToCartInDatabase = async (data: Object) => {
   const response = await fetch(url + "/product/add-to-cart", {
     method: "POST",
     headers: {
@@ -9,5 +10,17 @@ export const addProductToCart = async (data: object) => {
     body: JSON.stringify(data),
   });
   const resData = await response.json();
-  console.log(resData.user.cart.items);
+  return resData;
 };
+
+export const updateCartInDatabase = debounce(async (data: Object) => {
+  const response = await fetch(url + "/product/update-cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const resData = await response.json();
+  return resData;
+}, 3000);

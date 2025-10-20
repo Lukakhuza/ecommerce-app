@@ -6,6 +6,7 @@ import HomePage from "../screens/AuthenticatedScreens/Home";
 import ProductDetails from "../screens/AuthenticatedScreens/ProductDetails";
 import Cart from "../screens/AuthenticatedScreens/Cart";
 import Favorites from "../screens/AuthenticatedScreens/Favorites";
+import Checkout from "../screens/AuthenticatedScreens/Checkout";
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,23 @@ const HomeTab = () => {
       <Stack.Screen
         name="Cart"
         component={Cart}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              style={{}}
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={Checkout}
         options={({ navigation }) => ({
           title: "",
           headerTransparent: true,

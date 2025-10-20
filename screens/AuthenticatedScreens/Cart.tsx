@@ -3,10 +3,12 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Pressable,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
 import { UserInputContext } from "../../store/user-input-context";
 import { ProductsContext } from "../../store/products-context";
@@ -61,10 +63,15 @@ const Cart = ({ navigation }: Props) => {
 
   // calculate the total:
 
-  let total = 0;
+  let subtotal = 0;
   for (let i = 0; i < cartCtx.cartItems.length; i++) {
-    total += cartCtx.cartItems[i].product.price * cartCtx.cartItems[i].quantity;
+    subtotal +=
+      cartCtx.cartItems[i].product.price * cartCtx.cartItems[i].quantity;
   }
+
+  let shippingCost = 8;
+  let taxAmount = 0;
+  let total = subtotal + shippingCost + taxAmount;
 
   const removeProductFromCart = async (itemData: any) => {
     // work here and send both product data, as well as user data.
@@ -84,6 +91,7 @@ const Cart = ({ navigation }: Props) => {
       shopFor: userInputCtx.input.shopFor,
       ageRange: userInputCtx.input.ageRange,
       cart: userInputCtx.input.cart,
+      stripeCustomerId: userInputCtx.input.stripeCustomerId,
     };
     const data = {
       productData: productData,
@@ -151,6 +159,10 @@ const Cart = ({ navigation }: Props) => {
     //   });
   };
 
+  if (cartCtx.isLoading) {
+    return <LoadingOverlay message="Loading Cart..." />;
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {cartCtx.cartItems.length > 0 && (
@@ -175,9 +187,15 @@ const Cart = ({ navigation }: Props) => {
               <View>
                 <View
                   style={{
-                    height: 700,
+                    height: 650,
                   }}
                 >
+                  <Pressable
+                    style={styles.removeAll}
+                    onPress={cartCtx.clearCart}
+                  >
+                    <Text style={styles.removeAllText}>Remove All</Text>
+                  </Pressable>
                   <FlatList
                     horizontal={false}
                     data={cartCtx.cartItems}
@@ -189,8 +207,8 @@ const Cart = ({ navigation }: Props) => {
                               style={styles.image}
                               source={{
                                 uri: productsCtx.products[
-                                  itemData.item.product.id
-                                ].image,
+                                  itemData.item.product.id - 1
+                                ]?.image,
                               }}
                             />
                           </View>
@@ -202,7 +220,6 @@ const Cart = ({ navigation }: Props) => {
                             }}
                           >
                             <View>
-                              {/* <View width={190}> */}
                               <View style={{ width: 190 }}>
                                 <Text numberOfLines={1}>
                                   {itemData.item.product.title}
@@ -266,7 +283,7 @@ const Cart = ({ navigation }: Props) => {
                                   size={35}
                                   color={Colors.blue100}
                                   onPress={() => {
-                                    removeProductFromCart(itemData);
+                                    // removeProductFromCart(itemData);
                                     cartCtx.removeItem(itemData.item._id);
                                   }}
                                 />
@@ -275,7 +292,7 @@ const Cart = ({ navigation }: Props) => {
                                   size={35}
                                   color={Colors.blue100}
                                   onPress={() => {
-                                    addProductToCart(itemData.item);
+                                    cartCtx.addItem(itemData.item);
                                   }}
                                 />
                               </View>
@@ -285,6 +302,106 @@ const Cart = ({ navigation }: Props) => {
                       );
                     }}
                   />
+
+                  <View
+                    style={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <View
+                      style={{
+                        marginVertical: 8,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text
+                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
+                      >
+                        Subtotal
+                      </Text>
+                      <Text
+                        style={{
+                          color: "black",
+                          fontWeight: 700,
+                          marginRight: 10,
+                        }}
+                      >
+                        ${subtotal.toFixed(2)}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        marginVertical: 8,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text
+                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
+                      >
+                        Shipping Cost
+                      </Text>
+                      <Text
+                        style={{
+                          color: "black",
+                          fontWeight: 700,
+                          marginRight: 10,
+                        }}
+                      >
+                        ${shippingCost}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        marginVertical: 8,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text
+                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
+                      >
+                        Tax
+                      </Text>
+                      <Text
+                        style={{
+                          color: "black",
+                          fontWeight: 700,
+                          marginRight: 10,
+                        }}
+                      >
+                        ${taxAmount}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        marginVertical: 20,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 17,
+                          fontWeight: 700,
+                          color: "gray",
+                          marginLeft: 8,
+                        }}
+                      >
+                        Total
+                      </Text>
+                      <Text
+                        style={{
+                          color: "black",
+                          fontWeight: 700,
+                          marginRight: 10,
+                        }}
+                      >
+                        ${total.toFixed(2)}
+                      </Text>
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
@@ -304,7 +421,7 @@ const Cart = ({ navigation }: Props) => {
                 justifyContent: "center",
               }}
             >
-              <View
+              {/* <View
                 style={{
                   flexDirection: "row",
                 }}
@@ -324,7 +441,7 @@ const Cart = ({ navigation }: Props) => {
                     ${total.toFixed(2)}
                   </Text>
                 </View>
-              </View>
+              </View> */}
               <View>
                 <Text
                   style={{
@@ -398,7 +515,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   cartItem: {
-    marginVertical: 10,
+    marginVertical: 0,
     marginHorizontal: 10,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -407,5 +524,13 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 20,
     paddingHorizontal: 20,
+  },
+  removeAll: {
+    alignItems: "flex-end",
+    marginRight: 25,
+  },
+  removeAllText: {
+    fontSize: 16,
+    fontWeight: 500,
   },
 });

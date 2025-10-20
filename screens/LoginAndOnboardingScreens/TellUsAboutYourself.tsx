@@ -16,6 +16,7 @@ import { AuthContext } from "../../store/auth-context";
 // import { addData, createUser } from "../../util/auth";
 // import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
+import { createCustomerInStripe } from "../../api/users.api";
 import DropdownComponent from "../../components/atoms/Dropdown";
 import { createUser } from "../../api/users.api";
 import LoadingOverlay from "../../components/atoms/LoadingOverlay";
@@ -55,9 +56,13 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
       ageRange: userInputCtx.userInput.ageRange.value,
       favorites: { items: [] },
       cart: { items: [] },
+      stripeCustomerId: "",
     };
 
     await createUser(user);
+    const { id } = await createCustomerInStripe(user);
+    // stripe id needs to be added to the database as well.
+    // userInputCtx.updateUserInput("stripeCustomerId", id, true);
     userInputCtx.clearUserInput();
     navigation.replace("EnterEmail");
     setIsCreatingUser(false);
