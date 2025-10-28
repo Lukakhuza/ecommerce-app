@@ -16,7 +16,9 @@ import { useContext, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { CartContext } from "../../store/cart-context";
 import { Colors } from "../../constants/colors";
-import { openPaymentSheet } from "../../api/products.api";
+import { createPaymentSheet, openPaymentSheet } from "../../api/products.api";
+import { CustomPaymentMethodResultStatus } from "@stripe/stripe-react-native";
+import { createOrder } from "../../api/orders.api";
 
 type Props = {
   navigation: any;
@@ -39,6 +41,38 @@ const Checkout = ({ navigation }: Props) => {
   let shippingCost = 8;
   let taxAmount = 0;
   let total = subtotal + shippingCost + taxAmount;
+
+  const placeOrderHandler = async () => {
+    const stripeCustomerId = userInputCtx.userInput.stripeCustomerId;
+    const totalAmount = Math.trunc(total * 100);
+    const currency = "usd";
+    const stripeData = await createPaymentSheet(
+      stripeCustomerId,
+      totalAmount,
+      currency
+    );
+    // const paymentIntentId = stripeData.paymentIntentId;
+    const response = await openPaymentSheet(stripeData);
+    console.log("resp:", response);
+    if (response.success === true) {
+      console.log("hello ");
+      const orderItems = cartCtx.cartItems;
+      const orderData = {
+        userId: userInputCtx.userInput.id.value,
+        items: orderItems,
+        total: total,
+        shippingAddress: {
+          addressLine1: userInputCtx.userInput.address.addressLine1.value,
+          city: userInputCtx.userInput.address.city.value,
+          state: userInputCtx.userInput.address.state.value,
+          zipcode: userInputCtx.userInput.address.zipcode.value,
+        },
+      };
+      await createOrder(orderData);
+      cartCtx.clearCart();
+      navigation.navigate("Home");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -202,7 +236,7 @@ const Checkout = ({ navigation }: Props) => {
                     </Text>
                   </View>
                 </View>
-                <PurpleButtonSmall onPress={openPaymentSheet}>
+                <PurpleButtonSmall onPress={placeOrderHandler}>
                   <View
                     style={{
                       flex: 1,

@@ -25,6 +25,7 @@ import { useNavigation } from "@react-navigation/native";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import EnterPassword from "./EnterPassword";
 import { AuthContext } from "../../store/auth-context";
+import { UserInputContext } from "../../store/user-input-context";
 
 type Props = {
   navigation?: any;
@@ -58,6 +59,7 @@ const EnterEmail = () => {
   //     userInputCtx.updateInputs(inputIdentifier, enteredText);
   //   };
 
+  // console.log(UserInputContext);
   return (
     <SafeAreaView
     // style={styles.safeAreaView}

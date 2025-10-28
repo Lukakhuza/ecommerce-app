@@ -2,13 +2,16 @@ import { Alert } from "react-native";
 import { url } from "./client";
 
 export const createUser = async (user: any) => {
-  const result = await fetch(url + "/user/create-user/", {
+  const response = await fetch(url + "/user/create-user/", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
   });
+  const resData = await response.json();
+  console.log("ResData: ", resData);
+  return resData;
 };
 
 export const createCustomerInStripe = async (user: any) => {
@@ -79,7 +82,9 @@ export const getUserByEmail = async (email: string) => {
 
 export const saveUserDataToDatabase = async (userData: any) => {
   try {
+    console.log("User data 33: ", userData);
     const userId = userData.id;
+
     const result = await fetch(url + "/user/update-user/" + userId, {
       method: "PUT",
       headers: {
@@ -127,4 +132,8 @@ export const saveFavoritesToDatabase = async (
     body: JSON.stringify(data),
   });
   const resData = await result.json();
+};
+
+export const clearCartInDatabase = async (userId: string) => {
+  await fetch(url + "/user/clear-cart" + userId);
 };

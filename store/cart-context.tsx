@@ -7,6 +7,7 @@ import {
 } from "react";
 import { UserInputContext } from "./user-input-context";
 import { addToCartInDatabase, updateCartInDatabase } from "../api/cart.api";
+import { clearCartInDatabase } from "../api/users.api";
 
 export const CartContext: any = createContext({
   cartItems: [],
@@ -120,17 +121,11 @@ const CartContextProvider = ({ children }: Props) => {
     setIsLoading(false);
   };
 
-  const clearCart = async () => {
+  const clearCart = () => {
     setIsLoading(true);
     setCartItems([]);
     setIsLoading(false);
   };
-
-  // const addProductToCart = async () => {
-  //   // Update Cart in the database
-  //   console.log("Test 0");
-  //   // const result = await addToCartInDatabase(data);
-  // };
 
   const value = {
     cartItems: cartItems,

@@ -227,6 +227,42 @@ const UserInputContextProvider = ({ children }: Props) => {
     setIsLoading(false);
   };
 
+  // Updates user's address
+  const updateStripeId = async (createdUser: any, stripeId: any) => {
+    // Create an user object with updated address:
+    setIsLoading(true);
+    const userData = {
+      id: createdUser.userData.id,
+      email: createdUser.userData.email,
+      firstName: createdUser.userData.firstName,
+      lastName: createdUser.userData.lastName,
+      phoneNumber: createdUser.userData.phoneNumber,
+      address: {
+        addressLine1: createdUser.userData.address.addressLine1,
+        city: createdUser.userData.address.city,
+        state: createdUser.userData.address.state,
+        zipcode: createdUser.userData.address.zipcode,
+      },
+      shopFor: createdUser.userData.shopFor,
+      ageRange: "27 to 35",
+      cart: { items: createdUser.userData.cart.items },
+      stripeCustomerId: stripeId,
+    };
+
+    // Save updated user data to database.
+    const resData = await saveUserDataToDatabase(userData);
+    console.log("Res Data: ", resData);
+    // If address update in the database was successful, update the context.
+    setUserInput((currInputValues) => {
+      return {
+        ...currInputValues,
+        stripeCustomerId: resData.userData.stripeCustomerId,
+      };
+    });
+    await wait(1000);
+    setIsLoading(false);
+  };
+
   const clearUserInput = () => {
     setUserInput(emptyUserInput);
   };
@@ -238,6 +274,7 @@ const UserInputContextProvider = ({ children }: Props) => {
     updateUserInput: updateUserInput,
     saveUserDataToDatabase: saveUserDataToDatabase,
     updateAddress: updateAddress,
+    updateStripeId: updateStripeId,
     clearUserInput: clearUserInput,
   };
 

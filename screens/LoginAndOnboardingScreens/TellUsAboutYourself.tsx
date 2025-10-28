@@ -20,6 +20,7 @@ import { createCustomerInStripe } from "../../api/users.api";
 import DropdownComponent from "../../components/atoms/Dropdown";
 import { createUser } from "../../api/users.api";
 import LoadingOverlay from "../../components/atoms/LoadingOverlay";
+
 // import { formToJSON } from "axios";
 
 const data = [
@@ -59,10 +60,12 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
       stripeCustomerId: "",
     };
 
-    await createUser(user);
-    const { id } = await createCustomerInStripe(user);
+    const createdUser = await createUser(user);
+    console.log("Created User: ", createdUser);
+    const { id: stripeId } = await createCustomerInStripe(createdUser);
     // stripe id needs to be added to the database as well.
     // userInputCtx.updateUserInput("stripeCustomerId", id, true);
+    userInputCtx.updateStripeId(createdUser, stripeId);
     userInputCtx.clearUserInput();
     navigation.replace("EnterEmail");
     setIsCreatingUser(false);
