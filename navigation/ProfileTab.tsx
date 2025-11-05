@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProfileSettings from "../screens/AuthenticatedScreens/Settings/ProfileSettings";
-import ManageUserAddress from "../screens/AuthenticatedScreens/Settings/ManageUserAddress";
-import ManageUserData from "../screens/AuthenticatedScreens/Settings/ManageUserData";
+import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
+import ManageUserAddress from "../screens/AuthenticatedScreens/Profile/ManageUserAddress";
+import ManageUserData from "../screens/AuthenticatedScreens/Profile/ManageUserData";
 import Categories from "../screens/AuthenticatedScreens/Categories";
-import Welcome from "../screens/AuthenticatedScreens/Welcome";
+import Welcome from "../screens/AuthenticatedScreens/Home/Welcome";
 import IconButton from "../components/atoms/IconButton";
-import HomePage from "../screens/AuthenticatedScreens/Home";
+import HomePage from "../screens/AuthenticatedScreens/Home/Home";
 
 const Stack = createNativeStackNavigator();
 

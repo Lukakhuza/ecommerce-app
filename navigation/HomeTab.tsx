@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Categories from "../screens/AuthenticatedScreens/Categories";
-import Welcome from "../screens/AuthenticatedScreens/Welcome";
+import Welcome from "../screens/AuthenticatedScreens/Home/Welcome";
 import IconButton from "../components/atoms/IconButton";
-import HomePage from "../screens/AuthenticatedScreens/Home";
+import HomePage from "../screens/AuthenticatedScreens/Home/Home";
 import ProductDetails from "../screens/AuthenticatedScreens/ProductDetails";
 import Cart from "../screens/AuthenticatedScreens/Cart";
 import Favorites from "../screens/AuthenticatedScreens/Favorites";

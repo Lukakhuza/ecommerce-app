@@ -27,9 +27,9 @@ import Notifications from "../screens/AuthenticatedScreens/Notifications";
 // import Welcome from "../screens/Welcome/welcome";
 
 import Orders from "../screens/AuthenticatedScreens/Orders";
-import ProfileSettings from "../screens/AuthenticatedScreens/Settings/ProfileSettings";
-import ManageUserData from "../screens/AuthenticatedScreens/Settings/ManageUserData";
-import ManageUserAddress from "../screens/AuthenticatedScreens/Settings/ManageUserAddress";
+import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
+import ManageUserData from "../screens/AuthenticatedScreens/Profile/ManageUserData";
+import ManageUserAddress from "../screens/AuthenticatedScreens/Profile/ManageUserAddress";
 // import Cart from "../screens/CartAndCheckout/Cart";
 // import ManageUserAddress from "../screens/ManageUserAddress";
 // import ManageUserData from "../screens/ManageUserData";

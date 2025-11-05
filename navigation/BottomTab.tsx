@@ -3,8 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import Notifications from "../screens/AuthenticatedScreens/Notifications";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import Orders from "../screens/AuthenticatedScreens/Orders";
-import ProfileSettings from "../screens/AuthenticatedScreens/Settings/ProfileSettings";
-import HomePage from "../screens/AuthenticatedScreens/Home";
+import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
+import HomePage from "../screens/AuthenticatedScreens/Home/Home";
 
 import ProfileTab from "./ProfileTab";
 import OrdersTab from "./OrdersTab";

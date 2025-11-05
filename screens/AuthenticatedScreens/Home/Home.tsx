@@ -11,22 +11,22 @@ import {
 } from "react-native";
 import { useContext, useEffect, useState } from "react";
 // import { fetchProfilePicture } from "../../util/auth";
-import { ProductsContext } from "../../store/products-context";
-import CartButton from "../../components/atoms/CartButton";
+import { ProductsContext } from "../../../store/products-context";
+import CartButton from "../../../components/atoms/CartButton";
 // import DropdownComponent from "../../components/ui/Dropdown";
 // import { UserInputContext } from "../../store/context/userInputContext";
 import { Dropdown } from "react-native-element-dropdown";
 import { Ionicons } from "@expo/vector-icons";
-import FavoriteIcon from "../../components/atoms/FavoriteIcon";
+import FavoriteIcon from "../../../components/atoms/FavoriteIcon";
 // import { FavoritesContext } from "../../store/context/favoritesContext";
-import { FavoritesContext } from "../../store/favorites-context";
+import { FavoritesContext } from "../../../store/favorites-context";
 // import SearchComponent from "../../components/ui/SearchComponent";
-import SearchComponent from "../../components/atoms/SearchComponent";
-import { AuthContext } from "../../store/auth-context";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
-import CategoryButton from "../../components/atoms/CategoryButton";
-import { UserInputContext } from "../../store/user-input-context";
-import { Colors } from "../../constants/colors";
+import SearchComponent from "../../../components/atoms/SearchComponent";
+import { AuthContext } from "../../../store/auth-context";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import CategoryButton from "../../../components/atoms/CategoryButton";
+import { UserInputContext } from "../../../store/user-input-context";
+import { Colors } from "../../../constants/colors";
 
 const data = [
   { label: "Men", value: "Men" },
