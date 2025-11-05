@@ -166,315 +166,237 @@ const Cart = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {cartCtx.cartItems.length > 0 && (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "space-between",
-          }}
-        >
-          <View>
-            <Text
-              style={{
-                fontSize: 20,
-                textAlign: "center",
-                fontWeight: 700,
-                marginBottom: 20,
-              }}
-            >
-              Cart
-            </Text>
-            <View style={styles.root}>
-              <View>
-                <View
-                  style={{
-                    height: 650,
-                  }}
-                >
-                  <Pressable
-                    style={styles.removeAll}
-                    onPress={cartCtx.clearCart}
-                  >
-                    <Text style={styles.removeAllText}>Remove All</Text>
-                  </Pressable>
-                  <FlatList
-                    horizontal={false}
-                    data={cartCtx.cartItems}
-                    renderItem={(itemData) => {
-                      return (
-                        <View style={styles.cartItem}>
-                          <View>
-                            <Image
-                              style={styles.image}
-                              source={{
-                                uri: productsCtx.products[
-                                  itemData.item.product.id - 1
-                                ]?.image,
-                              }}
-                            />
-                          </View>
-                          <View
-                            style={{
-                              marginLeft: 20,
-                              flexDirection: "row",
-                              justifyContent: "space-evenly",
-                            }}
-                          >
-                            <View>
-                              <View style={{ width: 190 }}>
-                                <Text numberOfLines={1}>
-                                  {itemData.item.product.title}
-                                </Text>
-                              </View>
-                              <View
-                                style={{
-                                  flexDirection: "row",
-                                }}
-                              >
-                                <Text style={{ marginRight: 5 }}>
-                                  <Text
-                                    style={{
-                                      fontWeight: 800,
-                                    }}
-                                  >
-                                    Id:{" "}
-                                  </Text>{" "}
-                                  {itemData.item.product.id}
-                                </Text>
-                                <Text style={{ marginHorizontal: 5 }}>
-                                  <Text
-                                    style={{
-                                      fontWeight: 800,
-                                    }}
-                                  >
-                                    Price:{" "}
-                                  </Text>{" "}
-                                  ${itemData.item.product.price.toFixed(2)}
-                                </Text>
-                                <Text style={{ marginHorizontal: 5 }}>
-                                  <Text
-                                    style={{
-                                      fontWeight: 800,
-                                    }}
-                                  >
-                                    Qty:{" "}
-                                  </Text>{" "}
-                                  {itemData.item.quantity}
-                                </Text>
-                              </View>
-                            </View>
-                            <View
+        <View style={styles.outerContainer1}>
+          {/* <View>
+            <Text style={styles.header}>Cart</Text>
+          </View> */}
+          <View style={styles.topSection}>
+            <Pressable style={styles.removeAll} onPress={cartCtx.clearCart}>
+              <Text style={styles.removeAllText}>Remove All</Text>
+            </Pressable>
+            <FlatList
+              horizontal={false}
+              data={cartCtx.cartItems}
+              renderItem={(itemData) => {
+                return (
+                  <View style={styles.cartItem}>
+                    <View>
+                      <Image
+                        style={styles.image}
+                        source={{
+                          uri: productsCtx.products[
+                            itemData.item.product.id - 1
+                          ]?.image,
+                        }}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        marginLeft: 10,
+                        flexDirection: "row",
+                        justifyContent: "space-evenly",
+                      }}
+                    >
+                      <View>
+                        <View style={{ width: 190 }}>
+                          <Text numberOfLines={1}>
+                            {itemData.item.product.title}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Text style={{ marginRight: 5 }}>
+                            <Text
                               style={{
-                                flex: 1,
-                                justifyContent: "space-around",
+                                fontWeight: 800,
                               }}
                             >
-                              <View>
-                                <Text>
-                                  $
-                                  {(
-                                    itemData.item.product.price *
-                                    itemData.item.quantity
-                                  ).toFixed(2)}
-                                </Text>
-                              </View>
-                              <View style={{ flexDirection: "row" }}>
-                                <Ionicons
-                                  name="remove-circle"
-                                  size={35}
-                                  color={Colors.blue100}
-                                  onPress={() => {
-                                    // removeProductFromCart(itemData);
-                                    cartCtx.removeItem(itemData.item._id);
-                                  }}
-                                />
-                                <Ionicons
-                                  name="add-circle"
-                                  size={35}
-                                  color={Colors.blue100}
-                                  onPress={() => {
-                                    cartCtx.addItem(itemData.item);
-                                  }}
-                                />
-                              </View>
-                            </View>
-                          </View>
+                              Id:{" "}
+                            </Text>{" "}
+                            {itemData.item.product.id}
+                          </Text>
+                          <Text style={{ marginHorizontal: 5 }}>
+                            <Text
+                              style={{
+                                fontWeight: 800,
+                              }}
+                            >
+                              Price:{" "}
+                            </Text>{" "}
+                            ${itemData.item.product.price.toFixed(2)}
+                          </Text>
+                          <Text style={{ marginHorizontal: 5 }}>
+                            <Text
+                              style={{
+                                fontWeight: 800,
+                              }}
+                            >
+                              Qty:{" "}
+                            </Text>{" "}
+                            {itemData.item.quantity}
+                          </Text>
                         </View>
-                      );
-                    }}
-                  />
-
-                  <View
-                    style={{
-                      flexDirection: "column",
-                    }}
-                  >
-                    <View
-                      style={{
-                        marginVertical: 8,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
-                        Subtotal
-                      </Text>
-                      <Text
+                      </View>
+                      <View
                         style={{
-                          color: "black",
-                          fontWeight: 700,
-                          marginRight: 10,
+                          flex: 1,
+                          justifyContent: "space-around",
                         }}
                       >
-                        ${subtotal.toFixed(2)}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        marginVertical: 8,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
-                        Shipping Cost
-                      </Text>
-                      <Text
-                        style={{
-                          color: "black",
-                          fontWeight: 700,
-                          marginRight: 10,
-                        }}
-                      >
-                        ${shippingCost}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        marginVertical: 8,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
-                        Tax
-                      </Text>
-                      <Text
-                        style={{
-                          color: "black",
-                          fontWeight: 700,
-                          marginRight: 10,
-                        }}
-                      >
-                        ${taxAmount}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        marginVertical: 20,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 17,
-                          fontWeight: 700,
-                          color: "gray",
-                          marginLeft: 8,
-                        }}
-                      >
-                        Total
-                      </Text>
-                      <Text
-                        style={{
-                          color: "black",
-                          fontWeight: 700,
-                          marginRight: 10,
-                        }}
-                      >
-                        ${total.toFixed(2)}
-                      </Text>
+                        <View>
+                          <Text>
+                            $
+                            {(
+                              itemData.item.product.price *
+                              itemData.item.quantity
+                            ).toFixed(2)}
+                          </Text>
+                        </View>
+                        <View style={{ flexDirection: "row" }}>
+                          <Ionicons
+                            name="remove-circle"
+                            size={35}
+                            color={Colors.blue100}
+                            onPress={() => {
+                              // removeProductFromCart(itemData);
+                              cartCtx.removeItem(itemData.item._id);
+                            }}
+                          />
+                          <Ionicons
+                            name="add-circle"
+                            size={35}
+                            color={Colors.blue100}
+                            onPress={() => {
+                              cartCtx.addItem(itemData.item);
+                            }}
+                          />
+                        </View>
+                      </View>
                     </View>
                   </View>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <PurpleButtonSmall
-            onPress={() => {
-              // navigation.navigate("Main", { screen: "Orders" });
-              navigation.navigate("Checkout");
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "center",
+                );
               }}
-            >
-              {/* <View
-                style={{
-                  flexDirection: "row",
-                }}
-              >
-                <View>
-                  <Text
-                    style={{
-                      color: Colors.white100,
-                      fontWeight: 700,
-                    }}
-                  >
-                    Total:{" "}
-                  </Text>
-                </View>
-                <View style={{ marginRight: 70 }}>
-                  <Text style={{ color: Colors.white100, fontWeight: 700 }}>
-                    ${total.toFixed(2)}
-                  </Text>
-                </View>
-              </View> */}
-              <View>
+            />
+          </View>
+          <View style={styles.bottomSection}>
+            <View>
+              <View style={styles.costItemContainer}>
+                <Text style={{ fontSize: 17, color: "gray", marginLeft: 8 }}>
+                  Subtotal
+                </Text>
                 <Text
                   style={{
-                    color: Colors.white100,
+                    color: "black",
                     fontWeight: 700,
+                    marginRight: 10,
                   }}
                 >
-                  Checkout
+                  ${subtotal.toFixed(2)}
+                </Text>
+              </View>
+              <View style={styles.costItemContainer}>
+                <Text style={{ fontSize: 17, color: "gray", marginLeft: 8 }}>
+                  Shipping Cost
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: 700,
+                    marginRight: 10,
+                  }}
+                >
+                  ${shippingCost}
+                </Text>
+              </View>
+              <View style={styles.costItemContainer}>
+                <Text style={{ fontSize: 17, color: "gray", marginLeft: 8 }}>
+                  Tax
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: 700,
+                    marginRight: 10,
+                  }}
+                >
+                  ${taxAmount}
+                </Text>
+              </View>
+              <View
+                style={{
+                  marginVertical: 20,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "gray",
+                    marginLeft: 8,
+                  }}
+                >
+                  Total
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: 700,
+                    marginRight: 10,
+                  }}
+                >
+                  ${total.toFixed(2)}
                 </Text>
               </View>
             </View>
-          </PurpleButtonSmall>
+            <View>
+              <PurpleButtonSmall
+                onPress={() => {
+                  navigation.navigate("Checkout");
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "center",
+                  }}
+                >
+                  <View>
+                    <Text style={styles.checkoutButtonText}>Checkout</Text>
+                  </View>
+                </View>
+              </PurpleButtonSmall>
+            </View>
+          </View>
         </View>
       )}
       {cartCtx.cartItems.length === 0 && (
-        <View style={styles.content}>
-          <Image
-            style={styles.image}
-            source={require("../../assets/parcel.png")}
-          />
-          <View>
-            <Text style={{ fontSize: 20, marginVertical: 20 }}>
-              Your Cart is Empty
-            </Text>
-          </View>
-          <View>
-            <PurpleButtonSmall
-              onPress={() => {
-                navigation.navigate("HomeTab", { screen: "Categories" });
-              }}
-            >
-              Explore Categories
-            </PurpleButtonSmall>
+        <View style={styles.outerContainer2}>
+          <View style={styles.innerContainer}>
+            <Image
+              style={styles.image}
+              source={require("../../assets/parcel.png")}
+            />
+            <View>
+              <Text style={{ fontSize: 20, marginVertical: 20 }}>
+                Your Cart is Empty
+              </Text>
+            </View>
+            <View>
+              <PurpleButtonSmall
+                onPress={() => {
+                  navigation.navigate("HomeTab", { screen: "Categories" });
+                }}
+              >
+                Explore Categories
+              </PurpleButtonSmall>
+            </View>
           </View>
         </View>
       )}
@@ -486,22 +408,7 @@ export default Cart;
 
 const styles = StyleSheet.create({
   safeArea: {
-    height: "100%",
-  },
-  header: {
-    fontSize: 17,
-    textAlign: "center",
-  },
-  root: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 40,
   },
   imageContainer: {
     justifyContent: "center",
@@ -515,22 +422,49 @@ const styles = StyleSheet.create({
     height: 40,
   },
   cartItem: {
-    marginVertical: 0,
-    marginHorizontal: 10,
+    marginVertical: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: Colors.white100,
-    height: 100,
+    backgroundColor: Colors.bgLight2,
+    height: 80,
     borderRadius: 20,
     paddingHorizontal: 20,
   },
   removeAll: {
     alignItems: "flex-end",
-    marginRight: 25,
   },
   removeAllText: {
     fontSize: 16,
     fontWeight: 500,
+  },
+  outerContainer1: {
+    flex: 1,
+    marginHorizontal: 11,
+  },
+  outerContainer2: {
+    flex: 1,
+    marginHorizontal: 11,
+    marginBottom: 150,
+    justifyContent: "center",
+  },
+  topSection: {
+    flex: 1,
+    marginTop: 10,
+  },
+  bottomSection: {
+    paddingBottom: 20,
+  },
+  checkoutButtonText: {
+    color: Colors.white100,
+    fontWeight: 700,
+  },
+  innerContainer: {
+    alignItems: "center",
+  },
+  costItemContainer: {
+    marginVertical: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

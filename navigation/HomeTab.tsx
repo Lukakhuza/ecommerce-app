@@ -89,8 +89,10 @@ const HomeTab = () => {
         name="Cart"
         component={Cart}
         options={({ navigation }) => ({
-          title: "",
-          headerTransparent: true,
+          title: "Cart",
+          headerShown: true,
+          headerTransparent: false,
+          headerTitleAlign: "center",
           headerLeft: ({ tintColor }) => (
             <IconButton
               style={{}}
@@ -106,8 +108,10 @@ const HomeTab = () => {
         name="Checkout"
         component={Checkout}
         options={({ navigation }) => ({
-          title: "",
-          headerTransparent: true,
+          headerTitle: "Checkout",
+          headerTitleAlign: "center",
+          headerShown: true,
+          headerTransparent: false,
           headerLeft: ({ tintColor }) => (
             <IconButton
               style={{}}

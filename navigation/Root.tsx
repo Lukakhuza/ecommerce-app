@@ -1,4 +1,4 @@
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import AuthStack from "./AuthStack";
 import AuthenticatedStack from "./AuthenticatedStack";
 import { AuthContext } from "../store/auth-context";
@@ -25,11 +25,7 @@ const Root = () => {
 
   return (
     <NavigationContainer theme={Theme}>
-      <SafeAreaView
-        style={{
-          flex: 1,
-        }}
-      >
+      <SafeAreaView style={styles.safeArea}>
         {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
       </SafeAreaView>
     </NavigationContainer>
@@ -37,3 +33,9 @@ const Root = () => {
 };
 
 export default Root;
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});

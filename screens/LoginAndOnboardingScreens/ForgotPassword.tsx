@@ -1,42 +1,48 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  Button,
-  SafeAreaView,
-} from "react-native";
-import { useState, useContext } from "react";
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import { useState } from "react";
 import PageHeader from "../../components/atoms/PageHeader";
-import ButtonOAuth from "../../components/atoms/ButtonOAuth";
+import { isValidEmail } from "../../util/validation";
 import DataInput from "../../components/atoms/DataInput";
 import ContinueButton from "../../components/atoms/ContinueButton";
-import { Colors } from "../../constants/colors";
-import SmallText from "../../components/atoms/SmallText";
-// import { useNavigation } from "@react-navigation/native";
-// import { addData, fetchProductsData } from "../../util/auth";
-// import { UserInputContext } from "../../store/context/userInputContext";
 
 type Props = {
   navigation?: any;
 };
 
 const ForgotPassword = ({ navigation }: Props) => {
+  const [enteredEmail, setEnteredEmail] = useState({
+    value: "",
+    isValid: true,
+  });
+  const proceedHandler = () => {
+    if (!isValidEmail(enteredEmail.value)) {
+      setEnteredEmail({
+        value: enteredEmail.value,
+        isValid: false,
+      });
+      return;
+    }
+    // A password reset email generation function needs to be added here.
+    navigation.replace("PasswordReset");
+  };
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.outerContainer}>
-          <PageHeader>Forgot Password?</PageHeader>
-          <DataInput placeholder="Enter Email Address" />
-          <ContinueButton
-            onPress={() => {
-              // For testing only
-              navigation.replace("PasswordReset");
-            }}
-          />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.outerContainer}>
+        <PageHeader>Forgot Password?</PageHeader>
+        <DataInput
+          placeholder="Enter Email Address"
+          onChangeText={(enteredText: string) => {
+            setEnteredEmail({
+              value: enteredText,
+              isValid: true,
+            });
+          }}
+          value={enteredEmail}
+          isValid={enteredEmail.isValid}
+        />
+        <ContinueButton onPress={proceedHandler} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -44,10 +50,8 @@ const ForgotPassword = ({ navigation }: Props) => {
 export default ForgotPassword;
 
 const styles = StyleSheet.create({
+  safeArea: { flex: 1 },
   outerContainer: {
-    paddingHorizontal: 30,
-  },
-  oAuthButtonsContainer: {
-    marginTop: 100,
+    marginHorizontal: 30,
   },
 });

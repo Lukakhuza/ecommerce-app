@@ -1,20 +1,8 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  Button,
-  SafeAreaView,
-} from "react-native";
-import { useState, useContext } from "react";
-// import { useNavigation } from "@react-navigation/native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import { useContext } from "react";
 import PageHeader from "../../components/atoms/PageHeader";
-import ButtonOAuth from "../../components/atoms/ButtonOAuth";
-import validator from "validator";
 import DataInput from "../../components/atoms/DataInput";
 import ContinueButton from "../../components/atoms/ContinueButton";
-import { Colors } from "../../constants/colors";
 import SmallText from "../../components/atoms/SmallText";
 import { UserInputContext } from "../../store/user-input-context";
 import {
@@ -23,9 +11,6 @@ import {
   isValidPassword,
   isValidLastName,
 } from "../../util/validation";
-// import { useNavigation } from "@react-navigation/native";
-// import { addData, fetchProductsData } from "../../util/auth";
-// import { UserInputContext } from "../../store/context/userInputContext";
 
 type Props = {
   navigation?: any;
@@ -33,7 +18,6 @@ type Props = {
 
 const CreateAccount = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
-  // const navigation = useNavigation();
   const proceedHandler = () => {
     const emailIsValid = isValidEmail(
       userInputCtx.userInput.emailAddress.value
@@ -91,10 +75,10 @@ const CreateAccount = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.outerContainer}>
-          <PageHeader>Create Account</PageHeader>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.outerContainer}>
+        <PageHeader>Create Account</PageHeader>
+        <View style={styles.inputsContainer}>
           <DataInput
             placeholder="First Name"
             onChangeText={(enteredText: string) => {
@@ -131,21 +115,20 @@ const CreateAccount = ({ navigation }: Props) => {
             isValid={userInputCtx.userInput.password.isValid}
             invalidInputMessage="Make sure the password is at least 8 characters long, is alphanumeric and contains special character(s)."
             secureTextEntry={true}
-            style={styles.endOfInputs}
-          />
-          <ContinueButton
-            style={styles.endOfContinueButton}
-            onPress={proceedHandler}
-          />
-          <SmallText
-            primaryText="Forgot Password?"
-            secondaryText="Reset"
-            onPress={() => {
-              navigation.navigate("ForgotPassword");
-            }}
           />
         </View>
-      </ScrollView>
+        <ContinueButton
+          style={styles.continueButton}
+          onPress={proceedHandler}
+        />
+        <SmallText
+          primaryText="Forgot Password?"
+          secondaryText="Reset"
+          onPress={() => {
+            navigation.navigate("ForgotPassword");
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -153,16 +136,17 @@ const CreateAccount = ({ navigation }: Props) => {
 export default CreateAccount;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   outerContainer: {
-    paddingHorizontal: 30,
+    flex: 1,
+    marginHorizontal: 30,
   },
-  oAuthButtonsContainer: {
-    marginTop: 100,
+  inputsContainer: {
+    marginBottom: 10,
   },
-  endOfInputs: {
-    marginBottom: 20,
-  },
-  endOfContinueButton: {
+  continueButton: {
     marginBottom: 25,
   },
 });

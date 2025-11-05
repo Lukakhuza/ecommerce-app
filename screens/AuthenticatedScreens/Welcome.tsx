@@ -49,6 +49,7 @@ const Welcome = ({ navigation }: Props) => {
   }, []);
 
   const filteredProducts = fetchedProductsData.filter((productData) => {
+    console.log("Pr data", productData);
     let categoryProductIds: Number[] = [];
     if (productsCtx.selectedCategory === "Jackets") {
       categoryProductIds = [3, 15, 16, 17];

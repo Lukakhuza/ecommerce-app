@@ -17,7 +17,7 @@ import { Colors } from "../../constants/colors";
 import { fetchOrders } from "../../api/orders.api";
 import { UserInputContext } from "../../store/user-input-context";
 
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 import { wait } from "../../util/helpers";
 import { OrderStatus } from "../../types/order";
@@ -26,11 +26,37 @@ type Props = {
   navigation: any;
 };
 
+interface OrderItem {
+  productId: string;
+  quantity: number;
+  price: number;
+}
+
+interface Order {
+  _id: string;
+  userId: string;
+  items: OrderItem[];
+  totalAmount: number;
+  status:
+    | "pending"
+    | "processing"
+    | "shipped"
+    | "delivered"
+    | "returned"
+    | "cancelled";
+  createdAt: string; // ISO date string
+  __v: number;
+}
+
+type OrdersResponse = Order[];
+
+const emptyOrdersArray: OrdersResponse = [];
+
 const Orders = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const userId = userInputCtx.userInput.id.value;
   const [isLoading, setIsLoading] = useState(true);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(emptyOrdersArray);
   const [orderStatus, setOrderStatus] = useState(OrderStatus.Processing);
   const [selectedStatus, setSelectedStatus] = useState(OrderStatus.Processing);
   const isFocused = useIsFocused();
@@ -39,7 +65,6 @@ const Orders = ({ navigation }: Props) => {
   useEffect(() => {
     const fetchOrdersFunction = async () => {
       setIsLoading(true);
-      console.log(isFocused);
       await wait(500);
       if (isFocused) {
         const fetchedOrders = await fetchOrders(userId);
@@ -54,7 +79,6 @@ const Orders = ({ navigation }: Props) => {
   if (isLoading) {
     return <LoadingOverlay message="Loading Orders..." />;
   }
-  console.log(orders[0].items.length);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -98,8 +122,12 @@ const Orders = ({ navigation }: Props) => {
                 return (
                   <Pressable
                     onPress={() => {
+                      const cleanOrder = JSON.parse(JSON.stringify(order));
                       // productsCtx.updateSelectedCategory("Jackets");
-                      navigation.navigate("HomeTab", { screen: "Favorites" });
+                      navigation.navigate("OrdersTab", {
+                        screen: "OrderDetails",
+                        params: { orderData: cleanOrder },
+                      });
                     }}
                     style={{
                       marginVertical: 5,

@@ -36,7 +36,9 @@ import ManageUserAddress from "../screens/AuthenticatedScreens/Settings/ManageUs
 // import Checkout from "../screens/Orders/Checkout";
 // import Payment from "../screens/Settings/Payment";
 // import Favorites from "../screens/ProductPage/Favorites";
-import TabsOverview from "./BottomTabs";
+// import TabsOverview from "./BottomTab";
+// import TabsOverview from "./BottomTab";
+import TabsOverview from "./BottomTab";
 // import Categories from "../screens/Categories";
 
 const Stack = createNativeStackNavigator();

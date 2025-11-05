@@ -28,6 +28,7 @@ const AuthStack = () => {
         component={CreateAccount}
         options={({ navigation: { goBack } }) => ({
           title: "",
+          headerShown: true,
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
@@ -64,9 +65,19 @@ const AuthStack = () => {
       <Stack.Screen
         name="TellUsAboutYourself"
         component={TellUsAboutYourself}
-        options={{
-          headerShown: false,
-        }}
+        options={({ navigation }) => ({
+          title: "",
+          headerShown: true,
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
