@@ -8,8 +8,8 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
-import { ProductsContext } from "../../store/products-context";
-import { Colors } from "../../constants/colors";
+import { ProductsContext } from "../../../store/products-context";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   navigation: any;

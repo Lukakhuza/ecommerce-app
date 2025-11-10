@@ -1,11 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import Notifications from "../screens/AuthenticatedScreens/Notifications";
+import Notifications from "../screens/AuthenticatedScreens/Notifications/Notifications";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import Orders from "../screens/AuthenticatedScreens/Orders";
-import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
-import HomePage from "../screens/AuthenticatedScreens/Home/Home";
-
 import ProfileTab from "./ProfileTab";
 import OrdersTab from "./OrdersTab";
 import HomeTab from "./HomeTab";

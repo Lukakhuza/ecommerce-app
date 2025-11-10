@@ -25,7 +25,7 @@ export default SearchComponent;
 
 const styles = StyleSheet.create({
   searchBarContainer: {
-    marginHorizontal: 30,
+    // marginHorizontal: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     // height: 40,
   },
   searchBar: {
-    backgroundColor: Colors.white100,
+    backgroundColor: Colors.bgLight2,
     // borderColor: Colors.black,
     flex: 1,
     height: 50,

@@ -8,17 +8,17 @@ import {
   SafeAreaView,
   Pressable,
 } from "react-native";
-import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
-import { AuthContext } from "../../store/auth-context";
-import { UserInputContext } from "../../store/user-input-context";
+import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
+import { AuthContext } from "../../../store/auth-context";
+import { UserInputContext } from "../../../store/user-input-context";
 import { useContext, useEffect, useState } from "react";
-import { fetchProductsData } from "../../api/products.api";
-import { CartContext } from "../../store/cart-context";
-import { Colors } from "../../constants/colors";
-import FavoriteIcon from "../../components/atoms/FavoriteIcon";
+import { fetchProductsData } from "../../../api/products.api";
+import { CartContext } from "../../../store/cart-context";
+import { Colors } from "../../../constants/colors";
+import FavoriteIcon from "../../../components/atoms/FavoriteIcon";
 import { Ionicons } from "@expo/vector-icons";
-import { FavoritesContext } from "../../store/favorites-context";
-import { ProductsContext } from "../../store/products-context";
+import { FavoritesContext } from "../../../store/favorites-context";
+import { ProductsContext } from "../../../store/products-context";
 
 type Props = {
   route: any;

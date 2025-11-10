@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Categories from "../screens/AuthenticatedScreens/Categories";
+import Categories from "../screens/AuthenticatedScreens/Home/Categories";
 import Welcome from "../screens/AuthenticatedScreens/Home/Welcome";
 import IconButton from "../components/atoms/IconButton";
 import HomePage from "../screens/AuthenticatedScreens/Home/Home";
-import ProductDetails from "../screens/AuthenticatedScreens/ProductDetails";
-import Cart from "../screens/AuthenticatedScreens/Cart";
-import Favorites from "../screens/AuthenticatedScreens/Favorites";
-import Checkout from "../screens/AuthenticatedScreens/Checkout";
+import ProductDetails from "../screens/AuthenticatedScreens/Home/ProductDetails";
+import Cart from "../screens/AuthenticatedScreens/Home/Cart";
+import Favorites from "../screens/AuthenticatedScreens/Home/Favorites";
+import Checkout from "../screens/AuthenticatedScreens/Home/Checkout";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,18 +19,9 @@ const HomeTab = () => {
       <Stack.Screen
         name="Home"
         component={HomePage}
-        options={({ navigation }) => ({
+        options={() => ({
           title: "",
           headerTransparent: false,
-          // headerLeft: ({ tintColor }) => (
-          //   <IconButton
-          //     style={{}}
-          //     icon="chevron-back-circle-outline"
-          //     size={32}
-          //     color={tintColor}
-          //     onPress={() => navigation.goBack()}
-          //   />
-          // ),
         })}
       />
       <Stack.Screen

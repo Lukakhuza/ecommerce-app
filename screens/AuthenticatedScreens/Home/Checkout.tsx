@@ -8,17 +8,20 @@ import {
   Text,
   View,
 } from "react-native";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
-import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
-import { UserInputContext } from "../../store/user-input-context";
-import { ProductsContext } from "../../store/products-context";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
+import { UserInputContext } from "../../../store/user-input-context";
+import { ProductsContext } from "../../../store/products-context";
 import { useContext, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { CartContext } from "../../store/cart-context";
-import { Colors } from "../../constants/colors";
-import { createPaymentSheet, openPaymentSheet } from "../../api/products.api";
+import { CartContext } from "../../../store/cart-context";
+import { Colors } from "../../../constants/colors";
+import {
+  createPaymentSheet,
+  openPaymentSheet,
+} from "../../../api/products.api";
 import { CustomPaymentMethodResultStatus } from "@stripe/stripe-react-native";
-import { createOrder } from "../../api/orders.api";
+import { createOrder } from "../../../api/orders.api";
 
 type Props = {
   navigation: any;

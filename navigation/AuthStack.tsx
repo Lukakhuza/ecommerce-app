@@ -11,7 +11,13 @@ const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator initialRouteName="EnterEmail">
+    <Stack.Navigator
+      initialRouteName="EnterEmail"
+      screenOptions={{
+        contentStyle: { backgroundColor: "#fff" },
+        animation: "none",
+      }}
+    >
       <Stack.Screen
         name="EnterEmail"
         component={EnterEmail}

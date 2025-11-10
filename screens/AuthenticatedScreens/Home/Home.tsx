@@ -3,30 +3,23 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   ScrollView,
   SafeAreaView,
   FlatList,
   Pressable,
 } from "react-native";
-import { useContext, useEffect, useState } from "react";
-// import { fetchProfilePicture } from "../../util/auth";
+import { useContext, useState } from "react";
 import { ProductsContext } from "../../../store/products-context";
 import CartButton from "../../../components/atoms/CartButton";
-// import DropdownComponent from "../../components/ui/Dropdown";
-// import { UserInputContext } from "../../store/context/userInputContext";
 import { Dropdown } from "react-native-element-dropdown";
-import { Ionicons } from "@expo/vector-icons";
-import FavoriteIcon from "../../../components/atoms/FavoriteIcon";
-// import { FavoritesContext } from "../../store/context/favoritesContext";
 import { FavoritesContext } from "../../../store/favorites-context";
-// import SearchComponent from "../../components/ui/SearchComponent";
 import SearchComponent from "../../../components/atoms/SearchComponent";
-import { AuthContext } from "../../../store/auth-context";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
-import CategoryButton from "../../../components/atoms/CategoryButton";
 import { UserInputContext } from "../../../store/user-input-context";
 import { Colors } from "../../../constants/colors";
+import ProductItem from "../../../components/molecules/ProductItem";
+import CategoryItem from "../../../components/molecules/CategoryItem";
+import ProductList from "../../../components/organisms/ProductList";
 
 const data = [
   { label: "Men", value: "Men" },
@@ -38,311 +31,136 @@ type Props = {
 };
 
 const HomePage = ({ navigation }: Props) => {
-  const productsCtx: any = useContext(ProductsContext);
+  const { products, updateSelectedCategory }: any = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
-  const favoritesCtx: any = useContext(FavoritesContext);
-  const [dummyUserData, setDummyUserData] = useState("");
+  const { favorites, addFavorite, removeFavorite }: any =
+    useContext(FavoritesContext);
   const [genderSelection, setGenderSelection] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
-  //   useEffect(() => {
-  // const getProfilePicture = async () => {
-  //   const response = await fetchProfilePicture();
-  //   setDummyUserData(response);
-  // };
-  // getProfilePicture();
-  //   setIsLoading(false);
-  //   }, []);
-
-  if (productsCtx.products.length === 0) {
+  if (products.length === 0) {
     return <LoadingOverlay message="Loading Home Screen..." />;
   }
 
+  const categoryPressHandler = (category: String) => {
+    updateSelectedCategory(category);
+    navigation.navigate("Welcome");
+  };
+
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.headerContainer}>
-        <Pressable
-          style={styles.imageContainer}
-          onPress={() => {
-            navigation.navigate("ProfileTab", { screen: "Profile" });
-          }}
-        >
-          {/* {dummyUserData.users && ( */}
-          <Image
-            source={{
-              uri: "https://drive.google.com/uc?export=view&id=1LBJjTPXlYb-g8vXO9nIIMr9mcqK5l0xa",
-            }}
-            style={styles.image}
-          />
-          {/* )} */}
-        </Pressable>
-        <View style={styles.dropdownContainer}>
-          <Dropdown
-            style={styles.dropdown}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            data={data}
-            //   search
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder="M / W"
-            //   searchPlaceholder="Search..."
-            value={genderSelection}
-            onChange={(item) => {
-              setGenderSelection(item.value);
-              userInputCtx.updateInputs("shopFor", item.value);
-            }}
-          />
-        </View>
-        <View style={styles.cartButtonContainer}>
-          <CartButton
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.outerContainer}>
+        <View style={styles.headerContainer}>
+          <Pressable
+            style={styles.imageContainer}
             onPress={() => {
-              navigation.navigate("Cart");
+              navigation.navigate("ProfileTab", { screen: "Profile" });
             }}
-          />
+          >
+            <Image
+              source={{
+                uri: "https://drive.google.com/uc?export=view&id=1LBJjTPXlYb-g8vXO9nIIMr9mcqK5l0xa",
+              }}
+              style={styles.image}
+            />
+          </Pressable>
+          <View style={styles.dropdownContainer}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              inputSearchStyle={styles.inputSearchStyle}
+              iconStyle={styles.iconStyle}
+              data={data}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder="M / W"
+              value={genderSelection}
+              onChange={(item) => {
+                setGenderSelection(item.value);
+                userInputCtx.updateInputs("shopFor", item.value);
+              }}
+            />
+          </View>
+          <View style={styles.cartButtonContainer}>
+            <CartButton
+              onPress={() => {
+                navigation.navigate("Cart");
+              }}
+            />
+          </View>
+        </View>
+        <View style={styles.mainContainer}>
+          <View style={styles.searchContainer}>
+            <SearchComponent />
+          </View>
+          <ScrollView overScrollMode="never">
+            <View style={styles.categoriesContainer}>
+              {products.length > 0 && (
+                <View style={styles.categories}>
+                  <View style={styles.categoriesHeader}>
+                    <Text style={styles.categoriesHeaderText}>Categories</Text>
+                    <Pressable
+                      onPress={() => {
+                        navigation.navigate("Categories");
+                      }}
+                    >
+                      <Text style={styles.categoriesHeaderSeeAllText}>
+                        See All
+                      </Text>
+                    </Pressable>
+                  </View>
+                  <View style={styles.categoriesContent}>
+                    <CategoryItem
+                      onPress={() => {
+                        categoryPressHandler("Jackets");
+                      }}
+                      imageUri={products[2].image}
+                      categoryName="Jackets"
+                    />
+                    <CategoryItem
+                      onPress={() => {
+                        categoryPressHandler("Tops");
+                      }}
+                      imageUri={products[1].image}
+                      categoryName="Tops"
+                    />
+                    <CategoryItem
+                      onPress={() => {
+                        categoryPressHandler("Tech");
+                      }}
+                      imageUri={products[8].image}
+                      categoryName="Tech"
+                    />
+                    <CategoryItem
+                      onPress={() => {
+                        categoryPressHandler("Jewelry");
+                      }}
+                      imageUri={products[6].image}
+                      categoryName="Jewelry"
+                    />
+                    <CategoryItem
+                      onPress={() => {
+                        categoryPressHandler("Other");
+                      }}
+                      imageUri={products[0].image}
+                      categoryName="Other"
+                    />
+                  </View>
+                </View>
+              )}
+            </View>
+            <View style={styles.productListsContainer}>
+              <ProductList selection="Top Selling" products={products} />
+              <ProductList
+                selection="New In"
+                products={products}
+                headerTextStyle={styles.topSellingHeaderTextStyle}
+              />
+            </View>
+          </ScrollView>
         </View>
       </View>
-
-      <ScrollView style={styles.container}>
-        <SearchComponent />
-        {productsCtx.products.length > 0 && (
-          <View style={styles.categories}>
-            <View style={styles.categoriesHeader}>
-              <Text style={{ fontSize: 17, fontWeight: 700 }}>Categories</Text>
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("Categories");
-                }}
-              >
-                <Text style={{ fontSize: 17 }}>See All</Text>
-              </Pressable>
-            </View>
-            <View style={styles.categoriesContent}>
-              <View style={styles.categoryItem}>
-                <Pressable
-                  onPress={() => {
-                    productsCtx.updateSelectedCategory("Jackets");
-                    navigation.navigate("Welcome");
-                  }}
-                  style={({ pressed }) => [
-                    styles.imageContainer2,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Image
-                    source={{ uri: productsCtx.products[2].image }}
-                    style={styles.image}
-                  />
-                </Pressable>
-                <Text style={{ textAlign: "center" }}>Jackets</Text>
-              </View>
-              <View style={styles.categoryItem}>
-                <Pressable
-                  onPress={() => {
-                    productsCtx.updateSelectedCategory("Tops");
-                    navigation.navigate("Welcome");
-                  }}
-                  style={({ pressed }) => [
-                    styles.imageContainer2,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Image
-                    source={{ uri: productsCtx.products[1].image }}
-                    style={styles.image}
-                  />
-                </Pressable>
-                <Text style={{ textAlign: "center" }}>Tops</Text>
-              </View>
-              <View style={styles.categoryItem}>
-                <Pressable
-                  onPress={() => {
-                    productsCtx.updateSelectedCategory("Tech");
-                    navigation.navigate("Welcome");
-                  }}
-                  style={({ pressed }) => [
-                    styles.imageContainer2,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Image
-                    source={{ uri: productsCtx.products[8].image }}
-                    style={styles.image}
-                  />
-                </Pressable>
-                <Text style={{ textAlign: "center" }}>Tech</Text>
-              </View>
-              <View style={styles.categoryItem}>
-                <Pressable
-                  onPress={() => {
-                    productsCtx.updateSelectedCategory("Jewelry");
-                    navigation.navigate("Welcome");
-                  }}
-                  style={({ pressed }) => [
-                    styles.imageContainer2,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Image
-                    source={{ uri: productsCtx.products[6].image }}
-                    style={styles.image}
-                  />
-                </Pressable>
-                <Text style={{ textAlign: "center" }}>Jewelry</Text>
-              </View>
-              <View style={styles.categoryItem}>
-                <Pressable
-                  onPress={() => {
-                    productsCtx.updateSelectedCategory("Other");
-                    navigation.navigate("Welcome");
-                  }}
-                  style={({ pressed }) => [
-                    styles.imageContainer2,
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Image
-                    source={{ uri: productsCtx.products[0].image }}
-                    style={styles.image}
-                  />
-                </Pressable>
-                <Text style={{ textAlign: "center" }}>Other</Text>
-              </View>
-            </View>
-          </View>
-        )}
-        <View style={styles.topSelling}>
-          <View style={styles.topSellingHeader}>
-            <Text style={{ fontSize: 21, fontWeight: 700 }}>Top Selling</Text>
-            <Pressable
-              onPress={() => {
-                productsCtx.updateSelectedCategory("All");
-                navigation.navigate("Welcome");
-              }}
-            >
-              <Text style={{ fontSize: 17 }}>See All</Text>
-            </Pressable>
-          </View>
-          <FlatList
-            horizontal={true}
-            data={productsCtx.products}
-            renderItem={(itemData) => {
-              return (
-                <View style={styles.productContainer}>
-                  <View style={styles.favIcon}>
-                    <FavoriteIcon
-                      name={
-                        favoritesCtx.favorites.includes(itemData.item.id)
-                          ? "heart"
-                          : "heart-outline"
-                      }
-                      size={30}
-                      color={Colors.black}
-                      onPress={() => {
-                        if (
-                          !favoritesCtx.favorites.includes(itemData.item.id)
-                        ) {
-                          favoritesCtx.addFavorite(itemData.item.id);
-                        } else {
-                          favoritesCtx.removeFavorite(itemData.item.id);
-                        }
-                      }}
-                    />
-                  </View>
-                  <Pressable
-                    style={styles.productStyle}
-                    onPress={() => {
-                      navigation.navigate("ProductDetails", {
-                        product: itemData.item,
-                      });
-                    }}
-                  >
-                    <Image
-                      source={{ uri: itemData.item.image }}
-                      style={styles.image1}
-                    />
-                    <Text numberOfLines={1}>{itemData.item.title}</Text>
-                    <Text
-                      style={{ fontWeight: 700 }}
-                    >{`$${itemData.item.price}`}</Text>
-                  </Pressable>
-                </View>
-              );
-            }}
-          />
-        </View>
-        <View style={styles.topSelling}>
-          <View style={styles.topSellingHeader}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 600,
-                marginLeft: 10,
-                color: Colors.purple100,
-              }}
-            >
-              New In
-            </Text>
-            <Pressable
-              onPress={() => {
-                productsCtx.updateSelectedCategory("All");
-                navigation.navigate("Welcome");
-              }}
-            >
-              <Text style={{ fontSize: 17 }}>See All</Text>
-            </Pressable>
-          </View>
-          <FlatList
-            horizontal={true}
-            data={productsCtx.products}
-            renderItem={(itemData) => {
-              return (
-                <View style={styles.productContainer}>
-                  <View style={styles.favIcon}>
-                    <FavoriteIcon
-                      name={
-                        favoritesCtx.favorites.includes(itemData.item.id)
-                          ? "heart"
-                          : "heart-outline"
-                      }
-                      size={30}
-                      color={Colors.black}
-                      onPress={() => {
-                        if (
-                          !favoritesCtx.favorites.includes(itemData.item.id)
-                        ) {
-                          favoritesCtx.addFavorite(itemData.item.id);
-                        } else {
-                          favoritesCtx.removeFavorite(itemData.item.id);
-                        }
-                      }}
-                    />
-                  </View>
-                  <Pressable
-                    onPress={() => {
-                      navigation.navigate("ProductDetails", {
-                        product: itemData.item,
-                      });
-                    }}
-                  >
-                    <Image
-                      source={{ uri: itemData.item.image }}
-                      style={styles.image1}
-                    />
-                    <Text numberOfLines={1}>{itemData.item.title}</Text>
-                    <Text
-                      style={{ fontWeight: 700 }}
-                    >{`$${itemData.item.price}`}</Text>
-                  </Pressable>
-                </View>
-              );
-            }}
-          />
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -350,24 +168,21 @@ const HomePage = ({ navigation }: Props) => {
 export default HomePage;
 
 const styles = StyleSheet.create({
-  safeAreaContainer: {
+  safeArea: {
     flex: 1,
-    // backgroundColor: Colors.orange100,
+  },
+  outerContainer: {
+    flex: 1,
   },
   headerContainer: {
-    // flex: 1,
-    // marginTop: 75,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderColor: Colors.red100,
-    // borderWidth: 4,
     height: 100,
   },
-
-  container: {
-    // height: 800,
+  mainContainer: {
+    flex: 1,
   },
   imageContainer: {
     height: 50,
@@ -375,23 +190,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.brown100,
     borderRadius: 25,
   },
-  imageContainer2: {
-    height: 78,
-    width: 78,
-    padding: 2,
-    // borderColor: Colors.orange100,
-    // borderWidth: 3,
-  },
+
   image: {
     flex: 1,
-    // borderColor: Colors.black,
-    // borderWidth: 2,
-    // padding: 8,
-    // margin: 5,
-    // backgroundColor: Colors.white100,
-    // height: 30,
-    // width: 20,
-    // height: 20,
     overflow: "hidden",
     resizeMode: "contain",
     borderRadius: 40,
@@ -404,13 +205,9 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     width: 150,
   },
-  icon: {
-    marginRight: 5,
-  },
   placeholderStyle: {
     fontSize: 16,
     alignItems: "center",
-    // textAlign: "center",
   },
   selectedTextStyle: {
     fontSize: 16,
@@ -425,74 +222,45 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     marginTop: 0,
-    // borderColor: Colors.black,
     borderWidth: 1,
     paddingHorizontal: 15,
-    // margin: 16,
     height: 60,
     backgroundColor: Colors.bgLight2,
     borderRadius: 30,
   },
   categories: {
     flex: 1,
-    height: 160,
     marginTop: 10,
     marginBottom: 15,
     paddingHorizontal: 5,
-    marginHorizontal: 30,
   },
   categoriesHeader: {
-    // flex: 1,
     flexDirection: "row",
-    height: 40,
-    // paddingHorizontal: 10,
-    // marginBottom: 10,
+    flex: 1,
     justifyContent: "space-between",
+    paddingBottom: 10,
   },
+  categoriesHeaderText: { fontSize: 17, fontWeight: 700 },
+  categoriesHeaderSeeAllText: { fontSize: 17 },
   categoriesContent: {
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
   },
-  categoryItem: {
-    flex: 1,
-    // marginHorizontal: 10,
-    // height: 1,
-    // height: 300,
-    // width: 300,
+  searchContainer: {
+    paddingHorizontal: 20,
   },
-  topSelling: {
-    flex: 5,
-    marginHorizontal: 30,
-    paddingHorizontal: 10,
+  categoriesContainer: {
+    flex: 3,
+    marginHorizontal: 20,
   },
-  topSellingHeader: {
-    flex: 1,
-    flexDirection: "row",
-    marginBottom: 10,
-    justifyContent: "space-between",
+  topSellingHeaderTextStyle: {
+    fontSize: 18,
+    fontWeight: 600,
+    marginLeft: 10,
+    color: Colors.purple100,
   },
-  productContainer: {
-    flex: 1,
-    backgroundColor: Colors.white100,
-    height: "auto",
-    width: 150,
-    margin: 10,
-    padding: 20,
-    borderRadius: 20,
-  },
-  favIcon: { position: "absolute", right: 15, top: 15, zIndex: 1 },
-  image1: {
-    width: "100%",
-    height: 200,
-    zIndex: 0,
-    overflow: "hidden",
-    resizeMode: "contain",
-  },
-  pressed: {
-    opacity: 0.5,
-  },
-  productStyle: {
-    // backgroundColor: Colors.yellow100,
+  productListsContainer: {
+    marginVertical: 10,
   },
 });

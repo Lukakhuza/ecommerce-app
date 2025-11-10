@@ -10,17 +10,16 @@ import {
   FlatList,
 } from "react-native";
 import { useCallback, useContext, useEffect, useState } from "react";
-// import PurpleButton from "../../components/ui/PurpleButton";
-import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
+import SmallPurpleButton from "../../../components/atoms/SmallPurpleButton";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../../constants/colors";
-import { fetchOrders } from "../../api/orders.api";
-import { UserInputContext } from "../../store/user-input-context";
+import { Colors } from "../../../constants/colors";
+import { fetchOrders } from "../../../api/orders.api";
+import { UserInputContext } from "../../../store/user-input-context";
 
 import { useIsFocused } from "@react-navigation/native";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
-import { wait } from "../../util/helpers";
-import { OrderStatus } from "../../types/order";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import { wait } from "../../../util/helpers";
+import { OrderStatus } from "../../../types/order";
 
 type Props = {
   navigation: any;
@@ -199,7 +198,7 @@ const Orders = ({ navigation }: Props) => {
           <View style={styles.content}>
             <Image
               style={styles.image}
-              source={require("../../assets/check-out.png")}
+              source={require("../../../assets/check-out.png")}
             />
             <View>
               <Text style={{ fontSize: 20, marginVertical: 10 }}>

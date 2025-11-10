@@ -7,9 +7,8 @@ import {
   Text,
   View,
 } from "react-native";
-// import PurpleButton from "../../components/ui/PurpleButton";
-import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
-import { Colors } from "../../constants/colors";
+import SmallPurpleButton from "../../../components/atoms/SmallPurpleButton";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   navigation: any;
@@ -23,7 +22,7 @@ const Notifications = ({ navigation }: Props) => {
         <View style={styles.content}>
           <Image
             style={styles.image}
-            source={require("../../assets/bell.png")}
+            source={require("../../../assets/bell.png")}
           />
           <View>
             <Text style={{ fontSize: 20, marginVertical: 10 }}>

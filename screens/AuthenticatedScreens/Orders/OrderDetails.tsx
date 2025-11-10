@@ -2,7 +2,7 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { Colors } from "../../constants/colors";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   route: any;

@@ -9,14 +9,14 @@ import {
   View,
 } from "react-native";
 import { useRoute } from "@react-navigation/core";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
-import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
-import { UserInputContext } from "../../store/user-input-context";
-import { ProductsContext } from "../../store/products-context";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
+import { UserInputContext } from "../../../store/user-input-context";
+import { ProductsContext } from "../../../store/products-context";
 import { useContext, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { CartContext } from "../../store/cart-context";
-import { Colors } from "../../constants/colors";
+import { CartContext } from "../../../store/cart-context";
+import { Colors } from "../../../constants/colors";
 
 type Props = {
   navigation: any;

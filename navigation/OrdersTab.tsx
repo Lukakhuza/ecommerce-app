@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Orders from "../screens/AuthenticatedScreens/Orders";
-import OrderDetails from "../screens/AuthenticatedScreens/OrderDetails";
+import Orders from "../screens/AuthenticatedScreens/Orders/Orders";
+import OrderDetails from "../screens/AuthenticatedScreens/Orders/OrderDetails";
 import IconButton from "../components/atoms/IconButton";
-import OrderItems from "../screens/AuthenticatedScreens/OrderItems";
+import OrderItems from "../screens/AuthenticatedScreens/Orders/OrderItems";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ const OrdersTab = () => {
       <Stack.Screen
         name="OrderDetails"
         component={OrderDetails}
-        options={({ navigation: { goBack }, route }) => ({
+        options={({ navigation: { goBack }, route }: any) => ({
           title: route.params?.orderData?.item?._id
             ? `Order ${route.params.orderData.item._id.slice(-10)}`
             : "Order Details",

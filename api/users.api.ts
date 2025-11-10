@@ -54,6 +54,7 @@ export const fetchToken = async (userData: object) => {
       },
       body: JSON.stringify(userData),
     });
+    console.log("Response", response);
     const resData = await response.json();
     if (!response.ok) {
       throw new Error(resData.message);
