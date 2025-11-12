@@ -33,6 +33,8 @@ const TabsOverview = () => {
           return {
             headerShown: false,
             title: "Home",
+            contentStyle: { backgroundColor: "#fff" },
+            animation: "none",
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={25} color={color} />
             ),
@@ -60,6 +62,8 @@ const TabsOverview = () => {
           if (hideOnScreens.includes(routeName)) {
             return {
               title: "Orders",
+              contentStyle: { backgroundColor: "#fff" },
+              animation: "none",
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="receipt-outline" size={25} color={color} />
               ),
@@ -68,6 +72,8 @@ const TabsOverview = () => {
           }
           return {
             title: "Orders",
+            contentStyle: { backgroundColor: "#fff" },
+            animation: "none",
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="receipt-outline" size={25} color={color} />
             ),

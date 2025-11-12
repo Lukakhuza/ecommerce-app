@@ -5,7 +5,13 @@ const Stack = createNativeStackNavigator();
 
 const AuthenticatedStack = () => {
   return (
-    <Stack.Navigator initialRouteName="TabsOverview">
+    <Stack.Navigator
+      initialRouteName="TabsOverview"
+      screenOptions={{
+        contentStyle: { backgroundColor: "#fff" },
+        animation: "none",
+      }}
+    >
       <Stack.Screen
         name="TabsOverview"
         component={TabsOverview}
