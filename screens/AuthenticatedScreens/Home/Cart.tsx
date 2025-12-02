@@ -14,6 +14,7 @@ import { useContext } from "react";
 import CartItem from "../../../components/molecules/CartItem";
 import { CartContext } from "../../../store/cart-context";
 import { Colors } from "../../../constants/colors";
+import CostItems from "../../../components/organisms/CostItems";
 const parcelImage = require("../../../assets/parcel.png");
 
 type Props = {
@@ -69,24 +70,12 @@ const Cart = ({ navigation }: Props) => {
             />
           </View>
           <View style={styles.bottomSection}>
-            <View>
-              <View style={styles.costItemContainer}>
-                <Text style={styles.costItemLabel}>Subtotal</Text>
-                <Text style={styles.costItemValue}>${subtotal.toFixed(2)}</Text>
-              </View>
-              <View style={styles.costItemContainer}>
-                <Text style={styles.costItemLabel}>Shipping Cost</Text>
-                <Text style={styles.costItemValue}>${shippingCost}</Text>
-              </View>
-              <View style={styles.costItemContainer}>
-                <Text style={styles.costItemLabel}>Tax</Text>
-                <Text style={styles.costItemValue}>${taxAmount}</Text>
-              </View>
-              <View style={styles.costItemTotalContainer}>
-                <Text style={styles.costItemTotalLabel}>Total</Text>
-                <Text style={styles.costItemValue}>${total.toFixed(2)}</Text>
-              </View>
-            </View>
+            <CostItems
+              subtotal={subtotal.toFixed(2)}
+              shippingCost={shippingCost}
+              taxAmount={taxAmount}
+              total={total.toFixed(2)}
+            />
             <View>
               <PurpleButtonSmall
                 onPress={() => {

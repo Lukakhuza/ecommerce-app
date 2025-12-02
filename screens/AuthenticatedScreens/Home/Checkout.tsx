@@ -8,32 +8,39 @@ import {
   Text,
   View,
 } from "react-native";
-import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
 import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
 import { UserInputContext } from "../../../store/user-input-context";
 import { ProductsContext } from "../../../store/products-context";
-import { useContext, useEffect, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { useContext, useState } from "react";
 import { CartContext } from "../../../store/cart-context";
 import { Colors } from "../../../constants/colors";
 import {
   createPaymentSheet,
   openPaymentSheet,
 } from "../../../api/products.api";
-import { CustomPaymentMethodResultStatus } from "@stripe/stripe-react-native";
 import { createOrder } from "../../../api/orders.api";
+import CostItems from "../../../components/organisms/CostItems";
+import PressableComponent from "../../../components/organisms/PressableComponent";
+import { CheckoutContext } from "../../../store/checkout-context";
 
 type Props = {
   navigation: any;
 };
 
 const Checkout = ({ navigation }: Props) => {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const userInputCtx: any = useContext(UserInputContext);
-  const productsCtx: any = useContext(ProductsContext);
-  const [shippingAddress, setShippingAddress] = useState(
-    userInputCtx.userInput.address
-  );
+  const { shippingAddress, paymentMethod }: any = useContext(CheckoutContext);
   const cartCtx: any = useContext(CartContext);
+
+  const cardImages: any = {
+    visa: require("../../../assets/visa.png"),
+    mastercard: require("../../../assets/mastercard.png"),
+    amex: require("../../../assets/amex.png"),
+    discover: require("../../../assets/discover.png"),
+  };
+
+  const cardBrand = paymentMethod?.card?.brand;
 
   let subtotal = 0;
   for (let i = 0; i < cartCtx.cartItems.length; i++) {
@@ -46,6 +53,7 @@ const Checkout = ({ navigation }: Props) => {
   let total = subtotal + shippingCost + taxAmount;
 
   const placeOrderHandler = async () => {
+    setIsButtonDisabled(true);
     const stripeCustomerId = userInputCtx.userInput.stripeCustomerId;
     const totalAmount = Math.trunc(total * 100);
     const currency = "usd";
@@ -54,9 +62,8 @@ const Checkout = ({ navigation }: Props) => {
       totalAmount,
       currency
     );
-    // const paymentIntentId = stripeData.paymentIntentId;
+
     const response = await openPaymentSheet(stripeData);
-    console.log("resp:", response);
     if (response.success === true) {
       const orderItems = cartCtx.cartItems;
       const orderData = {
@@ -64,15 +71,17 @@ const Checkout = ({ navigation }: Props) => {
         items: orderItems,
         total: total,
         shippingAddress: {
-          addressLine1: userInputCtx.userInput.address.addressLine1.value,
-          city: userInputCtx.userInput.address.city.value,
-          state: userInputCtx.userInput.address.state.value,
-          zipcode: userInputCtx.userInput.address.zipcode.value,
+          addressLine1: shippingAddress.addressLine1.value,
+          city: shippingAddress.city.value,
+          state: shippingAddress.state.value,
+          zipcode: shippingAddress.zipcode.value,
         },
+        paymentMethod: paymentMethod,
       };
       await createOrder(orderData);
       cartCtx.clearCart();
       navigation.navigate("Home");
+      setIsButtonDisabled(false);
     }
   };
 
@@ -80,61 +89,63 @@ const Checkout = ({ navigation }: Props) => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.outerContainer}>
         <View style={styles.topSection}>
-          <Pressable
+          <PressableComponent
+            label="Shipping Address"
             onPress={() => {
-              navigation.navigate("Payment");
+              navigation.navigate("ManageShippingAddress");
             }}
-            style={styles.category}
+            textContainerStyle={styles.shippingAddressTextContainerStyle}
           >
-            <View style={{ maxWidth: 180 }}>
-              <Text style={styles.label2}>Shipping Address</Text>
-              <Text style={styles.label1} numberOfLines={1}>
-                {`${shippingAddress.addressLine1.value}, ${shippingAddress.city.value}, ${shippingAddress.state.value} ${shippingAddress.zipcode.value}`}
+            <Text style={styles.label2} numberOfLines={1}>
+              {shippingAddress.addressLine1.value
+                ? `${shippingAddress.addressLine1.value}, ${shippingAddress.city.value}, ${shippingAddress.state.value} ${shippingAddress.zipcode.value}`
+                : "Add Shipping Address"}
+            </Text>
+          </PressableComponent>
+          <PressableComponent
+            label="Payment Method"
+            onPress={() => {
+              navigation.navigate("ManagePaymentMethod");
+            }}
+          >
+            {paymentMethod ? (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.label2} numberOfLines={1}>
+                  {`****${paymentMethod.card.last4}`}
+                </Text>
+                <View>
+                  {cardImages[cardBrand] && (
+                    <Image
+                      style={styles.image}
+                      source={cardImages[cardBrand]}
+                    />
+                  )}
+                </View>
+              </View>
+            ) : (
+              <Text style={styles.label2} numberOfLines={1}>
+                Add Payment Method
               </Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("Payment");
-            }}
-            style={styles.category}
-          >
-            <View>
-              <Text style={styles.label2}>Payment Method</Text>
-              <Text style={styles.label1}>Add Payment Method</Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
+            )}
+          </PressableComponent>
         </View>
         <View style={styles.bottomSection}>
-          <View style={styles.costItemsContainer}>
-            <View style={styles.costItemContainer}>
-              <Text style={styles.costItemLabel}>Subtotal</Text>
-              <Text style={styles.costItemValue}>${subtotal.toFixed(2)}</Text>
-            </View>
-            <View style={styles.costItemContainer}>
-              <Text style={styles.costItemLabel}>Shipping Cost</Text>
-              <Text style={styles.costItemValue}>${shippingCost}</Text>
-            </View>
-            <View style={styles.costItemContainer}>
-              <Text style={styles.costItemLabel}>Tax</Text>
-              <Text style={styles.costItemValue}>${taxAmount}</Text>
-            </View>
-            <View style={styles.costItemContainerTotal}>
-              <Text style={styles.costItemLabelTotal}>Total</Text>
-              <Text style={styles.costItemValue}>${total.toFixed(2)}</Text>
-            </View>
-          </View>
+          <CostItems
+            subtotal={`${subtotal.toFixed(2)}`}
+            shippingCost={shippingCost}
+            tax={taxAmount}
+            total={total.toFixed(2)}
+          />
           <View>
-            <PurpleButtonSmall onPress={placeOrderHandler}>
+            <PurpleButtonSmall
+              onPress={placeOrderHandler}
+              disabled={isButtonDisabled}
+            >
               <View style={styles.purpleButtonTextContainer}>
                 <Text style={styles.purpleButtonText}>${total.toFixed(2)}</Text>
-                <Text style={styles.purpleButtonText}>Place Order</Text>
+                <Text style={styles.purpleButtonText}>
+                  {isButtonDisabled ? "Submitting..." : "Place Order"}
+                </Text>
               </View>
             </PurpleButtonSmall>
           </View>
@@ -153,61 +164,27 @@ const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
     marginHorizontal: 11,
+    // borderColor: "red",
+    // borderWidth: 3,
   },
   topSection: {
     flex: 1,
     marginTop: 10,
+    // borderColor: "green",
+    // borderWidth: 3,
   },
   bottomSection: {
     paddingBottom: 20,
+    // borderColor: "blue",
+    // borderWidth: 3,
   },
-  category: {
-    marginVertical: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: Colors.bgLight2,
-    height: 80,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-  },
-  label1: {
+  label2: {
     fontSize: 20,
     marginLeft: 10,
     marginVertical: 4,
     fontWeight: 700,
   },
-  label2: {
-    color: Colors.gray100,
-    fontSize: 17,
-    marginLeft: 10,
-    marginVertical: 4,
-  },
-  costItemContainer: {
-    marginVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  costItemLabel: { fontSize: 17, color: "gray", marginLeft: 8 },
-  costItemValue: {
-    color: "black",
-    fontWeight: 700,
-    marginRight: 10,
-  },
-  costItemLabelTotal: {
-    fontSize: 17,
-    fontWeight: 700,
-    color: "gray",
-    marginLeft: 8,
-  },
-  costItemContainerTotal: {
-    marginVertical: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  costItemsContainer: {
-    flexDirection: "column",
-  },
+
   purpleButtonTextContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -216,5 +193,11 @@ const styles = StyleSheet.create({
   purpleButtonText: {
     color: Colors.white100,
     fontWeight: 700,
+  },
+  shippingAddressTextContainerStyle: { maxWidth: 220 },
+  image: {
+    width: 80,
+    height: 40,
+    marginLeft: 10,
   },
 });

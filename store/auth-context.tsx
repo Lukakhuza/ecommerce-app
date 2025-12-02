@@ -99,8 +99,6 @@ const AuthContextProvider = ({ children }: Props) => {
   };
 
   const loginHandler = async (email: string, password: string) => {
-    console.log("Email: ", email, "Password: ", password);
-
     setIsLoading(true);
     clearEnteredUserInfo();
     try {

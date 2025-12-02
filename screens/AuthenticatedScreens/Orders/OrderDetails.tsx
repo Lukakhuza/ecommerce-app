@@ -1,6 +1,7 @@
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
+import { formatDate } from "../../../util/helpers";
 import { useRoute } from "@react-navigation/native";
 import { Colors } from "../../../constants/colors";
 
@@ -12,6 +13,10 @@ type Props = {
 const OrderDetails = ({ navigation }: Props) => {
   const route: any = useRoute();
   const orderData = route.params.orderData;
+
+  const shippingAddress = orderData.item.shippingAddress;
+
+  const formattedOrderDate = formatDate(orderData.item.createdAt);
 
   return (
     <View style={{ marginHorizontal: 25 }}>
@@ -45,12 +50,14 @@ const OrderDetails = ({ navigation }: Props) => {
             <Ionicons
               name="checkmark-circle"
               size={30}
-              color={Colors.primary100}
+              color={Colors.gray100}
             />
-            <Text style={{ marginLeft: 15, fontSize: 20 }}>Delivered</Text>
+            <Text style={{ marginLeft: 15, fontSize: 20, opacity: 0.5 }}>
+              Delivered
+            </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20 }}>28 May</Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Pending</Text>
           </View>
         </View>
         <View
@@ -73,12 +80,14 @@ const OrderDetails = ({ navigation }: Props) => {
             <Ionicons
               name="checkmark-circle"
               size={30}
-              color={Colors.primary100}
+              color={Colors.gray100}
             />
-            <Text style={{ marginLeft: 15, fontSize: 20 }}>Shipped</Text>
+            <Text style={{ marginLeft: 15, fontSize: 20, opacity: 0.5 }}>
+              Shipped
+            </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20 }}>28 May</Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Pending</Text>
           </View>
         </View>
         <View
@@ -101,14 +110,14 @@ const OrderDetails = ({ navigation }: Props) => {
             <Ionicons
               name="checkmark-circle"
               size={30}
-              color={Colors.primary100}
+              color={Colors.gray100}
             />
-            <Text style={{ marginLeft: 15, fontSize: 20 }}>
+            <Text style={{ marginLeft: 15, fontSize: 20, opacity: 0.5 }}>
               Order Confirmed
             </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20 }}>28 May</Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Pending</Text>
           </View>
         </View>
         <View
@@ -135,7 +144,7 @@ const OrderDetails = ({ navigation }: Props) => {
             <Text style={{ marginLeft: 15, fontSize: 20 }}>Order Placed</Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20 }}>28 May</Text>
+            <Text style={{ fontSize: 18 }}>{formattedOrderDate}</Text>
           </View>
         </View>
       </View>
@@ -202,11 +211,8 @@ const OrderDetails = ({ navigation }: Props) => {
         >
           <View style={styles.shippingAddress}>
             <Text style={{ fontSize: 16 }}>
-              100 Main St., Washington, NJ 08945
+              {`${shippingAddress.addressLine1}, ${shippingAddress.city}, ${shippingAddress.state} ${shippingAddress.zipcode}`}
             </Text>
-          </View>
-          <View style={styles.phoneNumber}>
-            <Text style={{ fontSize: 16 }}>908-215-5165</Text>
           </View>
         </View>
       </View>

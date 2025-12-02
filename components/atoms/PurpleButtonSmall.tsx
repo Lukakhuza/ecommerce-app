@@ -1,9 +1,21 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 
-type Props = { children: any; onPress: any; style: any; mode: string };
+type Props = {
+  children: any;
+  onPress: any;
+  style?: any;
+  mode?: string;
+  disabled: boolean;
+};
 
-const PurpleButtonSmall = ({ children, onPress, style, mode }: any) => {
+const PurpleButtonSmall = ({
+  children,
+  onPress,
+  style,
+  mode,
+  disabled,
+}: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -11,8 +23,10 @@ const PurpleButtonSmall = ({ children, onPress, style, mode }: any) => {
         styles.button,
         pressed && styles.pressed,
         mode === "selected" && styles.white,
+        disabled === true && { opacity: 0.5 },
       ]}
       onPress={onPress}
+      disabled={disabled}
     >
       <Text style={[styles.text, mode === "selected" && styles.selected]}>
         {children}

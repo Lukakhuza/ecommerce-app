@@ -13,10 +13,11 @@ import { useContext, useEffect, useState } from "react";
 import { fetchProductsData } from "../../../api/products.api";
 import { UserInputContext } from "../../../store/user-input-context";
 import { Colors } from "../../../constants/colors";
-import FavoriteIcon from "../../../components/atoms/FavoriteIcon";
-import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../../store/favorites-context";
 import { ProductsContext } from "../../../store/products-context";
+import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import { filter } from "lodash";
+import { wait } from "../../../util/helpers";
 
 type Props = {
   navigation: any;
@@ -25,56 +26,41 @@ type Props = {
 const Favorites = ({ navigation }: Props) => {
   const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
-  const favoritesCtx: any = useContext(FavoritesContext);
-  const productsCtx: any = useContext(ProductsContext);
-  const [fetchedUserData, setFetchedUserData] = useState([]);
-  const [fetchedProductsData, setFetchedProductsData] = useState([]);
-
-  useEffect(() => {
-    const getUserData = async () => {
-      // const userData = await fetchData();
-      // setFetchedUserData(userData);
-    };
-
-    getUserData();
-  }, []);
+  const { favorites }: any = useContext(FavoritesContext);
+  const [filteredProds, setFilteredProds] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getProductsData = async () => {
       const productsData = await fetchProductsData();
-      setFetchedProductsData(productsData);
+      const filteredProducts = productsData.filter((productData: any) => {
+        if (favorites.includes(productData.id)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      setFilteredProds(filteredProducts);
+      await wait(500);
+      setIsLoading(false);
     };
     getProductsData();
   }, []);
 
-  const favoriteProducts = fetchedProductsData.filter((productData: any) => {
-    let favoriteProductIds = favoritesCtx.favorites;
-
-    if (
-      favoriteProductIds.includes(productData.id) ||
-      productsCtx.selectedCategory === "All"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  if (isLoading) {
+    return <LoadingOverlay message="Loading Favorites..." />;
+  }
 
   let content = <View></View>;
 
-  if (favoriteProducts.length === 0) {
-    content = (
-      <Text
-      //  style={styles.noFavorites}
-      >
-        No Favorites Selected
-      </Text>
-    );
+  if (filteredProds.length === 0) {
+    content = <Text style={styles.noFavorites}>No Favorites Selected</Text>;
   }
+
   return (
     <View
       style={{
-        backgroundColor: Colors.orangishRed,
+        backgroundColor: Colors.primary100,
         // alignItems: "center",
         // justifyContent: "center",
       }}
@@ -91,7 +77,7 @@ const Favorites = ({ navigation }: Props) => {
           {content}
         </View>
         <FlatList
-          data={favoriteProducts}
+          data={filteredProds}
           renderItem={(itemData: any) => {
             return (
               <Pressable
@@ -126,6 +112,7 @@ const Favorites = ({ navigation }: Props) => {
             userInputCtx.resetInputs();
             authCtx.logout();
           }}
+          disabled={false}
         >
           Log Out
         </PurpleButtonSmall>
@@ -157,8 +144,8 @@ const styles: any = StyleSheet.create({
     textAlign: "center",
     marginHorizontal: 30,
     marginBottom: 10,
-    fontSize: 20,
-    fontWeight: 500,
+    fontSize: 21,
+    fontWeight: 700,
   },
   header: {
     height: 100,

@@ -7,6 +7,8 @@ import ProductDetails from "../screens/AuthenticatedScreens/Home/ProductDetails"
 import Cart from "../screens/AuthenticatedScreens/Home/Cart";
 import Favorites from "../screens/AuthenticatedScreens/Home/Favorites";
 import Checkout from "../screens/AuthenticatedScreens/Home/Checkout";
+import ManageShippingAddress from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManageShippingAddress";
+import ManagePaymentMethod from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManagePaymentMethod";
 
 const Stack = createNativeStackNavigator();
 
@@ -117,6 +119,40 @@ const HomeTab = () => {
       <Stack.Screen
         name="Favorites"
         component={Favorites}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              style={{}}
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ManageShippingAddress"
+        component={ManageShippingAddress}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              style={{}}
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="ManagePaymentMethod"
+        component={ManagePaymentMethod}
         options={({ navigation }) => ({
           title: "",
           headerTransparent: true,

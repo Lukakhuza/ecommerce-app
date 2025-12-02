@@ -54,7 +54,6 @@ export const fetchToken = async (userData: object) => {
       },
       body: JSON.stringify(userData),
     });
-    console.log("Response", response);
     const resData = await response.json();
     if (!response.ok) {
       throw new Error(resData.message);
@@ -83,7 +82,6 @@ export const getUserByEmail = async (email: string) => {
 
 export const saveUserDataToDatabase = async (userData: any) => {
   try {
-    console.log("User data 33: ", userData);
     const userId = userData.id;
 
     const result = await fetch(url + "/user/update-user/" + userId, {

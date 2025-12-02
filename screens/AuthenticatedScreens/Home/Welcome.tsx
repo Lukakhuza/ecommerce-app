@@ -48,8 +48,7 @@ const Welcome = ({ navigation }: Props) => {
     getProductsData();
   }, []);
 
-  const filteredProducts = fetchedProductsData.filter((productData) => {
-    console.log("Pr data", productData);
+  const filteredProducts = fetchedProductsData.filter((productData: any) => {
     let categoryProductIds: Number[] = [];
     if (productsCtx.selectedCategory === "Jackets") {
       categoryProductIds = [3, 15, 16, 17];
@@ -84,7 +83,7 @@ const Welcome = ({ navigation }: Props) => {
         </Text>
         <FlatList
           data={filteredProducts}
-          renderItem={(itemData) => {
+          renderItem={(itemData: any) => {
             return (
               <View style={styles.productContainer}>
                 <View style={styles.favIcon}>
@@ -122,7 +121,7 @@ const Welcome = ({ navigation }: Props) => {
               </View>
             );
           }}
-          keyExtractor={(item, index) => {
+          keyExtractor={(item: any, index) => {
             return item.id;
           }}
           numColumns={2}

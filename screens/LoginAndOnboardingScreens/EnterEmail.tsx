@@ -8,6 +8,7 @@ import ContinueButton from "../../components/atoms/ContinueButton";
 import SmallText from "../../components/atoms/SmallText";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../store/auth-context";
+import * as Notifications from "expo-notifications";
 
 type Props = {
   navigation?: any;
@@ -16,6 +17,19 @@ type Props = {
 const EnterEmail = () => {
   const authCtx: any = useContext(AuthContext);
   const navigation: any = useNavigation();
+
+  const scheduleNotificationHandler = () => {
+    // Notifications.scheduleNotificationAsync({
+    //   content: {
+    //     title: "My first local notification",
+    //     body: "This is the body of the notification.",
+    //     data: { userName: "Luka" },
+    //   },
+    //   trigger: {
+    //     seconds: 5,
+    //   },
+    // });
+  };
 
   const proceedHandler = () => {
     const emailIsValid = validator.isEmail(authCtx.enteredEmail.value);
@@ -57,9 +71,7 @@ const EnterEmail = () => {
             Continue with Apple
           </ButtonOAuth>
           <ButtonOAuth
-            onPress={() => {
-              console.log("Log in with your Google account.");
-            }}
+            onPress={scheduleNotificationHandler}
             imageSource={require("../../assets/OAuth/google-logo.png")}
           >
             Continue with Google

@@ -82,19 +82,25 @@ const UserInputContextProvider = ({ children }: Props) => {
         },
         address: {
           addressLine1: {
-            value: "100 Main St.",
+            value: userData.user.address.addressLine1
+              ? userData.user.address.addressLine1
+              : "",
             isValid: true,
           },
           city: {
-            value: "Washington",
+            value: userData.user.address.city ? userData.user.address.city : "",
             isValid: true,
           },
           state: {
-            value: "NJ",
+            value: userData.user.address.state
+              ? userData.user.address.state
+              : "",
             isValid: true,
           },
           zipcode: {
-            value: "08560",
+            value: userData.user.address.zipcode
+              ? userData.user.address.zipcode
+              : "",
             isValid: true,
           },
         },

@@ -15,8 +15,8 @@ const TabsOverview = () => {
         name="HomeTab"
         component={HomeTab}
         options={({ route }) => {
-          const routeName = getFocusedRouteNameFromRoute(route) ?? "Orders111";
-          const hideOnScreens = ["Cart", "Checkout"];
+          const routeName = getFocusedRouteNameFromRoute(route) ?? "Orders";
+          const hideOnScreens = ["Cart", "Checkout", "ManageShippingAddress"];
 
           if (hideOnScreens.includes(routeName)) {
             return {
