@@ -11,3 +11,17 @@ export const addPaymentMethod = async (paymentMethodData: Object) => {
   const resData = await response.json();
   return resData;
 };
+
+export const fetchPaymentMethods = async (stripeCustomerId: string) => {
+  const response = await fetch(
+    url + "/checkout/payment-methods/" + stripeCustomerId,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const resData = await response.json();
+  return resData;
+};

@@ -9,6 +9,7 @@ import Favorites from "../screens/AuthenticatedScreens/Home/Favorites";
 import Checkout from "../screens/AuthenticatedScreens/Home/Checkout";
 import ManageShippingAddress from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManageShippingAddress";
 import ManagePaymentMethod from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManagePaymentMethod";
+import Payment from "../screens/AuthenticatedScreens/Home/Payment";
 
 const Stack = createNativeStackNavigator();
 
@@ -148,6 +149,17 @@ const HomeTab = () => {
               onPress={() => navigation.goBack()}
             />
           ),
+        })}
+      />
+
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={() => ({
+          title: "Payment Methods",
+          headerShown: true,
+          headerTransparent: false,
+          headerTitleAlign: "center",
         })}
       />
       <Stack.Screen

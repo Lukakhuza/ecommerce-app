@@ -8,14 +8,11 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
-// import { fetchProfilePicture } from "../../util/auth";
-// import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../../store/auth-context";
 import { UserInputContext } from "../../../store/user-input-context";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
 import { Colors } from "../../../constants/colors";
-// import { FavoritesContext } from "../../store/context/favoritesContext";
 
 type Props = {
   navigation: any;
@@ -114,7 +111,6 @@ const ProfileSettings = ({ navigation }: Props) => {
           </Pressable>
           <Pressable
             onPress={() => {
-              // productsCtx.updateSelectedCategory("Jackets");
               navigation.navigate("HomeTab", { screen: "Favorites" });
             }}
             style={styles.category}
@@ -128,8 +124,7 @@ const ProfileSettings = ({ navigation }: Props) => {
           </Pressable>
           <Pressable
             onPress={() => {
-              // productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Payment");
+              navigation.navigate("HomeTab", { screen: "Payment" });
             }}
             style={styles.category}
           >

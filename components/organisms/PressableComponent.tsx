@@ -6,12 +6,12 @@ const PressableComponent = ({
   children,
   label,
   onPress,
-  textContainerStyle,
+
   disabled,
 }: any) => {
   return (
     <Pressable onPress={onPress} style={styles.container} disabled={disabled}>
-      <View style={textContainerStyle}>
+      <View>
         <Text style={styles.label1}>{label}</Text>
         <View>{children}</View>
       </View>

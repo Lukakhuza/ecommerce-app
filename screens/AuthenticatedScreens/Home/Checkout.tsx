@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     fontWeight: 700,
   },
-
   purpleButtonTextContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
