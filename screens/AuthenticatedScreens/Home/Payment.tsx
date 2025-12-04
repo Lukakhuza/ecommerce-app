@@ -32,7 +32,7 @@ const Payment = ({ navigation }: Props) => {
       setIsLoading(false);
     };
     load();
-  }, []);
+  }, [paymentMethods]);
 
   if (isLoading) {
     return <LoadingOverlay message="Loading Payment Methods..." />;
