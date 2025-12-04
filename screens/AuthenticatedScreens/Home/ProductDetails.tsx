@@ -89,8 +89,8 @@ const ProductDetails = ({ route, navigation }: Props) => {
   //     });
   // }
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 60 }}>
-      <ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView overScrollMode="never">
         <View style={styles.outerContainer}>
           <View>
             <Image source={{ uri: product.image }} style={styles.image1} />
@@ -172,6 +172,7 @@ const ProductDetails = ({ route, navigation }: Props) => {
         </View>
       </ScrollView>
       <PurpleButtonSmall
+        disabled={false}
         onPress={() => {
           addProductToCartHandler();
           navigation.navigate("Cart");
@@ -202,15 +203,9 @@ const ProductDetails = ({ route, navigation }: Props) => {
 };
 
 const styles: any = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: 400,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    backgroundColor: Colors.bgLight2,
-  },
+  safeArea: { flex: 1, paddingTop: 60 },
   outerContainer: {
-    height: 850,
+    // height: 550,
     justifyContent: "space-between",
   },
   favIcon: {

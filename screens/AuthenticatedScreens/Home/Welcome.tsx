@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
 import { AuthContext } from "../../../store/auth-context";
@@ -73,90 +74,69 @@ const Welcome = ({ navigation }: Props) => {
   });
 
   return (
-    <View
-    //  style={{ backgroundColor }}
-    >
-      <View style={styles.fl}>
-        <Text style={styles.category}>
-          {" "}
-          {productsCtx.selectedCategory} ({filteredProducts.length})
-        </Text>
-        <FlatList
-          data={filteredProducts}
-          renderItem={(itemData: any) => {
-            return (
-              <View style={styles.productContainer}>
-                <View style={styles.favIcon}>
-                  <FavoriteIcon
-                    name={
-                      favoritesCtx.favorites.includes(itemData.item.id)
-                        ? "heart"
-                        : "heart-outline"
-                    }
-                    size={30}
-                    color={Colors.black}
-                    onPress={() => {
-                      if (!favoritesCtx.favorites.includes(itemData.item.id)) {
-                        favoritesCtx.addFavorite(itemData.item.id);
-                      } else {
-                        favoritesCtx.removeFavorite(itemData.item.id);
-                      }
-                    }}
-                  />
-                </View>
-                <Pressable
+    <SafeAreaView style={styles.safeArea}>
+      <Text style={styles.category}>
+        {" "}
+        {productsCtx.selectedCategory} ({filteredProducts.length})
+      </Text>
+      <FlatList
+        data={filteredProducts}
+        overScrollMode="never"
+        renderItem={(itemData: any) => {
+          return (
+            <View style={styles.productContainer}>
+              <View style={styles.favIcon}>
+                <FavoriteIcon
+                  name={
+                    favoritesCtx.favorites.includes(itemData.item.id)
+                      ? "heart"
+                      : "heart-outline"
+                  }
+                  size={30}
+                  color={Colors.black}
                   onPress={() => {
-                    navigation.navigate("ProductDetails", {
-                      product: itemData.item,
-                    });
+                    if (!favoritesCtx.favorites.includes(itemData.item.id)) {
+                      favoritesCtx.addFavorite(itemData.item.id);
+                    } else {
+                      favoritesCtx.removeFavorite(itemData.item.id);
+                    }
                   }}
-                >
-                  <Image
-                    source={{ uri: itemData.item.image }}
-                    style={styles.image}
-                  />
-                  <Text numberOfLines={1}>{itemData.item.title}</Text>
-                  <Text>{`$${itemData.item.price}`}</Text>
-                </Pressable>
+                />
               </View>
-            );
-          }}
-          keyExtractor={(item: any, index) => {
-            return item.id;
-          }}
-          numColumns={2}
-          contentContainerStyle={{
-            // alignItems: "stretch",
-            padding: 15,
-            // rowGap: 10,
-            // columnGap: 0,
-            // alignContent: "flex-end",
-          }}
-        />
-      </View>
-      <View>
-        <PurpleButtonSmall
-          onPress={() => {
-            userInputCtx.resetInputs();
-            authCtx.logout();
-          }}
-        >
-          Log Out
-        </PurpleButtonSmall>
-      </View>
-    </View>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("ProductDetails", {
+                    product: itemData.item,
+                  });
+                }}
+              >
+                <Image
+                  source={{ uri: itemData.item.image }}
+                  style={styles.image}
+                />
+                <Text numberOfLines={1}>{itemData.item.title}</Text>
+                <Text>{`$${itemData.item.price}`}</Text>
+              </Pressable>
+            </View>
+          );
+        }}
+        keyExtractor={(item: any, index) => {
+          return item.id;
+        }}
+        numColumns={2}
+        contentContainerStyle={{
+          // alignItems: "stretch",
+          padding: 15,
+          // rowGap: 10,
+          // columnGap: 0,
+          // alignContent: "flex-end",
+        }}
+      />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: 400,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    backgroundColor: Colors.bgLight2,
-    // marginBottom: 30,
-  },
   favIcon: {
     position: "absolute",
     right: 15,
@@ -173,10 +153,6 @@ const styles = StyleSheet.create({
   header: {
     height: 100,
   },
-  test: {
-    color: Colors.black,
-    fontSize: 30,
-  },
   image: {
     width: "100%",
     height: 300,
@@ -192,16 +168,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
-  flatlistContainer: {
-    // marginBottom: 30,
-  },
-  fl: {
-    // borderWidth: 3,
+
+  safeArea: {
+    flex: 1,
     paddingTop: 10,
     marginTop: 30,
-    // flex: 2,
-    // flexGrow: 600,
-    height: 665,
   },
 });
 

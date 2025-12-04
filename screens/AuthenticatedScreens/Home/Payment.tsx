@@ -14,8 +14,12 @@ import PaymentMethodComponent from "../../../components/organisms/PaymentMethodC
 import { wait } from "../../../util/helpers";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
 
-const Payment = () => {
-  const [paymentMethods, setPaymentMethods] = useState(null);
+type Props = {
+  navigation: any;
+};
+
+const Payment = ({ navigation }: Props) => {
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const userInputCtx: any = useContext(UserInputContext);
   const { stripeCustomerId: customerId } = userInputCtx.userInput;
@@ -44,9 +48,18 @@ const Payment = () => {
           }}
         />
       ) : (
-        <View>
-          <Text>There are no saved payment methods.</Text>
-          <Button title="Add Payment Method" />
+        <View style={styles.container}>
+          <View style={styles.textContainer}>
+            <Text style={styles.noMethodsText}>
+              There are no saved payment methods.
+            </Text>
+          </View>
+          <Button
+            title="Add Payment Method"
+            onPress={() => {
+              navigation.navigate("ManagePaymentMethod");
+            }}
+          />
         </View>
       )}
     </SafeAreaView>
@@ -60,6 +73,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 10,
     paddingTop: 20,
+    // borderColor: "yellow",
+    // borderWidth: 3,
   },
   card: {
     flex: 1,
@@ -79,5 +94,25 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 17,
     textAlign: "center",
+  },
+  container: {
+    marginTop: 150,
+    marginHorizontal: 10,
+    // borderColor: "brown",
+    // borderWidth: 3,
+    alignItems: "center",
+  },
+  textContainer: {
+    height: 50,
+    // justifyContent: "center",
+  },
+  noMethodsText: {
+    // color: Colors.primary100,
+    textAlign: "center",
+    // borderColor: "blue",
+    // borderWidth: 2,
+    fontSize: 18,
+    justifyContent: "center",
+    fontWeight: 500,
   },
 });
