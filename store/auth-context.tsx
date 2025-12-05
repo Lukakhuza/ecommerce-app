@@ -39,15 +39,17 @@ const AuthContextProvider = ({ children }: Props) => {
   });
   const [enteredUserInfo, setEnteredUserInfo] = useState(emptyEmailAndPassword);
   const [isLoading, setIsLoading] = useState(false);
-  // const [loading, setLoading] = useState(true);
-  // const [hasError, setHasError] = useState(null);
 
   useEffect(() => {
     // Check for token at app startup
     const loadToken = async () => {
       try {
         const storedToken: any = await SecureStore.getItemAsync("token");
-        if (storedToken && !isJWTExpired) {
+
+        console.log("Test 0", storedToken);
+        console.log("Hello: ", isJWTExpired(storedToken));
+
+        if (!isJWTExpired(storedToken)) {
           setAuthToken(storedToken);
         }
       } catch (error) {
