@@ -5,6 +5,7 @@ import { Alert } from "react-native";
 import { validateToken, fetchToken } from "../api/users.api";
 import { wait } from "../util/helpers";
 import { jwtDecode } from "jwt-decode";
+import { isJWTExpired } from "../util/helpers";
 
 export const AuthContext: any = createContext({
   token: "",
@@ -46,7 +47,7 @@ const AuthContextProvider = ({ children }: Props) => {
     const loadToken = async () => {
       try {
         const storedToken: any = await SecureStore.getItemAsync("token");
-        if (storedToken) {
+        if (storedToken && !isJWTExpired) {
           setAuthToken(storedToken);
         }
       } catch (error) {

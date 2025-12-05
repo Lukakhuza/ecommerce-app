@@ -20,6 +20,7 @@ import { Colors } from "../../../constants/colors";
 import ProductItem from "../../../components/molecules/ProductItem";
 import CategoryItem from "../../../components/molecules/CategoryItem";
 import ProductList from "../../../components/organisms/ProductList";
+import { isJWTExpired } from "../../../util/helpers";
 
 const data = [
   { label: "Men", value: "Men" },
@@ -33,8 +34,6 @@ type Props = {
 const HomePage = ({ navigation }: Props) => {
   const { products, updateSelectedCategory }: any = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
-  const { favorites, addFavorite, removeFavorite }: any =
-    useContext(FavoritesContext);
   const [genderSelection, setGenderSelection] = useState("");
 
   if (products.length === 0) {
@@ -53,7 +52,11 @@ const HomePage = ({ navigation }: Props) => {
           <Pressable
             style={styles.imageContainer}
             onPress={() => {
-              navigation.navigate("ProfileTab", { screen: "Profile" });
+              const expired = isJWTExpired(
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1a2E1MEB0ZXN0LmNvbSIsInVzZXJJZCI6IjY5MzE1MmNjZmM3OWQ1ZTU3ODQzMzQ0NSIsImlhdCI6MTc2NDg0MDE1OCwiZXhwIjoxNzY0ODQzNzU4fQ.fdco-FOhnOrUaeVnXQM3sKMWdAE2t832O-ve_OzB45Q"
+              );
+              console.log(expired);
+              // navigation.navigate("ProfileTab", { screen: "Profile" });
             }}
           >
             <Image
