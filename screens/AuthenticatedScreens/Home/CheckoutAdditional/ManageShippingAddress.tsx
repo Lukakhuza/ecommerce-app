@@ -1,17 +1,15 @@
-import { useContext, useLayoutEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Input from "../../../../components/atoms/Input";
+import { useContext } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import Button from "../../../../components/atoms/Button";
-import { UserInputContext } from "../../../../store/user-input-context";
+import Input from "../../../../components/atoms/Input";
+import { Colors } from "../../../../constants/colors";
+import { CheckoutContext } from "../../../../store/checkout-context";
 import {
   isValidAddressLine1,
   isValidCityName,
   isValidUSState,
   isValidUSZipCode,
 } from "../../../../util/validation";
-import { Colors } from "../../../../constants/colors";
-import { CardField } from "@stripe/stripe-react-native";
-import { CheckoutContext } from "../../../../store/checkout-context";
 
 type Props = {
   route: any;
@@ -34,7 +32,7 @@ const ManageShippingAddress = ({ route, navigation }: Props) => {
   const confirmHandler = () => {
     // Validate the address inputs
     const addressLine1IsValid = isValidAddressLine1(
-      shippingAddress.addressLine1.value
+      shippingAddress.addressLine1.value,
     );
     const cityIsValid = isValidCityName(shippingAddress.city.value);
     const stateIsValid = isValidUSState(shippingAddress.state.value);
@@ -50,7 +48,7 @@ const ManageShippingAddress = ({ route, navigation }: Props) => {
         updateShippingAddress(
           "addressLine1",
           shippingAddress.addressLine1.value,
-          false
+          false,
         );
       }
       if (!cityIsValid) {
@@ -68,7 +66,7 @@ const ManageShippingAddress = ({ route, navigation }: Props) => {
     updateShippingAddress(
       "addressLine1",
       shippingAddress.addressLine1.value,
-      true
+      true,
     );
     updateShippingAddress("city", shippingAddress.city.value, true);
     updateShippingAddress("state", shippingAddress.state.value, true);

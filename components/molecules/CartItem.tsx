@@ -1,5 +1,5 @@
-import { Pressable, Text, Image, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 
 const CartItem = ({ itemData, imageUri, onAddItem, onRemoveItem }: any) => {
@@ -38,7 +38,7 @@ const CartItem = ({ itemData, imageUri, onAddItem, onRemoveItem }: any) => {
             <Text>
               $
               {(itemData.item.product.price * itemData.item.quantity).toFixed(
-                2
+                2,
               )}
             </Text>
           </View>

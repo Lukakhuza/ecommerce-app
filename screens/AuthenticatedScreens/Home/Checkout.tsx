@@ -1,27 +1,17 @@
-import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
-import { UserInputContext } from "../../../store/user-input-context";
-import { ProductsContext } from "../../../store/products-context";
 import { useContext, useState } from "react";
-import { CartContext } from "../../../store/cart-context";
-import { Colors } from "../../../constants/colors";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { createOrder } from "../../../api/orders.api";
 import {
   createPaymentSheet,
   openPaymentSheet,
 } from "../../../api/products.api";
-import { createOrder } from "../../../api/orders.api";
+import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
 import CostItems from "../../../components/organisms/CostItems";
 import PressableComponent from "../../../components/organisms/PressableComponent";
+import { Colors } from "../../../constants/colors";
+import { CartContext } from "../../../store/cart-context";
 import { CheckoutContext } from "../../../store/checkout-context";
+import { UserInputContext } from "../../../store/user-input-context";
 
 type Props = {
   navigation: any;
@@ -60,7 +50,7 @@ const Checkout = ({ navigation }: Props) => {
     const stripeData = await createPaymentSheet(
       stripeCustomerId,
       totalAmount,
-      currency
+      currency,
     );
 
     const response = await openPaymentSheet(stripeData);

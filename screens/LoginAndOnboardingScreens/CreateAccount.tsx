@@ -1,15 +1,15 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useContext } from "react";
-import PageHeader from "../../components/atoms/PageHeader";
-import DataInput from "../../components/atoms/DataInput";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import ContinueButton from "../../components/atoms/ContinueButton";
+import DataInput from "../../components/atoms/DataInput";
+import PageHeader from "../../components/atoms/PageHeader";
 import SmallText from "../../components/atoms/SmallText";
 import { UserInputContext } from "../../store/user-input-context";
 import {
-  isValidFirstName,
   isValidEmail,
-  isValidPassword,
+  isValidFirstName,
   isValidLastName,
+  isValidPassword,
 } from "../../util/validation";
 
 type Props = {
@@ -20,19 +20,19 @@ const CreateAccount = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const proceedHandler = () => {
     const emailIsValid = isValidEmail(
-      userInputCtx.userInput.emailAddress.value
+      userInputCtx.userInput.emailAddress.value,
     );
 
     const passwordIsValid = isValidPassword(
-      userInputCtx.userInput.password.value
+      userInputCtx.userInput.password.value,
     );
 
     const firstNameIsValid = isValidFirstName(
-      userInputCtx.userInput.firstName.value
+      userInputCtx.userInput.firstName.value,
     );
 
     const lastNameIsValid = isValidLastName(
-      userInputCtx.userInput.lastName.value
+      userInputCtx.userInput.lastName.value,
     );
 
     if (
@@ -45,28 +45,28 @@ const CreateAccount = ({ navigation }: Props) => {
         userInputCtx.updateUserInput(
           "emailAddress",
           userInputCtx.userInput.emailAddress.value,
-          false
+          false,
         );
       }
       if (!passwordIsValid) {
         userInputCtx.updateUserInput(
           "password",
           userInputCtx.userInput.password.value,
-          false
+          false,
         );
       }
       if (!firstNameIsValid) {
         userInputCtx.updateUserInput(
           "firstName",
           userInputCtx.userInput.firstName.value,
-          false
+          false,
         );
       }
       if (!lastNameIsValid) {
         userInputCtx.updateUserInput(
           "lastName",
           userInputCtx.userInput.lastName.value,
-          false
+          false,
         );
       }
       return;

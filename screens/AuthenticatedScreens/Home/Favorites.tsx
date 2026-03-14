@@ -1,22 +1,19 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-  Image,
-  FlatList,
-} from "react-native";
-import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
-import { AuthContext } from "../../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { fetchProductsData } from "../../../api/products.api";
-import { UserInputContext } from "../../../store/user-input-context";
-import { Colors } from "../../../constants/colors";
-import { FavoritesContext } from "../../../store/favorites-context";
-import { ProductsContext } from "../../../store/products-context";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
-import { filter } from "lodash";
+import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
+import { Colors } from "../../../constants/colors";
+import { AuthContext } from "../../../store/auth-context";
+import { FavoritesContext } from "../../../store/favorites-context";
+import { UserInputContext } from "../../../store/user-input-context";
 import { wait } from "../../../util/helpers";
 
 type Props = {

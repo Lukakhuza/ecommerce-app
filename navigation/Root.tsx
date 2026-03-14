@@ -1,11 +1,11 @@
-import { SafeAreaView, StyleSheet } from "react-native";
-import AuthStack from "./AuthStack";
-import AuthenticatedStack from "./AuthenticatedStack";
-import { AuthContext } from "../store/auth-context";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { useContext } from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
 import LoadingOverlay from "../components/atoms/LoadingOverlay";
 import { Colors } from "../constants/colors";
+import { AuthContext } from "../store/auth-context";
+import AuthStack from "./AuthStack";
+import AuthenticatedStack from "./AuthenticatedStack";
 
 const Theme = {
   ...DefaultTheme,

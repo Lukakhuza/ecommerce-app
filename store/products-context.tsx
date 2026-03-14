@@ -1,14 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
-import { AuthContext } from "./auth-context";
-import { wait } from "../util/helpers";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import { fetchProductsData } from "../api/products.api";
-import { getUserByEmail, saveUserDataToDatabase } from "../api/users.api";
 
 export const ProductsContext: any = createContext({
   products: {},

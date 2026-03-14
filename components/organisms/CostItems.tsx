@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const CostItems = ({ subtotal, shippingCost, tax, total }: any) => {
   return (

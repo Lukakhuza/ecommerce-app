@@ -1,25 +1,23 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
+import { useContext, useEffect, useState } from "react";
 import {
-  BackHandler,
+  FlatList,
   Image,
+  Pressable,
   SafeAreaView,
   ScrollView,
-  Pressable,
   StyleSheet,
   Text,
   View,
-  FlatList,
 } from "react-native";
-import { useCallback, useContext, useEffect, useState } from "react";
-import SmallPurpleButton from "../../../components/atoms/SmallPurpleButton";
-import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../../../constants/colors";
 import { fetchOrders } from "../../../api/orders.api";
-import { UserInputContext } from "../../../store/user-input-context";
-import { useIsFocused } from "@react-navigation/native";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
-import { wait } from "../../../util/helpers";
+import SmallPurpleButton from "../../../components/atoms/SmallPurpleButton";
+import { Colors } from "../../../constants/colors";
+import { UserInputContext } from "../../../store/user-input-context";
 import { OrderStatus } from "../../../types/order";
-import { filter } from "lodash";
+import { wait } from "../../../util/helpers";
 
 type Props = {
   navigation: any;

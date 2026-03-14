@@ -1,4 +1,4 @@
-import { Pressable, Text, Image, StyleSheet, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 const CategoryItem = ({
   onPress,

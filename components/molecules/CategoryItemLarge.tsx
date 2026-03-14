@@ -1,4 +1,4 @@
-import { Pressable, Text, Image, StyleSheet, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 
 const CategoryItemLarge = ({ category, onPress, imageUri }: any) => {

@@ -1,15 +1,9 @@
-import FavoriteIcon from "../atoms/FavoriteIcon";
-import { Pressable, Text, Image, StyleSheet, View } from "react-native";
-import { ProductsContext } from "../../store/products-context";
 import { useNavigation } from "@react-navigation/native";
-import { FavoritesContext } from "../../store/favorites-context";
-
 import { useContext } from "react";
-import { FlatList } from "react-native";
-
-import { Colors } from "../../constants/colors";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FavoritesContext } from "../../store/favorites-context";
+import { ProductsContext } from "../../store/products-context";
 import ProductItem from "../molecules/ProductItem";
-import { isEthereumAddress } from "validator";
 
 const ProductList = ({ selection, headerTextStyle }: any) => {
   const navigation: any = useNavigation();

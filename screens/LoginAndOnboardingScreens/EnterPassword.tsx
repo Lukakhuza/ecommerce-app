@@ -1,12 +1,12 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useContext } from "react";
-import PageHeader from "../../components/atoms/PageHeader";
-import DataInput from "../../components/atoms/DataInput";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import ContinueButton from "../../components/atoms/ContinueButton";
+import DataInput from "../../components/atoms/DataInput";
+import LoadingOverlay from "../../components/atoms/LoadingOverlay";
+import PageHeader from "../../components/atoms/PageHeader";
 import SmallText from "../../components/atoms/SmallText";
 import { AuthContext } from "../../store/auth-context";
 import { isValidPassword } from "../../util/validation";
-import LoadingOverlay from "../../components/atoms/LoadingOverlay";
 
 type Props = {
   navigation?: any;

@@ -1,25 +1,22 @@
+import { useContext, useState } from "react";
 import {
   Image,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  SafeAreaView,
-  FlatList,
-  Pressable,
 } from "react-native";
-import { useContext, useState } from "react";
-import { ProductsContext } from "../../../store/products-context";
-import CartButton from "../../../components/atoms/CartButton";
 import { Dropdown } from "react-native-element-dropdown";
-import { FavoritesContext } from "../../../store/favorites-context";
-import SearchComponent from "../../../components/atoms/SearchComponent";
+import CartButton from "../../../components/atoms/CartButton";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
-import { UserInputContext } from "../../../store/user-input-context";
-import { Colors } from "../../../constants/colors";
-import ProductItem from "../../../components/molecules/ProductItem";
+import SearchComponent from "../../../components/atoms/SearchComponent";
 import CategoryItem from "../../../components/molecules/CategoryItem";
 import ProductList from "../../../components/organisms/ProductList";
+import { Colors } from "../../../constants/colors";
+import { ProductsContext } from "../../../store/products-context";
+import { UserInputContext } from "../../../store/user-input-context";
 import { isJWTExpired } from "../../../util/helpers";
 
 const data = [
@@ -53,7 +50,7 @@ const HomePage = ({ navigation }: Props) => {
             style={styles.imageContainer}
             onPress={() => {
               const expired = isJWTExpired(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1a2E1MEB0ZXN0LmNvbSIsInVzZXJJZCI6IjY5MzE1MmNjZmM3OWQ1ZTU3ODQzMzQ0NSIsImlhdCI6MTc2NDg0MDE1OCwiZXhwIjoxNzY0ODQzNzU4fQ.fdco-FOhnOrUaeVnXQM3sKMWdAE2t832O-ve_OzB45Q"
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1a2E1MEB0ZXN0LmNvbSIsInVzZXJJZCI6IjY5MzE1MmNjZmM3OWQ1ZTU3ODQzMzQ0NSIsImlhdCI6MTc2NDg0MDE1OCwiZXhwIjoxNzY0ODQzNzU4fQ.fdco-FOhnOrUaeVnXQM3sKMWdAE2t832O-ve_OzB45Q",
               );
               console.log(expired);
               // navigation.navigate("ProfileTab", { screen: "Profile" });

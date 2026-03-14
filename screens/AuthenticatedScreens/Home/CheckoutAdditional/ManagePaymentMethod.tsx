@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
-import { View, Text, Button, Alert } from "react-native";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
+import { useContext, useState } from "react";
+import { Alert, Button, View } from "react-native";
 import { addPaymentMethod } from "../../../../api/checkout.api";
-import { UserInputContext } from "../../../../store/user-input-context";
 import { CheckoutContext } from "../../../../store/checkout-context";
+import { UserInputContext } from "../../../../store/user-input-context";
 
 type Props = {
   route: any;

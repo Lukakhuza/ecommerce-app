@@ -1,16 +1,15 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import Input from "../../../components/atoms/Input";
 // import IconButton from "../components/ui/IconButton";
 import Button from "../../../components/atoms/Button";
+import { Colors } from "../../../constants/colors";
 import { UserInputContext } from "../../../store/user-input-context";
-import { AuthContext } from "../../../store/auth-context";
 import {
   isValidFirstName,
   isValidLastName,
   isValidPhoneNumber,
 } from "../../../util/validation";
-import { Colors } from "../../../constants/colors";
 
 type Props = {
   route: any;
@@ -48,7 +47,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
     const firstNameIsValid = isValidFirstName(inputValues.firstName.value);
     const lastNameIsValid = isValidLastName(inputValues.lastName.value);
     const phoneNumberIsValid = isValidPhoneNumber(
-      inputValues.phoneNumber.value
+      inputValues.phoneNumber.value,
     );
 
     if (!firstNameIsValid || !lastNameIsValid || !phoneNumberIsValid) {

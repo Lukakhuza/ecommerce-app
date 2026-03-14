@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
 import ManageUserAddress from "../screens/AuthenticatedScreens/Profile/ManageUserAddress";
 import ManageUserData from "../screens/AuthenticatedScreens/Profile/ManageUserData";
+import ProfileSettings from "../screens/AuthenticatedScreens/Profile/ProfileSettings";
 
 const Stack = createNativeStackNavigator();
 

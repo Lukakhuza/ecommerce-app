@@ -8,11 +8,11 @@ import {
   View,
 } from "react-native";
 import { fetchPaymentMethods } from "../../../api/checkout.api";
-import { UserInputContext } from "../../../store/user-input-context";
-import { Colors } from "../../../constants/colors";
-import PaymentMethodComponent from "../../../components/organisms/PaymentMethodComponent";
-import { wait } from "../../../util/helpers";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
+import PaymentMethodComponent from "../../../components/organisms/PaymentMethodComponent";
+import { Colors } from "../../../constants/colors";
+import { UserInputContext } from "../../../store/user-input-context";
+import { wait } from "../../../util/helpers";
 
 type Props = {
   navigation: any;

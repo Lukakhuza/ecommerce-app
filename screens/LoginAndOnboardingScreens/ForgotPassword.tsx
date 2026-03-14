@@ -1,9 +1,9 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useState } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import ContinueButton from "../../components/atoms/ContinueButton";
+import DataInput from "../../components/atoms/DataInput";
 import PageHeader from "../../components/atoms/PageHeader";
 import { isValidEmail } from "../../util/validation";
-import DataInput from "../../components/atoms/DataInput";
-import ContinueButton from "../../components/atoms/ContinueButton";
 
 type Props = {
   navigation?: any;

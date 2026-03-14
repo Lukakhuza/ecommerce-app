@@ -1,18 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { useContext, useEffect } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
   Image,
   Pressable,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AuthContext } from "../../../store/auth-context";
-import { UserInputContext } from "../../../store/user-input-context";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
 import { Colors } from "../../../constants/colors";
+import { AuthContext } from "../../../store/auth-context";
+import { UserInputContext } from "../../../store/user-input-context";
 
 type Props = {
   navigation: any;
@@ -22,10 +22,10 @@ const ProfileSettings = ({ navigation }: Props) => {
   const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const editPressHandler = (basicInfo: any) => {
-    navigation.navigate("ManageUserData"),
+    (navigation.navigate("ManageUserData"),
       {
         userData: basicInfo,
-      };
+      });
   };
 
   const ProfilePicture = () => {

@@ -5,9 +5,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { AuthContext } from "./auth-context";
-import { wait } from "../util/helpers";
 import { getUserByEmail, saveUserDataToDatabase } from "../api/users.api";
+import { wait } from "../util/helpers";
+import { AuthContext } from "./auth-context";
 
 const emptyUserInput = {
   id: { value: "", isValid: true },
@@ -123,7 +123,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   const updateUserInput = (
     inputIdentifier: any,
     enteredText: string,
-    inputValid: boolean
+    inputValid: boolean,
   ) => {
     setUserInput((currInputValues) => {
       return {

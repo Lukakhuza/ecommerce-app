@@ -1,15 +1,15 @@
+import { StripeProvider } from "@stripe/stripe-react-native";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
+import { Colors } from "./constants/colors";
 import Root from "./navigation/Root";
 import AuthContextProvider from "./store/auth-context";
-import UserInputContextProvider from "./store/user-input-context";
-import * as SplashScreen from "expo-splash-screen";
-import ProductsContextProvider from "./store/products-context";
-import FavoritesContextProvider from "./store/favorites-context";
-import CheckoutContextProvider from "./store/checkout-context";
-import { StripeProvider } from "@stripe/stripe-react-native";
-import { Colors } from "./constants/colors";
 import CartContextProvider from "./store/cart-context";
+import CheckoutContextProvider from "./store/checkout-context";
+import FavoritesContextProvider from "./store/favorites-context";
+import ProductsContextProvider from "./store/products-context";
+import UserInputContextProvider from "./store/user-input-context";
 
 SplashScreen.preventAutoHideAsync();
 // Notifications.setNotificationHandler({

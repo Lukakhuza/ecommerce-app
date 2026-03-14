@@ -5,9 +5,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { UserInputContext } from "./user-input-context";
 import { addToCartInDatabase, updateCartInDatabase } from "../api/cart.api";
-import { clearCartInDatabase } from "../api/users.api";
+import { UserInputContext } from "./user-input-context";
 
 export const CartContext: any = createContext({
   cartItems: [],
@@ -25,7 +24,7 @@ const CartContextProvider = ({ children }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState(
-    userInputCtx.userInput.cart.items ?? []
+    userInputCtx.userInput.cart.items ?? [],
   );
   const [userId, setUserId] = useState(userInputCtx.userInput.id.value ?? "");
 
@@ -106,7 +105,7 @@ const CartContextProvider = ({ children }: Props) => {
         }
       });
       updatedCartItems = updatedCartItems.filter(
-        (element: any, index: Number) => index !== deletedItemIndex
+        (element: any, index: Number) => index !== deletedItemIndex,
       );
 
       return updatedCartItems;

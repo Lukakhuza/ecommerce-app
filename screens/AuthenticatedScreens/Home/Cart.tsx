@@ -1,20 +1,20 @@
+import { useContext } from "react";
 import {
   FlatList,
   Image,
-  SafeAreaView,
   Pressable,
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import LoadingOverlay from "../../../components/atoms/LoadingOverlay";
 import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
-import { ProductsContext } from "../../../store/products-context";
-import { useContext } from "react";
 import CartItem from "../../../components/molecules/CartItem";
-import { CartContext } from "../../../store/cart-context";
-import { Colors } from "../../../constants/colors";
 import CostItems from "../../../components/organisms/CostItems";
+import { Colors } from "../../../constants/colors";
+import { CartContext } from "../../../store/cart-context";
+import { ProductsContext } from "../../../store/products-context";
 const parcelImage = require("../../../assets/parcel.png");
 
 type Props = {

@@ -1,6 +1,6 @@
-import FavoriteIcon from "../atoms/FavoriteIcon";
-import { Pressable, Text, Image, StyleSheet, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
+import FavoriteIcon from "../atoms/FavoriteIcon";
 
 const ProductItem = ({
   itemData,

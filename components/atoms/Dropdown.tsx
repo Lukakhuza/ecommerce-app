@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
 
 const data = [
   { label: " < 20 ", value: " < 20 " },

@@ -1,14 +1,13 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
-import { useContext } from "react";
-import validator from "validator";
-import PageHeader from "../../components/atoms/PageHeader";
-import ButtonOAuth from "../../components/atoms/ButtonOAuth";
-import DataInput from "../../components/atoms/DataInput";
-import ContinueButton from "../../components/atoms/ContinueButton";
-import SmallText from "../../components/atoms/SmallText";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import validator from "validator";
+import ButtonOAuth from "../../components/atoms/ButtonOAuth";
+import ContinueButton from "../../components/atoms/ContinueButton";
+import DataInput from "../../components/atoms/DataInput";
+import PageHeader from "../../components/atoms/PageHeader";
+import SmallText from "../../components/atoms/SmallText";
 import { AuthContext } from "../../store/auth-context";
-import * as Notifications from "expo-notifications";
 
 type Props = {
   navigation?: any;

@@ -1,12 +1,12 @@
 import {
   createContext,
-  useState,
   useContext,
-  type ReactNode,
   useEffect,
+  useState,
+  type ReactNode,
 } from "react";
-import { UserInputContext } from "./user-input-context";
 import { saveFavoritesToDatabase } from "../api/users.api";
+import { UserInputContext } from "./user-input-context";
 
 export const FavoritesContext: any = createContext({
   favorites: [],
@@ -32,7 +32,7 @@ const FavoritesContextProvider = ({ children }: Props) => {
       const updatedFavorites = [...currentFavorites, id];
       saveFavoritesToDatabase(
         userInputCtx.userInput.id.value,
-        updatedFavorites
+        updatedFavorites,
       );
 
       return updatedFavorites;
@@ -48,7 +48,7 @@ const FavoritesContextProvider = ({ children }: Props) => {
 
       saveFavoritesToDatabase(
         userInputCtx.userInput.id.value,
-        updatedFavorites
+        updatedFavorites,
       );
 
       return updatedFavorites;

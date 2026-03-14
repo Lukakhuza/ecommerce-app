@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import EnterEmail from "../screens/LoginAndOnboardingScreens/EnterEmail";
-import EnterPassword from "../screens/LoginAndOnboardingScreens/EnterPassword";
 import IconButton from "../components/atoms/IconButton";
 import CreateAccount from "../screens/LoginAndOnboardingScreens/CreateAccount";
+import EnterEmail from "../screens/LoginAndOnboardingScreens/EnterEmail";
+import EnterPassword from "../screens/LoginAndOnboardingScreens/EnterPassword";
 import ForgotPassword from "../screens/LoginAndOnboardingScreens/ForgotPassword";
 import PasswordReset from "../screens/LoginAndOnboardingScreens/PasswordReset";
 import TellUsAboutYourself from "../screens/LoginAndOnboardingScreens/TellUsAboutYourself";

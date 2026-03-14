@@ -1,11 +1,10 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
 import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
-import { Alert } from "react-native";
-import { validateToken, fetchToken } from "../api/users.api";
-import { wait } from "../util/helpers";
 import { jwtDecode } from "jwt-decode";
-import { isJWTExpired } from "../util/helpers";
+import { createContext, useEffect, useState, type ReactNode } from "react";
+import { Alert } from "react-native";
+import { fetchToken } from "../api/users.api";
+import { isJWTExpired, wait } from "../util/helpers";
 
 export const AuthContext: any = createContext({
   token: "",
@@ -88,7 +87,7 @@ const AuthContextProvider = ({ children }: Props) => {
   const updateEnteredUserInfo = (
     inputIdentifier: any,
     enteredText: string,
-    inputValid: boolean
+    inputValid: boolean,
   ) => {
     setEnteredUserInfo((currInputValues) => {
       return {
@@ -115,7 +114,7 @@ const AuthContextProvider = ({ children }: Props) => {
       console.log(error);
       Alert.alert(
         "Authentication Failed - 3",
-        "Please check your credentials and try again!"
+        "Please check your credentials and try again!",
       );
     }
     setIsLoading(false);

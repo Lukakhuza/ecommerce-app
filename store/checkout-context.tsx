@@ -27,7 +27,7 @@ const CheckoutContextProvider = ({ children }: Props) => {
   const updateShippingAddress = (
     inputIdentifier: string,
     enteredText: string,
-    inputValid: boolean
+    inputValid: boolean,
   ) => {
     setShippingAddress((currInputValues) => {
       return {

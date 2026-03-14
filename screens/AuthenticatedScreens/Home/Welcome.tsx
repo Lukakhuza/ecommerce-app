@@ -1,24 +1,20 @@
+import { useContext, useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
   FlatList,
+  Image,
   Pressable,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import PurpleButtonSmall from "../../../components/atoms/PurpleButtonSmall";
-import { AuthContext } from "../../../store/auth-context";
-import { useContext, useEffect, useState } from "react";
 import { fetchProductsData } from "../../../api/products.api";
-import { UserInputContext } from "../../../store/user-input-context";
-import { Colors } from "../../../constants/colors";
 import FavoriteIcon from "../../../components/atoms/FavoriteIcon";
-import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "../../../constants/colors";
+import { AuthContext } from "../../../store/auth-context";
 import { FavoritesContext } from "../../../store/favorites-context";
 import { ProductsContext } from "../../../store/products-context";
-import { jsx } from "react/jsx-runtime";
+import { UserInputContext } from "../../../store/user-input-context";
 
 type Props = {
   navigation: any;

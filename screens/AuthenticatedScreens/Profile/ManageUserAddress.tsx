@@ -1,7 +1,8 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Input from "../../../components/atoms/Input";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import Button from "../../../components/atoms/Button";
+import Input from "../../../components/atoms/Input";
+import { Colors } from "../../../constants/colors";
 import { UserInputContext } from "../../../store/user-input-context";
 import {
   isValidAddressLine1,
@@ -9,7 +10,6 @@ import {
   isValidUSState,
   isValidUSZipCode,
 } from "../../../util/validation";
-import { Colors } from "../../../constants/colors";
 
 type Props = {
   route: any;
@@ -58,7 +58,7 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
   const confirmHandler = () => {
     // Validate the address inputs
     const addressLine1IsValid = isValidAddressLine1(
-      addressInputValues.addressLine1.value
+      addressInputValues.addressLine1.value,
     );
     const cityIsValid = isValidCityName(addressInputValues.city.value);
     const stateIsValid = isValidUSState(addressInputValues.state.value);

@@ -6,7 +6,7 @@ type Props = {
   onPress: any;
   style?: any;
   mode?: string;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 const PurpleButtonSmall = ({

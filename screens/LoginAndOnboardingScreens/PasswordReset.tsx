@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import PurpleButtonSmall from "../../components/atoms/PurpleButtonSmall";
 
 type Props = {

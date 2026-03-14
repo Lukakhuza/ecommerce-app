@@ -1,15 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Categories from "../screens/AuthenticatedScreens/Home/Categories";
-import Welcome from "../screens/AuthenticatedScreens/Home/Welcome";
 import IconButton from "../components/atoms/IconButton";
-import HomePage from "../screens/AuthenticatedScreens/Home/Home";
-import ProductDetails from "../screens/AuthenticatedScreens/Home/ProductDetails";
 import Cart from "../screens/AuthenticatedScreens/Home/Cart";
-import Favorites from "../screens/AuthenticatedScreens/Home/Favorites";
+import Categories from "../screens/AuthenticatedScreens/Home/Categories";
 import Checkout from "../screens/AuthenticatedScreens/Home/Checkout";
-import ManageShippingAddress from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManageShippingAddress";
 import ManagePaymentMethod from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManagePaymentMethod";
+import ManageShippingAddress from "../screens/AuthenticatedScreens/Home/CheckoutAdditional/ManageShippingAddress";
+import Favorites from "../screens/AuthenticatedScreens/Home/Favorites";
+import HomePage from "../screens/AuthenticatedScreens/Home/Home";
 import Payment from "../screens/AuthenticatedScreens/Home/Payment";
+import ProductDetails from "../screens/AuthenticatedScreens/Home/ProductDetails";
+import Welcome from "../screens/AuthenticatedScreens/Home/Welcome";
 
 const Stack = createNativeStackNavigator();
 

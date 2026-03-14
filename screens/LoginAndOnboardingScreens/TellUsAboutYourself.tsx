@@ -1,14 +1,12 @@
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import { useState, useContext } from "react";
-import { UserInputContext } from "../../store/user-input-context";
-import { Colors } from "../../constants/colors";
+import { useContext, useState } from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { createCustomerInStripe, createUser } from "../../api/users.api";
 import ContinueButton from "../../components/atoms/ContinueButton";
-import { AuthContext } from "../../store/auth-context";
-import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
-import { createCustomerInStripe } from "../../api/users.api";
 import DropdownComponent from "../../components/atoms/Dropdown";
-import { createUser } from "../../api/users.api";
 import LoadingOverlay from "../../components/atoms/LoadingOverlay";
+import SmallPurpleButton from "../../components/atoms/SmallPurpleButton";
+import { Colors } from "../../constants/colors";
+import { UserInputContext } from "../../store/user-input-context";
 
 type Props = {
   navigation: any;
