@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
+import { type ReactNode } from "react";
 
 type Props = {
-  children: any;
+  children: ReactNode;
 };
 
 const PageHeader = ({ children }: Props) => {

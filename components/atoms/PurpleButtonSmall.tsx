@@ -1,9 +1,10 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Colors } from "../../constants/colors";
+import { type ReactNode } from "react";
 
 type Props = {
-  children: any;
-  onPress: any;
+  children: ReactNode;
+  onPress: () => void;
   style?: any;
   mode?: string;
   disabled?: boolean;

@@ -1,10 +1,10 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, ViewStyle } from "react-native";
 import { Colors } from "../../constants/colors";
 
 type Props = {
   text: string;
-  onPress: any;
-  style: any;
+  onPress: () => void;
+  style: ViewStyle;
   mode: string;
 };
 

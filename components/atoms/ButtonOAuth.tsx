@@ -1,10 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
-import { Image } from "react-native";
+import { type ReactNode } from "react";
 
 type Props = {
-  children: any;
-  onPress: any;
+  children: ReactNode;
+  onPress: () => void;
   style?: object;
   imageSource: object;
 };

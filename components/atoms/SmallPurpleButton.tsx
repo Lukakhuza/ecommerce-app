@@ -1,14 +1,14 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, ViewStyle } from "react-native";
 import { Colors } from "../../constants/colors";
 
 type Props = {
   text: string;
-  onPress: any;
-  style: any;
+  onPress: () => void;
+  style: ViewStyle;
   mode: string;
 };
 
-const SmallPurpleButton = ({ text, onPress, style, mode }: any) => {
+const SmallPurpleButton = ({ text, onPress, style, mode }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [

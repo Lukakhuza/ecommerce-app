@@ -45,9 +45,6 @@ const AuthContextProvider = ({ children }: Props) => {
       try {
         const storedToken: any = await SecureStore.getItemAsync("token");
 
-        console.log("Test 0", storedToken);
-        console.log("Hello: ", isJWTExpired(storedToken));
-
         if (!isJWTExpired(storedToken)) {
           setAuthToken(storedToken);
         }
@@ -77,7 +74,6 @@ const AuthContextProvider = ({ children }: Props) => {
   const getEmailFromToken = (token: string) => {
     try {
       const decoded: any = jwtDecode(token);
-      console.log(decoded);
       return decoded.email;
     } catch (error) {
       return null;

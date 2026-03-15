@@ -52,7 +52,6 @@ const HomePage = ({ navigation }: Props) => {
               const expired = isJWTExpired(
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1a2E1MEB0ZXN0LmNvbSIsInVzZXJJZCI6IjY5MzE1MmNjZmM3OWQ1ZTU3ODQzMzQ0NSIsImlhdCI6MTc2NDg0MDE1OCwiZXhwIjoxNzY0ODQzNzU4fQ.fdco-FOhnOrUaeVnXQM3sKMWdAE2t832O-ve_OzB45Q",
               );
-              console.log(expired);
               // navigation.navigate("ProfileTab", { screen: "Profile" });
             }}
           >

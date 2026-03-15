@@ -40,7 +40,6 @@ const FavoritesContextProvider = ({ children }: Props) => {
   };
 
   const removeFavorite = (id: any) => {
-    console.log("Test 11:", id);
     setFavorites((currentFavorites) => {
       const updatedFavorites = currentFavorites.filter((favoriteItem) => {
         return favoriteItem !== id;

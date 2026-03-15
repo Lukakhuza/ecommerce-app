@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 type Props = {
   primaryText: string;
   secondaryText: string;
-  onPress: any;
+  onPress: () => void;
   style?: any;
 };
 

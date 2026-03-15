@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
   children?: [];
-  onPress: any;
+  onPress: () => void;
   style?: object;
 };
 

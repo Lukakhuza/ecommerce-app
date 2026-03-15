@@ -14,7 +14,6 @@ import UserInputContextProvider from "./store/user-input-context";
 SplashScreen.preventAutoHideAsync();
 // Notifications.setNotificationHandler({
 //   handleNotification: async () => {
-//     console.log("Hiiii ");
 //     return {
 //       shouldPlaySound: true,
 //       shouldSetBadge: true,

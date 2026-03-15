@@ -6,7 +6,7 @@ type Props = {
   icon: any;
   size: any;
   color: any;
-  onPress: any;
+  onPress: () => void;
   style?: any;
 };
 

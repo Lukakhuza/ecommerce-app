@@ -2,6 +2,7 @@ import { Alert } from "react-native";
 import { url } from "./client";
 
 export const createUser = async (user: any) => {
+  console.log("User: ", user);
   const response = await fetch(url + "/user/create-user/", {
     method: "PUT",
     headers: {
@@ -10,11 +11,11 @@ export const createUser = async (user: any) => {
     body: JSON.stringify(user),
   });
   const resData = await response.json();
-  console.log("ResData: ", resData);
   return resData;
 };
 
 export const createCustomerInStripe = async (user: any) => {
+  console.log("Customer in stripe");
   const response = await fetch(url + "/user/create-customer-in-stripe/", {
     method: "POST",
     headers: {
@@ -23,7 +24,6 @@ export const createCustomerInStripe = async (user: any) => {
     body: JSON.stringify(user),
   });
   const resData = await response.json();
-  console.log("Test 456", resData);
   return resData;
 };
 
@@ -55,7 +55,6 @@ export const fetchToken = async (userData: object) => {
       body: JSON.stringify(userData),
     });
     const resData = await response.json();
-    console.log("Res Data ", resData);
     if (!response.ok) {
       throw new Error(resData.message);
     }
@@ -82,6 +81,7 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export const saveUserDataToDatabase = async (userData: any) => {
+  console.log("User Data: ", userData);
   try {
     const userId = userData.id;
 
@@ -118,7 +118,7 @@ export const saveUserDataToContext = async (userData: any) => {
 
 export const saveFavoritesToDatabase = async (
   userId: string,
-  updatedFavorites: Number[]
+  updatedFavorites: Number[],
 ) => {
   const data = {
     userId: userId,

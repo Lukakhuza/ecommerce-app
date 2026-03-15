@@ -80,7 +80,6 @@ const ProductDetails = ({ route, navigation }: Props) => {
   //       return response.json();
   //     })
   //     .then((resData) => {
-  //       console.log(resData.data);
   //     });
   // }
   return (

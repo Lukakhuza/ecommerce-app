@@ -257,7 +257,6 @@ const UserInputContextProvider = ({ children }: Props) => {
 
     // Save updated user data to database.
     const resData = await saveUserDataToDatabase(userData);
-    console.log("Res Data: ", resData);
     // If address update in the database was successful, update the context.
     setUserInput((currInputValues) => {
       return {

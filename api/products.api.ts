@@ -5,6 +5,7 @@ import {
   initPaymentSheet,
   presentPaymentSheet,
 } from "@stripe/stripe-react-native";
+import { StripeData } from "../types/stripe";
 
 export const fetchProductsData = async () => {
   const response = await fetch("https://fakestoreapi.com/products");
@@ -15,7 +16,7 @@ export const fetchProductsData = async () => {
 export const createPaymentSheet = async (
   stripeCustomerId: string,
   totalAmount: Number,
-  currency: string
+  currency: string,
 ) => {
   const response = await fetch(url + "/product/create-payment-sheet/", {
     method: "POST",
@@ -32,7 +33,7 @@ export const createPaymentSheet = async (
   return resData;
 };
 
-export const openPaymentSheet = async (stripeData: any) => {
+export const openPaymentSheet = async (stripeData: StripeData) => {
   const response = await initPaymentSheet({
     merchantDisplayName: "LK Store",
     customerId: stripeData.customerId,
