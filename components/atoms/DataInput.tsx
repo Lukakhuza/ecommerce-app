@@ -1,14 +1,12 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, TextStyle } from "react-native";
 import { Colors } from "../../constants/colors";
 
 type Props = {
   placeholder: string;
-  style?: any;
+  style?: TextStyle;
   secureTextEntry?: boolean;
   isValid?: boolean;
-  onChangeText?: any;
   invalidInputMessage?: string;
-  value?: any;
 };
 
 const DataInput = ({

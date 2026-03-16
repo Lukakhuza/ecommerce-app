@@ -8,7 +8,7 @@ type Props = {
   mode: string;
 };
 
-const ContinueButton = ({ text = "Continue", onPress, style, mode }: any) => {
+const ContinueButton = ({ text = "Continue", onPress, style, mode }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [

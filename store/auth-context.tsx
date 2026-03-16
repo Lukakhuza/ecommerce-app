@@ -6,6 +6,19 @@ import { Alert } from "react-native";
 import { fetchToken } from "../api/users.api";
 import { isJWTExpired, wait } from "../util/helpers";
 
+type AuthContextType = {
+  token: string;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  hasError: boolean;
+  enteredEmail: { value: string; isValid: boolean };
+  enteredPassword: { value: string; isValid: boolean };
+  loginHandler: (email: string, password: string) => {};
+  fetchToken: (userData: object) => {};
+  logout: () => void;
+  clearEnteredUserInfo: () => void;
+};
+
 export const AuthContext: any = createContext({
   token: "",
   isAuthenticated: false,

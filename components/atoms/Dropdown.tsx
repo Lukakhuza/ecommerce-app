@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
 const data = [
@@ -11,7 +11,13 @@ const data = [
   { label: " > 60 ", value: " > 60 " },
 ];
 
-const DropdownComponent = ({ value, onChange, style }: any) => {
+type Props = {
+  value: string;
+  onChange: (item: any) => void;
+  style: ViewStyle;
+};
+
+const DropdownComponent = ({ value, onChange, style }: Props) => {
   //   const [value, setValue] = useState(null);
 
   return (
@@ -36,7 +42,7 @@ const DropdownComponent = ({ value, onChange, style }: any) => {
 
 export default DropdownComponent;
 
-const styles: any = StyleSheet.create({
+const styles = StyleSheet.create({
   dropdown: {
     margin: 16,
     height: 50,
