@@ -1,0 +1,67 @@
+import React from 'react';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
+
+const data = [
+  { label: ' < 20 ', value: ' < 20 ' },
+  { label: '21 to 26', value: '21 to 26' },
+  { label: '27 to 35', value: '27 to 35' },
+  { label: '36 to 45', value: '36 to 45' },
+  { label: '46 to 60', value: '46 to 60' },
+  { label: ' > 60 ', value: ' > 60 ' },
+];
+
+type Props = {
+  value: string;
+  onChange: (item: any) => void;
+  style: ViewStyle;
+};
+
+const DropdownComponent = ({ value, onChange, style }: Props) => {
+  //   const [value, setValue] = useState(null);
+
+  return (
+    <Dropdown
+      style={[style, styles.dropdown]}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={data}
+      //   search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder="Age Range"
+      //   searchPlaceholder="Search..."
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
+
+export default DropdownComponent;
+
+const styles = StyleSheet.create({
+  dropdown: {
+    margin: 16,
+    height: 50,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+});

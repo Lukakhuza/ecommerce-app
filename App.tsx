@@ -5,41 +5,46 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar, useColorScheme } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootNavigator from './src/navigation/RootNavigator';
+import FavoritesContextProvider from './src/store/favorites-context';
+import CartContextProvider from './src/store/cart-context';
+import dotenv from 'dotenv';
+import CheckoutContextProvider from './src/store/checkout-context';
+import ProductsContextProvider from './src/store/products-context';
+import AuthContextProvider from './src/store/auth-context';
+import UserInputContextProvider from './src/store/user-input-context';
+import { StripeProvider } from '@stripe/stripe-react-native';
+
+dotenv.config({ path: 'credentials.env' });
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <StripeProvider publishableKey={process.env.STRIPE_PUBLISHABLE_KEY ?? ''}>
+      <SafeAreaProvider>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <AuthContextProvider>
+          <UserInputContextProvider>
+            <ProductsContextProvider>
+              <FavoritesContextProvider>
+                <CartContextProvider>
+                  <CheckoutContextProvider>
+                    <NavigationContainer>
+                      <RootNavigator />
+                    </NavigationContainer>
+                  </CheckoutContextProvider>
+                </CartContextProvider>
+              </FavoritesContextProvider>
+            </ProductsContextProvider>
+          </UserInputContextProvider>
+        </AuthContextProvider>
+      </SafeAreaProvider>
+    </StripeProvider>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
