@@ -1,13 +1,6 @@
 import Icon from '@react-native-vector-icons/ionicons';
 import { useContext, useState } from 'react';
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import PurpleButtonSmall from '../../components/atoms/PurpleButtonSmall';
 import { Colors } from '../../theme/colors';
 import { AuthContext } from '../../store/auth-context';
@@ -84,7 +77,13 @@ const ProductDetails = ({ route, navigation }: Props) => {
   //     });
   // }
   return (
-    <ScreenContainer style={{ flex: 1 }}>
+    <ScreenContainer
+      style={{
+        flex: 1,
+        paddingBottom: 24,
+        paddingTop: 24,
+      }}
+    >
       <ScrollView overScrollMode="never">
         <View style={styles.outerContainer}>
           <View>
@@ -198,10 +197,9 @@ const ProductDetails = ({ route, navigation }: Props) => {
 };
 
 const styles: any = StyleSheet.create({
-  safeArea: { flex: 1, paddingTop: 60 },
   outerContainer: {
     // height: 550,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   favIcon: {
     position: 'absolute',

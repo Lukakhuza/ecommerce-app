@@ -1,5 +1,6 @@
-import { type ReactNode } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 export type ScreenContainer = {
   children: ReactNode;
@@ -7,7 +8,11 @@ export type ScreenContainer = {
 };
 
 const ScreenContainer = ({ children, style }: ScreenContainer) => {
-  return <View style={[styles.container, style]}>{children}</View>;
+  const safeAreaInsets = useContext(SafeAreaInsetsContext);
+
+  return (
+    <View style={[safeAreaInsets, styles.container, style]}>{children}</View>
+  );
 };
 
 export default ScreenContainer;

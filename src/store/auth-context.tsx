@@ -100,6 +100,7 @@ const AuthContextProvider = ({ children }: Props) => {
     isLoading,
     isAuthenticated,
     // authenticate,
+    authToken,
     loginHandler,
   };
 

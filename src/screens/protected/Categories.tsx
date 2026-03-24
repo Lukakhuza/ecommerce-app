@@ -17,7 +17,7 @@ const Categories = ({ navigation }: Props) => {
   };
 
   return (
-    <ScreenContainer style={{ flex: 1 }}>
+    <ScreenContainer style={{ flex: 1, paddingBottom: 24 }}>
       <Text style={styles.title}>Shop by Categories</Text>
       <View style={styles.categoriesContainer}>
         <CategoryItemLarge
@@ -67,16 +67,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    marginLeft: 30,
-    marginTop: 40,
+    marginLeft: 20,
+    marginTop: 25,
     fontSize: 25,
     fontWeight: 500,
   },
   categoriesContainer: {
     flex: 1,
-    display: 'flex',
+    // display: 'flex',
     flexDirection: 'column',
-    marginHorizontal: 20,
-    paddingVertical: 10,
+    // borderColor: 'blue',
+    // borderWidth: 2,
+    // marginHorizontal: 20,
+    // paddingVertical: 10,
   },
 });

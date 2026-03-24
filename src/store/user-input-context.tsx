@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import {
   createContext,
   useContext,
@@ -36,93 +37,77 @@ type Props = {
 };
 
 const UserInputContextProvider = ({ children }: Props) => {
-  const { token, authData }: any = useContext(AuthContext);
+  const { token, authData, authToken }: any = useContext(AuthContext);
   const [userInput, setUserInput] = useState(emptyUserInput);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const getUser = async () => {
-      if (!token) {
-        return;
-      }
-      if (!authData.email) {
-        return;
-      }
-      const email = authData.email;
-      const userData = await getUserByEmail(email);
-      setUserInput({
-        id: { value: userData.user.id ? userData.user.id : '', isValid: true },
-        firstName: {
-          value: userData.user.firstName ? userData.user.firstName : '',
+  const getUserData = async () => {
+    if (!authToken) return;
+    const decoded: any = jwtDecode(authToken);
+    const email = decoded.email;
+    const { user } = await getUserByEmail(email);
+    setUserInput({
+      id: { value: user.id ? user.id : '', isValid: true },
+      firstName: {
+        value: user.firstName ? user.firstName : '',
+        isValid: true,
+      },
+      lastName: {
+        value: user.lastName ? user.lastName : '',
+        isValid: true,
+      },
+      emailAddress: {
+        value: email ? email : '',
+        isValid: true,
+      },
+      password: {
+        value: user.password ? user.password : '',
+        isValid: true,
+      },
+      phoneNumber: {
+        value: user.phoneNumber ? user.phoneNumber : '',
+        isValid: true,
+      },
+      shopFor: {
+        value: user.shopFor ? user.shopFor : '',
+        isValid: true,
+      },
+      ageRange: {
+        value: user.ageRange ? user.ageRange : '',
+        isValid: true,
+      },
+      address: {
+        addressLine1: {
+          value: user.address.addressLine1 ? user.address.addressLine1 : '',
           isValid: true,
         },
-        lastName: {
-          value: userData.user.lastName ? userData.user.lastName : '',
+        city: {
+          value: user.address.city ? user.address.city : '',
           isValid: true,
         },
-        emailAddress: {
-          value: email ? email : '',
+        state: {
+          value: user.address.state ? user.address.state : '',
           isValid: true,
         },
-        password: {
-          value: userData.user.password ? userData.user.password : '',
+        zipcode: {
+          value: user.address.zipcode ? user.address.zipcode : '',
           isValid: true,
         },
-        phoneNumber: {
-          value: userData.user.phoneNumber ? userData.user.phoneNumber : '',
-          isValid: true,
-        },
-        shopFor: {
-          value: userData.user.shopFor ? userData.user.shopFor : '',
-          isValid: true,
-        },
-        ageRange: {
-          value: userData.user.ageRange ? userData.user.ageRange : '',
-          isValid: true,
-        },
-        address: {
-          addressLine1: {
-            value: userData.user.address.addressLine1
-              ? userData.user.address.addressLine1
-              : '',
-            isValid: true,
-          },
-          city: {
-            value: userData.user.address.city ? userData.user.address.city : '',
-            isValid: true,
-          },
-          state: {
-            value: userData.user.address.state
-              ? userData.user.address.state
-              : '',
-            isValid: true,
-          },
-          zipcode: {
-            value: userData.user.address.zipcode
-              ? userData.user.address.zipcode
-              : '',
-            isValid: true,
-          },
-        },
-        favorites: {
-          items: userData.user.favorites.items
-            ? userData.user.favorites.items
-            : [],
-        },
-        cart: {
-          items: userData.user.cart.items ? userData.user.cart.items : [],
-        },
-        stripeCustomerId: userData.user.stripeCustomerId
-          ? userData.user.stripeCustomerId
-          : '',
-      });
-    };
-    getUser();
-  }, [
-    token,
+      },
+      favorites: {
+        items: user.favorites.items ? user.favorites.items : [],
+      },
+      cart: {
+        items: user.cart.items ? user.cart.items : [],
+      },
+      stripeCustomerId: user.stripeCustomerId ? user.stripeCustomerId : '',
+    });
+  };
 
-    // authData.email
-  ]);
+  // If there is an auth token, get auth data based on it:
+  useEffect(() => {
+    getUserData();
+  }, [authToken]);
 
   const updateUserInput = (
     inputIdentifier: any,
@@ -239,23 +224,33 @@ const UserInputContextProvider = ({ children }: Props) => {
 
   // Updates user's address
   const updateStripeId = async (createdUser: any, stripeId: any) => {
+    const {
+      id,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+      address,
+      shopFor,
+      cart,
+    } = createdUser;
     // Create an user object with updated address:
     setIsLoading(true);
     const userData = {
-      id: createdUser.userData.id,
-      email: createdUser.userData.email,
-      firstName: createdUser.userData.firstName,
-      lastName: createdUser.userData.lastName,
-      phoneNumber: createdUser.userData.phoneNumber,
+      id: id,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
       address: {
-        addressLine1: createdUser.userData.address.addressLine1,
-        city: createdUser.userData.address.city,
-        state: createdUser.userData.address.state,
-        zipcode: createdUser.userData.address.zipcode,
+        addressLine1: address.addressLine1,
+        city: address.city,
+        state: address.state,
+        zipcode: address.zipcode,
       },
-      shopFor: createdUser.userData.shopFor,
+      shopFor: shopFor,
       ageRange: '27 to 35',
-      cart: { items: createdUser.userData.cart.items },
+      cart: { items: cart.items },
       stripeCustomerId: stripeId,
     };
 

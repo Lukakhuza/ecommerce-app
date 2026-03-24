@@ -11,20 +11,17 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootNavigator from './src/navigation/RootNavigator';
 import FavoritesContextProvider from './src/store/favorites-context';
 import CartContextProvider from './src/store/cart-context';
-import dotenv from 'dotenv';
 import CheckoutContextProvider from './src/store/checkout-context';
 import ProductsContextProvider from './src/store/products-context';
 import AuthContextProvider from './src/store/auth-context';
 import UserInputContextProvider from './src/store/user-input-context';
 import { StripeProvider } from '@stripe/stripe-react-native';
 
-dotenv.config({ path: 'credentials.env' });
-
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <StripeProvider publishableKey={process.env.STRIPE_PUBLISHABLE_KEY ?? ''}>
+    <StripeProvider publishableKey={''}>
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <AuthContextProvider>

@@ -5,7 +5,6 @@ import {
   FlatList,
   Image,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,9 +12,10 @@ import {
 } from 'react-native';
 import { fetchOrders } from '../../api/orders.api';
 import LoadingOverlay from '../../components/atoms/LoadingOverlay';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import SmallPurpleButton from '../../components/atoms/SmallPurpleButton';
-import { Colors } from '../../theme/colors';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 import { OrderStatus } from '../../types/order';
 import { wait } from '../../utils/helpers';
 
@@ -81,7 +81,7 @@ const Orders = ({ navigation }: Props) => {
   });
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenContainer style={{ flex: 1 }}>
       <Text style={styles.header}>Orders</Text>
       <View style={styles.root}>
         {orders.length > 0 && (
@@ -205,7 +205,7 @@ const Orders = ({ navigation }: Props) => {
               </Text>
               {/* <Text style={{ fontSize: 20, marginVertical: 10 }}>
                 {orders.length}
-              </Text> */}
+                </Text> */}
             </View>
             <View>
               <SmallPurpleButton
@@ -218,16 +218,13 @@ const Orders = ({ navigation }: Props) => {
           </View>
         )}
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default Orders;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    height: '100%',
-  },
   header: {
     fontSize: 17,
     textAlign: 'center',

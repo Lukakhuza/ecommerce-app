@@ -41,7 +41,7 @@ const Cart = ({ navigation }: Props) => {
   }
 
   return (
-    <ScreenContainer>
+    <ScreenContainer style={{ flex: 1, paddingBottom: 24 }}>
       {cartItems.length > 0 && (
         <View style={styles.outerContainer1}>
           <View style={styles.topSection}>
@@ -142,11 +142,9 @@ const styles = StyleSheet.create({
   },
   outerContainer1: {
     flex: 1,
-    marginHorizontal: 11,
   },
   outerContainer2: {
     flex: 1,
-    marginHorizontal: 11,
     marginBottom: 150,
     justifyContent: 'center',
   },
