@@ -3,20 +3,24 @@ import { createContext, useEffect, ReactNode, useState } from 'react';
 import { Alert } from 'react-native';
 import { fetchToken } from '../api/users.api';
 import { isTokenExpired } from '../utils/helpers';
-import { UserCredentials, setGenericPassword } from 'react-native-keychain';
+import {
+  UserCredentials,
+  setGenericPassword,
+  resetGenericPassword,
+} from 'react-native-keychain';
 import { wait } from '../utils/helpers';
 
 type AuthContextType = {
   isAuthenticated: boolean;
   isLoading: boolean;
-  // authenticate: (token: string) => void;
+  logout: () => void;
   loginHandler: (email: string, password: string) => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   isLoading: false,
   isAuthenticated: false,
-  // authenticate: () => {},
+  logout: () => {},
   loginHandler: () => {},
 });
 
@@ -56,19 +60,6 @@ const AuthContextProvider = ({ children }: Props) => {
     loadToken();
   }, []);
 
-  // If there is an auth token, get auth data based on it:
-  // useEffect(() => {
-  //   if (authToken) {
-  //     const decoded: any = jwtDecode(authToken);
-  //     setAuthData({
-  //       email: decoded.email,
-  //       userId: decoded.userId,
-  //       exp: decoded.exp,
-  //       iat: decoded.iat,
-  //     });
-  //   }
-  // }, [authToken]);
-
   const loginHandler = async (email: string, password: string) => {
     setIsLoading(true);
 
@@ -92,14 +83,16 @@ const AuthContextProvider = ({ children }: Props) => {
     }
   };
 
-  // const authenticate = (token: any) => {
-  //   setAuthToken(token);
-  // };
+  const logout = () => {
+    setAuthToken(false);
+    setIsAuthenticated(false);
+    resetGenericPassword();
+  };
 
   const value = {
     isLoading,
     isAuthenticated,
-    // authenticate,
+    logout,
     authToken,
     loginHandler,
   };

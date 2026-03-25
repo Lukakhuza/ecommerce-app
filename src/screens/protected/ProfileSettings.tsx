@@ -59,7 +59,7 @@ const ProfileSettings = ({ navigation }: Props) => {
   }
 
   return (
-    <ScreenContainer>
+    <ScreenContainer style={{ flex: 1 }}>
       <View
         style={{
           flexDirection: 'column',
@@ -174,7 +174,6 @@ const ProfileSettings = ({ navigation }: Props) => {
           </Pressable>
         </ScrollView>
       </View>
-      {/* <View></View> */}
     </ScreenContainer>
   );
 };
@@ -187,8 +186,7 @@ const styles = StyleSheet.create({
     // backgroundColor: Colors.gray100,
   },
   containerProfilePic: {
-    marginTop: 38,
-    marginHorizontal: 30,
+    marginTop: 25,
     alignItems: 'center',
   },
   categories: {
@@ -220,7 +218,7 @@ const styles = StyleSheet.create({
   categoriesContainer: {
     display: 'flex',
     flexDirection: 'column',
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     paddingVertical: 20,
   },
   category: {

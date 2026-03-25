@@ -26,7 +26,7 @@ const EnterEmail = ({ navigation }: any) => {
   };
 
   return (
-    <ScreenContainer>
+    <ScreenContainer style={{ flex: 1, backgroundColor: 'white' }}>
       <PageHeader>Sign In</PageHeader>
       <DataInput
         placeholder="Email Address"

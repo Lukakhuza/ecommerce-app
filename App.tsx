@@ -16,10 +16,31 @@ import ProductsContextProvider from './src/store/products-context';
 import AuthContextProvider from './src/store/auth-context';
 import UserInputContextProvider from './src/store/user-input-context';
 import { StripeProvider } from '@stripe/stripe-react-native';
+import { hide } from 'react-native-bootsplash';
 import Config from 'react-native-config';
+import { useEffect, useState } from 'react';
+import LoadingOverlay from './src/components/atoms/LoadingOverlay';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const init = async () => {
+      // await new Promise<void>(resolve => setTimeout(resolve, 500));
+      await hide({ fade: true });
+
+      setIsReady(true);
+    };
+
+    init();
+    // requestAnimationFrame(() => {
+    //   hide();
+    // });
+  }, []);
+
+  if (!isReady) return <LoadingOverlay message="I am here" />;
 
   return (
     <StripeProvider publishableKey={Config.STRIPE_PUBLISHABLE_KEY!}>

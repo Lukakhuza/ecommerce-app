@@ -17,7 +17,6 @@ import ProductList from '../../components/organisms/ProductList';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
-import { isTokenExpired } from '../../utils/helpers';
 
 const data = [
   { label: 'Men', value: 'Men' },
@@ -48,10 +47,7 @@ const HomePage = ({ navigation }: Props) => {
         <Pressable
           style={styles.imageContainer}
           onPress={() => {
-            const expired = isTokenExpired(
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1a2E1MEB0ZXN0LmNvbSIsInVzZXJJZCI6IjY5MzE1MmNjZmM3OWQ1ZTU3ODQzMzQ0NSIsImlhdCI6MTc2NDg0MDE1OCwiZXhwIjoxNzY0ODQzNzU4fQ.fdco-FOhnOrUaeVnXQM3sKMWdAE2t832O-ve_OzB45Q',
-            );
-            // navigation.navigate("ProfileTab", { screen: "Profile" });
+            navigation.navigate('ProfileTab', { screen: 'Profile' });
           }}
         >
           <Image
@@ -76,7 +72,7 @@ const HomePage = ({ navigation }: Props) => {
             value={genderSelection}
             onChange={item => {
               setGenderSelection(item.value);
-              userInputCtx.updateInputs('shopFor', item.value);
+              // userInputCtx.updateInputs('shopFor', item.value);
             }}
           />
         </View>

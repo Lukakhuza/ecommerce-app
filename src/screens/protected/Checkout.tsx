@@ -74,7 +74,7 @@ const Checkout = ({ navigation }: Props) => {
   };
 
   return (
-    <ScreenContainer style={{ flex: 1 }}>
+    <ScreenContainer style={{ flex: 1, paddingBottom: 24 }}>
       <View style={styles.outerContainer}>
         <View style={styles.topSection}>
           <PressableComponent

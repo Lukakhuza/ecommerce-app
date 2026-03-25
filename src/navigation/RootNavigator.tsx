@@ -8,7 +8,7 @@ const RootNavigator = () => {
   const { isAuthenticated, isLoading } = useContext(AuthContext);
 
   if (isLoading) {
-    return <LoadingOverlay message="Loading..." />;
+    return null;
   }
 
   return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;

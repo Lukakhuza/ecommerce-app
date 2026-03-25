@@ -48,7 +48,7 @@ const Orders = ({ navigation }: Props) => {
   const userId = userInputCtx.userInput.id.value;
   const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState(emptyOrdersArray);
-  const [selectedStatus, setSelectedStatus] = useState(OrderStatus.Processing);
+  const [selectedStatus, setSelectedStatus] = useState(OrderStatus.Pending);
   const isFocused = useIsFocused();
   const statuses = Object.values(OrderStatus);
 
@@ -103,8 +103,15 @@ const Orders = ({ navigation }: Props) => {
                     setSelectedStatus(status);
                   }}
                 >
-                  <Text style={selectedStatus === status && { color: 'white' }}>
-                    {status}
+                  <Text
+                    style={[
+                      { textTransform: 'capitalize', paddingBottom: 2 },
+                      selectedStatus === status && {
+                        color: 'white',
+                      },
+                    ]}
+                  >
+                    {`${status}`}
                   </Text>
                 </Pressable>
               ))}

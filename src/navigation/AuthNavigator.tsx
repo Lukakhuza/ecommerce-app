@@ -10,7 +10,12 @@ const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: 'white' },
+      }}
+    >
       <Stack.Screen name="EnterEmail" component={EnterEmail} />
       <Stack.Screen name="EnterPassword" component={EnterPassword} />
       <Stack.Screen name="CreateAccount" component={CreateAccount} />

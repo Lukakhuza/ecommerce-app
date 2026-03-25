@@ -33,7 +33,7 @@ const Payment = ({ navigation }: Props) => {
   }
 
   return (
-    <ScreenContainer style={{ flex: 1, marginHorizontal: 10, paddingTop: 20 }}>
+    <ScreenContainer style={{ flex: 1 }}>
       {paymentMethods?.length > 0 ? (
         <FlatList
           data={paymentMethods}
