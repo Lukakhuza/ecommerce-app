@@ -3,7 +3,6 @@ import {
   FlatList,
   Image,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   Text,
   View,

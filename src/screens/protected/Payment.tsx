@@ -1,17 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import {
-  Button,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import { fetchPaymentMethods } from '../../api/checkout.api';
 import LoadingOverlay from '../../components/atoms/LoadingOverlay';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import PaymentMethodComponent from '../../components/organisms/PaymentMethodComponent';
-import { Colors } from '../../theme/colors';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 import { wait } from '../../utils/helpers';
 
 type Props = {
@@ -39,7 +33,7 @@ const Payment = ({ navigation }: Props) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenContainer style={{ flex: 1, marginHorizontal: 10, paddingTop: 20 }}>
       {paymentMethods?.length > 0 ? (
         <FlatList
           data={paymentMethods}
@@ -62,20 +56,13 @@ const Payment = ({ navigation }: Props) => {
           />
         </View>
       )}
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default Payment;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    marginHorizontal: 10,
-    paddingTop: 20,
-    // borderColor: "yellow",
-    // borderWidth: 3,
-  },
   card: {
     flex: 1,
     alignItems: 'center',

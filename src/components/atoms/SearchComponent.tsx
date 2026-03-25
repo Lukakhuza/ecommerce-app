@@ -5,8 +5,6 @@ import Icon from '@react-native-vector-icons/ionicons';
 type Props = { style?: any; onChangeText?: any; value?: any };
 
 const SearchComponent = ({ style, onChangeText, value }: Props) => {
-  console.log(Icon);
-
   return (
     <View style={[styles.searchBarContainer, style]}>
       <Icon name="search-outline" size={25} style={styles.searchIcon} />

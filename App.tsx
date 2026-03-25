@@ -16,12 +16,13 @@ import ProductsContextProvider from './src/store/products-context';
 import AuthContextProvider from './src/store/auth-context';
 import UserInputContextProvider from './src/store/user-input-context';
 import { StripeProvider } from '@stripe/stripe-react-native';
+import Config from 'react-native-config';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <StripeProvider publishableKey={''}>
+    <StripeProvider publishableKey={Config.STRIPE_PUBLISHABLE_KEY!}>
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <AuthContextProvider>

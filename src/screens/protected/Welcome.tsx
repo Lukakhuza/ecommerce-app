@@ -3,13 +3,13 @@ import {
   FlatList,
   Image,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import { fetchProductsData } from '../../api/products.api';
 import FavoriteIcon from '../../components/atoms/FavoriteIcon';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { AuthContext } from '../../store/auth-context';
 import { FavoritesContext } from '../../store/favorites-context';
 import { ProductsContext } from '../../store/products-context';
@@ -70,7 +70,15 @@ const Welcome = ({ navigation }: Props) => {
   });
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenContainer
+      style={{
+        flex: 1,
+        paddingTop: 10,
+        marginTop: 30,
+        marginBottom: 24,
+        paddingHorizontal: 0,
+      }}
+    >
       <Text style={styles.category}>
         {' '}
         {productsCtx.selectedCategory} ({filteredProducts.length})
@@ -128,7 +136,7 @@ const Welcome = ({ navigation }: Props) => {
           // alignContent: "flex-end",
         }}
       />
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
@@ -163,12 +171,6 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     borderRadius: 20,
-  },
-
-  safeArea: {
-    flex: 1,
-    paddingTop: 10,
-    marginTop: 30,
   },
 });
 

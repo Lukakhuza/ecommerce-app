@@ -3,16 +3,16 @@ import { useContext, useEffect } from 'react';
 import {
   Image,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import LoadingOverlay from '../../components/atoms/LoadingOverlay';
-import { Colors } from '../../theme/colors';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { AuthContext } from '../../store/auth-context';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 
 type Props = {
   navigation: any;
@@ -59,7 +59,7 @@ const ProfileSettings = ({ navigation }: Props) => {
   }
 
   return (
-    <SafeAreaView>
+    <ScreenContainer>
       <View
         style={{
           flexDirection: 'column',
@@ -175,7 +175,7 @@ const ProfileSettings = ({ navigation }: Props) => {
         </ScrollView>
       </View>
       {/* <View></View> */}
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 

@@ -1,14 +1,15 @@
 import { useContext, useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { createOrder } from '../../api/orders.api';
 import { createPaymentSheet, openPaymentSheet } from '../../api/products.api';
 import PurpleButtonSmall from '../../components/atoms/PurpleButtonSmall';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import CostItems from '../../components/organisms/CostItems';
 import PressableComponent from '../../components/organisms/PressableComponent';
-import { Colors } from '../../theme/colors';
 import { CartContext } from '../../store/cart-context';
 import { CheckoutContext } from '../../store/checkout-context';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 
 type Props = {
   navigation: any;
@@ -73,7 +74,7 @@ const Checkout = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenContainer style={{ flex: 1 }}>
       <View style={styles.outerContainer}>
         <View style={styles.topSection}>
           <PressableComponent
@@ -138,16 +139,13 @@ const Checkout = ({ navigation }: Props) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default Checkout;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
   outerContainer: {
     flex: 1,
     marginHorizontal: 11,

@@ -34,13 +34,7 @@ interface Order {
   userId: string;
   items: OrderItem[];
   totalAmount: number;
-  status:
-    | 'pending'
-    | 'processing'
-    | 'shipped'
-    | 'delivered'
-    | 'returned'
-    | 'cancelled';
+  status: 'processing' | 'shipped' | 'delivered' | 'returned' | 'cancelled';
   createdAt: string; // ISO date string
   __v: number;
 }
@@ -77,6 +71,7 @@ const Orders = ({ navigation }: Props) => {
   }
 
   const filteredOrders = orders.filter(order => {
+    console.log('Orders:', order.status);
     return selectedStatus === order.status;
   });
 

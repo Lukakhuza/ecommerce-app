@@ -1,9 +1,10 @@
 import { useContext, useLayoutEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Button from '../../components/atoms/Button';
 import Input from '../../components/atoms/Input';
-import { Colors } from '../../theme/colors';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 import {
   isValidAddressLine1,
   isValidCityName,
@@ -121,7 +122,7 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
     navigation.goBack();
   };
   return (
-    <SafeAreaView>
+    <ScreenContainer style={{ flex: 1 }}>
       <View style={styles.container}>
         <Input
           label="Address Line 1"
@@ -187,7 +188,7 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
           Confirm
         </Button>
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 

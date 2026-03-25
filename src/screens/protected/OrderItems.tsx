@@ -1,10 +1,11 @@
 import { useRoute } from '@react-navigation/core';
 import { useContext } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Colors } from '../../theme/colors';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { CartContext } from '../../store/cart-context';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 
 type Props = {
   navigation: any;
@@ -19,7 +20,7 @@ const OrderItems = ({ navigation }: Props) => {
   const cartCtx: any = useContext(CartContext);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <ScreenContainer>
       {cartCtx.cartItems.length > 0 && (
         <View
           style={{
@@ -43,14 +44,14 @@ const OrderItems = ({ navigation }: Props) => {
                         <View style={styles.cartItem}>
                           {/* <View>
                             <Image
-                              style={styles.image}
-                              source={{
-                                uri: productsCtx.products[
-                                  itemData.item.product.id - 1
+                            style={styles.image}
+                            source={{
+                              uri: productsCtx.products[
+                                itemData.item.product.id - 1
                                 ]?.image,
-                              }}
-                            />
-                          </View> */}
+                                }}
+                                />
+                                </View> */}
                           <View
                             style={{
                               marginLeft: 20,
@@ -136,67 +137,67 @@ const OrderItems = ({ navigation }: Props) => {
                         marginVertical: 8,
                         flexDirection: "row",
                         justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
+                        }}
+                        >
+                        <Text
                         style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
+                        >
                         Subtotal
-                      </Text>
-                      <Text
+                        </Text>
+                        <Text
                         style={{
                           color: "black",
                           fontWeight: 700,
                           marginRight: 10,
-                        }}
-                      >
-                        ${subtotal.toFixed(2)}
-                      </Text>
-                    </View> */}
+                          }}
+                          >
+                          ${subtotal.toFixed(2)}
+                          </Text>
+                          </View> */}
                     {/* <View
                       style={{
                         marginVertical: 8,
                         flexDirection: "row",
                         justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
+                        }}
+                        >
+                        <Text
                         style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
+                        >
                         Shipping Cost
-                      </Text>
-                      <Text
+                        </Text>
+                        <Text
                         style={{
                           color: "black",
                           fontWeight: 700,
                           marginRight: 10,
-                        }}
-                      >
-                        ${shippingCost}
-                      </Text>
-                    </View> */}
+                          }}
+                          >
+                          ${shippingCost}
+                          </Text>
+                          </View> */}
                     {/* <View
                       style={{
                         marginVertical: 8,
                         flexDirection: "row",
                         justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
+                        }}
+                        >
+                        <Text
                         style={{ fontSize: 17, color: "gray", marginLeft: 8 }}
-                      >
+                        >
                         Tax
-                      </Text>
-                      <Text
+                        </Text>
+                        <Text
                         style={{
                           color: "black",
                           fontWeight: 700,
                           marginRight: 10,
-                        }}
-                      >
-                        ${taxAmount}
-                      </Text>
-                    </View> */}
+                          }}
+                          >
+                          ${taxAmount}
+                          </Text>
+                          </View> */}
                     <View
                       style={{
                         marginVertical: 20,
@@ -231,16 +232,13 @@ const OrderItems = ({ navigation }: Props) => {
           </View>
         </View>
       )}
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default OrderItems;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    height: '100%',
-  },
   header: {
     fontSize: 17,
     textAlign: 'center',

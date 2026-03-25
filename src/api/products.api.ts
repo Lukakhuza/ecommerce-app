@@ -43,7 +43,6 @@ export const openPaymentSheet = async (stripeData: StripeData) => {
   const { error } = await presentPaymentSheet();
 
   if (error) {
-    console.log('Payment failed:', error);
     return { success: false, message: error.message };
   } else {
     return { success: true, message: 'Payment Completed!' };

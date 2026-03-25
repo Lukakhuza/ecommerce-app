@@ -14,7 +14,6 @@ import {
 } from '../../utils/validation';
 
 const CreateAccount = ({ navigation }: any) => {
-  console.log('Create Account');
   const userInputCtx: any = useContext(UserInputContext);
 
   const proceedHandler = () => {

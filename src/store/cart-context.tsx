@@ -40,7 +40,6 @@ const CartContextProvider = ({ children }: Props) => {
       userId: userInputCtx.userInput.id.value,
       cartItems: cartItems,
     };
-    // console.log("Test 14", data.cartItems);
     updateCartInDatabase(data);
   }, [cartItems]);
 

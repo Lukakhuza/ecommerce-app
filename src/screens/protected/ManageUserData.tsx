@@ -1,10 +1,11 @@
 import { useContext, useLayoutEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Input from '../../components/atoms/Input';
 // import IconButton from "../components/ui/IconButton";
 import Button from '../../components/atoms/Button';
-import { Colors } from '../../theme/colors';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { UserInputContext } from '../../store/user-input-context';
+import { Colors } from '../../theme/colors';
 import {
   isValidFirstName,
   isValidLastName,
@@ -93,7 +94,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScreenContainer style={{ flex: 1, padding: 24 }}>
       <View>
         <Input
           label="First Name"
@@ -166,18 +167,13 @@ const ManageUserData = ({ route, navigation }: Props) => {
           Confirm
         </Button>
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 export default ManageUserData;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    color: Colors.purple100,
-  },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'center',

@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Button from '../../components/atoms/Button';
 import Input from '../../components/atoms/Input';
-import { Colors } from '../../theme/colors';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { CheckoutContext } from '../../store/checkout-context';
+import { Colors } from '../../theme/colors';
 import {
   isValidAddressLine1,
   isValidCityName,
@@ -76,14 +77,14 @@ const ManageShippingAddress = ({ route, navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView>
+    <ScreenContainer style={{ flex: 1 }}>
       <View style={styles.container}>
         {/* <CardField
           postalCodeEnabled={true}
           onCardChange={(details) => {
             // setCardDetails(details);
-          }}
-        /> */}
+            }}
+            /> */}
         <Input
           label="Address Line 1"
           textInputConfig={{
@@ -148,7 +149,7 @@ const ManageShippingAddress = ({ route, navigation }: Props) => {
           Confirm
         </Button>
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
