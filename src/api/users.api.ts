@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import { url } from './client';
 
 export const createUser = async (user: any) => {
+  console.log('USER HERE: ', user);
   const response = await fetch(url + '/user/create-user/', {
     method: 'PUT',
     headers: {

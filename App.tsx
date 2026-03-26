@@ -28,19 +28,15 @@ function App() {
 
   useEffect(() => {
     const init = async () => {
-      // await new Promise<void>(resolve => setTimeout(resolve, 500));
-      await hide({ fade: true });
+      await hide();
 
       setIsReady(true);
     };
 
     init();
-    // requestAnimationFrame(() => {
-    //   hide();
-    // });
   }, []);
 
-  if (!isReady) return <LoadingOverlay message="I am here" />;
+  if (!isReady) return null;
 
   return (
     <StripeProvider publishableKey={Config.STRIPE_PUBLISHABLE_KEY!}>

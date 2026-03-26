@@ -54,8 +54,10 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
   }
 
   return (
-    <ScreenContainer style={{ flex: 1 }}>
-      <View style={styles.topContainer}>
+    <ScreenContainer
+      style={{ flex: 1, paddingBottom: 24, paddingHorizontal: 0 }}
+    >
+      <View style={[styles.topContainer, { paddingHorizontal: 30 }]}>
         <View>
           <Text style={styles.text1}>Tell us about yourself</Text>
         </View>
@@ -75,7 +77,9 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
                   userInputCtx.updateUserInput('shopFor', 'men', true);
                 }
               }}
-            />
+            >
+              Men
+            </SmallPurpleButton>
             <SmallPurpleButton
               style={styles.gender}
               mode={selection === 'women' ? 'selected' : ''}
@@ -89,7 +93,9 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
                   userInputCtx.updateUserInput('shopFor', 'women', true);
                 }
               }}
-            />
+            >
+              Women
+            </SmallPurpleButton>
           </View>
         </View>
         <View>
