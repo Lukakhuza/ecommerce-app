@@ -2,13 +2,7 @@ import Icon from '@react-native-vector-icons/ionicons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
 
-const PressableComponent = ({
-  children,
-  label,
-  onPress,
-
-  disabled,
-}: any) => {
+const PressableComponent = ({ children, label, onPress, disabled }: any) => {
   return (
     <Pressable onPress={onPress} style={styles.container} disabled={disabled}>
       <View>

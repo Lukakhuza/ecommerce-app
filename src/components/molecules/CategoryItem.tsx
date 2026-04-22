@@ -1,11 +1,25 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native';
+
+type Props = {
+  onPress: () => void;
+  imageUri: string;
+  categoryName: string;
+  containerStyle?: ViewStyle;
+};
 
 const CategoryItem = ({
   onPress,
   imageUri,
   categoryName,
   containerStyle,
-}: any) => {
+}: Props) => {
   return (
     <View style={styles.container}>
       <Pressable
@@ -34,12 +48,12 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    overflow: "hidden",
-    resizeMode: "contain",
+    overflow: 'hidden',
+    resizeMode: 'contain',
     borderRadius: 40,
   },
   textContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   pressed: {
     opacity: 0.5,

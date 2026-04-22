@@ -1,11 +1,11 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, TextStyle } from 'react-native';
 import { Colors } from '../../theme/colors';
 import { type ReactNode } from 'react';
 
 type Props = {
   children?: ReactNode;
   onPress: () => void;
-  style?: any;
+  style?: TextStyle;
   text?: string;
   mode?: string;
   disabled?: boolean;

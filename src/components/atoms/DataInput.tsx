@@ -9,6 +9,8 @@ type Props = {
   onChangeText?: (enteredText: string) => void;
   value?: string;
   invalidInputMessage?: string;
+  autoFocus?: boolean;
+  onSubmitEditing?: () => void;
 };
 
 const DataInput = ({

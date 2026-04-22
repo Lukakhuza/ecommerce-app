@@ -41,7 +41,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
 
     const createdUser = await createUser(user);
 
-    console.log('Created User: ', createdUser);
+    // console.log('Created User: ', createdUser);
     const { id: stripeId } = await createCustomerInStripe(createdUser);
     userInputCtx.updateStripeId(createdUser, stripeId);
     userInputCtx.clearUserInput();
@@ -105,7 +105,7 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
           <DropdownComponent
             style={styles.dropdown}
             value={ageRange}
-            onChange={(item: any) => {
+            onChange={item => {
               setAgeRange(item.value);
               userInputCtx.updateUserInput('ageRange', item.value, true);
             }}

@@ -3,7 +3,7 @@ import { Colors } from '../../theme/colors';
 
 type Props = {
   message: string;
-  onConfirm: any;
+  onConfirm: () => {};
 };
 
 const ErrorOverlay = ({ message, onConfirm }: Props) => {

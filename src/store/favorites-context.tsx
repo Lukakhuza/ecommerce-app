@@ -8,10 +8,16 @@ import {
 import { saveFavoritesToDatabase } from '../api/users.api';
 import { UserInputContext } from './user-input-context';
 
-export const FavoritesContext: any = createContext({
+type FavoritesContext = {
+  favorites: number[];
+  addFavorite: (id: number) => void;
+  removeFavorite: (id: number) => void;
+};
+
+export const FavoritesContext = createContext<FavoritesContext>({
   favorites: [],
-  addFavorite: (id: any) => {},
-  removeFavorite: (id: any) => {},
+  addFavorite: (id: number) => {},
+  removeFavorite: (id: number) => {},
 });
 
 type Props = {
@@ -20,13 +26,13 @@ type Props = {
 
 const FavoritesContextProvider = ({ children }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
-  const [favorites, setFavorites] = useState<Number[]>([]);
+  const [favorites, setFavorites] = useState<number[]>([]);
 
   useEffect(() => {
     setFavorites(userInputCtx.userInput.favorites.items);
   }, [userInputCtx.userInput.favorites.items]);
 
-  const addFavorite = async (id: any) => {
+  const addFavorite = async (id: number) => {
     // Update context
     setFavorites(currentFavorites => {
       const updatedFavorites = [...currentFavorites, id];
@@ -39,7 +45,7 @@ const FavoritesContextProvider = ({ children }: Props) => {
     });
   };
 
-  const removeFavorite = (id: any) => {
+  const removeFavorite = (id: number) => {
     setFavorites(currentFavorites => {
       const updatedFavorites = currentFavorites.filter(favoriteItem => {
         return favoriteItem !== id;

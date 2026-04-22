@@ -1,13 +1,13 @@
-import Icon from '@react-native-vector-icons/ionicons';
-import { Pressable, StyleSheet } from 'react-native';
+import Icon, { IoniconsIconName } from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, TextStyle } from 'react-native';
 import { Colors } from '../../theme/colors';
 
 type Props = {
-  icon: any;
-  size: any;
-  color: any;
+  icon: IoniconsIconName;
+  size: number;
+  color: string;
   onPress: () => void;
-  style?: any;
+  style?: TextStyle;
 };
 
 const IconButton = ({ icon, size, color, onPress, style }: Props) => {

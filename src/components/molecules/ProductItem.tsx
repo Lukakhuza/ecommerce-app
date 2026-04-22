@@ -1,13 +1,35 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
 import FavoriteIcon from '../atoms/FavoriteIcon';
+import { ListRenderItemInfo } from 'react-native';
+import { IoniconsIconName } from '@react-native-vector-icons/ionicons';
+
+type Item = {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+};
+
+type Props = {
+  itemData: ListRenderItemInfo<Item>;
+  onPress: () => void;
+  onFavoritesPress: () => void;
+  favoritesIcon: IoniconsIconName;
+};
 
 const ProductItem = ({
   itemData,
   onPress,
   onFavoritesPress,
   favoritesIcon,
-}: any) => {
+}: Props) => {
   return (
     <View style={styles.productContainer}>
       <View style={styles.favIcon}>
@@ -18,7 +40,10 @@ const ProductItem = ({
           onPress={onFavoritesPress}
         />
       </View>
-      <Pressable onPress={onPress}>
+      <Pressable
+        onPress={onPress}
+        style={({ pressed }) => pressed && styles.pressed}
+      >
         <Image source={{ uri: itemData.item.image }} style={styles.image1} />
         <Text numberOfLines={1}>{itemData.item.title}</Text>
         <Text style={{ fontWeight: 700 }}>{`$${itemData.item.price}`}</Text>
@@ -48,5 +73,8 @@ const styles = StyleSheet.create({
     zIndex: 0,
     overflow: 'hidden',
     resizeMode: 'contain',
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });

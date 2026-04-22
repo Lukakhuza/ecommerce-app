@@ -1,7 +1,13 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
 
-const CategoryItemLarge = ({ category, onPress, imageUri }: any) => {
+type Props = {
+  category: string;
+  onPress: () => void;
+  imageUri: string;
+};
+
+const CategoryItemLarge = ({ category, onPress, imageUri }: Props) => {
   return (
     <View>
       <Pressable

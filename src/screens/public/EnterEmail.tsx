@@ -36,6 +36,8 @@ const EnterEmail = ({ navigation }: any) => {
         value={email.value}
         isValid={email.isValid}
         invalidInputMessage="Please enter a valid email"
+        onSubmitEditing={proceedHandler}
+        autoFocus
       />
       <ContinueButton onPress={proceedHandler} />
       <SmallText

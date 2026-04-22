@@ -31,6 +31,7 @@ const ProductDetails = ({ route, navigation }: Props) => {
     };
 
     const userId = userInputCtx.userInput.id.value;
+
     const data = {
       productData: productData,
       userId: userId,

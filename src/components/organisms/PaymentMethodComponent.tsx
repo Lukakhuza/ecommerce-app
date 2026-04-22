@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
 
 const PaymentMethodComponent = ({ cardInfo }: any) => {
+  console.log('Test 20', cardInfo);
   const cardImages: any = {
     visa: require('../../../assets/images/logos/visa.png'),
     mastercard: require('../../../assets/images/logos/mastercard.png'),

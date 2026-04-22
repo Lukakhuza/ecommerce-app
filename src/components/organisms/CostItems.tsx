@@ -1,6 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
 
-const CostItems = ({ subtotal, shippingCost, tax, total }: any) => {
+type Props = {
+  subtotal: string;
+  shippingCost: number;
+  tax?: number;
+  taxAmount?: number;
+  total: string;
+};
+
+const CostItems = ({ subtotal, shippingCost, tax, total }: Props) => {
   return (
     <View style={styles.costItemsContainer}>
       <View style={styles.costItemContainer}>
@@ -28,27 +36,27 @@ export default CostItems;
 const styles = StyleSheet.create({
   costItemContainer: {
     marginVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  costItemLabel: { fontSize: 17, color: "gray", marginLeft: 8 },
+  costItemLabel: { fontSize: 17, color: 'gray', marginLeft: 8 },
   costItemValue: {
-    color: "black",
+    color: 'black',
     fontWeight: 700,
     marginRight: 10,
   },
   costItemLabelTotal: {
     fontSize: 17,
     fontWeight: 700,
-    color: "gray",
+    color: 'gray',
     marginLeft: 8,
   },
   costItemsContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   costItemContainerTotal: {
     marginVertical: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

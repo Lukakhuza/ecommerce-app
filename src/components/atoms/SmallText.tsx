@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, TextStyle } from 'react-native';
 
 type Props = {
   primaryText: string;
   secondaryText: string;
   onPress: () => void;
-  style?: any;
+  style?: TextStyle;
 };
 
 const SmallText = ({ primaryText, secondaryText, onPress, style }: Props) => {

@@ -1,10 +1,17 @@
 import { createContext, useEffect, useState, type ReactNode } from 'react';
 import { fetchProductsData } from '../api/products.api';
+import { Product } from '../types/product';
 
-export const ProductsContext: any = createContext({
-  products: {},
+type ProductsContextType = {
+  products: Product[];
+  selectedCategory: string;
+  updateSelectedCategory: (category: string) => void;
+};
+
+export const ProductsContext = createContext<ProductsContextType>({
+  products: [],
   selectedCategory: '',
-  updateSelectedCategory: (category: any) => {},
+  updateSelectedCategory: (category: string) => {},
 });
 
 type Props = {
@@ -23,7 +30,7 @@ const ProductsContextProvider = ({ children }: Props) => {
     getProductsData();
   }, []);
 
-  const updateSelectedCategory = (category: any) => {
+  const updateSelectedCategory = (category: string) => {
     setSelectedCategory(category);
   };
 

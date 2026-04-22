@@ -1,8 +1,19 @@
 import Icon from '@react-native-vector-icons/ionicons';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import { Colors } from '../../theme/colors';
+import { type CartItemType } from '../../types/cart';
 
-const CartItem = ({ itemData, imageUri, onAddItem, onRemoveItem }: any) => {
+type ItemData = ListRenderItemInfo<CartItemType>;
+
+type Props = {
+  itemData: any;
+  imageUri: string;
+  onAddItem: () => void;
+  onRemoveItem: () => void;
+};
+
+const CartItem = ({ itemData, imageUri, onAddItem, onRemoveItem }: Props) => {
   return (
     <View style={styles.container}>
       <View>

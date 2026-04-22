@@ -1,8 +1,8 @@
 import { Alert } from 'react-native';
 import { url } from './client';
+import { User, UserData } from '../types/user';
 
-export const createUser = async (user: any) => {
-  console.log('USER HERE: ', user);
+export const createUser = async (user: User) => {
   const response = await fetch(url + '/user/create-user/', {
     method: 'PUT',
     headers: {
@@ -14,7 +14,7 @@ export const createUser = async (user: any) => {
   return resData;
 };
 
-export const createCustomerInStripe = async (user: any) => {
+export const createCustomerInStripe = async (user: User) => {
   const response = await fetch(url + '/user/create-customer-in-stripe/', {
     method: 'POST',
     headers: {
@@ -79,7 +79,7 @@ export const getUserByEmail = async (email: string) => {
   return resData;
 };
 
-export const saveUserDataToDatabase = async (userData: any) => {
+export const saveUserDataToDatabase = async (userData: UserData) => {
   try {
     const userId = userData.id;
 
@@ -97,22 +97,22 @@ export const saveUserDataToDatabase = async (userData: any) => {
   }
 };
 
-export const saveUserDataToContext = async (userData: any) => {
-  try {
-    const userId = userData.id;
-    const result = await fetch(url + '/user/update-user/' + userId, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-    const resData = await result.json();
-    return resData;
-  } catch (error) {
-    Alert.alert('User could not be saved. Try again later.');
-  }
-};
+// export const saveUserDataToContext = async (userData) => {
+//   try {
+//     const userId = userData.id;
+//     const result = await fetch(url + '/user/update-user/' + userId, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(userData),
+//     });
+//     const resData = await result.json();
+//     return resData;
+//   } catch (error) {
+//     Alert.alert('User could not be saved. Try again later.');
+//   }
+// };
 
 export const saveFavoritesToDatabase = async (
   userId: string,

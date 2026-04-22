@@ -10,6 +10,32 @@ import { getUserByEmail, saveUserDataToDatabase } from '../api/users.api';
 import { wait } from '../utils/helpers';
 import { AuthContext } from './auth-context';
 
+type UserInputContextType = {
+  userInput: {
+    id: { value: string; isValid: boolean };
+    firstName: { value: string; isValid: boolean };
+    lastName: { value: string; isValid: boolean };
+    emailAddress: { value: string; isValid: boolean };
+    password: { value: string; isValid: boolean };
+    phoneNumber: { value: string; isValid: boolean };
+    address: {
+      addressLine1: { value: string; isValid: boolean };
+      city: { value: string; isValid: boolean };
+      state: { value: string; isValid: boolean };
+      zipcode: { value: string; isValid: boolean };
+    };
+    favorites: { items: any[] };
+    cart: { items: any[] };
+    stripeCustomerId: string;
+  };
+  isLoading: boolean;
+  updateUserInfo: (updatedInfo: any) => void;
+  saveUserDataToDatabase: any;
+  updateAddress: (updatedAddressValues: any) => void;
+  updateStripeId: (createdUser: any, stripeId: string) => void;
+  clearUserInput: () => void;
+};
+
 const emptyUserInput = {
   id: { value: '', isValid: true },
   firstName: { value: '', isValid: true },
@@ -30,20 +56,51 @@ const emptyUserInput = {
   stripeCustomerId: '',
 };
 
-export const UserInputContext: any = createContext(emptyUserInput);
+export const UserInputContext = createContext<UserInputContextType>({
+  userInput: {
+    id: { value: '', isValid: false },
+    firstName: { value: '', isValid: false },
+    lastName: { value: '', isValid: false },
+    emailAddress: { value: '', isValid: false },
+    password: { value: '', isValid: false },
+    phoneNumber: { value: '', isValid: false },
+    address: {
+      addressLine1: { value: '', isValid: false },
+      city: { value: '', isValid: false },
+      state: { value: '', isValid: false },
+      zipcode: { value: '', isValid: false },
+    },
+    favorites: { items: [] },
+    cart: { items: [] },
+    stripeCustomerId: '',
+  },
+  isLoading: false,
+  updateUserInfo: (updatedInfo: any) => {},
+  saveUserDataToDatabase: () => {},
+  updateAddress: (updatedAddressValues: any) => {},
+  updateStripeId: (createdUser: any, stripeId: string) => {},
+  clearUserInput: () => {},
+});
 
 type Props = {
   children: ReactNode;
 };
 
+type DecodedToken = {
+  email: string;
+  userId: string;
+  iat: number;
+  exp: number;
+};
+
 const UserInputContextProvider = ({ children }: Props) => {
-  const { token, authData, authToken }: any = useContext(AuthContext);
+  const { authToken } = useContext(AuthContext);
   const [userInput, setUserInput] = useState(emptyUserInput);
   const [isLoading, setIsLoading] = useState(false);
 
   const getUserData = async () => {
     if (!authToken) return;
-    const decoded: any = jwtDecode(authToken);
+    const decoded: DecodedToken = jwtDecode(authToken);
     const email = decoded.email;
     const { user } = await getUserByEmail(email);
     setUserInput({
@@ -223,7 +280,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   };
 
   // Updates user's address
-  const updateStripeId = async (createdUser: any, stripeId: any) => {
+  const updateStripeId = async (createdUser: any, stripeId: string) => {
     const {
       id,
       email,
@@ -272,14 +329,14 @@ const UserInputContextProvider = ({ children }: Props) => {
   };
 
   const value = {
-    userInput: userInput,
-    isLoading: isLoading,
-    updateUserInfo: updateUserInfo,
-    updateUserInput: updateUserInput,
-    saveUserDataToDatabase: saveUserDataToDatabase,
-    updateAddress: updateAddress,
-    updateStripeId: updateStripeId,
-    clearUserInput: clearUserInput,
+    userInput,
+    isLoading,
+    updateUserInfo,
+    updateUserInput,
+    saveUserDataToDatabase,
+    updateAddress,
+    updateStripeId,
+    clearUserInput,
   };
 
   return (

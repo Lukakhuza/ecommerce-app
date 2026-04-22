@@ -10,3 +10,18 @@ export type AuthStackParamList = {
 };
 
 export type AuthNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
+
+export type HomeTabParamList = {
+  Home: undefined;
+  Categories: undefined;
+  Welcome: undefined;
+  ProductDetails: { product: any };
+  Cart: undefined;
+  Checkout: undefined;
+  Favorites: undefined;
+  ManageShippingAddress: undefined;
+  Payment: undefined;
+  ManagePaymentMethod: undefined;
+};
+
+export type HomeTabNavigationProp = NativeStackNavigationProp<HomeTabParamList>;

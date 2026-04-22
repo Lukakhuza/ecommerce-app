@@ -1,12 +1,12 @@
-import { Pressable, StyleSheet } from 'react-native';
-import Icon from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, TextStyle } from 'react-native';
+import Icon, { IoniconsIconName } from '@react-native-vector-icons/ionicons';
 
 type Props = {
-  name?: any;
-  color?: any;
-  onPress?: any;
-  size?: any;
-  style?: any;
+  name: IoniconsIconName;
+  color?: string;
+  onPress?: () => void;
+  size?: number;
+  style?: TextStyle;
 };
 
 const FavoriteIcon = ({ name, color, onPress, size, style }: Props) => {

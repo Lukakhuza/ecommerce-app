@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-import { UserInputContext } from '../store/user-input-context';
-import { url } from './client';
 import {
   initPaymentSheet,
   presentPaymentSheet,
 } from '@stripe/stripe-react-native';
 import { StripeData } from '../types/stripe';
+import { url } from './client';
 
 export const fetchProductsData = async () => {
   const response = await fetch('https://fakestoreapi.com/products');

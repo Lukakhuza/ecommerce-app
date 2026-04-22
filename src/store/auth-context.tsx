@@ -1,18 +1,17 @@
-import * as Keychain from 'react-native-keychain';
-import { createContext, useEffect, ReactNode, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { fetchToken } from '../api/users.api';
-import { isTokenExpired } from '../utils/helpers';
+import * as Keychain from 'react-native-keychain';
 import {
-  UserCredentials,
-  setGenericPassword,
   resetGenericPassword,
+  setGenericPassword,
 } from 'react-native-keychain';
-import { wait } from '../utils/helpers';
+import { fetchToken } from '../api/users.api';
+import { isTokenExpired, wait } from '../utils/helpers';
 
 type AuthContextType = {
   isAuthenticated: boolean;
   isLoading: boolean;
+  authToken: string | false;
   logout: () => void;
   loginHandler: (email: string, password: string) => void;
 };
@@ -20,6 +19,7 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   isLoading: false,
   isAuthenticated: false,
+  authToken: false,
   logout: () => {},
   loginHandler: () => {},
 });
@@ -31,14 +31,15 @@ type Props = {
 const AuthContextProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState<UserCredentials | false>(false);
+  const [authToken, setAuthToken] = useState<string | false>(false);
 
   // Check for token at app startup
   const loadToken = async () => {
     try {
       setIsLoading(true);
-      const { password: storedToken }: any =
-        await Keychain.getGenericPassword();
+      const result = await Keychain.getGenericPassword();
+      if (result === false) return;
+      const { password: storedToken } = result;
       if (!isTokenExpired(storedToken)) {
         setAuthToken(storedToken);
         setIsAuthenticated(true);

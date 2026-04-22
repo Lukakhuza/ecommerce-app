@@ -115,6 +115,7 @@ const CartContextProvider = ({ children }: Props) => {
     // Update cart in the database:
     const response = await addToCartInDatabase(data);
     // Update cartItems
+    console.log('Test 30: ', response.user.cart.items);
     setCartItems(response.user.cart.items);
     setIsLoading(false);
   };

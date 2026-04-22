@@ -1,23 +1,24 @@
-import { useContext } from "react";
-import { Pressable, Image, View, Text, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { ProductsContext } from "../../store/products-context";
+import { useContext } from 'react';
+import { Pressable, Image, View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ProductsContext } from '../../store/products-context';
+import { HomeTabNavigationProp } from '../../types/navigation';
 
 type Props = {
   category: string;
-  imageId: string;
+  imageId: number;
 };
 
 const CategoryButton = ({ category, imageId }: Props) => {
-  const productsCtx: any = useContext(ProductsContext);
-  const navigation: any = useNavigation();
+  const productsCtx = useContext(ProductsContext);
+  const navigation: HomeTabNavigationProp = useNavigation();
   return (
     <Pressable
       onPress={() => {
         productsCtx.updateSelectedCategory(category);
-        navigation.navigate("Welcome");
+        navigation.navigate('Welcome');
       }}
-      style={styles.category}
+      style={({ pressed }) => [styles.category, pressed && styles.pressed]}
     >
       <View style={styles.imageContainer}>
         {productsCtx.products.length > 0 && (
@@ -46,8 +47,8 @@ const styles = StyleSheet.create({
     // height: 50,
     flex: 1,
     // zIndex: 10,
-    overflow: "hidden",
-    resizeMode: "contain",
+    overflow: 'hidden',
+    resizeMode: 'contain',
   },
   imageContainer: {
     height: 40,
@@ -58,9 +59,9 @@ const styles = StyleSheet.create({
   },
   category: {
     marginVertical: 5,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     // justifyContent: "flex-start",
     // borderColor: Colors.orange100,
     // borderWidth: 5,
@@ -72,5 +73,8 @@ const styles = StyleSheet.create({
     height: 80,
     // width:
     borderRadius: 20,
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });

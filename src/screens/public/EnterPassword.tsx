@@ -38,6 +38,8 @@ const EnterPassword = ({ navigation, route }: any) => {
         isValid={password.isValid}
         invalidInputMessage="Make sure the password is at least 8 characters long, is alphanumeric and contains special character(s)."
         secureTextEntry={true}
+        onSubmitEditing={proceedHandler}
+        autoFocus
       />
       <ContinueButton onPress={proceedHandler} />
       <SmallText

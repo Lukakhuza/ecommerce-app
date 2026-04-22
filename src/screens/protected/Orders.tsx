@@ -71,7 +71,6 @@ const Orders = ({ navigation }: Props) => {
   }
 
   const filteredOrders = orders.filter(order => {
-    console.log('Orders:', order.status);
     return selectedStatus === order.status;
   });
 

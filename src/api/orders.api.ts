@@ -1,11 +1,10 @@
-import { Alert } from "react-native";
-import { url } from "./client";
+import { url } from './client';
 
 export const createOrder = async (orderData: object) => {
-  const response = await fetch(url + "/order/create-order/", {
-    method: "POST",
+  const response = await fetch(url + '/order/create-order/', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(orderData),
   });
@@ -14,10 +13,10 @@ export const createOrder = async (orderData: object) => {
 };
 
 export const fetchOrders = async (userId: string) => {
-  const response = await fetch(url + "/order/fetch-orders/" + userId, {
-    method: "GET",
+  const response = await fetch(url + '/order/fetch-orders/' + userId, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const resData = await response.json();

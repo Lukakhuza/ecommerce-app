@@ -1,8 +1,12 @@
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, TextStyle } from 'react-native';
 import { Colors } from '../../theme/colors';
 import Icon from '@react-native-vector-icons/ionicons';
 
-type Props = { style?: any; onChangeText?: any; value?: any };
+type Props = {
+  style?: TextStyle;
+  onChangeText?: (text: string) => void;
+  value?: string;
+};
 
 const SearchComponent = ({ style, onChangeText, value }: Props) => {
   return (

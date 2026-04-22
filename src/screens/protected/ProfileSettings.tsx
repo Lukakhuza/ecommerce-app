@@ -164,7 +164,10 @@ const ProfileSettings = ({ navigation }: Props) => {
             </View>
           </Pressable>
           <Pressable
-            style={styles.signOutContainer}
+            style={({ pressed }) => [
+              styles.signOutContainer,
+              pressed && styles.pressed,
+            ]}
             onPress={() => {
               userInputCtx.clearUserInput();
               authCtx.logout();
@@ -182,8 +185,7 @@ export default ProfileSettings;
 
 const styles = StyleSheet.create({
   pressed: {
-    opacity: 0.75,
-    // backgroundColor: Colors.gray100,
+    opacity: 0.5,
   },
   containerProfilePic: {
     marginTop: 25,

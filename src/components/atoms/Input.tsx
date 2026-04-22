@@ -1,12 +1,19 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  View,
+} from 'react-native';
 import { Colors } from '../../theme/colors';
 
 type Props = {
-  label: any;
+  label: string;
   isValid?: boolean;
-  style?: any;
+  style?: TextStyle;
   invalidInputMessage?: string;
-  textInputConfig: any;
+  textInputConfig: TextInputProps;
 };
 
 const Input = ({
@@ -16,6 +23,7 @@ const Input = ({
   isValid = true,
   invalidInputMessage = 'Invalid Input',
 }: Props) => {
+  console.log('TIC: ', textInputConfig);
   return (
     <View>
       {!isValid && (

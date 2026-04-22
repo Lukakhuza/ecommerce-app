@@ -11,9 +11,15 @@ const data = [
   { label: ' > 60 ', value: ' > 60 ' },
 ];
 
+type Item = {
+  _index: number;
+  label: string;
+  value: string;
+};
+
 type Props = {
   value: string;
-  onChange: (item: any) => void;
+  onChange: (item: Item) => void;
   style: ViewStyle;
 };
 

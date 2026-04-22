@@ -1,17 +1,32 @@
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+} from 'react-native';
 import { FavoritesContext } from '../../store/favorites-context';
 import { ProductsContext } from '../../store/products-context';
 import ProductItem from '../molecules/ProductItem';
+import { HomeTabNavigationProp } from '../../types/navigation';
+import { Product } from '../../types/product';
 
-const ProductList = ({ selection, headerTextStyle }: any) => {
-  const navigation: any = useNavigation();
-  const { products, updateSelectedCategory }: any = useContext(ProductsContext);
-  const { favorites, addFavorite, removeFavorite }: any =
+type Props = {
+  selection: string;
+  headerTextStyle?: TextStyle;
+  products: Product[];
+};
+
+const ProductList = ({ selection, headerTextStyle }: Props) => {
+  const navigation: HomeTabNavigationProp = useNavigation();
+  const { products, updateSelectedCategory } = useContext(ProductsContext);
+  const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);
 
-  const favoritesPressHandler = (id: String) => {
+  const favoritesPressHandler = (id: number) => {
     if (!favorites.includes(id)) {
       addFavorite(id);
     } else {
