@@ -2,7 +2,7 @@ import { useContext, useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Input from '../../components/atoms/Input';
 // import IconButton from "../components/ui/IconButton";
-import Button from '../../components/atoms/Button';
+import Button1 from '../../components/atoms/Button';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
@@ -151,7 +151,7 @@ const ManageUserData = ({ route, navigation }: Props) => {
         />
       </View>
       <View style={styles.buttons}>
-        <Button
+        <Button1
           onPress={cancelHandler}
           mode="flat2"
           style={{
@@ -162,10 +162,10 @@ const ManageUserData = ({ route, navigation }: Props) => {
           }}
         >
           Cancel
-        </Button>
-        <Button mode="" onPress={confirmHandler} style={styles.button}>
+        </Button1>
+        <Button1 mode="" onPress={confirmHandler} style={styles.button}>
           Confirm
-        </Button>
+        </Button1>
       </View>
     </ScreenContainer>
   );

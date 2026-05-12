@@ -24,8 +24,6 @@ type Props = {
 };
 
 const DropdownComponent = ({ value, onChange, style }: Props) => {
-  //   const [value, setValue] = useState(null);
-
   return (
     <Dropdown
       style={[style, styles.dropdown]}
@@ -34,12 +32,10 @@ const DropdownComponent = ({ value, onChange, style }: Props) => {
       inputSearchStyle={styles.inputSearchStyle}
       iconStyle={styles.iconStyle}
       data={data}
-      //   search
       maxHeight={300}
       labelField="label"
       valueField="value"
       placeholder="Age Range"
-      //   searchPlaceholder="Search..."
       value={value}
       onChange={onChange}
     />

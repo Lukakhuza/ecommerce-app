@@ -7,7 +7,7 @@ import { type CartItemType } from '../../types/cart';
 type ItemData = ListRenderItemInfo<CartItemType>;
 
 type Props = {
-  itemData: any;
+  itemData: ItemData;
   imageUri: string;
   onAddItem: () => void;
   onRemoveItem: () => void;
@@ -40,17 +40,18 @@ const CartItem = ({ itemData, imageUri, onAddItem, onRemoveItem }: Props) => {
             </View>
             <View style={styles.itemDesc}>
               <Text style={styles.itemDescLabel}>Qty: </Text>
-              <Text>{itemData.item.quantity}</Text>
+              <Text style={{ width: 18, textAlign: 'center' }}>
+                {itemData.item.quantity}
+              </Text>
             </View>
           </View>
         </View>
         <View>
           <View style={styles.priceContainer}>
             <Text>
-              $
-              {(itemData.item.product.price * itemData.item.quantity).toFixed(
-                2,
-              )}
+              {`$${(
+                itemData.item.product.price * itemData.item.quantity
+              ).toFixed(2)}`}
             </Text>
           </View>
           <View style={styles.buttonsContainer}>
@@ -85,6 +86,8 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 20,
     paddingHorizontal: 20,
+    borderColor: 'blue',
+    borderWidth: 2,
   },
   image: {
     width: 40,

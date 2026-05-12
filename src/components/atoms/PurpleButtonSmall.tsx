@@ -50,13 +50,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 48.6,
     justifyContent: 'center',
     alignItems: 'center',
-    // alignContent: "flex-end",
   },
   text: {
     fontSize: 16,
-    // fontFamily: "Circular-Std",
     fontWeight: 500,
-    // lineHeight: 26.73,
     color: Colors.white100,
     textAlign: 'center',
     justifyContent: 'center',

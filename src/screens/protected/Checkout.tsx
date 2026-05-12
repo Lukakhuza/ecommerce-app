@@ -17,7 +17,7 @@ type Props = {
 
 const Checkout = ({ navigation }: Props) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const { shippingAddress, paymentMethod }: any = useContext(CheckoutContext);
   const cartCtx: any = useContext(CartContext);
 
@@ -82,7 +82,6 @@ const Checkout = ({ navigation }: Props) => {
             onPress={() => {
               navigation.navigate('ManageShippingAddress');
             }}
-            textContainerStyle={styles.shippingAddressTextContainerStyle}
           >
             <Text style={styles.label2} numberOfLines={1}>
               {shippingAddress.addressLine1.value
@@ -178,7 +177,6 @@ const styles = StyleSheet.create({
     color: Colors.white100,
     fontWeight: 700,
   },
-  shippingAddressTextContainerStyle: { maxWidth: 220 },
   image: {
     width: 80,
     height: 40,

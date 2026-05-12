@@ -1,6 +1,6 @@
 import { useContext, useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Button from '../../components/atoms/Button';
+import Button1 from '../../components/atoms/Button';
 import Input from '../../components/atoms/Input';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { UserInputContext } from '../../store/user-input-context';
@@ -181,12 +181,12 @@ const ManageUserAddress = ({ route, navigation }: Props) => {
         />
       </View>
       <View style={styles.buttons}>
-        <Button mode="flat2" onPress={cancelHandler} style={styles.button}>
+        <Button1 mode="flat2" onPress={cancelHandler} style={styles.button}>
           Cancel
-        </Button>
-        <Button mode="" onPress={confirmHandler} style={styles.button}>
+        </Button1>
+        <Button1 mode="" onPress={confirmHandler} style={styles.button}>
           Confirm
-        </Button>
+        </Button1>
       </View>
     </ScreenContainer>
   );

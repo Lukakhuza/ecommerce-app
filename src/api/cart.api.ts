@@ -1,7 +1,8 @@
+import { CartItemType } from '../types/cart';
 import { url } from './client';
 import { debounce } from 'lodash';
 
-export const addToCartInDatabase = async (data: any) => {
+export const addToCartInDatabase = async (data: CartItemType) => {
   const response = await fetch(url + '/product/add-to-cart', {
     method: 'POST',
     headers: {

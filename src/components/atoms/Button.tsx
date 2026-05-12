@@ -9,7 +9,7 @@ type Props = {
   style: object;
 };
 
-const Button = ({ children, onPress, mode, style }: Props) => {
+const Button1 = ({ children, onPress, mode, style }: Props) => {
   return (
     <View style={style}>
       <Pressable
@@ -38,7 +38,7 @@ const Button = ({ children, onPress, mode, style }: Props) => {
   );
 };
 
-export default Button;
+export default Button1;
 
 const styles = StyleSheet.create({
   button: {

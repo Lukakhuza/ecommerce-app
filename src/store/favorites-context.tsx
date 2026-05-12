@@ -25,7 +25,7 @@ type Props = {
 };
 
 const FavoritesContextProvider = ({ children }: Props) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const [favorites, setFavorites] = useState<number[]>([]);
 
   useEffect(() => {

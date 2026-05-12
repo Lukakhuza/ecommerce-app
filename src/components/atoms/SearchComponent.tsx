@@ -29,21 +29,15 @@ export default SearchComponent;
 
 const styles = StyleSheet.create({
   searchBarContainer: {
-    // marginHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderColor: Colors.red100,
-    // borderWidth: 4,
-    // height: 40,
   },
   searchBar: {
     backgroundColor: Colors.bgLight2,
-    // borderColor: Colors.black,
     flex: 1,
     height: 50,
     paddingLeft: 40,
-    // borderWidth: 2,
     borderRadius: 30,
   },
   searchIcon: {

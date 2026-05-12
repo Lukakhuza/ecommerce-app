@@ -10,8 +10,7 @@ type Props = {
 const SmallText = ({ primaryText, secondaryText, onPress, style }: Props) => {
   return (
     <View style={styles.textContainer}>
-      <Text>{primaryText}</Text>
-      <Text> </Text>
+      <Text>{`${primaryText} `}</Text>
       <Pressable
         onPress={onPress}
         style={({ pressed }) => [pressed && styles.pressed, style]}

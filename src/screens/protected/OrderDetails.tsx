@@ -13,6 +13,8 @@ const OrderDetails = ({ navigation }: Props) => {
   const route: any = useRoute();
   const orderData = route.params.orderData;
 
+  console.log('Test 00: ', orderData);
+
   const shippingAddress = orderData.item.shippingAddress;
 
   const formattedOrderDate = formatDate(orderData.item.createdAt);
@@ -194,7 +196,9 @@ const OrderDetails = ({ navigation }: Props) => {
         >
           <View style={styles.shippingAddress}>
             <Text style={{ fontSize: 16 }}>
-              {`${shippingAddress.addressLine1}, ${shippingAddress.city}, ${shippingAddress.state} ${shippingAddress.zipcode}`}
+              {shippingAddress
+                ? `${shippingAddress.addressLine1}, ${shippingAddress.city}, ${shippingAddress.state} ${shippingAddress.zipcode}`
+                : 'No shipping address available'}
             </Text>
           </View>
         </View>

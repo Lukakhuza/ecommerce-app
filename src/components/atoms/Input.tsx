@@ -23,7 +23,6 @@ const Input = ({
   isValid = true,
   invalidInputMessage = 'Invalid Input',
 }: Props) => {
-  console.log('TIC: ', textInputConfig);
   return (
     <View>
       {!isValid && (

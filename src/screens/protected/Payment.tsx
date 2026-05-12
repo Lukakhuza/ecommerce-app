@@ -15,7 +15,7 @@ type Props = {
 const Payment = ({ navigation }: Props) => {
   const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const { stripeCustomerId: customerId } = userInputCtx.userInput;
 
   useEffect(() => {
@@ -26,14 +26,14 @@ const Payment = ({ navigation }: Props) => {
       setIsLoading(false);
     };
     load();
-  }, [paymentMethods]);
+  }, []);
 
   if (isLoading) {
     return <LoadingOverlay message="Loading Payment Methods..." />;
   }
 
   return (
-    <ScreenContainer style={{ flex: 1 }}>
+    <ScreenContainer style={{ flex: 1, borderColor: 'green', borderWidth: 2 }}>
       {paymentMethods?.length > 0 ? (
         <FlatList
           data={paymentMethods}
@@ -85,21 +85,14 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 150,
     marginHorizontal: 10,
-    // borderColor: "brown",
-    // borderWidth: 3,
     alignItems: 'center',
   },
   textContainer: {
     height: 50,
-    // justifyContent: "center",
   },
   noMethodsText: {
-    // color: Colors.primary100,
     textAlign: 'center',
-    // borderColor: "blue",
-    // borderWidth: 2,
     fontSize: 18,
-    justifyContent: 'center',
     fontWeight: 500,
   },
 });

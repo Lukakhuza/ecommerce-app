@@ -44,7 +44,7 @@ type OrdersResponse = Order[];
 const emptyOrdersArray: OrdersResponse = [];
 
 const Orders = ({ navigation }: Props) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const userId = userInputCtx.userInput.id.value;
   const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState(emptyOrdersArray);
@@ -83,8 +83,6 @@ const Orders = ({ navigation }: Props) => {
             <ScrollView
               horizontal
               contentContainerStyle={{
-                // borderWidth: 2,
-                // borderColor: "blue",
                 flexDirection: 'row',
                 alignItems: 'center',
                 height: 60,
@@ -118,38 +116,24 @@ const Orders = ({ navigation }: Props) => {
             <View>
               <FlatList
                 data={filteredOrders}
-                contentContainerStyle={
-                  {
-                    // borderColor: "brown", borderWidth: 3
-                  }
-                }
                 renderItem={order => {
                   return (
                     <Pressable
                       onPress={() => {
                         const cleanOrder = JSON.parse(JSON.stringify(order));
-                        // productsCtx.updateSelectedCategory("Jackets");
                         navigation.navigate('OrdersTab', {
                           screen: 'OrderDetails',
                           params: { orderData: cleanOrder },
                         });
                       }}
-                      style={{
-                        marginVertical: 5,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'stretch',
-                        backgroundColor: Colors.bgLight2,
-                        height: 80,
-                        borderRadius: 20,
-                        paddingHorizontal: 10,
-                      }}
+                      style={({ pressed }) => [
+                        styles.order,
+                        pressed && styles.pressed,
+                      ]}
                     >
                       <View
                         style={{
                           flex: 1,
-                          // borderWidth: 2,
-                          // borderColor: "red",
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
@@ -159,8 +143,6 @@ const Orders = ({ navigation }: Props) => {
                       <View
                         style={{
                           flex: 4,
-                          // borderColor: "purple",
-                          // borderWidth: 3,
                           alignItems: 'flex-start',
                           justifyContent: 'center',
                           paddingLeft: 10,
@@ -178,8 +160,6 @@ const Orders = ({ navigation }: Props) => {
                       <View
                         style={{
                           flex: 1,
-                          // borderWidth: 2,
-                          // borderColor: "blue",
                           alignItems: 'flex-end',
                           justifyContent: 'center',
                           paddingLeft: 10,
@@ -204,9 +184,6 @@ const Orders = ({ navigation }: Props) => {
               <Text style={{ fontSize: 20, marginVertical: 10 }}>
                 No Orders yet
               </Text>
-              {/* <Text style={{ fontSize: 20, marginVertical: 10 }}>
-                {orders.length}
-                </Text> */}
             </View>
             <View>
               <SmallPurpleButton
@@ -260,5 +237,18 @@ const styles = StyleSheet.create({
   },
   selected: {
     backgroundColor: Colors.primary100,
+  },
+  order: {
+    marginVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
+    backgroundColor: Colors.bgLight2,
+    height: 80,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+  },
+  pressed: {
+    opacity: 0.3,
   },
 });

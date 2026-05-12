@@ -1,6 +1,13 @@
 import Icon from '@react-native-vector-icons/ionicons';
 import { useContext, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import PurpleButtonSmall from '../../components/atoms/PurpleButtonSmall';
 import { Colors } from '../../theme/colors';
 import { AuthContext } from '../../store/auth-context';
@@ -123,30 +130,34 @@ const ProductDetails = ({ route, navigation }: Props) => {
                     alignItems: 'center',
                   }}
                 >
-                  <Icon
-                    name="remove-circle-outline"
-                    size={35}
+                  <Pressable
                     onPress={() => {
                       if (quantity > 1) {
                         setQuantity(quantity - 1);
                       }
                     }}
-                  />
+                    style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+                  >
+                    <Icon name="remove-circle-outline" size={35} />
+                  </Pressable>
                   <Text
                     style={{
                       fontSize: 17,
                       marginHorizontal: 5,
+                      width: 24,
+                      textAlign: 'center',
                     }}
                   >
                     {quantity}
                   </Text>
-                  <Icon
-                    name="add-circle-outline"
-                    size={35}
+                  <Pressable
                     onPress={() => {
                       setQuantity(quantity + 1);
                     }}
-                  />
+                    style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+                  >
+                    <Icon name="add-circle-outline" size={35} />
+                  </Pressable>
                 </View>
               </View>
               <Text

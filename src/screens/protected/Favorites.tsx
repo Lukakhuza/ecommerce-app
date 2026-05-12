@@ -22,7 +22,7 @@ type Props = {
 
 const Favorites = ({ navigation }: Props) => {
   const authCtx: any = useContext(AuthContext);
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const { favorites }: any = useContext(FavoritesContext);
   const [filteredProds, setFilteredProds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -106,7 +106,7 @@ const Favorites = ({ navigation }: Props) => {
       <View>
         <PurpleButtonSmall
           onPress={() => {
-            userInputCtx.resetInputs();
+            // userInputCtx.resetInputs();
             authCtx.logout();
           }}
           disabled={false}

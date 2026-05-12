@@ -18,7 +18,6 @@ const DataInput = ({
   secureTextEntry = false,
   isValid = true,
   invalidInputMessage = 'Invalid Input',
-  // onChangeText = () => {},
   ...props
 }: Props) => {
   return (

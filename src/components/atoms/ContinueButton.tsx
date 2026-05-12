@@ -42,9 +42,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    // fontFamily: "Circular-Std",
     fontWeight: 500,
-    // lineHeight: 26.73,
     color: Colors.white100,
     textAlign: 'center',
     justifyContent: 'center',

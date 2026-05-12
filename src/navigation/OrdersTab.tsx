@@ -1,10 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import IconButton from '../components/atoms/IconButton';
 import OrderDetails from '../screens/protected/OrderDetails';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import OrderItems from '../screens/protected/OrderItems';
 import Orders from '../screens/protected/Orders';
 
 const Stack = createNativeStackNavigator();
+
+type StackParamList = {
+  Orders: unknown;
+  OrderDetails: unknown;
+  OrderItems: unknown;
+};
 
 const OrdersTab = () => {
   return (

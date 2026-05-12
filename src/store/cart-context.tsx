@@ -21,7 +21,7 @@ type Props = {
 };
 
 const CartContextProvider = ({ children }: Props) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState(
     userInputCtx.userInput.cart.items ?? [],
@@ -115,7 +115,7 @@ const CartContextProvider = ({ children }: Props) => {
     // Update cart in the database:
     const response = await addToCartInDatabase(data);
     // Update cartItems
-    console.log('Test 30: ', response.user.cart.items);
+
     setCartItems(response.user.cart.items);
     setIsLoading(false);
   };

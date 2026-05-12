@@ -130,6 +130,7 @@ export const isValidUSState = (input: string) => {
     'WV',
     'WI',
     'WY',
+    'DC',
   ];
 
   if (typeof input !== 'string') return false;

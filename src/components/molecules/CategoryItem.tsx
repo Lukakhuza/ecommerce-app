@@ -41,7 +41,7 @@ const CategoryItem = ({
 export default CategoryItem;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, alignItems: 'center' },
   imageContainer: {
     height: 63,
     width: 63,

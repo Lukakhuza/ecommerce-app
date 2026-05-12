@@ -15,6 +15,7 @@ export const createUser = async (user: User) => {
 };
 
 export const createCustomerInStripe = async (user: User) => {
+  console.log('Creating customer in stripe....');
   const response = await fetch(url + '/user/create-customer-in-stripe/', {
     method: 'POST',
     headers: {

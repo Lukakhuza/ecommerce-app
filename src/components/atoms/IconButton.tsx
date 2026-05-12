@@ -5,7 +5,7 @@ import { Colors } from '../../theme/colors';
 type Props = {
   icon: IoniconsIconName;
   size: number;
-  color: string;
+  color: string | undefined;
   onPress: () => void;
   style?: TextStyle;
 };

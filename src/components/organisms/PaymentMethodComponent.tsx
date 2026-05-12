@@ -1,9 +1,14 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
+import * as stripeData from '@stripe/stripe-react-native';
+import { CardInfo } from '../../types/stripe';
 
-const PaymentMethodComponent = ({ cardInfo }: any) => {
-  console.log('Test 20', cardInfo);
-  const cardImages: any = {
+type Props = {
+  cardInfo: CardInfo;
+};
+
+const PaymentMethodComponent = ({ cardInfo }: Props) => {
+  const cardImages: Record<string, ReturnType<NodeRequire>> = {
     visa: require('../../../assets/images/logos/visa.png'),
     mastercard: require('../../../assets/images/logos/mastercard.png'),
     amex: require('../../../assets/images/logos/amex.png'),
@@ -42,6 +47,8 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 20,
     paddingHorizontal: 10,
+    borderColor: 'blue',
+    borderWidth: 2,
   },
   label1: {
     color: Colors.gray100,

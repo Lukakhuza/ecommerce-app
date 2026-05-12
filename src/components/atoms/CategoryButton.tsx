@@ -43,10 +43,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    // width: "100%",
-    // height: 50,
     flex: 1,
-    // zIndex: 10,
     overflow: 'hidden',
     resizeMode: 'contain',
   },
@@ -62,16 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // justifyContent: "flex-start",
-    // borderColor: Colors.orange100,
-    // borderWidth: 5,
-    // alignItems: "flex-start",
-    // alignContent: "flex-start",
-    // alignItems: "ce?nter",
-    // justifyContent: "center",
-    // backgroundColor: Colors.white100,
     height: 80,
-    // width:
     borderRadius: 20,
   },
   pressed: {
