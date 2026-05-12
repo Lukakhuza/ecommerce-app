@@ -58,8 +58,6 @@ const Favorites = ({ navigation }: Props) => {
     <View
       style={{
         backgroundColor: Colors.primary100,
-        // alignItems: "center",
-        // justifyContent: "center",
       }}
     >
       <View style={styles.fl}>
@@ -133,10 +131,7 @@ const styles: any = StyleSheet.create({
     zIndex: 1,
   },
   noFavorites: {
-    // flex: 1,
-    // marginTop: 100,
     color: Colors.white100,
-    // textDecorationLine: "",
     justifyContent: 'center',
     textAlign: 'center',
     marginHorizontal: 30,
@@ -165,12 +160,7 @@ const styles: any = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
-  flatlistContainer: {
-    // marginBottom: 30,
-  },
   fl: {
-    // flex: 2,
-    // flexGrow: 600,
     height: 840,
   },
 });

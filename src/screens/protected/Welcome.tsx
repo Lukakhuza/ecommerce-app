@@ -15,6 +15,7 @@ import { FavoritesContext } from '../../store/favorites-context';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import IconButton from '../../components/atoms/IconButton';
 
 type Props = {
   navigation: any;
@@ -74,15 +75,27 @@ const Welcome = ({ navigation }: Props) => {
       style={{
         flex: 1,
         paddingTop: 10,
-        marginTop: 30,
+        // marginTop: 30,
         marginBottom: 24,
         paddingHorizontal: 0,
       }}
     >
-      <Text style={styles.category}>
-        {' '}
-        {productsCtx.selectedCategory} ({filteredProducts.length})
-      </Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <IconButton
+          icon="chevron-back-circle-outline"
+          size={28}
+          color={'black'}
+          onPress={() => navigation.goBack()}
+        />
+        <Text style={styles.category}>
+          {productsCtx.selectedCategory} ({filteredProducts.length})
+        </Text>
+      </View>
       <FlatList
         data={filteredProducts}
         overScrollMode="never"
@@ -149,9 +162,9 @@ const styles = StyleSheet.create({
     // top: 10,
   },
   category: {
-    marginLeft: 30,
-    marginBottom: 10,
-    fontSize: 20,
+    // marginLeft: 30,
+    // marginBottom: 10,
+    fontSize: 22,
     fontWeight: 500,
   },
   header: {

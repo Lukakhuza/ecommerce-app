@@ -25,3 +25,12 @@ export type HomeTabParamList = {
 };
 
 export type HomeTabNavigationProp = NativeStackNavigationProp<HomeTabParamList>;
+
+export type OrdersTabParamList = {
+  Orders: undefined;
+  OrderDetails: undefined;
+  OrderItems: undefined;
+};
+
+export type OrdersTabNavigationProp =
+  NativeStackNavigationProp<OrdersTabParamList>;

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
 import * as stripeData from '@stripe/stripe-react-native';
 import { CardInfo } from '../../types/stripe';
@@ -18,7 +18,7 @@ const PaymentMethodComponent = ({ cardInfo }: Props) => {
   const cardBrand = cardInfo?.brand;
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View>
@@ -31,7 +31,7 @@ const PaymentMethodComponent = ({ cardInfo }: Props) => {
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -40,6 +40,7 @@ export default PaymentMethodComponent;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 5,
+    marginHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

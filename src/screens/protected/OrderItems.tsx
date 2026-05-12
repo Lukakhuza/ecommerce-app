@@ -108,8 +108,6 @@ const OrderItems = ({ navigation }: Props) => {
                                 justifyContent: 'flex-start',
                                 alignItems: 'flex-end',
                                 marginRight: 20,
-                                // borderWidth: 3,
-                                // borderColor: "yellow",
                               }}
                             >
                               <View>
