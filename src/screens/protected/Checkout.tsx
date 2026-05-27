@@ -57,6 +57,8 @@ const Checkout = ({ navigation }: Props) => {
       const orderData = {
         userId: userInputCtx.userInput.id.value,
         items: orderItems,
+        taxAmount: taxAmount,
+        shippingCost: shippingCost,
         total: total,
         shippingAddress: {
           addressLine1: shippingAddress.addressLine1.value,

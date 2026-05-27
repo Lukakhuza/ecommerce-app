@@ -3,6 +3,7 @@ import { url } from './client';
 import { User, UserData } from '../types/user';
 
 export const createUser = async (user: User) => {
+  console.log(JSON.stringify(user));
   const response = await fetch(url + '/user/create-user/', {
     method: 'PUT',
     headers: {

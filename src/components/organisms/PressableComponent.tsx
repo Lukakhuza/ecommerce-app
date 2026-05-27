@@ -18,7 +18,7 @@ const PressableComponent = ({
 }: PressableComponentType) => {
   return (
     <Pressable onPress={onPress} style={styles.container} disabled={disabled}>
-      <View>
+      <View style={{ flex: 1 }}>
         <Text style={styles.label1}>{label}</Text>
         <View>{children}</View>
       </View>
@@ -40,18 +40,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgLight2,
     height: 80,
     borderRadius: 20,
-    paddingHorizontal: 10,
+    borderColor: 'blue',
+    borderWidth: 2,
+    // paddingHorizontal: 10,
   },
   label1: {
     color: Colors.gray100,
     fontSize: 17,
     marginLeft: 10,
     marginVertical: 4,
-  },
-  label2: {
-    fontSize: 20,
-    marginLeft: 10,
-    marginVertical: 4,
-    fontWeight: 700,
   },
 });

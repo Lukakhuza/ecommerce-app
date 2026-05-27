@@ -6,7 +6,9 @@ import { StripeData } from '../types/stripe';
 import { url } from './client';
 
 export const fetchProductsData = async () => {
-  const response = await fetch('https://fakestoreapi.com/products');
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-products',
+  );
   const resData = await response.json();
   return resData;
 };

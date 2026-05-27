@@ -13,8 +13,6 @@ const OrderDetails = ({ navigation }: Props) => {
   const route: any = useRoute();
   const orderData = route.params.orderData;
 
-  console.log('Test 00: ', orderData);
-
   const shippingAddress = orderData.item.shippingAddress;
 
   const formattedOrderDate = formatDate(orderData.item.createdAt);
@@ -166,6 +164,7 @@ const OrderDetails = ({ navigation }: Props) => {
               onPress={() => {
                 navigation.navigate('OrderItems', { orderData: orderData });
               }}
+              style={({ pressed }) => pressed && styles.pressed}
             >
               <Text
                 style={{
@@ -224,4 +223,5 @@ const styles = StyleSheet.create({
   },
   shippingAddress: { marginVertical: 4 },
   phoneNumber: { marginVertical: 4 },
+  pressed: { opacity: 0.4 },
 });
