@@ -1,13 +1,16 @@
 import { url } from './client';
 
 export const createOrder = async (orderData: object) => {
-  const response = await fetch(url + '/order/create-order/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-order',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderData),
     },
-    body: JSON.stringify(orderData),
-  });
+  );
   const resData = await response.json();
   return resData;
 };

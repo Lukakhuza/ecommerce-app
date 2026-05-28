@@ -3,7 +3,6 @@ import { url } from './client';
 import { User, UserData } from '../types/user';
 
 export const createUser = async (user: User) => {
-  console.log(JSON.stringify(user));
   const response = await fetch(url + '/user/create-user/', {
     method: 'PUT',
     headers: {
@@ -16,7 +15,7 @@ export const createUser = async (user: User) => {
 };
 
 export const createCustomerInStripe = async (user: User) => {
-  console.log('Creating customer in stripe....');
+  // console.log('Creating customer in stripe....');
   const response = await fetch(url + '/user/create-customer-in-stripe/', {
     method: 'POST',
     headers: {

@@ -19,7 +19,7 @@ const OrderItems = ({ navigation }: Props) => {
   const productsCtx: any = useContext(ProductsContext);
   const cartCtx: any = useContext(CartContext);
 
-  console.log('Test 11: ', route.params.orderData);
+  // console.log('Test 11: ', route.params.orderData);
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 30 }}>
