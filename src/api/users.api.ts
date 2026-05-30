@@ -3,13 +3,17 @@ import { url } from './client';
 import { User, UserData } from '../types/user';
 
 export const createUser = async (user: User) => {
-  const response = await fetch(url + '/user/create-user/', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-user',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
     },
-    body: JSON.stringify(user),
-  });
+  );
+
   const resData = await response.json();
   return resData;
 };
