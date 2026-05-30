@@ -16,12 +16,17 @@ export const createOrder = async (orderData: object) => {
 };
 
 export const fetchOrders = async (userId: string) => {
-  const response = await fetch(url + '/order/fetch-orders/' + userId, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/fetch-orders',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: userId }),
     },
-  });
+  );
+
   const resData = await response.json();
   return resData;
 };

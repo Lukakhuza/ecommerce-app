@@ -57,7 +57,7 @@ const Orders = ({ navigation }: Props) => {
       setIsLoading(true);
       await wait(500);
       if (isFocused) {
-        const fetchedOrders = await fetchOrders(userId);
+        const fetchedOrders: any = await fetchOrders(userId);
         setOrders(fetchedOrders);
       }
       setIsLoading(false);

@@ -68,6 +68,8 @@ const Checkout = ({ navigation }: Props) => {
         },
         paymentMethod: paymentMethod,
       };
+
+      // console.log('ORDER Data: ', orderData);
       await createOrder(orderData);
       cartCtx.clearCart();
       navigation.navigate('Home');
