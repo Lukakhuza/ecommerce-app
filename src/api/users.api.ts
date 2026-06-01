@@ -33,24 +33,6 @@ export const createCustomerInStripe = async (user: User) => {
   return resData;
 };
 
-export const validateToken = async (token: string) => {
-  const tokenData = {
-    token: token,
-  };
-  const result = await fetch(url + '/user/authenticate/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(tokenData),
-  });
-  const resData = await result.json();
-  // setIsLoading(false);
-  return resData;
-  // SecureStore.setItemAsync("token", token);
-  // setAuthToken(token);
-};
-
 export const fetchToken = async (userData: object) => {
   try {
     const response = await fetch(url + '/user/login/', {
