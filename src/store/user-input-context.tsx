@@ -301,14 +301,14 @@ const UserInputContextProvider = ({ children }: Props) => {
       lastName: lastName,
       phoneNumber: phoneNumber,
       address: {
-        addressLine1: address.addressLine1,
-        city: address.city,
-        state: address.state,
-        zipcode: address.zipcode,
+        addressLine1: address?.addressLine1,
+        city: address?.city,
+        state: address?.state,
+        zipcode: address?.zipcode,
       },
       shopFor: shopFor,
       ageRange: '27 to 35',
-      cart: { items: cart.items },
+      cart: { items: cart?.items },
       stripeCustomerId: stripeId,
     };
 

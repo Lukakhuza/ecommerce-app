@@ -53,18 +53,18 @@ const Checkout = ({ navigation }: Props) => {
 
     const response = await openPaymentSheet(stripeData);
     if (response.success === true) {
-      const orderItems = cartCtx.cartItems;
+      const orderItems = cartCtx?.cartItems;
       const orderData = {
-        userId: userInputCtx.userInput.id.value,
+        userId: userInputCtx?.userInput?.id?.value,
         items: orderItems,
         taxAmount: taxAmount,
         shippingCost: shippingCost,
         total: total,
         shippingAddress: {
-          addressLine1: shippingAddress.addressLine1.value,
-          city: shippingAddress.city.value,
-          state: shippingAddress.state.value,
-          zipcode: shippingAddress.zipcode.value,
+          addressLine1: shippingAddress?.addressLine1?.value,
+          city: shippingAddress?.city?.value,
+          state: shippingAddress?.state?.value,
+          zipcode: shippingAddress?.zipcode?.value,
         },
         paymentMethod: paymentMethod,
       };
