@@ -24,14 +24,21 @@ const CartContextProvider = ({ children }: Props) => {
   const userInputCtx = useContext(UserInputContext);
   const [isLoading, setIsLoading] = useState(false);
   const [cartItems, setCartItems] = useState(
-    userInputCtx.userInput.cart.items ?? [],
+    userInputCtx.userInput?.cart?.items ?? [],
   );
+
+  // console.log(
+  //   'Test User Input CTX 123: ',
+  //   userInputCtx.userInput.cart.items.length,
+  // );
   const [userId, setUserId] = useState(userInputCtx.userInput.id.value ?? '');
 
   useEffect(() => {
+    // console.log('Test 1: ', userInputCtx.userInput.cart.items);
     if (userInputCtx.userInput.cart.items) {
       setCartItems(userInputCtx.userInput.cart.items);
     }
+    // setCartItems(userInputCtx.userInput?.cart?.items ?? []);
   }, [userInputCtx.userInput.cart.items]);
 
   useEffect(() => {
@@ -115,8 +122,7 @@ const CartContextProvider = ({ children }: Props) => {
     // Update cart in the database:
     const response = await addToCartInDatabase(data);
     // Update cartItems
-
-    setCartItems(response.user.cart.items);
+    setCartItems(response.userData.cart.items);
     setIsLoading(false);
   };
 

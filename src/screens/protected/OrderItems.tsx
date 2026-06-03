@@ -280,8 +280,6 @@ const OrderItems = ({ navigation }: Props) => {
                 horizontal={false}
                 data={orderItems}
                 renderItem={itemData => {
-                  // console.log('Test 0: ', typeof itemData.item.product.id);
-                  // console.log(
                   //   productsCtx.products[itemData.item.product.id - 1]
                   //     .image,
                   // );

@@ -37,12 +37,18 @@ const ProductDetails = ({ route, navigation }: Props) => {
       quantity: quantity,
     };
 
+    console.log('Test 2', productData);
+
     const userId = userInputCtx.userInput.id.value;
+
+    console.log('Test 3', userId);
 
     const data = {
       productData: productData,
       userId: userId,
     };
+
+    console.log('Test 4', data);
     await cartCtx.addProductToCart(data);
   };
 

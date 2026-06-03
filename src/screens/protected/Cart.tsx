@@ -25,9 +25,11 @@ const Cart = ({ navigation }: Props) => {
   const productsCtx: any = useContext(ProductsContext);
   const { cartItems, addItem, removeItem, clearCart, isLoading }: any =
     useContext(CartContext);
+  const cartCtx = useContext(CartContext);
 
   let subtotal = 0;
-  for (let i = 0; i < cartItems.length; i++) {
+
+  for (let i = 0; i < cartItems?.length; i++) {
     subtotal += cartItems[i].product.price * cartItems[i].quantity;
   }
 
@@ -39,9 +41,11 @@ const Cart = ({ navigation }: Props) => {
     return <LoadingOverlay message="Loading Cart..." />;
   }
 
+  // console.log('Cart Context: ', cartCtx);
+
   return (
     <ScreenContainer style={{ flex: 1, paddingBottom: 24 }}>
-      {cartItems.length > 0 && (
+      {cartItems?.length > 0 && (
         <View style={styles.outerContainer1}>
           <View style={styles.topSection}>
             <Pressable style={styles.removeAll} onPress={clearCart}>
@@ -92,7 +96,7 @@ const Cart = ({ navigation }: Props) => {
           </View>
         </View>
       )}
-      {cartItems.length === 0 && (
+      {cartItems?.length === 0 && (
         <View style={styles.outerContainer2}>
           <View style={styles.innerContainer}>
             <Image style={styles.image} source={parcelImage} />

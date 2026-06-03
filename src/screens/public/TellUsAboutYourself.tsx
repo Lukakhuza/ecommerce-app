@@ -41,7 +41,6 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
 
     const createdUser = await createUser(user);
 
-    // console.log('Created User: ', createdUser);
     const { id: stripeId } = await createCustomerInStripe(createdUser);
     userInputCtx.updateStripeId(createdUser, stripeId);
     userInputCtx.clearUserInput();
