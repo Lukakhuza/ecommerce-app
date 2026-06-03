@@ -16,9 +16,11 @@ export const addPaymentMethod = async (paymentMethodData: Object) => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const fetchPaymentMethods = async (stripeCustomerId: string) => {
   const response = await fetch(
-    url + '/checkout/payment-methods/' + stripeCustomerId,
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-payment-methods/' +
+      stripeCustomerId,
     {
       method: 'GET',
       headers: {
