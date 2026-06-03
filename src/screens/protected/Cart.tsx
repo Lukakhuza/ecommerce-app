@@ -41,8 +41,6 @@ const Cart = ({ navigation }: Props) => {
     return <LoadingOverlay message="Loading Cart..." />;
   }
 
-  // console.log('Cart Context: ', cartCtx);
-
   return (
     <ScreenContainer style={{ flex: 1, paddingBottom: 24 }}>
       {cartItems?.length > 0 && (

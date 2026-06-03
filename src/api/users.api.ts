@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import { url } from './client';
 import { User, UserData } from '../types/user';
 
+// Migrated to AWS Lambda ✅
 export const createUser = async (user: User) => {
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-user',
@@ -18,6 +19,7 @@ export const createUser = async (user: User) => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const createCustomerInStripe = async (user: User) => {
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-customer-in-stripe',

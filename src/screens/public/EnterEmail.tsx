@@ -50,7 +50,7 @@ const EnterEmail = ({ navigation }: any) => {
       <View style={styles.oAuthButtonsContainer}>
         <ButtonOAuth
           onPress={() => {
-            console.log('Log in with your Apple account.');
+            // console.log('Log in with your Apple account.');
           }}
           imageSource={require('../../../assets/images/logos/OAuth/apple-logo.png')}
         >
@@ -64,7 +64,7 @@ const EnterEmail = ({ navigation }: any) => {
         </ButtonOAuth>
         <ButtonOAuth
           onPress={() => {
-            console.log('Log in with your Facebook account.');
+            // console.log('Log in with your Facebook account.');
           }}
           imageSource={require('../../../assets/images/logos/OAuth/facebook-logo.png')}
         >

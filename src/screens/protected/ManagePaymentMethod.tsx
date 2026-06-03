@@ -40,6 +40,8 @@ const ManagePaymentMethod = ({ route, navigation }: Props) => {
       paymentMethodId: paymentMethod.id,
     };
 
+    console.log('Test 1: ', JSON.stringify(paymentMethodData));
+
     const { stripePaymentMethod } = await addPaymentMethod(paymentMethodData);
 
     checkoutCtx.updatePaymentMethod(stripePaymentMethod);

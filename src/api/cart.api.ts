@@ -2,6 +2,7 @@ import { CartItemType } from '../types/cart';
 import { url } from './client';
 import { debounce } from 'lodash';
 
+// Migrated to AWS Lambda ✅
 export const addToCartInDatabase = async (data: CartItemType) => {
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/add-to-cart-in-database',
@@ -18,6 +19,7 @@ export const addToCartInDatabase = async (data: CartItemType) => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const updateCartInDatabase = debounce(async (data: Object) => {
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/update-cart',

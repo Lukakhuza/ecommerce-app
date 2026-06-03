@@ -5,6 +5,7 @@ import {
 import { StripeData } from '../types/stripe';
 import { url } from './client';
 
+// Migrated to AWS Lambda ✅
 export const fetchProductsData = async () => {
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-products',

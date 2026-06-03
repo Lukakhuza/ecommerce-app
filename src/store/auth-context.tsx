@@ -49,7 +49,6 @@ const AuthContextProvider = ({ children }: Props) => {
         setIsAuthenticated(false);
       }
     } catch (error) {
-      console.log('Error loading token', error);
     } finally {
       await wait(500);
       setIsLoading(false);
@@ -74,7 +73,6 @@ const AuthContextProvider = ({ children }: Props) => {
       setIsAuthenticated(true);
       setGenericPassword('token', token);
     } catch (error) {
-      console.log(error);
       Alert.alert(
         'Authentication Failed',
         'Please check your credentials and try again!',
