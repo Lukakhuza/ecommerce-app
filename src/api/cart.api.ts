@@ -19,13 +19,16 @@ export const addToCartInDatabase = async (data: CartItemType) => {
 };
 
 export const updateCartInDatabase = debounce(async (data: Object) => {
-  const response = await fetch(url + '/product/update-cart', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/update-cart',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
   const resData = await response.json();
   return resData;
 }, 3000);

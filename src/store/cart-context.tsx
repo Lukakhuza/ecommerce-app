@@ -27,18 +27,12 @@ const CartContextProvider = ({ children }: Props) => {
     userInputCtx.userInput?.cart?.items ?? [],
   );
 
-  // console.log(
-  //   'Test User Input CTX 123: ',
-  //   userInputCtx.userInput.cart.items.length,
-  // );
   const [userId, setUserId] = useState(userInputCtx.userInput.id.value ?? '');
 
   useEffect(() => {
-    // console.log('Test 1: ', userInputCtx.userInput.cart.items);
     if (userInputCtx.userInput.cart.items) {
       setCartItems(userInputCtx.userInput.cart.items);
     }
-    // setCartItems(userInputCtx.userInput?.cart?.items ?? []);
   }, [userInputCtx.userInput.cart.items]);
 
   useEffect(() => {
