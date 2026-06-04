@@ -67,7 +67,6 @@ export const getUserByEmail = async (email: string) => {
 
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-user-by-email',
-    // url + '/user/get-user-by-email',
     {
       method: 'POST',
       headers: {
@@ -76,23 +75,24 @@ export const getUserByEmail = async (email: string) => {
       body: JSON.stringify(userData),
     },
   );
-  console.log('Test 5: ', response);
   const resData = await response.json();
-  console.log('TEst 6: ', resData);
   return resData;
 };
 
 export const saveUserDataToDatabase = async (userData: UserData) => {
   try {
     const userId = userData.id;
-
-    const result = await fetch(url + '/user/update-user/' + userId, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+    const result = await fetch(
+      'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/update-user/' +
+        userId,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       },
-      body: JSON.stringify(userData),
-    });
+    );
     const resData = await result.json();
     return resData;
   } catch (error) {
