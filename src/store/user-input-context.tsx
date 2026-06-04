@@ -103,7 +103,9 @@ const UserInputContextProvider = ({ children }: Props) => {
     if (!authToken) return;
     const decoded: DecodedToken = jwtDecode(authToken);
     const email = decoded.email;
-    const { user } = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
+
+    console.log('Test 7: ', user);
     setUserInput({
       id: { value: user.id ? user.id : '', isValid: true },
       firstName: {
