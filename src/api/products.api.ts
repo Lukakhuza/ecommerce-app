@@ -20,14 +20,6 @@ export const createPaymentSheet = async (
   totalAmount: Number,
   currency: string,
 ) => {
-  console.log(
-    'Test 1: ',
-    JSON.stringify({
-      customerId: stripeCustomerId,
-      totalAmount: totalAmount,
-      currency: currency,
-    }),
-  );
   const response = await fetch(
     'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-payment-sheet',
     {

@@ -37,13 +37,16 @@ export const createCustomerInStripe = async (user: User) => {
 
 export const fetchToken = async (userData: object) => {
   try {
-    const response = await fetch(url + '/user/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/login-user',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       },
-      body: JSON.stringify(userData),
-    });
+    );
     const resData = await response.json();
     if (!response.ok) {
       throw new Error(resData.message);
