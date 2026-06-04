@@ -35,6 +35,7 @@ export const createCustomerInStripe = async (user: User) => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const fetchToken = async (userData: object) => {
   try {
     const response = await fetch(
@@ -58,17 +59,22 @@ export const fetchToken = async (userData: object) => {
   }
 };
 
+// Migrated to AWS Lambda ✅
 export const getUserByEmail = async (email: string) => {
   const userData = {
     email: email,
   };
-  const response = await fetch(url + '/user/get-user-by-email', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-user-by-email',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
     },
-    body: JSON.stringify(userData),
-  });
+  );
   const resData = await response.json();
   return resData;
 };
