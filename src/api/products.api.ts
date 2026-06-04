@@ -14,22 +14,34 @@ export const fetchProductsData = async () => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const createPaymentSheet = async (
   stripeCustomerId: string,
   totalAmount: Number,
   currency: string,
 ) => {
-  const response = await fetch(url + '/product/create-payment-sheet/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  console.log(
+    'Test 1: ',
+    JSON.stringify({
       customerId: stripeCustomerId,
       totalAmount: totalAmount,
       currency: currency,
     }),
-  });
+  );
+  const response = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-payment-sheet',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        customerId: stripeCustomerId,
+        totalAmount: totalAmount,
+        currency: currency,
+      }),
+    },
+  );
   const resData = response.json();
   return resData;
 };
