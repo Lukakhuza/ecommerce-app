@@ -79,6 +79,7 @@ export const getUserByEmail = async (email: string) => {
   return resData;
 };
 
+// Migrated to AWS Lambda ✅
 export const saveUserDataToDatabase = async (userData: UserData) => {
   try {
     const userId = userData.id;
@@ -100,23 +101,7 @@ export const saveUserDataToDatabase = async (userData: UserData) => {
   }
 };
 
-// export const saveUserDataToContext = async (userData) => {
-//   try {
-//     const userId = userData.id;
-//     const result = await fetch(url + '/user/update-user/' + userId, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(userData),
-//     });
-//     const resData = await result.json();
-//     return resData;
-//   } catch (error) {
-//     Alert.alert('User could not be saved. Try again later.');
-//   }
-// };
-
+// Migrated to AWS Lambda ✅
 export const saveFavoritesToDatabase = async (
   userId: string,
   updatedFavorites: Number[],
@@ -125,13 +110,16 @@ export const saveFavoritesToDatabase = async (
     userId: userId,
     updatedFavorites: updatedFavorites,
   };
-  const result = await fetch(url + '/product/save-updated-favorites/', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
+  const result = await fetch(
+    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/save-updated-favorites',
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
   const resData = await result.json();
 };
 
