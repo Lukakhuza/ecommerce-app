@@ -1,1 +1,1 @@
-export const url = 'https://backend-ecommerce-mobile-app.onrender.com';
+export const url = 'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/';

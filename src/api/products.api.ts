@@ -7,9 +7,7 @@ import { url } from './client';
 
 // Migrated to AWS Lambda ✅
 export const fetchProductsData = async () => {
-  const response = await fetch(
-    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/get-products',
-  );
+  const response = await fetch(`${url}get-products`);
   const resData = await response.json();
   return resData;
 };
@@ -20,20 +18,17 @@ export const createPaymentSheet = async (
   totalAmount: Number,
   currency: string,
 ) => {
-  const response = await fetch(
-    'https://oyrhq868lf.execute-api.us-east-1.amazonaws.com/create-payment-sheet',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        customerId: stripeCustomerId,
-        totalAmount: totalAmount,
-        currency: currency,
-      }),
+  const response = await fetch(`${url}create-payment-sheet`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+    body: JSON.stringify({
+      customerId: stripeCustomerId,
+      totalAmount: totalAmount,
+      currency: currency,
+    }),
+  });
   const resData = response.json();
   return resData;
 };
