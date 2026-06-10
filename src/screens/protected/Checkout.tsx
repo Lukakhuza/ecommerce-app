@@ -19,6 +19,7 @@ const Checkout = ({ navigation }: Props) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const userInputCtx = useContext(UserInputContext);
   const { shippingAddress, paymentMethod }: any = useContext(CheckoutContext);
+  const checkoutCtx = useContext(CheckoutContext);
   const cartCtx: any = useContext(CartContext);
 
   const cardImages: any = {
@@ -29,6 +30,8 @@ const Checkout = ({ navigation }: Props) => {
   };
 
   const cardBrand = paymentMethod?.card?.brand;
+
+  console.log('Test 30: ', checkoutCtx);
 
   let subtotal = 0;
   for (let i = 0; i < cartCtx.cartItems.length; i++) {

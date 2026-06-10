@@ -159,7 +159,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       cart: {
         items: user.cart.items ? user.cart.items : [],
       },
-      stripeCustomerId: user.stripeCustomerId ? user.stripeCustomerId : '',
+      stripeCustomerId: user?.stripeCustomerId ? user?.stripeCustomerId : '',
     });
   };
 
@@ -203,7 +203,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       shopFor: userInput.shopFor.value,
       ageRange: userInput.ageRange.value,
       cart: { items: userInput.cart.items },
-      stripeCustomerId: userInput.stripeCustomerId,
+      stripeCustomerId: userInput?.stripeCustomerId,
     };
 
     // Save updated user data to database.
@@ -250,7 +250,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       shopFor: userInput.shopFor.value,
       ageRange: userInput.ageRange.value,
       cart: { items: userInput.cart.items },
-      stripeCustomerId: userInput.stripeCustomerId,
+      stripeCustomerId: userInput?.stripeCustomerId,
     };
 
     // Save updated user data to database.
@@ -284,7 +284,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   // Updates user's address
   const updateStripeId = async (createdUser: any, stripeId: string) => {
     const {
-      id,
+      _id: id,
       email,
       firstName,
       lastName,
@@ -292,8 +292,12 @@ const UserInputContextProvider = ({ children }: Props) => {
       address,
       shopFor,
       cart,
-    } = createdUser;
+    } = createdUser.userData;
+
+    console.log('Test 16: ', createdUser);
     // Create an user object with updated address:
+    console.log('Test 13: ', stripeId);
+    console.log('Test 20: ', id);
     setIsLoading(true);
     const userData = {
       id: id,
@@ -313,13 +317,14 @@ const UserInputContextProvider = ({ children }: Props) => {
       stripeCustomerId: stripeId,
     };
 
+    console.log('Test 14: ', userData);
     // Save updated user data to database.
     const resData = await saveUserDataToDatabase(userData);
     // If address update in the database was successful, update the context.
     setUserInput(currInputValues => {
       return {
         ...currInputValues,
-        stripeCustomerId: resData.userData.stripeCustomerId,
+        stripeCustomerId: resData.userData?.stripeCustomerId,
       };
     });
     await wait(1000);

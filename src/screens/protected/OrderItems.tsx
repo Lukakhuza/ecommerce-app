@@ -19,13 +19,15 @@ const OrderItems = ({ navigation }: Props) => {
   const productsCtx: any = useContext(ProductsContext);
   const cartCtx: any = useContext(CartContext);
 
+  console.log('Test 1: ', route.params.orderData);
   return (
     <View style={{ flex: 1, paddingHorizontal: 30 }}>
-      {cartCtx.cartItems.length > 0 && (
+      {orderItems.length > 0 && (
         <View
           style={{
             flex: 1,
             marginTop: 10,
+            marginBottom: 20,
           }}
         >
           <FlatList
@@ -33,44 +35,6 @@ const OrderItems = ({ navigation }: Props) => {
             data={orderItems}
             renderItem={itemData => {
               return (
-                // <View style={styles.cartItem}>
-                //   <View>
-                //     <Image
-                //       style={styles.image}
-                //       source={{
-                //         uri: productsCtx.products[itemData.item.product.id - 1]
-                //           .image,
-                //       }}
-                //     />
-                //   </View>
-                //   <View style={{ width: 190 }}>
-                //     <Text numberOfLines={1}>{itemData.item.product.title}</Text>
-                //   </View>
-
-                //   {/*  */}
-
-                //   <View>
-                //     <Text style={{ marginHorizontal: 5 }}>
-                //       <Text
-                //         style={{
-                //           fontWeight: 800,
-                //         }}
-                //       >
-                //         Qty:{' '}
-                //       </Text>{' '}
-                //       {itemData.item.quantity}
-                //     </Text>
-                //   </View>
-                //   {/*  */}
-                //   <View>
-                //     <Text style={{ fontWeight: 700 }}>
-                //       $
-                //       {(
-                //         itemData.item.product.price * itemData.item.quantity
-                //       ).toFixed(2)}
-                //     </Text>
-                //   </View>
-                // </View>
                 <View style={styles.cartItem}>
                   <View>
                     <Image
@@ -132,9 +96,6 @@ const OrderItems = ({ navigation }: Props) => {
                     </View>
                     <View
                       style={{
-                        // flex: 1,
-                        // justifyContent: 'flex-start',
-                        // alignItems: 'flex-end',
                         marginRight: 10,
                       }}
                     >
@@ -152,14 +113,12 @@ const OrderItems = ({ navigation }: Props) => {
               );
             }}
           />
-
-          {/*  */}
-
           <View
             style={{
               flexDirection: 'column',
             }}
           >
+            {/* 1 */}
             <View
               style={{
                 marginVertical: 8,
@@ -179,9 +138,8 @@ const OrderItems = ({ navigation }: Props) => {
               >
                 {/* ${subtotal.toFixed(2)} */} 55.5
               </Text>
-              {/*
-             
             </View>
+            {/* 2 */}
             <View
               style={{
                 marginVertical: 8,
@@ -199,9 +157,10 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                ${shippingCost}
+                {/* ${subtotal.toFixed(2)} */} 55.5
               </Text>
             </View>
+            {/* 3 */}
             <View
               style={{
                 marginVertical: 8,
@@ -219,156 +178,39 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                ${taxAmount}
+                {/* ${subtotal.toFixed(2)} */} 55.5
               </Text>
             </View>
-            */}
+            <View
+              style={{
+                marginVertical: 8,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 17,
+                  fontWeight: 700,
+                  color: 'gray',
+                  marginLeft: 8,
+                }}
+              >
+                Total
+              </Text>
+              <Text
+                style={{
+                  color: 'black',
+                  fontWeight: 700,
+                  marginRight: 10,
+                }}
+              >
+                {/* ${subtotal.toFixed(2)} */} 55.5
+              </Text>
             </View>
-          </View>
-
-          {/*  */}
-          <View
-            style={{
-              marginVertical: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 17,
-                fontWeight: 700,
-                color: 'gray',
-                marginLeft: 8,
-              }}
-            >
-              Total
-            </Text>
-            <Text
-              style={{
-                color: 'black',
-                fontWeight: 700,
-                marginRight: 10,
-              }}
-            >
-              ${total.toFixed(2)}
-            </Text>
           </View>
         </View>
       )}
-      {/* {cartCtx.cartItems.length > 0 && (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'space-between',
-            borderColor: 'brown',
-            borderWidth: 1,
-          }}
-        >
-          <View style={styles.root}>
-            <View
-              style={{
-                flex: 1,
-                // height: 650,
-                // borderColor: 'blue',
-                // borderWidth: 2,
-              }}
-            >
-              <FlatList
-                horizontal={false}
-                data={orderItems}
-                renderItem={itemData => {
-                  //   productsCtx.products[itemData.item.product.id - 1]
-                  //     .image,
-                  // );
-                  return (
-                    <View style={styles.cartItem}>
-                      <View>
-                        <Image
-                          style={styles.image}
-                          source={{
-                            uri: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png',
-                          }}
-                        />
-                      </View>
-                      <View
-                        style={{
-                          marginLeft: 20,
-                          flexDirection: 'row',
-                          justifyContent: 'space-evenly',
-                        }}
-                      >
-                        <View>
-                          <View style={{ width: 190 }}>
-                            <Text numberOfLines={1}>
-                              {itemData.item.product.title}
-                            </Text>
-                          </View>
-                          <View
-                            style={{
-                              flexDirection: 'row',
-                            }}
-                          >
-                            <Text style={{ marginRight: 5 }}>
-                              <Text
-                                style={{
-                                  fontWeight: 800,
-                                }}
-                              >
-                                Id:{' '}
-                              </Text>{' '}
-                              {itemData.item.product.id}
-                            </Text>
-                            <Text style={{ marginHorizontal: 5 }}>
-                              <Text
-                                style={{
-                                  fontWeight: 800,
-                                }}
-                              >
-                                Price:{' '}
-                              </Text>{' '}
-                              ${itemData.item.product.price.toFixed(2)}
-                            </Text>
-                            <Text style={{ marginHorizontal: 5 }}>
-                              <Text
-                                style={{
-                                  fontWeight: 800,
-                                }}
-                              >
-                                Qty:{' '}
-                              </Text>{' '}
-                              {itemData.item.quantity}
-                            </Text>
-                          </View>
-                        </View>
-                        <View
-                          style={{
-                            flex: 1,
-                            justifyContent: 'flex-start',
-                            alignItems: 'flex-end',
-                            marginRight: 20,
-                          }}
-                        >
-                          <View>
-                            <Text style={{ fontWeight: 700 }}>
-                              $
-                              {(
-                                itemData.item.product.price *
-                                itemData.item.quantity
-                              ).toFixed(2)}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  );
-                }}
-              />
-              iew>
-            </View>
-          </View>
-        </View>
-      )} */}
     </View>
   );
 };

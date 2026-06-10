@@ -17,7 +17,7 @@ const ManagePaymentMethod = ({ route, navigation }: Props) => {
   const [cardDetails, setCardDetails] = useState<any>(null);
   const { createPaymentMethod } = useStripe();
 
-  const stripeCustomerId = userInput.stripeCustomerId;
+  const stripeCustomerId = userInput?.stripeCustomerId;
 
   const handleAddCard = async () => {
     if (!cardDetails?.complete) {

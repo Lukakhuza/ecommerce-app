@@ -7,7 +7,7 @@ import { url } from './client';
 
 // Migrated to AWS Lambda ✅
 export const fetchProductsData = async () => {
-  const response = await fetch(`${url}get-products`);
+  const response = await fetch(`${url}/get-products`);
   const resData = await response.json();
   return resData;
 };
@@ -18,7 +18,7 @@ export const createPaymentSheet = async (
   totalAmount: Number,
   currency: string,
 ) => {
-  const response = await fetch(`${url}create-payment-sheet`, {
+  const response = await fetch(`${url}/create-payment-sheet`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ import { url } from './client';
 
 // Migrated to AWS Lambda ✅
 export const createOrder = async (orderData: object) => {
-  const response = await fetch(`${url}create-order`, {
+  const response = await fetch(`${url}/create-order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export const createOrder = async (orderData: object) => {
 
 // Migrated to AWS Lambda ✅
 export const fetchOrders = async (userId: string) => {
-  const response = await fetch(`${url}fetch-orders`, {
+  const response = await fetch(`${url}/fetch-orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

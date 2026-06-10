@@ -40,8 +40,9 @@ const TellUsAboutYourself = ({ navigation }: Props) => {
     };
 
     const createdUser = await createUser(user);
-
+    console.log('Test 15: ', createdUser);
     const { id: stripeId } = await createCustomerInStripe(createdUser);
+    console.log('Test 9: ', stripeId);
     userInputCtx.updateStripeId(createdUser, stripeId);
     userInputCtx.clearUserInput();
     navigation.replace('EnterEmail');

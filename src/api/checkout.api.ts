@@ -2,7 +2,8 @@ import { url } from './client';
 
 // Migrated to AWS Lambda ✅
 export const addPaymentMethod = async (paymentMethodData: Object) => {
-  const response = await fetch(`${url}add-payment-method`, {
+  console.log('Test 12: ', JSON.stringify(paymentMethodData));
+  const response = await fetch(`${url}/add-payment-method`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +17,7 @@ export const addPaymentMethod = async (paymentMethodData: Object) => {
 // Migrated to AWS Lambda ✅
 export const fetchPaymentMethods = async (stripeCustomerId: string) => {
   const response = await fetch(
-    `${url}get-payment-methods/${stripeCustomerId}`,
+    `${url}/get-payment-methods/${stripeCustomerId}`,
     {
       method: 'GET',
       headers: {

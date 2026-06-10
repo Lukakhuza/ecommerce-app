@@ -117,10 +117,12 @@ const Orders = ({ navigation }: Props) => {
               <FlatList
                 data={filteredOrders}
                 renderItem={order => {
+                  console.log('Test 6', order);
                   return (
                     <Pressable
                       onPress={() => {
                         const cleanOrder = JSON.parse(JSON.stringify(order));
+                        console.log('Test 7', cleanOrder);
                         navigation.navigate('OrdersTab', {
                           screen: 'OrderDetails',
                           params: { orderData: cleanOrder },
