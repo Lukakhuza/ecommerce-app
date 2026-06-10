@@ -2,7 +2,6 @@ import { url } from './client';
 
 // Migrated to AWS Lambda ✅
 export const addPaymentMethod = async (paymentMethodData: Object) => {
-  console.log('Test 12: ', JSON.stringify(paymentMethodData));
   const response = await fetch(`${url}/add-payment-method`, {
     method: 'PUT',
     headers: {

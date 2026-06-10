@@ -31,8 +31,6 @@ const Checkout = ({ navigation }: Props) => {
 
   const cardBrand = paymentMethod?.card?.brand;
 
-  console.log('Test 30: ', checkoutCtx);
-
   let subtotal = 0;
   for (let i = 0; i < cartCtx.cartItems.length; i++) {
     subtotal +=
@@ -60,6 +58,7 @@ const Checkout = ({ navigation }: Props) => {
       const orderData = {
         userId: userInputCtx?.userInput?.id?.value,
         items: orderItems,
+        subtotal: subtotal,
         taxAmount: taxAmount,
         shippingCost: shippingCost,
         total: total,
@@ -71,7 +70,7 @@ const Checkout = ({ navigation }: Props) => {
         },
         paymentMethod: paymentMethod,
       };
-
+      console.log('Test 1: ', orderData);
       await createOrder(orderData);
       cartCtx.clearCart();
       navigation.navigate('Home');

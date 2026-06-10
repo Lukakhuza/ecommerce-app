@@ -21,7 +21,6 @@ const CheckoutContextProvider = ({ children }: Props) => {
   const [paymentMethod, setPaymentMethod] = useState<any>(null);
 
   const updatePaymentMethod = (data: Object) => {
-    console.log('Test 10: ', data);
     setPaymentMethod(data);
   };
 

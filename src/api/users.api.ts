@@ -26,7 +26,6 @@ export const createCustomerInStripe = async (user: User) => {
     body: JSON.stringify(user),
   });
   const resData = await response.json();
-  console.log('Test 8: ', resData);
   return resData;
 };
 

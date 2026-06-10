@@ -18,8 +18,9 @@ const OrderItems = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const productsCtx: any = useContext(ProductsContext);
   const cartCtx: any = useContext(CartContext);
+  const { subTotal, shippingCost, taxAmount, totalAmount } =
+    route.params.orderData.item;
 
-  console.log('Test 1: ', route.params.orderData);
   return (
     <View style={{ flex: 1, paddingHorizontal: 30 }}>
       {orderItems.length > 0 && (
@@ -136,7 +137,7 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                {/* ${subtotal.toFixed(2)} */} 55.5
+                ${subTotal.toFixed(2)}
               </Text>
             </View>
             {/* 2 */}
@@ -157,7 +158,7 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                {/* ${subtotal.toFixed(2)} */} 55.5
+                ${shippingCost.toFixed(2)}
               </Text>
             </View>
             {/* 3 */}
@@ -178,7 +179,7 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                {/* ${subtotal.toFixed(2)} */} 55.5
+                ${taxAmount.toFixed(2)}
               </Text>
             </View>
             <View
@@ -205,7 +206,7 @@ const OrderItems = ({ navigation }: Props) => {
                   marginRight: 10,
                 }}
               >
-                {/* ${subtotal.toFixed(2)} */} 55.5
+                ${totalAmount.toFixed(2)}
               </Text>
             </View>
           </View>

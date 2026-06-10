@@ -294,10 +294,7 @@ const UserInputContextProvider = ({ children }: Props) => {
       cart,
     } = createdUser.userData;
 
-    console.log('Test 16: ', createdUser);
     // Create an user object with updated address:
-    console.log('Test 13: ', stripeId);
-    console.log('Test 20: ', id);
     setIsLoading(true);
     const userData = {
       id: id,
@@ -317,7 +314,6 @@ const UserInputContextProvider = ({ children }: Props) => {
       stripeCustomerId: stripeId,
     };
 
-    console.log('Test 14: ', userData);
     // Save updated user data to database.
     const resData = await saveUserDataToDatabase(userData);
     // If address update in the database was successful, update the context.
