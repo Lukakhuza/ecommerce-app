@@ -1,9 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { type ReactNode } from 'react';
-
-type Props = {
-  children: ReactNode;
-};
+import { StyleSheet, Text, View } from 'react-native';
+import { Props } from '../../types/general';
 
 const PageHeader = ({ children }: Props) => {
   return (

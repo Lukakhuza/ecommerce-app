@@ -16,12 +16,12 @@ import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
 import IconButton from '../../components/atoms/IconButton';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type WelcomeProp = NativeStackScreenProps<HomeTabParamList, 'Welcome'>;
 
-const Welcome = ({ navigation }: Props) => {
+const Welcome = ({ navigation }: WelcomeProp) => {
   const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const favoritesCtx: any = useContext(FavoritesContext);

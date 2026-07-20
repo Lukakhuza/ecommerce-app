@@ -7,6 +7,7 @@ import {
 } from 'react-native-keychain';
 import { fetchToken } from '../api/users.api';
 import { isTokenExpired, wait } from '../utils/helpers';
+import { Props } from '../types/general';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -23,10 +24,6 @@ export const AuthContext = createContext<AuthContextType>({
   logout: () => {},
   loginHandler: () => {},
 });
-
-type Props = {
-  children: ReactNode;
-};
 
 const AuthContextProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(true);

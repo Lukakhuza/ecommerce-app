@@ -10,8 +10,9 @@ import Payment from '../screens/protected/Payment';
 import ProductDetails from '../screens/protected/ProductDetails';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from '../screens/protected/Welcome';
+import { HomeTabParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<HomeTabParamList>();
 
 const HomeTab = () => {
   return (

@@ -1,24 +1,25 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { addToCartInDatabase, updateCartInDatabase } from '../api/cart.api';
+import { Props } from '../types/general';
 import { UserInputContext } from './user-input-context';
 
-export const CartContext: any = createContext({
+type CartContextType = {
+  cartItems: any[];
+  addItem: (item: any) => void;
+  clearCart: () => void;
+  removeItem: (id: any) => void;
+  addProductToCart: (item: Object) => void;
+  isLoading: boolean;
+};
+
+export const CartContext = createContext<CartContextType>({
   cartItems: [],
-  addItem: () => {},
+  addItem: (item: any) => {},
   clearCart: () => {},
   removeItem: () => {},
   addProductToCart: (item: Object) => {},
+  isLoading: true,
 });
-
-type Props = {
-  children: ReactNode;
-};
 
 const CartContextProvider = ({ children }: Props) => {
   const userInputCtx = useContext(UserInputContext);
@@ -45,6 +46,8 @@ const CartContextProvider = ({ children }: Props) => {
   }, [cartItems]);
 
   const addItem = (item: any) => {
+    console.log('Item: ', item);
+    console.log('Item type: ', typeof item);
     setCartItems((currentCartItems: any) => {
       const index = currentCartItems.findIndex((selectedItem: any) => {
         if (item._id === selectedItem._id) {

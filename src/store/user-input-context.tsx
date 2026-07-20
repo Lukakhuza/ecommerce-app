@@ -1,13 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
-import * as RN from 'react-native';
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { getUserByEmail, saveUserDataToDatabase } from '../api/users.api';
+import { Props } from '../types/general';
 import { wait } from '../utils/helpers';
 import { AuthContext } from './auth-context';
 
@@ -82,10 +76,6 @@ export const UserInputContext = createContext<UserInputContextType>({
   updateStripeId: (createdUser: any, stripeId: string) => {},
   clearUserInput: () => {},
 });
-
-type Props = {
-  children: ReactNode;
-};
 
 type DecodedToken = {
   email: string;

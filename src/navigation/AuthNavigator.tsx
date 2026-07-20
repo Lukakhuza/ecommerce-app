@@ -5,8 +5,9 @@ import CreateAccount from '../screens/public/CreateAccount';
 import ForgotPassword from '../screens/public/ForgotPassword';
 import PasswordReset from '../screens/public/PasswordReset';
 import TellUsAboutYourself from '../screens/public/TellUsAboutYourself';
+import { AuthStackParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
   return (

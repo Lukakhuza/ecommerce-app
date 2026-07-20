@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { saveFavoritesToDatabase } from '../api/users.api';
 import { UserInputContext } from './user-input-context';
+import { Props } from '../types/general';
 
 type FavoritesContext = {
   favorites: number[];
@@ -19,10 +20,6 @@ export const FavoritesContext = createContext<FavoritesContext>({
   addFavorite: (id: number) => {},
   removeFavorite: (id: number) => {},
 });
-
-type Props = {
-  children: ReactNode;
-};
 
 const FavoritesContextProvider = ({ children }: Props) => {
   const userInputCtx = useContext(UserInputContext);

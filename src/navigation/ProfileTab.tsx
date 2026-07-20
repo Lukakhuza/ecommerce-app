@@ -1,9 +1,15 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import ManageUserAddress from '../screens/protected/ManageUserAddress';
 import ManageUserData from '../screens/protected/ManageUserData';
 import ProfileSettings from '../screens/protected/ProfileSettings';
+import { ProfileTabParamsList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<ProfileTabParamsList>();
+
+type ProfileProps = NativeStackScreenProps<ProfileTabParamsList, 'Profile'>;
 
 const ProfileTab = () => {
   return (

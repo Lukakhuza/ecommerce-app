@@ -4,13 +4,18 @@ import { Alert, Button, View } from 'react-native';
 import { addPaymentMethod } from '../../api/checkout.api';
 import { CheckoutContext } from '../../store/checkout-context';
 import { UserInputContext } from '../../store/user-input-context';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type ManagePaymentMethodProp = NativeStackScreenProps<
+  HomeTabParamList,
+  'ManagePaymentMethod'
+>;
 
-const ManagePaymentMethod = ({ route, navigation }: Props) => {
+const ManagePaymentMethod = ({
+  route,
+  navigation,
+}: ManagePaymentMethodProp) => {
   const { userInput }: any = useContext(UserInputContext);
   const checkoutCtx: any = useContext(CheckoutContext);
   const userId = userInput.id.value;

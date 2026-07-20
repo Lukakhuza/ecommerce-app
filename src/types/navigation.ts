@@ -1,4 +1,9 @@
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+export type AppParamList = {
+  BottomTabs: undefined;
+};
 
 export type AuthStackParamList = {
   EnterEmail: undefined;
@@ -9,7 +14,12 @@ export type AuthStackParamList = {
   TellUsAboutYourself: undefined;
 };
 
-export type AuthNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
+export type BottomTabsParamList = {
+  HomeTab: NavigatorScreenParams<HomeTabParamList>;
+  Notifications: undefined;
+  OrdersTab: NavigatorScreenParams<OrdersTabParamList>;
+  ProfileTab: NavigatorScreenParams<ProfileTabParamsList>;
+};
 
 export type HomeTabParamList = {
   Home: undefined;
@@ -24,13 +34,26 @@ export type HomeTabParamList = {
   ManagePaymentMethod: undefined;
 };
 
-export type HomeTabNavigationProp = NativeStackNavigationProp<HomeTabParamList>;
-
 export type OrdersTabParamList = {
   Orders: undefined;
-  OrderDetails: undefined;
+  OrderDetails: {
+    orderData?: {
+      item?: {
+        _id: string;
+        status: string;
+      };
+    };
+  };
   OrderItems: undefined;
 };
 
-export type OrdersTabNavigationProp =
-  NativeStackNavigationProp<OrdersTabParamList>;
+// export type OrdersTabNavigationProp =
+//   NativeStackNavigationProp<OrdersTabParamList>;
+
+export type ProfileTabParamsList = {
+  Profile: undefined;
+  ManageUserData: undefined;
+  ManageUserAddress: undefined;
+};
+
+export type HomeTabNavigationProp = NativeStackNavigationProp<HomeTabParamList>;

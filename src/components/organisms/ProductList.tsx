@@ -21,7 +21,7 @@ type Props = {
 };
 
 const ProductList = ({ selection, headerTextStyle }: Props) => {
-  const navigation: HomeTabNavigationProp = useNavigation();
+  const navigation = useNavigation<HomeTabNavigationProp>();
   const { products, updateSelectedCategory } = useContext(ProductsContext);
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext);

@@ -1,19 +1,22 @@
 import Icon from '@react-native-vector-icons/ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  ParamListBase,
+  RouteProp,
+} from '@react-navigation/native';
+import Notifications from '../screens/protected/Notifications';
+import { BottomTabsParamList } from '../types/navigation';
 import HomeTab from './HomeTab';
 import OrdersTab from './OrdersTab';
-import Notifications from '../screens/protected/Notifications';
-import { RouteProp, ParamListBase } from '@react-navigation/native';
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import ProfileTab from './ProfileTab';
 
-const BottomTabs = createBottomTabNavigator();
+const BottomTabsStack = createBottomTabNavigator<BottomTabsParamList>();
 
-const TabsOverview = () => {
+const BottomTabs = () => {
   return (
-    <BottomTabs.Navigator screenOptions={{ headerShown: false }}>
-      <BottomTabs.Screen
+    <BottomTabsStack.Navigator screenOptions={{ headerShown: false }}>
+      <BottomTabsStack.Screen
         name="HomeTab"
         component={HomeTab}
         options={({ route }: { route: RouteProp<ParamListBase> }) => {
@@ -50,7 +53,7 @@ const TabsOverview = () => {
           };
         }}
       />
-      <BottomTabs.Screen
+      <BottomTabsStack.Screen
         name="Notifications"
         component={Notifications}
         options={{
@@ -64,7 +67,7 @@ const TabsOverview = () => {
           ),
         }}
       />
-      <BottomTabs.Screen
+      <BottomTabsStack.Screen
         name="OrdersTab"
         component={OrdersTab}
         options={({ route }) => {
@@ -101,7 +104,7 @@ const TabsOverview = () => {
           };
         }}
       />
-      <BottomTabs.Screen
+      <BottomTabsStack.Screen
         name="ProfileTab"
         component={ProfileTab}
         options={{
@@ -116,8 +119,8 @@ const TabsOverview = () => {
           ),
         }}
       />
-    </BottomTabs.Navigator>
+    </BottomTabsStack.Navigator>
   );
 };
 
-export default TabsOverview;
+export default BottomTabs;

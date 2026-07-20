@@ -11,13 +11,15 @@ import {
   isValidLastName,
   isValidPhoneNumber,
 } from '../../utils/validation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ProfileTabParamsList } from '../../types/navigation';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type ManageUserDataProps = NativeStackScreenProps<
+  ProfileTabParamsList,
+  'ManageUserData'
+>;
 
-const ManageUserData = ({ route, navigation }: Props) => {
+const ManageUserData = ({ route, navigation }: ManageUserDataProps) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [phone, setPhone] = useState('');
   const [inputValues, setInputValues] = useState({

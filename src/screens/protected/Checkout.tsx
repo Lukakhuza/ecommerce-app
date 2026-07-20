@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { createOrder } from '../../api/orders.api';
@@ -10,19 +11,25 @@ import { CartContext } from '../../store/cart-context';
 import { CheckoutContext } from '../../store/checkout-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import { HomeTabParamList } from '../../types/navigation';
+import { ImageSourcePropType } from 'react-native';
 
-type Props = {
-  navigation: any;
+type CategoriesProps = NativeStackScreenProps<HomeTabParamList, 'Checkout'>;
+
+type CardImagesType = {
+  visa: ImageSourcePropType;
+  mastercard: ImageSourcePropType;
+  amex: ImageSourcePropType;
+  discover: ImageSourcePropType;
 };
 
-const Checkout = ({ navigation }: Props) => {
+const Checkout = ({ navigation }: CategoriesProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const userInputCtx = useContext(UserInputContext);
-  const { shippingAddress, paymentMethod }: any = useContext(CheckoutContext);
-  const checkoutCtx = useContext(CheckoutContext);
+  const { shippingAddress, paymentMethod } = useContext(CheckoutContext);
   const cartCtx: any = useContext(CartContext);
 
-  const cardImages: any = {
+  const cardImages: CardImagesType = {
     visa: require('../../../assets/images/logos/visa.png'),
     mastercard: require('../../../assets/images/logos/mastercard.png'),
     amex: require('../../../assets/images/logos/amex.png'),
@@ -70,7 +77,6 @@ const Checkout = ({ navigation }: Props) => {
         },
         paymentMethod: paymentMethod,
       };
-      console.log('Test 1: ', orderData);
       await createOrder(orderData);
       cartCtx.clearCart();
       navigation.navigate('Home');

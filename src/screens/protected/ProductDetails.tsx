@@ -15,13 +15,16 @@ import { CartContext } from '../../store/cart-context';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
+import { ProductData } from '../../types/product';
+import { HomeTabParamList } from '../../types/navigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type ProductDetailsProps = NativeStackScreenProps<
+  HomeTabParamList,
+  'ProductDetails'
+>;
 
-const ProductDetails = ({ route, navigation }: Props) => {
+const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
   const cartCtx: any = useContext(CartContext);
@@ -30,7 +33,7 @@ const ProductDetails = ({ route, navigation }: Props) => {
   const product = route.params.product;
 
   const addProductToCartHandler = async () => {
-    const productData = {
+    const productData: ProductData = {
       id: route.params.product.id,
       title: route.params.product.title,
       price: route.params.product.price,

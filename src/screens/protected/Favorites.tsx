@@ -15,12 +15,12 @@ import { AuthContext } from '../../store/auth-context';
 import { FavoritesContext } from '../../store/favorites-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { wait } from '../../utils/helpers';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type FavoritesProps = NativeStackScreenProps<HomeTabParamList, 'Favorites'>;
 
-const Favorites = ({ navigation }: Props) => {
+const Favorites = ({ navigation }: FavoritesProps) => {
   const authCtx: any = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const { favorites }: any = useContext(FavoritesContext);

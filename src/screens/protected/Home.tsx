@@ -17,17 +17,28 @@ import ProductList from '../../components/organisms/ProductList';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabsParamList, HomeTabParamList } from '../../types/navigation';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+// type HomeProps = CompositeScreenProps
+//   NativeStackScreenProps<HomeTabParamList, 'Home'>,
+//   BottomTabScreenProps<BottomTabsParamList>
+// >;
+
+// type HomeProps = NativeStackScreenProps<HomeTabParamList, 'Home'>;
+
+type HomeProps = CompositeScreenProps<
+  NativeStackScreenProps<HomeTabParamList, 'Home'>,
+  BottomTabScreenProps<BottomTabsParamList>
+>;
 
 const data = [
   { label: 'Men', value: 'Men' },
   { label: 'Women', value: 'Women' },
 ];
 
-type Props = {
-  navigation: any;
-};
-
-const HomePage = ({ navigation }: Props) => {
+const HomePage = ({ navigation }: HomeProps) => {
   const { products, updateSelectedCategory }: any = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
   const [genderSelection, setGenderSelection] = useState('');

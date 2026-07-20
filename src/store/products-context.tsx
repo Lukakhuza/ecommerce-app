@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { fetchProductsData } from '../api/products.api';
+import { Props } from '../types/general';
 import { Product } from '../types/product';
 
 type ProductsContextType = {
@@ -13,10 +14,6 @@ export const ProductsContext = createContext<ProductsContextType>({
   selectedCategory: '',
   updateSelectedCategory: (category: string) => {},
 });
-
-type Props = {
-  children: ReactNode;
-};
 
 const ProductsContextProvider = ({ children }: Props) => {
   const [fetchedProductsData, setFetchedProductsData] = useState([]);

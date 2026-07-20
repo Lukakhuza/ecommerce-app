@@ -3,15 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import CategoryItemLarge from '../../components/molecules/CategoryItemLarge';
 import { ProductsContext } from '../../store/products-context';
+import { HomeTabParamList } from '../../types/navigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type Props = {
-  navigation: any;
-};
+type CategoriesProps = NativeStackScreenProps<HomeTabParamList, 'Categories'>;
 
-const Categories = ({ navigation }: Props) => {
-  const { products, updateSelectedCategory }: any = useContext(ProductsContext);
+const Categories = ({ navigation }: CategoriesProps) => {
+  const { products, updateSelectedCategory } = useContext(ProductsContext);
 
-  const categoryPressHandler = (category: String) => {
+  const categoryPressHandler = (category: string) => {
     updateSelectedCategory(category);
     navigation.navigate('Welcome');
   };

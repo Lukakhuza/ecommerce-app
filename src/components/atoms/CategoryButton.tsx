@@ -1,68 +1,68 @@
-import { useContext } from 'react';
-import { Pressable, Image, View, Text, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ProductsContext } from '../../store/products-context';
-import { HomeTabNavigationProp } from '../../types/navigation';
+// import { useContext } from 'react';
+// import { Pressable, Image, View, Text, StyleSheet } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
+// import { ProductsContext } from '../../store/products-context';
+// import { HomeTabNavigationProp } from '../../types/navigation';
 
-type Props = {
-  category: string;
-  imageId: number;
-};
+// type Props = {
+//   category: string;
+//   imageId: number;
+// };
 
-const CategoryButton = ({ category, imageId }: Props) => {
-  const productsCtx = useContext(ProductsContext);
-  const navigation: HomeTabNavigationProp = useNavigation();
-  return (
-    <Pressable
-      onPress={() => {
-        productsCtx.updateSelectedCategory(category);
-        navigation.navigate('Welcome');
-      }}
-      style={({ pressed }) => [styles.category, pressed && styles.pressed]}
-    >
-      <View style={styles.imageContainer}>
-        {productsCtx.products.length > 0 && (
-          <Image
-            source={{ uri: productsCtx.products[imageId].image }}
-            style={styles.image}
-          />
-        )}
-      </View>
-      <View>
-        <Text style={styles.label}>{category}</Text>
-      </View>
-    </Pressable>
-  );
-};
+// const CategoryButton = ({ category, imageId }: Props) => {
+//   const productsCtx = useContext(ProductsContext);
+//   const navigation: HomeTabNavigationProp = useNavigation();
+//   return (
+//     <Pressable
+//       onPress={() => {
+//         productsCtx.updateSelectedCategory(category);
+//         navigation.navigate('Welcome');
+//       }}
+//       style={({ pressed }) => [styles.category, pressed && styles.pressed]}
+//     >
+//       <View style={styles.imageContainer}>
+//         {productsCtx.products.length > 0 && (
+//           <Image
+//             source={{ uri: productsCtx.products[imageId].image }}
+//             style={styles.image}
+//           />
+//         )}
+//       </View>
+//       <View>
+//         <Text style={styles.label}>{category}</Text>
+//       </View>
+//     </Pressable>
+//   );
+// };
 
-export default CategoryButton;
+// export default CategoryButton;
 
-const styles = StyleSheet.create({
-  label: {
-    fontSize: 17,
-    marginLeft: 10,
-  },
-  image: {
-    flex: 1,
-    overflow: 'hidden',
-    resizeMode: 'contain',
-  },
-  imageContainer: {
-    height: 40,
-    width: 40,
-    marginLeft: 20,
-    marginRight: 10,
-    marginVertical: 5,
-  },
-  category: {
-    marginVertical: 5,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    height: 80,
-    borderRadius: 20,
-  },
-  pressed: {
-    opacity: 0.5,
-  },
-});
+// const styles = StyleSheet.create({
+//   label: {
+//     fontSize: 17,
+//     marginLeft: 10,
+//   },
+//   image: {
+//     flex: 1,
+//     overflow: 'hidden',
+//     resizeMode: 'contain',
+//   },
+//   imageContainer: {
+//     height: 40,
+//     width: 40,
+//     marginLeft: 20,
+//     marginRight: 10,
+//     marginVertical: 5,
+//   },
+//   category: {
+//     marginVertical: 5,
+//     flexDirection: 'row',
+//     justifyContent: 'flex-start',
+//     alignItems: 'center',
+//     height: 80,
+//     borderRadius: 20,
+//   },
+//   pressed: {
+//     opacity: 0.5,
+//   },
+// });

@@ -1,18 +1,19 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import IconButton from '../components/atoms/IconButton';
 import OrderDetails from '../screens/protected/OrderDetails';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import OrderItems from '../screens/protected/OrderItems';
 import Orders from '../screens/protected/Orders';
+import { OrdersTabParamList } from '../types/navigation';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<OrdersTabParamList>();
 
-type StackParamList = {
-  Orders: unknown;
-  OrderDetails: unknown;
-  OrderItems: unknown;
-};
+type OrderDetailsProps = NativeStackScreenProps<
+  OrdersTabParamList,
+  'OrderDetails'
+>;
 
+type OrderItemsProps = NativeStackScreenProps<OrdersTabParamList, 'OrderItems'>;
 const OrdersTab = () => {
   return (
     <Stack.Navigator initialRouteName="Orders">
@@ -24,7 +25,7 @@ const OrdersTab = () => {
       <Stack.Screen
         name="OrderDetails"
         component={OrderDetails}
-        options={({ navigation: { goBack }, route }: any) => ({
+        options={({ navigation: { goBack }, route }: OrderDetailsProps) => ({
           title: route.params?.orderData?.item?._id
             ? `Order ${route.params.orderData.item._id.slice(-10)}`
             : 'Order Details',
@@ -42,7 +43,7 @@ const OrdersTab = () => {
       <Stack.Screen
         name="OrderItems"
         component={OrderItems}
-        options={({ navigation: { goBack }, route }) => ({
+        options={({ navigation: { goBack }, route }: OrderItemsProps) => ({
           title: 'Order Items',
           headerShown: true,
           headerLeft: ({ tintColor }) => (

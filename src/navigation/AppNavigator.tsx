@@ -1,20 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TabsOverview from './BottomTab';
+import BottomTabs from './BottomTabs';
+import { AppParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AppParamList>();
 
 const AppNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="TabsOverview"
+      initialRouteName="BottomTabs"
       screenOptions={{
         contentStyle: { backgroundColor: '#fff' },
         animation: 'none',
       }}
     >
       <Stack.Screen
-        name="TabsOverview"
-        component={TabsOverview}
+        name="BottomTabs"
+        component={BottomTabs}
         options={{
           headerShown: false,
           contentStyle: { backgroundColor: '#fff' },

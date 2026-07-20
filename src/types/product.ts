@@ -7,3 +7,10 @@ export type Product = {
   image: string;
   rating: { rate: number; count: number };
 };
+
+export type ProductData = {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+};

@@ -16,14 +16,14 @@ import { CartContext } from '../../store/cart-context';
 import { ProductsContext } from '../../store/products-context';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 const parcelImage = require('./../../../assets/images/logos/parcel.png');
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type CartProps = NativeStackScreenProps<HomeTabParamList, 'Cart'>;
 
-const Cart = ({ navigation }: Props) => {
-  const productsCtx: any = useContext(ProductsContext);
-  const { cartItems, addItem, removeItem, clearCart, isLoading }: any =
+const Cart = ({ navigation }: CartProps) => {
+  const productsCtx = useContext(ProductsContext);
+  const { cartItems, addItem, removeItem, clearCart, isLoading } =
     useContext(CartContext);
   const cartCtx = useContext(CartContext);
 
@@ -104,7 +104,7 @@ const Cart = ({ navigation }: Props) => {
             <View>
               <PurpleButtonSmall
                 onPress={() => {
-                  navigation.navigate('HomeTab', { screen: 'Categories' });
+                  navigation.navigate('Categories');
                 }}
               >
                 Explore Categories

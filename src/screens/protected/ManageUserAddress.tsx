@@ -11,13 +11,15 @@ import {
   isValidUSState,
   isValidUSZipCode,
 } from '../../utils/validation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ProfileTabParamsList } from '../../types/navigation';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type ManageUserAddressProps = NativeStackScreenProps<
+  ProfileTabParamsList,
+  'ManageUserAddress'
+>;
 
-const ManageUserAddress = ({ route, navigation }: Props) => {
+const ManageUserAddress = ({ route, navigation }: ManageUserAddressProps) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [addressInputValues, setAddressInputValues] = useState({
     addressLine1: {

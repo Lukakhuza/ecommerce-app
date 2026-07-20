@@ -11,13 +11,18 @@ import {
   isValidUSState,
   isValidUSZipCode,
 } from '../../utils/validation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type ManageShippingAddressProps = NativeStackScreenProps<
+  HomeTabParamList,
+  'ManageShippingAddress'
+>;
 
-const ManageShippingAddress = ({ route, navigation }: Props) => {
+const ManageShippingAddress = ({
+  route,
+  navigation,
+}: ManageShippingAddressProps) => {
   const { shippingAddress, updateShippingAddress }: any =
     useContext(CheckoutContext);
 
