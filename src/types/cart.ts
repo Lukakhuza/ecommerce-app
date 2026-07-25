@@ -1,11 +1,13 @@
-type Product = {
+export type CartProduct = {
   id: number;
   title: string;
   price: number;
 };
 
-export type CartItemType = {
-  product: Product;
-  quantity: number;
+export type CartItem = {
   _id: string;
+  product: CartProduct;
+  quantity: number;
 };
+
+export type CartItems = CartItem[];

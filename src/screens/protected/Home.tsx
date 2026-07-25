@@ -39,15 +39,15 @@ const data = [
 ];
 
 const HomePage = ({ navigation }: HomeProps) => {
-  const { products, updateSelectedCategory }: any = useContext(ProductsContext);
-  const userInputCtx: any = useContext(UserInputContext);
+  const { products, updateSelectedCategory } = useContext(ProductsContext);
+  const userInputCtx = useContext(UserInputContext);
   const [genderSelection, setGenderSelection] = useState('');
 
   if (products.length === 0) {
     return <LoadingOverlay message="Loading Home Screen..." />;
   }
 
-  const categoryPressHandler = (category: String) => {
+  const categoryPressHandler = (category: string) => {
     updateSelectedCategory(category);
     navigation.navigate('Welcome');
   };

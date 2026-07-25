@@ -61,7 +61,10 @@ const AuthContextProvider = ({ children }: Props) => {
     setIsLoading(true);
 
     try {
+      console.log('Test 1: ', email);
+      console.log('Test 2: ', password);
       const token = await fetchToken({ email, password });
+      console.log('Test 3', token);
 
       if (!token) {
         throw new Error('Authentication Failed');

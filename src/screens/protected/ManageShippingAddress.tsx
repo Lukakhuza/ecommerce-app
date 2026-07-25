@@ -23,7 +23,7 @@ const ManageShippingAddress = ({
   route,
   navigation,
 }: ManageShippingAddressProps) => {
-  const { shippingAddress, updateShippingAddress }: any =
+  const { shippingAddress, updateShippingAddress } =
     useContext(CheckoutContext);
 
   // useLayoutEffect(() => {

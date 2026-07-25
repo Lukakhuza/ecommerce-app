@@ -1,5 +1,6 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Product } from './product';
 
 export type AppParamList = {
   BottomTabs: undefined;
@@ -25,7 +26,7 @@ export type HomeTabParamList = {
   Home: undefined;
   Categories: undefined;
   Welcome: undefined;
-  ProductDetails: { product: any };
+  ProductDetails: { product: Product };
   Cart: undefined;
   Checkout: undefined;
   Favorites: undefined;

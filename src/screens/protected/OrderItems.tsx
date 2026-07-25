@@ -15,9 +15,9 @@ const OrderItems = ({ navigation }: Props) => {
   const route: any = useRoute();
   const orderItems = route.params.orderData.item.items;
   const total = route.params.orderData.item.totalAmount;
-  const userInputCtx: any = useContext(UserInputContext);
-  const productsCtx: any = useContext(ProductsContext);
-  const cartCtx: any = useContext(CartContext);
+  const userInputCtx = useContext(UserInputContext);
+  const productsCtx = useContext(ProductsContext);
+  const cartCtx = useContext(CartContext);
   const { subTotal, shippingCost, taxAmount, totalAmount } =
     route.params.orderData.item;
 

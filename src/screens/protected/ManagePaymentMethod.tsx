@@ -16,8 +16,8 @@ const ManagePaymentMethod = ({
   route,
   navigation,
 }: ManagePaymentMethodProp) => {
-  const { userInput }: any = useContext(UserInputContext);
-  const checkoutCtx: any = useContext(CheckoutContext);
+  const { userInput } = useContext(UserInputContext);
+  const checkoutCtx = useContext(CheckoutContext);
   const userId = userInput.id.value;
   const [cardDetails, setCardDetails] = useState<any>(null);
   const { createPaymentMethod } = useStripe();

@@ -20,7 +20,7 @@ type ManageUserAddressProps = NativeStackScreenProps<
 >;
 
 const ManageUserAddress = ({ route, navigation }: ManageUserAddressProps) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const [addressInputValues, setAddressInputValues] = useState({
     addressLine1: {
       value: userInputCtx.userInput.address.addressLine1.value,
@@ -40,7 +40,7 @@ const ManageUserAddress = ({ route, navigation }: ManageUserAddressProps) => {
     },
   });
 
-  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
+  const handleTextChange = (inputIdentifier: string, enteredText: string) => {
     setAddressInputValues(currAddress => {
       return {
         ...currAddress,

@@ -1,3 +1,5 @@
+import { CartItems } from './cart';
+
 export type User = {
   email: string;
   password: string;
@@ -13,9 +15,9 @@ export type User = {
   shopFor: string;
   ageRange: string;
   favorites: {
-    items: any[];
+    items: CartItems;
   };
-  cart: { items: any[] };
+  cart: { items: CartItems[] };
   stripeCustomerId: string;
 };
 
@@ -33,6 +35,6 @@ export type UserData = {
   };
   shopFor: string;
   ageRange: string;
-  cart: { items: any[] };
+  cart: { items: CartItems };
   stripeCustomerId: string;
 };

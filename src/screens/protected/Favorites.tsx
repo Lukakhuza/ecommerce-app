@@ -5,6 +5,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  ListRenderItemInfo,
   View,
 } from 'react-native';
 import { fetchProductsData } from '../../api/products.api';
@@ -17,26 +18,30 @@ import { UserInputContext } from '../../store/user-input-context';
 import { wait } from '../../utils/helpers';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HomeTabParamList } from '../../types/navigation';
+import { ProductData } from '../../types/product';
+import { Product } from '../../types/product';
 
 type FavoritesProps = NativeStackScreenProps<HomeTabParamList, 'Favorites'>;
 
 const Favorites = ({ navigation }: FavoritesProps) => {
-  const authCtx: any = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
-  const { favorites }: any = useContext(FavoritesContext);
+  const { favorites } = useContext(FavoritesContext);
   const [filteredProds, setFilteredProds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getProductsData = async () => {
       const productsData = await fetchProductsData();
-      const filteredProducts = productsData.filter((productData: any) => {
-        if (favorites.includes(productData.id)) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+      const filteredProducts = productsData.filter(
+        (productData: ProductData) => {
+          if (favorites.includes(productData.id)) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      );
       setFilteredProds(filteredProducts);
       await wait(500);
       setIsLoading(false);
@@ -73,7 +78,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
         </View>
         <FlatList
           data={filteredProds}
-          renderItem={(itemData: any) => {
+          renderItem={(itemData: ListRenderItemInfo<ProductData>) => {
             return (
               <Pressable
                 style={styles.productContainer}
@@ -92,7 +97,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
               </Pressable>
             );
           }}
-          keyExtractor={(item: any, index) => {
+          keyExtractor={(item: Product, index) => {
             return item.id;
           }}
           numColumns={2}
@@ -116,7 +121,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
   );
 };
 
-const styles: any = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 400,

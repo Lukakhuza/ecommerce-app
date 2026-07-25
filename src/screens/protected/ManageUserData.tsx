@@ -20,7 +20,7 @@ type ManageUserDataProps = NativeStackScreenProps<
 >;
 
 const ManageUserData = ({ route, navigation }: ManageUserDataProps) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const [phone, setPhone] = useState('');
   const [inputValues, setInputValues] = useState({
     firstName: { value: userInputCtx.userInput.firstName.value, isValid: true },
@@ -36,7 +36,7 @@ const ManageUserData = ({ route, navigation }: ManageUserDataProps) => {
     });
   }, [navigation]);
 
-  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
+  const handleTextChange = (inputIdentifier: string, enteredText: string) => {
     setInputValues(currInputs => {
       return {
         ...currInputs,

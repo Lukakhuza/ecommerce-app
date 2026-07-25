@@ -20,9 +20,10 @@ type UserInputContextType = {
       zipcode: { value: string; isValid: boolean };
     };
     favorites: { items: any[] };
-    cart: { items: any[] };
+    cart: { items: CartItems };
     stripeCustomerId: string;
   };
+
   isLoading: boolean;
   updateUserInfo: (updatedInfo: any) => void;
   saveUserDataToDatabase: any;

@@ -27,7 +27,7 @@ const Checkout = ({ navigation }: CategoriesProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const userInputCtx = useContext(UserInputContext);
   const { shippingAddress, paymentMethod } = useContext(CheckoutContext);
-  const cartCtx: any = useContext(CartContext);
+  const cartCtx = useContext(CartContext);
 
   const cardImages: CardImagesType = {
     visa: require('../../../assets/images/logos/visa.png'),
@@ -112,12 +112,12 @@ const Checkout = ({ navigation }: CategoriesProps) => {
                   {`****${paymentMethod.card.last4}`}
                 </Text>
                 <View>
-                  {cardImages[cardBrand] && (
+                  <View>
                     <Image
                       style={styles.image}
-                      source={cardImages[cardBrand]}
+                      source={cardImages[cardBrand as keyof CardImagesType]}
                     />
-                  )}
+                  </View>
                 </View>
               </View>
             ) : (

@@ -26,7 +26,7 @@ type ProductDetailsProps = NativeStackScreenProps<
 
 const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
   const productsCtx = useContext(ProductsContext);
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const cartCtx: any = useContext(CartContext);
   const authCtx = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
@@ -212,7 +212,7 @@ const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
   );
 };
 
-const styles: any = StyleSheet.create({
+const styles = StyleSheet.create({
   outerContainer: {
     // height: 550,
     // justifyContent: 'space-between',

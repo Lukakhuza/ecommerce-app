@@ -22,10 +22,10 @@ import { HomeTabParamList } from '../../types/navigation';
 type WelcomeProp = NativeStackScreenProps<HomeTabParamList, 'Welcome'>;
 
 const Welcome = ({ navigation }: WelcomeProp) => {
-  const authCtx: any = useContext(AuthContext);
-  const userInputCtx: any = useContext(UserInputContext);
-  const favoritesCtx: any = useContext(FavoritesContext);
-  const productsCtx: any = useContext(ProductsContext);
+  const authCtx = useContext(AuthContext);
+  const userInputCtx = useContext(UserInputContext);
+  const favoritesCtx = useContext(FavoritesContext);
+  const productsCtx = useContext(ProductsContext);
   const [fetchedUserData, setFetchedUserData] = useState([]);
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
 

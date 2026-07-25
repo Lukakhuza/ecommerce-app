@@ -1,20 +1,22 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { addToCartInDatabase, updateCartInDatabase } from '../api/cart.api';
 import { Props } from '../types/general';
+import { ProductData } from '../types/product';
 import { UserInputContext } from './user-input-context';
+import { CartItem, CartItems } from '../types/cart';
 
 type CartContextType = {
-  cartItems: any[];
-  addItem: (item: any) => void;
+  cartItems: CartItems;
+  addItem: (item: CartItem) => void;
   clearCart: () => void;
-  removeItem: (id: any) => void;
-  addProductToCart: (item: Object) => void;
+  removeItem: (id: string) => void;
+  addProductToCart: (productData: ProductData) => void;
   isLoading: boolean;
 };
 
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
-  addItem: (item: any) => {},
+  addItem: (item: CartItem) => {},
   clearCart: () => {},
   removeItem: () => {},
   addProductToCart: (item: Object) => {},
@@ -24,7 +26,7 @@ export const CartContext = createContext<CartContextType>({
 const CartContextProvider = ({ children }: Props) => {
   const userInputCtx = useContext(UserInputContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [cartItems, setCartItems] = useState(
+  const [cartItems, setCartItems] = useState<CartItems>(
     userInputCtx.userInput?.cart?.items ?? [],
   );
 
@@ -45,18 +47,16 @@ const CartContextProvider = ({ children }: Props) => {
     updateCartInDatabase(data);
   }, [cartItems]);
 
-  const addItem = (item: any) => {
-    console.log('Item: ', item);
-    console.log('Item type: ', typeof item);
-    setCartItems((currentCartItems: any) => {
-      const index = currentCartItems.findIndex((selectedItem: any) => {
+  const addItem = (item: CartItem) => {
+    setCartItems((currentCartItems: CartItems) => {
+      const index = currentCartItems.findIndex((selectedItem: CartItem) => {
         if (item._id === selectedItem._id) {
           return true;
         } else {
           return false;
         }
       });
-      let updatedCartItems = currentCartItems.map((c: any, i: number) => {
+      let updatedCartItems = currentCartItems.map((c: CartItem, i: number) => {
         if (i === index) {
           const updatedItem = {
             _id: c._id,
@@ -74,10 +74,10 @@ const CartContextProvider = ({ children }: Props) => {
     return cartItems;
   };
 
-  const removeItem = (id: any) => {
+  const removeItem = (id: string) => {
     // Update context
-    setCartItems((currentCartItems: any) => {
-      const index = currentCartItems.findIndex((selectedItem: any) => {
+    setCartItems((currentCartItems: CartItems) => {
+      const index = currentCartItems.findIndex((selectedItem: CartItem) => {
         if (id === selectedItem._id) {
           return true;
         } else {
@@ -85,7 +85,7 @@ const CartContextProvider = ({ children }: Props) => {
         }
       });
       let deletedItemIndex = -1;
-      let updatedCartItems = currentCartItems.map((c: any, i: number) => {
+      let updatedCartItems = currentCartItems.map((c: CartItem, i: number) => {
         if (i === index) {
           if (c.quantity > 1) {
             const updatedItem = {
@@ -108,13 +108,14 @@ const CartContextProvider = ({ children }: Props) => {
         }
       });
       updatedCartItems = updatedCartItems.filter(
-        (element: any, index: Number) => index !== deletedItemIndex,
+        (element: CartItem, index: Number) => index !== deletedItemIndex,
       );
 
       return updatedCartItems;
     });
   };
-  const addProductToCart = async (data: any) => {
+
+  const addProductToCart = async (data: ProductData) => {
     setIsLoading(true);
     // Update cart in the database:
     const response = await addToCartInDatabase(data);
@@ -128,6 +129,8 @@ const CartContextProvider = ({ children }: Props) => {
     setCartItems([]);
     setIsLoading(false);
   };
+
+  console.log('Test 100: ', cartItems);
 
   const value = {
     cartItems: cartItems,
