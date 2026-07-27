@@ -1,7 +1,6 @@
-import { CartItemType } from '../types/cart';
+import { debounce } from 'lodash';
 import { ProductData } from '../types/product';
 import { url } from './client';
-import { debounce } from 'lodash';
 
 // Migrated to AWS Lambda ✅
 export const addToCartInDatabase = async (data: ProductData) => {

@@ -19,8 +19,8 @@ type Props = {
 };
 
 const ProfileSettings = ({ navigation }: Props) => {
-  const authCtx: any = useContext(AuthContext);
-  const userInputCtx: any = useContext(UserInputContext);
+  const authCtx = useContext(AuthContext);
+  const userInputCtx = useContext(UserInputContext);
   const editPressHandler = (basicInfo: any) => {
     navigation.navigate('ManageUserData'),
       {

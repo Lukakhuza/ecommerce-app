@@ -14,3 +14,8 @@ export type ProductData = {
   price: number;
   quantity: number;
 };
+
+export type ProductDataWithUserId = {
+  productData: ProductData;
+  userId: string;
+};

@@ -1,3 +1,6 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import {
   Image,
@@ -17,20 +20,14 @@ import ProductList from '../../components/organisms/ProductList';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabsParamList, HomeTabParamList } from '../../types/navigation';
-import { CompositeScreenProps } from '@react-navigation/native';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-// type HomeProps = CompositeScreenProps
-//   NativeStackScreenProps<HomeTabParamList, 'Home'>,
-//   BottomTabScreenProps<BottomTabsParamList>
-// >;
-
-// type HomeProps = NativeStackScreenProps<HomeTabParamList, 'Home'>;
+import {
+  BottomTabsParamList,
+  ProfileTabParamsList,
+} from '../../types/navigation';
 
 type HomeProps = CompositeScreenProps<
-  NativeStackScreenProps<HomeTabParamList, 'Home'>,
-  BottomTabScreenProps<BottomTabsParamList>
+  BottomTabScreenProps<BottomTabsParamList, 'ProfileTab'>,
+  NativeStackScreenProps<ProfileTabParamsList, 'Profile'>
 >;
 
 const data = [
@@ -49,7 +46,7 @@ const HomePage = ({ navigation }: HomeProps) => {
 
   const categoryPressHandler = (category: string) => {
     updateSelectedCategory(category);
-    navigation.navigate('Welcome');
+    navigation.navigate('HomeTab', { screen: 'Welcome' });
   };
 
   return (
@@ -90,7 +87,7 @@ const HomePage = ({ navigation }: HomeProps) => {
         <View style={styles.cartButtonContainer}>
           <CartButton
             onPress={() => {
-              navigation.navigate('Cart');
+              navigation.navigate('HomeTab', { screen: 'Cart' });
             }}
           />
         </View>
@@ -107,7 +104,7 @@ const HomePage = ({ navigation }: HomeProps) => {
                   <Text style={styles.categoriesHeaderText}>Categories</Text>
                   <Pressable
                     onPress={() => {
-                      navigation.navigate('Categories');
+                      navigation.navigate('HomeTab', { screen: 'Categories' });
                     }}
                   >
                     <Text style={styles.categoriesHeaderSeeAllText}>

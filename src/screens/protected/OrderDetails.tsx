@@ -12,9 +12,7 @@ type Props = {
 const OrderDetails = ({ navigation }: Props) => {
   const route: any = useRoute();
   const orderData = route.params.orderData;
-
   const shippingAddress = orderData.item.shippingAddress;
-
   const formattedOrderDate = formatDate(orderData.item.createdAt);
 
   return (

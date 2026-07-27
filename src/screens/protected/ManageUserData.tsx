@@ -87,6 +87,7 @@ const ManageUserData = ({ route, navigation }: ManageUserDataProps) => {
       return;
     }
 
+    console.log('Testing 111');
     userInputCtx.updateUserInfo(inputValues);
     navigation.goBack();
   };

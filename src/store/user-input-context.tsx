@@ -4,6 +4,44 @@ import { getUserByEmail, saveUserDataToDatabase } from '../api/users.api';
 import { Props } from '../types/general';
 import { wait } from '../utils/helpers';
 import { AuthContext } from './auth-context';
+import { CartItems } from '../types/cart';
+import { UserData } from '../types/user';
+
+type UpdatedAddressValues = {
+  addressLine1: { value: string; isValid: boolean };
+  city: { value: string; isValid: boolean };
+  state: { value: string; isValid: boolean };
+  zipcode: { value: string; isValid: boolean };
+};
+
+type CreatedUser = {
+  userData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phoneNumber: string;
+    address: {
+      addressLine1: string;
+      city: string;
+      state: string;
+      zipcode: string;
+    };
+    shopFor: string;
+    favorites: { items: [] };
+    cart: { items: CartItems };
+    stripeCustomerId: string;
+    stripePaymentMethod: { id: string; card: { brand: string; last4: string } };
+    _id: string;
+    __v: number;
+  };
+};
+
+type UpdatedInfo = {
+  firstName: { value: string; isValid: boolean };
+  lastName: { value: string; isValid: boolean };
+  phoneNumber: { value: string; isValid: boolean };
+};
 
 type UserInputContextType = {
   userInput: {
@@ -19,16 +57,23 @@ type UserInputContextType = {
       state: { value: string; isValid: boolean };
       zipcode: { value: string; isValid: boolean };
     };
-    favorites: { items: any[] };
+    shopFor: { value: string; isValid: boolean };
+    ageRange: { value: string; isValid: boolean };
+    favorites: { items: number[] };
     cart: { items: CartItems };
     stripeCustomerId: string;
   };
 
   isLoading: boolean;
-  updateUserInfo: (updatedInfo: any) => void;
-  saveUserDataToDatabase: any;
-  updateAddress: (updatedAddressValues: any) => void;
-  updateStripeId: (createdUser: any, stripeId: string) => void;
+  updateUserInfo: (updatedInfo: UpdatedInfo) => void;
+  updateUserInput: (
+    inputIdentifier: string,
+    enteredText: string,
+    inputValid: boolean,
+  ) => void;
+  saveUserDataToDatabase: (userData: UserData) => void;
+  updateAddress: (updatedAddressValues: UpdatedAddressValues) => void;
+  updateStripeId: (createdUser: CreatedUser, stripeId: string) => void;
   clearUserInput: () => void;
 };
 
@@ -66,15 +111,22 @@ export const UserInputContext = createContext<UserInputContextType>({
       state: { value: '', isValid: false },
       zipcode: { value: '', isValid: false },
     },
+    shopFor: { value: '', isValid: false },
+    ageRange: { value: '', isValid: false },
     favorites: { items: [] },
     cart: { items: [] },
     stripeCustomerId: '',
   },
   isLoading: false,
-  updateUserInfo: (updatedInfo: any) => {},
-  saveUserDataToDatabase: () => {},
-  updateAddress: (updatedAddressValues: any) => {},
-  updateStripeId: (createdUser: any, stripeId: string) => {},
+  updateUserInfo: (updatedInfo: UpdatedInfo) => {},
+  saveUserDataToDatabase: (userData: UserData) => {},
+  updateUserInput: (
+    inputIdentifier: string,
+    enteredText: string,
+    inputValid: boolean,
+  ) => {},
+  updateAddress: (updatedAddressValues: UpdatedAddressValues) => {},
+  updateStripeId: (createdUser: CreatedUser, stripeId: string) => {},
   clearUserInput: () => {},
 });
 
@@ -160,7 +212,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   }, [authToken]);
 
   const updateUserInput = (
-    inputIdentifier: any,
+    inputIdentifier: string,
     enteredText: string,
     inputValid: boolean,
   ) => {
@@ -176,7 +228,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   };
 
   // Updates user's first name, last name and phone number
-  const updateUserInfo = async (updatedInfo: any) => {
+  const updateUserInfo = async (updatedInfo: UpdatedInfo) => {
     setIsLoading(true);
     const userData = {
       id: userInput.id.value,
@@ -223,7 +275,7 @@ const UserInputContextProvider = ({ children }: Props) => {
   };
 
   // Updates user's address
-  const updateAddress = async (updatedAddressValues: any) => {
+  const updateAddress = async (updatedAddressValues: UpdatedAddressValues) => {
     // Create an user object with updated address:
     setIsLoading(true);
     const userData = {
@@ -273,7 +325,8 @@ const UserInputContextProvider = ({ children }: Props) => {
   };
 
   // Updates user's address
-  const updateStripeId = async (createdUser: any, stripeId: string) => {
+  const updateStripeId = async (createdUser: CreatedUser, stripeId: string) => {
+    console.log('Test 600: ', createdUser);
     const {
       _id: id,
       email,

@@ -14,7 +14,7 @@ import {
 } from '../../utils/validation';
 
 const CreateAccount = ({ navigation }: any) => {
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
 
   const proceedHandler = () => {
     const emailIsValid = isValidEmail(

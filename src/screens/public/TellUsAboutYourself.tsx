@@ -14,7 +14,7 @@ type Props = {
 };
 const TellUsAboutYourself = ({ navigation }: Props) => {
   const [isCreatingUser, setIsCreatingUser] = useState(false);
-  const userInputCtx: any = useContext(UserInputContext);
+  const userInputCtx = useContext(UserInputContext);
   const [selection, setSelection] = useState('');
   const [ageRange, setAgeRange] = useState('');
 

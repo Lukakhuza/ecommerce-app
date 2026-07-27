@@ -130,8 +130,6 @@ const CartContextProvider = ({ children }: Props) => {
     setIsLoading(false);
   };
 
-  console.log('Test 100: ', cartItems);
-
   const value = {
     cartItems: cartItems,
     isLoading: isLoading,

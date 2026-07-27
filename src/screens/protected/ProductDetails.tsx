@@ -1,4 +1,5 @@
 import Icon from '@react-native-vector-icons/ionicons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import {
   Image,
@@ -9,15 +10,14 @@ import {
   View,
 } from 'react-native';
 import PurpleButtonSmall from '../../components/atoms/PurpleButtonSmall';
-import { Colors } from '../../theme/colors';
+import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { AuthContext } from '../../store/auth-context';
 import { CartContext } from '../../store/cart-context';
 import { ProductsContext } from '../../store/products-context';
 import { UserInputContext } from '../../store/user-input-context';
-import ScreenContainer from '../../components/atoms/ScreenContainer';
-import { ProductData } from '../../types/product';
+import { Colors } from '../../theme/colors';
 import { HomeTabParamList } from '../../types/navigation';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ProductData } from '../../types/product';
 
 type ProductDetailsProps = NativeStackScreenProps<
   HomeTabParamList,
@@ -27,7 +27,7 @@ type ProductDetailsProps = NativeStackScreenProps<
 const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx = useContext(UserInputContext);
-  const cartCtx: any = useContext(CartContext);
+  const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
@@ -47,7 +47,7 @@ const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
       userId: userId,
     };
 
-    await cartCtx.addProductToCart(data);
+    await cartCtx.addProductToCart(data.productData);
   };
 
   // const testStripe = async () => {

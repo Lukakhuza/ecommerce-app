@@ -48,9 +48,6 @@ export type OrdersTabParamList = {
   OrderItems: undefined;
 };
 
-// export type OrdersTabNavigationProp =
-//   NativeStackNavigationProp<OrdersTabParamList>;
-
 export type ProfileTabParamsList = {
   Profile: undefined;
   ManageUserData: undefined;
