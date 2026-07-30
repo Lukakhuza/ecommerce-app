@@ -11,8 +11,11 @@ import DataInput from '../../components/atoms/DataInput';
 import PageHeader from '../../components/atoms/PageHeader';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import SmallText from '../../components/atoms/SmallText';
+import { AuthStackParamList } from '../../types/navigation';
 
-const EnterEmail = ({ navigation }: any) => {
+type EnterEmailType = NativeStackScreenProps<AuthStackParamList, 'EnterEmail'>;
+
+const EnterEmail = ({ navigation }: EnterEmailType) => {
   const [email, setEmail] = useState({ value: '', isValid: true });
   // const navigation: AuthNavigationProp = useNavigation();
 

@@ -1,8 +1,15 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import PurpleButtonSmall from '../../components/atoms/PurpleButtonSmall';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../../types/navigation';
 
-const PasswordReset = ({ navigation }: any) => {
+type PasswordResetType = NativeStackScreenProps<
+  AuthStackParamList,
+  'PasswordReset'
+>;
+
+const PasswordReset = ({ navigation }: PasswordResetType) => {
   return (
     <ScreenContainer style={{ flex: 1 }}>
       <View

@@ -8,8 +8,15 @@ import ScreenContainer from '../../components/atoms/ScreenContainer';
 import SmallText from '../../components/atoms/SmallText';
 import { AuthContext } from '../../store/auth-context';
 import { isValidPassword } from '../../utils/validation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../../types/navigation';
 
-const EnterPassword = ({ navigation, route }: any) => {
+type EnterPasswordType = NativeStackScreenProps<
+  AuthStackParamList,
+  'EnterPassword'
+>;
+
+const EnterPassword = ({ navigation, route }: EnterPasswordType) => {
   const email = route.params.email;
   const [password, setPassword] = useState({ value: '', isValid: true });
   const { isLoading, loginHandler } = useContext(AuthContext);

@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ContinueButton from '../../components/atoms/ContinueButton';
@@ -6,6 +7,7 @@ import PageHeader from '../../components/atoms/PageHeader';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import SmallText from '../../components/atoms/SmallText';
 import { UserInputContext } from '../../store/user-input-context';
+import { AuthStackParamList } from '../../types/navigation';
 import {
   isValidEmail,
   isValidFirstName,
@@ -13,7 +15,12 @@ import {
   isValidPassword,
 } from '../../utils/validation';
 
-const CreateAccount = ({ navigation }: any) => {
+type CreateAccountType = NativeStackScreenProps<
+  AuthStackParamList,
+  'CreateAccount'
+>;
+
+const CreateAccount = ({ navigation }: CreateAccountType) => {
   const userInputCtx = useContext(UserInputContext);
 
   const proceedHandler = () => {

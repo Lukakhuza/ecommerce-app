@@ -8,11 +8,15 @@ import SmallPurpleButton from '../../components/atoms/PurpleButtonSmall';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
-const TellUsAboutYourself = ({ navigation }: Props) => {
+type TellUsAboutYourselfType = NativeStackScreenProps<
+  AuthStackParamList,
+  'TellUsAboutYourself'
+>;
+
+const TellUsAboutYourself = ({ navigation }: TellUsAboutYourselfType) => {
   const [isCreatingUser, setIsCreatingUser] = useState(false);
   const userInputCtx = useContext(UserInputContext);
   const [selection, setSelection] = useState('');

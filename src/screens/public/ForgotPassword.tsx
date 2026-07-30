@@ -5,10 +5,15 @@ import ContinueButton from '../../components/atoms/ContinueButton';
 import DataInput from '../../components/atoms/DataInput';
 import PageHeader from '../../components/atoms/PageHeader';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
-import { AuthStackParamList } from '../../types/navigation';
 import { isValidEmail } from '../../utils/validation';
+import { AuthStackParamList } from '../../types/navigation';
 
-const ForgotPassword = ({ navigation }: any) => {
+type ForgotPasswordType = NativeStackScreenProps<
+  AuthStackParamList,
+  'ForgotPassword'
+>;
+
+const ForgotPassword = ({ navigation }: ForgotPasswordType) => {
   const [enteredEmail, setEnteredEmail] = useState({
     value: '',
     isValid: true,
