@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { addToCartInDatabase, updateCartInDatabase } from '../api/cart.api';
 import { Props } from '../types/general';
-import { ProductData } from '../types/product';
+import { ProductData, ProductDataWithUserId } from '../types/product';
 import { UserInputContext } from './user-input-context';
 import { CartItem, CartItems } from '../types/cart';
 
@@ -10,7 +10,7 @@ type CartContextType = {
   addItem: (item: CartItem) => void;
   clearCart: () => void;
   removeItem: (id: string) => void;
-  addProductToCart: (productData: ProductData) => void;
+  addProductToCart: (productData: ProductDataWithUserId) => void;
   isLoading: boolean;
 };
 
@@ -19,7 +19,7 @@ export const CartContext = createContext<CartContextType>({
   addItem: (item: CartItem) => {},
   clearCart: () => {},
   removeItem: () => {},
-  addProductToCart: (item: Object) => {},
+  addProductToCart: (productData: ProductDataWithUserId) => {},
   isLoading: true,
 });
 
@@ -33,13 +33,14 @@ const CartContextProvider = ({ children }: Props) => {
   const [userId, setUserId] = useState(userInputCtx.userInput.id.value ?? '');
 
   useEffect(() => {
-    if (userInputCtx.userInput.cart.items) {
+    if (userInputCtx?.userInput?.cart?.items) {
       setCartItems(userInputCtx.userInput.cart.items);
     }
   }, [userInputCtx.userInput.cart.items]);
 
   useEffect(() => {
     // Whenever cartItems state changes, send the updated carts to the database.
+
     const data = {
       userId: userInputCtx.userInput.id.value,
       cartItems: cartItems,
@@ -115,7 +116,7 @@ const CartContextProvider = ({ children }: Props) => {
     });
   };
 
-  const addProductToCart = async (data: ProductData) => {
+  const addProductToCart = async (data: ProductDataWithUserId) => {
     setIsLoading(true);
     // Update cart in the database:
     const response = await addToCartInDatabase(data);

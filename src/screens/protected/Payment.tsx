@@ -7,12 +7,12 @@ import PaymentMethodComponent from '../../components/organisms/PaymentMethodComp
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
 import { wait } from '../../utils/helpers';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeTabParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type PaymentType = NativeStackScreenProps<HomeTabParamList, 'Payment'>;
 
-const Payment = ({ navigation }: Props) => {
+const Payment = ({ navigation }: PaymentType) => {
   const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const userInputCtx = useContext(UserInputContext);

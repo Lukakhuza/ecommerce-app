@@ -1,25 +1,15 @@
-import { useRoute } from '@react-navigation/core';
-import { useContext } from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import ScreenContainer from '../../components/atoms/ScreenContainer';
-import { CartContext } from '../../store/cart-context';
-import { ProductsContext } from '../../store/products-context';
-import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import { OrdersTabParamList } from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type OrderItems = NativeStackScreenProps<OrdersTabParamList, 'OrderItems'>;
 
-const OrderItems = ({ navigation }: Props) => {
-  const route: any = useRoute();
-  const orderItems = route.params.orderData.item.items;
-  const total = route.params.orderData.item.totalAmount;
-  const userInputCtx = useContext(UserInputContext);
-  const productsCtx = useContext(ProductsContext);
-  const cartCtx = useContext(CartContext);
+const OrderItems = ({ route }: OrderItems) => {
+  const orderItems = route.params.orderData.items;
+
   const { subTotal, shippingCost, taxAmount, totalAmount } =
-    route.params.orderData.item;
+    route.params.orderData;
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 30 }}>

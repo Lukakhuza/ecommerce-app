@@ -18,10 +18,11 @@ import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
 import { OrderStatus } from '../../types/order';
 import { wait } from '../../utils/helpers';
-
-type Props = {
-  navigation: any;
-};
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { OrdersTabParamList } from '../../types/navigation';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { BottomTabsParamList } from '../../types/navigation';
 
 interface OrderItem {
   productId: string;
@@ -41,9 +42,14 @@ interface Order {
 
 type OrdersResponse = Order[];
 
+type HomeProps = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabsParamList, 'OrdersTab'>,
+  NativeStackScreenProps<OrdersTabParamList, 'Orders'>
+>;
+
 const emptyOrdersArray: OrdersResponse = [];
 
-const Orders = ({ navigation }: Props) => {
+const Orders = ({ navigation }: HomeProps) => {
   const userInputCtx = useContext(UserInputContext);
   const userId = userInputCtx.userInput.id.value;
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +63,7 @@ const Orders = ({ navigation }: Props) => {
       setIsLoading(true);
       await wait(500);
       if (isFocused) {
-        const fetchedOrders: any = await fetchOrders(userId);
+        const fetchedOrders = await fetchOrders(userId);
         setOrders(fetchedOrders);
       }
       setIsLoading(false);
@@ -121,7 +127,6 @@ const Orders = ({ navigation }: Props) => {
                     <Pressable
                       onPress={() => {
                         const cleanOrder = JSON.parse(JSON.stringify(order));
-
                         navigation.navigate('OrdersTab', {
                           screen: 'OrderDetails',
                           params: { orderData: cleanOrder },

@@ -26,8 +26,8 @@ const OrdersTab = () => {
         name="OrderDetails"
         component={OrderDetails}
         options={({ navigation: { goBack }, route }: OrderDetailsProps) => ({
-          title: route.params?.orderData?.item?._id
-            ? `Order ${route.params.orderData.item._id.slice(-10)}`
+          title: route.params?.orderData?._id
+            ? `Order ${route.params.orderData._id.slice(-10)}`
             : 'Order Details',
           headerShown: true,
           headerLeft: ({ tintColor }) => (

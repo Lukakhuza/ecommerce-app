@@ -18,7 +18,7 @@ import { UserInputContext } from '../../store/user-input-context';
 import { wait } from '../../utils/helpers';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HomeTabParamList } from '../../types/navigation';
-import { ProductData } from '../../types/product';
+import { ProductData, FavoriteItemData } from '../../types/product';
 import { Product } from '../../types/product';
 
 type FavoritesProps = NativeStackScreenProps<HomeTabParamList, 'Favorites'>;
@@ -34,7 +34,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
     const getProductsData = async () => {
       const productsData = await fetchProductsData();
       const filteredProducts = productsData.filter(
-        (productData: ProductData) => {
+        (productData: FavoriteItemData) => {
           if (favorites.includes(productData.id)) {
             return true;
           } else {
@@ -78,7 +78,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
         </View>
         <FlatList
           data={filteredProds}
-          renderItem={(itemData: ListRenderItemInfo<ProductData>) => {
+          renderItem={(itemData: ListRenderItemInfo<FavoriteItemData>) => {
             return (
               <Pressable
                 style={styles.productContainer}
@@ -98,7 +98,7 @@ const Favorites = ({ navigation }: FavoritesProps) => {
             );
           }}
           keyExtractor={(item: Product, index) => {
-            return item.id;
+            return item.id.toString();
           }}
           numColumns={2}
           contentContainerStyle={{

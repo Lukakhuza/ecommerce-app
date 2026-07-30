@@ -326,7 +326,6 @@ const UserInputContextProvider = ({ children }: Props) => {
 
   // Updates user's address
   const updateStripeId = async (createdUser: CreatedUser, stripeId: string) => {
-    console.log('Test 600: ', createdUser);
     const {
       _id: id,
       email,

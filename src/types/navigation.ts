@@ -1,6 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Product } from './product';
+import { OrderData } from './order';
 
 export type AppParamList = {
   BottomTabs: undefined;
@@ -38,20 +39,19 @@ export type HomeTabParamList = {
 export type OrdersTabParamList = {
   Orders: undefined;
   OrderDetails: {
-    orderData?: {
-      item?: {
-        _id: string;
-        status: string;
-      };
-    };
+    orderData: OrderData;
   };
-  OrderItems: undefined;
+  OrderItems: { orderData: OrderData };
 };
 
 export type ProfileTabParamsList = {
   Profile: undefined;
   ManageUserData: undefined;
   ManageUserAddress: undefined;
+};
+
+export type NotificationsTabParamList = {
+  Notifications: undefined;
 };
 
 export type HomeTabNavigationProp = NativeStackNavigationProp<HomeTabParamList>;

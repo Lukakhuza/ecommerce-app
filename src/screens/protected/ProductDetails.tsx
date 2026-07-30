@@ -47,7 +47,7 @@ const ProductDetails = ({ route, navigation }: ProductDetailsProps) => {
       userId: userId,
     };
 
-    await cartCtx.addProductToCart(data.productData);
+    await cartCtx.addProductToCart(data);
   };
 
   // const testStripe = async () => {

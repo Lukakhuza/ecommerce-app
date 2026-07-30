@@ -1,13 +1,21 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import ScreenContainer from '../../components/atoms/ScreenContainer';
 import SmallPurpleButton from '../../components/atoms/SmallPurpleButton';
 import { Colors } from '../../theme/colors';
+import {
+  BottomTabsParamList,
+  NotificationsTabParamList,
+} from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type HomeProps = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabsParamList, 'Notifications'>,
+  NativeStackScreenProps<NotificationsTabParamList, 'Notifications'>
+>;
 
-const Notifications = ({ navigation }: Props) => {
+const Notifications = ({ navigation }: HomeProps) => {
   return (
     <ScreenContainer style={{ flex: 1 }}>
       <Text style={styles.header}>Notifications</Text>

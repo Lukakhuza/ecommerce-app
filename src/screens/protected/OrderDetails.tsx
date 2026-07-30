@@ -1,19 +1,18 @@
 import Icon from '@react-native-vector-icons/ionicons';
-import { useRoute } from '@react-navigation/native';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/colors';
+import { OrdersTabParamList } from '../../types/navigation';
 import { formatDate } from '../../utils/helpers';
 
-type Props = {
-  route: any;
-  navigation: any;
-};
+type OrderDetails = NativeStackScreenProps<OrdersTabParamList, 'OrderDetails'>;
 
-const OrderDetails = ({ navigation }: Props) => {
-  const route: any = useRoute();
+const OrderDetails = ({ navigation }: OrderDetails) => {
+  const route = useRoute<RouteProp<OrdersTabParamList, 'OrderDetails'>>();
   const orderData = route.params.orderData;
-  const shippingAddress = orderData.item.shippingAddress;
-  const formattedOrderDate = formatDate(orderData.item.createdAt);
+  const shippingAddress = orderData?.shippingAddress;
+  const formattedOrderDate = formatDate(orderData.createdAt);
 
   return (
     <View style={{ marginHorizontal: 25 }}>
@@ -148,7 +147,7 @@ const OrderDetails = ({ navigation }: Props) => {
           </View>
           <View style={styles.itemsContainer}>
             <View>
-              <Text>{orderData.item.items.length} Item(s)</Text>
+              <Text>{orderData.items.length} Item(s)</Text>
             </View>
           </View>
           <View

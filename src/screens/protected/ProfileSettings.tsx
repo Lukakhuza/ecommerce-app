@@ -1,4 +1,7 @@
 import Icon from '@react-native-vector-icons/ionicons';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useEffect } from 'react';
 import {
   Image,
@@ -13,12 +16,17 @@ import ScreenContainer from '../../components/atoms/ScreenContainer';
 import { AuthContext } from '../../store/auth-context';
 import { UserInputContext } from '../../store/user-input-context';
 import { Colors } from '../../theme/colors';
+import {
+  BottomTabsParamList,
+  ProfileTabParamsList,
+} from '../../types/navigation';
 
-type Props = {
-  navigation: any;
-};
+type HomeProps = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabsParamList, 'ProfileTab'>,
+  NativeStackScreenProps<ProfileTabParamsList, 'Profile'>
+>;
 
-const ProfileSettings = ({ navigation }: Props) => {
+const ProfileSettings = ({ navigation }: HomeProps) => {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const editPressHandler = (basicInfo: any) => {

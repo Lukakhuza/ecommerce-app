@@ -32,7 +32,6 @@ export const createCustomerInStripe = async (user: User) => {
 // Migrated to AWS Lambda ✅
 export const fetchToken = async (userData: object) => {
   try {
-    console.log('Test 4: ', JSON.stringify(userData));
     const response = await fetch(`${url}/login-user`, {
       method: 'POST',
       headers: {

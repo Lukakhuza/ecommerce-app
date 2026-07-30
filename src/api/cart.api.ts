@@ -1,9 +1,9 @@
 import { debounce } from 'lodash';
-import { ProductData } from '../types/product';
+import { ProductData, ProductDataWithUserId } from '../types/product';
 import { url } from './client';
 
 // Migrated to AWS Lambda ✅
-export const addToCartInDatabase = async (data: ProductData) => {
+export const addToCartInDatabase = async (data: ProductDataWithUserId) => {
   const response = await fetch(`${url}/add-to-cart-in-database`, {
     method: 'POST',
     headers: {
